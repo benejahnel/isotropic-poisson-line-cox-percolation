@@ -1,0 +1,59 @@
+# 03 — The sparse regime $\mu r\le m_0$: a stretch-renormalised first moment
+
+Scaling: $\lambda_c(\mu,r)=r^{-1}\lambda_c(\mu r,1)$, so take $r=1$ throughout; $\mu$ is then the dimensionless line density. By Prop 3.1, $\lambda_c(\mu,1)$ is nonincreasing in $\mu$, so it suffices to prove $\lambda_c(m_0,1)>0$ for **one** small $m_0$.
+
+Status in one line: the probabilistic estimates (Lemmas A, B below) are proved; the combinatorial decomposition (Lemma C) is stated precisely with a proof sketch and one explicitly open step. No complete proof of $\lambda_c>0$ is claimed.
+
+## 1. Why the earlier obstacles disappear when probabilities replace indicators
+
+* **Micro-path union bound (Thm 5.1 of the note) fails even with truncated weights.** A bundle of $j$ nearly parallel lines over length $t$ has probability $\asymp(\mu/t)^j/j!$, and a strip of width $O(1)$ boxes and length $t$ contains $\ge2^t$ self-avoiding 2-paths. So $\sum_t2^t(\mu/t)^j=\infty$ for every $j$: the union bound over micro-paths inside a bundle is the problem, not the bundle itself.
+* **Vacant-circuit gates (Section 6 of the note) fail** because a stretch where two lines run within distance $2$ was declared blocked with probability one, and such stretches have length $L$ with $\mathbb E L^2=\infty$.
+* **Resolution.** Treat a maximal stretch along a *bundle* (a set of $j$ lines running together) as one unit and bound the probability that the Cox points cross it by Lemma A: $(Cj\lambda)^{t/2}$. This is exponentially small in $t$ as long as $j\le j_0:=\lfloor1/(2C\lambda)\rfloor$, i.e. for all bundles that are not "thick". Thick bundles ($j>j_0$) are rare: Lemma B gives probability $\le(C'\mu/t)^{j_0}$ for a thick bundle over length $t$, which is summable in $t$ (and in the position) once $j_0\ge3$, i.e. for $\lambda$ small. Both estimates therefore beat the stretch entropy, and the only remaining issue is the combinatorics of decomposing a chain into stretches and jumps (Lemma C).
+
+## 2. Chains and stretches
+
+Given $\mathcal L$ (locally finite), an occupied path from the box $Q(z_0)$ to distance $n$ yields a **chain**: points $x_0,\dots,x_k\in X_\lambda$ with $|x_i-x_{i+1}|<2$, $x_0\in Q(z_0)$, $|x_k-x_0|\ge n$. Each $x_i$ lies on a line $\ell(x_i)\in\mathcal L$ (a.s. unique). We may take the chain self-avoiding and of minimal length, so $k\le$ number of points visited.
+
+For a finite set $J\subseteq\mathcal L$ of lines, a direction unit vector $u$ and an interval $I=[s,s+t]$ (in the coordinate $x\cdot u$), the **stretch** $S(J,u,I)$ is the set of points of $\bigcup_{\ell\in J}\ell$ with $x\cdot u\in I$. We say the chain **runs through** $S(J,u,I)$ if a consecutive block $x_a,\dots,x_b$ of the chain lies in $S(J,u,I)$ with $x_a\cdot u\le s+1$ and $x_b\cdot u\ge s+t-1$.
+
+### Lemma A (crossing a stretch costs exponentially in its length)
+Let $J$ be a set of $j$ lines, $u$ a unit vector, $I$ an interval of length $t\ge8$. Assume every $\ell\in J$ makes an angle $\le\pi/4$ with $u$ (slope $\le1$ in the $u$-coordinate), so the $u$-projection of $\ell\cap S$ has length $t$ and $\ell\cap S$ has length $\le\sqrt2\,t$. The projected points $\{x\cdot u: x\in X_\lambda\cap S\}$ form a Poisson process on $I$ of intensity at most $\sqrt2\,\lambda j$ (superposition of $j$ projected processes, each of intensity $\le\sqrt2\lambda$). A chain running through $S$ has consecutive projections at distance $<2$, from a point with projection $\le s+1$ to one with projection $\ge s+t-1$; hence the projected process has no gap of length $\ge2$ inside $[s+1,s+t-1]$, which forces at least $m:=\lceil(t-2)/2\rceil-1$ points in $I$. Therefore
+$$P(\cdot\,|\,\mathcal L)\le P(\mathrm{Poi}(\sqrt2\lambda jt)\ge m)\le\Bigl(\frac{e\sqrt2\lambda jt}{m}\Bigr)^m\le(4e\sqrt2\,\lambda j)^{m}\qquad(t\ge8),$$
+using $t/m\le4$ for $t\ge8$. Writing $q_j:=4e\sqrt2\,\lambda j$, the bound is $q_j^{(t-6)/2}$, exponentially small in $t$ whenever $q_j<1$, i.e. $j<j_0:=1/(4e\sqrt2\,\lambda)$. **Proof complete** (the only facts used: projection of a Poisson process on a line is Poisson with the stated intensity; a $2$-chain across an interval forces no gap $\ge2$).
+
+*Remark.* The angle restriction is harmless: for a stretch along a bundle, $u$ is chosen as the direction of one of its lines, and all lines of the bundle are within angle $\pi/4$ of it (indeed within angle $O(1/t)$, see Lemma B).
+
+### Lemma B (thick bundles are rare)
+Fix a unit vector $u$, an interval $I=[s,s+t]$ with $t\ge8$, and a transversal position: let $T$ be the strip $\{x: x\cdot u\in I,\ |x\cdot u^\perp-c|\le w\}$ of width $2w$ (we will use $w=2j_0+2$, a constant). Lines that cross $T$ lengthwise, i.e. meet both ends $\{x\cdot u=s\}\cap T$ and $\{x\cdot u=s+t\}\cap T$, have $\nu_\mu$-measure at most
+$$\nu(T)\le\frac{\mu}{\pi}\cdot2\arcsin\Bigl(\frac{2w}{t}\Bigr)\cdot2w\le\frac{4\pi w^2\mu}{\pi t}=\frac{4w^2\mu}{t}$$
+(same computation as Lemma 3.2 of the note with the two end segments in place of disks). Hence
+$$P(\ge j_0\text{ lines cross }T\text{ lengthwise})\le\Bigl(\frac{e\cdot4w^2\mu}{j_0\,t}\Bigr)^{j_0}.$$
+**Proof complete.** For $j_0\ge3$ the sum over $t\in\mathbb N$, over the $O(n^2)$ positions of $T$ in $[-n,n]^2$ and over $O(t)$ directions (directions need only be known up to $1/t$ to fix which lines cross), gives
+$$\sum_{t\ge8}\,n^2\cdot t\cdot\Bigl(\frac{4ew^2\mu}{j_0t}\Bigr)^{j_0}\le C(w,j_0)\,\mu^{j_0}\,n^2,$$
+so a.s. no thick bundle of length $t\ge n^{3/j_0}$-ish appears near the origin, and more usefully the expected total "thick length" in $[-n,n]^2$ is $O(\mu^{j_0}n^2)$ — polynomial, fine for a first-moment argument organised stretch by stretch.
+
+## 3. The combinatorial step (Lemma C) — stated, sketched, one step open
+
+Fix $\lambda$ with $j_0=1/(4e\sqrt2\lambda)\ge3$ and set $w:=2j_0+2$, $t_0:=8$.
+
+**Lemma C (decomposition and entropy; NOT yet proved).** Let $\mathcal L$ be locally finite. Every chain from $Q(z_0)$ to distance $n$ runs through stretches $S_1,\dots,S_m$ with pairwise disjoint supports (disjoint subsets of $\bigcup\mathcal L$) such that
+
+1. each $S_i=S(J_i,u_i,I_i)$ has $u_i$ equal to the direction of a line of $J_i$, all lines of $J_i$ within angle $\pi/4$ of $u_i$, and $|I_i|=t_i\ge t_0$;
+2. $\sum_i t_i\ge n/4$;
+3. $S_i$ is **thin** ($\#J_i<j_0$) or **thick** ($\#J_i\ge j_0$, and then all lines of $J_i$ cross the strip of width $2w$ around $u_i\mathbb R$ lengthwise over $I_i$);
+4. the number of candidate families $(S_1,\dots,S_m)$ with prescribed lengths $(t_1,\dots,t_m)$ that are compatible with a given $\mathcal L$ is at most $\prod_i\bigl(A\,(1+\mu t_i)\,t_i^{B}\,\#J_i!\bigr)$ for universal $A,B$ — i.e. **entropy per unit length of order $\mu$**, coming only from the choice of the next line at a crossing (a line of length $t$ is crossed by $\mathrm{Poi}(2\mu t/\pi)$ other lines).
+
+**Consequence if Lemma C holds.** Conditionally on $\mathcal L$, the events "chain runs through $S_i$" for disjoint supports are independent (points on disjoint line sets are independent). Union bound over families, Lemma A for thin stretches and the trivial bound $1$ for thick ones, then expectation over $\mathcal L$ with Lemma B for the thick ones (the thick-bundle event is a function of $\mathcal L$ only; the lengths $t_i$ and the family are enumerated, not chosen from the configuration, so Lemma B applies to each enumerated thick strip):
+$$P(\text{chain to distance }n)\le\sum_{m}\ \sum_{t_1+\dots+t_m\ge n/4}\ \prod_i\Bigl[A(1+\mu t_i)t_i^{B}\Bigl(j_0!\,q_{j_0}^{(t_i-6)/2}+\sum_{j\ge j_0}j!\Bigl(\frac{4ew^2\mu}{j\,t_i}\Bigr)^{j}\Bigr)\Bigr].$$
+For $\lambda$ small ($q_{j_0}\le1/2$, say) and $\mu\le m_0(\lambda)$ the bracket is $\le\rho^{t_i}$ with $\rho<1$ for thin stretches and $\le C\mu^{j_0}t_i^{B+1-j_0}$ for thick ones; with $j_0\ge B+4$ the thick term is summable in $t_i$ with small total mass, and the whole sum is $\le e^{-cn}$ **except** for the thick contributions, which are polynomially small ($n^{-(j_0-B-3)}$ from a single thick stretch of length $\asymp n$). That polynomial decay is the correct order of magnitude (Prop 4.1 of the note shows connection probabilities are at least quasi-polynomial). Summing over $z_0$ in an annulus of radius $n$ requires decay faster than $n^{-2}$, i.e. $j_0\ge B+6$: fine for $\lambda$ small. This would prove $\lambda_c(\mu,1)>0$ for $\mu\le m_0$.
+
+**Sketch of Lemma C.** Follow the chain. Maintain the current bundle $J$ (initially $\{\ell(x_0)\}$) and direction $u$. While the chain stays on lines of $J$ and advances in direction $u$, extend the stretch. When the chain jumps to a line $\ell'\notin J$: if $\ell'$ is within angle $O(1/t)$ of $u$ over the remaining stretch length (it will run along with the bundle), add it to $J$; otherwise close the stretch (it has length $t\ge t_0$ or is discarded as a *short piece*) and start a new stretch with $J=\{\ell'\}$, $u=$ direction of $\ell'$. Short pieces: a short piece occupies a region of diameter $O(t_0)$ and the chain exits it along a line; there are at most $O(1)$ lines through that region on average, so short pieces cost only entropy, no length. Disjointness: cut supports at the $u$-slabs; where two consecutive stretches overlap spatially (near the crossing), shorten both by $O(1)$, which costs a constant factor per stretch (absorbed in $A$). Property 2: the chain's displacement $n$ is covered by stretches and short pieces; one needs a bound on the number of short pieces, $\le n/t_0+\#\text{jumps}$, and on the total length lost to overlaps, $\le2\cdot\#\text{stretches}$.
+
+**The open step.** Property 4 (entropy) requires that at each jump the number of candidate lines is controlled by $\mu t_i$: the chain can leave line $\ell$ only to a line within distance $2$ of $\ell$ somewhere along the stretch, and such lines are of two kinds: those crossing the stretch (Poisson, mean $2\mu t/\pi$ — fine) and those nearly parallel that do not cross but come within distance $2$ (they meet the strip of width $4$ around the stretch; also Poisson with mean $O(\mu(t+1))$ — fine). So the count is fine **in expectation**, but property 4 is a deterministic statement about a given $\mathcal L$, and the enumeration over families must not depend on $\mathcal L$ when Lemma B is applied. The fix is to enumerate families by *combinatorial data* (lengths, directions discretised to $1/t_i$, transversal positions discretised to $1$) and to bound the expected number of configurations $\mathcal L$ realising each datum; this changes the union bound into a Mecke-formula computation over $m$-tuples of line sets. Carrying this out rigorously, with the bookkeeping for bundles that gain and lose lines along the way, is the part that is **not done**. I expect no obstruction beyond length, but I have not verified the Bell-number-type factors ($\#J_i!$ choices of which line explains which jump) against the $(\mu/t)^{j}$ gains in every case; this is exactly where the "superexponential moment" of Prop 6.1 could creep back in if bundles are allowed to be re-counted.
+
+## 4. What is rigorously established here
+
+* Lemma A: a chain crossing a stretch of $j$ lines of length $t$ has conditional probability $\le(4e\sqrt2\lambda j)^{(t-6)/2}$.
+* Lemma B: $\ge j_0$ lines crossing a strip of width $2w$ and length $t$ lengthwise has probability $\le(4ew^2\mu/(j_0t))^{j_0}$.
+* Together they show that both obstacles of Section 6 of the note are artefacts of indicator-based counting; the entropy rate of arrangement paths is $O(\mu)$ per unit length, while the cost rate is $\tfrac12\log(1/(4e\sqrt2\lambda j_0))$ — so the sparse regime is *not* needed for the balance of entropy against cost, only for controlling thick bundles.
+* **Not established:** Lemma C (the decomposition with $\mathcal L$-independent enumeration). This is a bounded, concrete task, but it is the whole difficulty.

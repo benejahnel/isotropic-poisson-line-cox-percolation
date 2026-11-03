@@ -1,0 +1,23 @@
+# LaTeX auxiliary files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.nav
+*.snm
+*.xdv
+
+# Python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# scratch
+_to_delete/

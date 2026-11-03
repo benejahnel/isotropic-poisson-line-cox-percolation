@@ -1,0 +1,196 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+
+\runningtitle{Greedy paths in a Poisson line environment}
+\hypersetup{pdftitle={Greedy paths in a Poisson line environment},pdfauthor={Christian Hirsch, Benedikt Jahnel}}
+
+\title{\textbf{Greedy paths in a Poisson line environment\\ and the subcritical phase}\\[0.6em] \large Working note}
+
+\author{%
+  Christian Hirsch\thanks{Institut f\"ur Mathematische Stochastik, Georg-August-Universit\"at G\"ottingen, Goldschmidtstra\ss e~7, 37077 G\"ottingen, Germany. \texttt{christian.hirsch@uni-goettingen.de}. \orcid{0000-0003-4136-3740}.}
+  \and
+  Benedikt Jahnel\thanks{Institut f\"ur Mathematische Stochastik, Technische Universit\"at Braunschweig, Universit\"atsplatz~2, 38106 Braunschweig, Germany, and Weierstrass Institute for Applied Analysis and Stochastics, Mohrenstra\ss e~39, 10117 Berlin, Germany. \texttt{benedikt.jahnel@tu-braunschweig.de}. \orcid{0000-0002-4212-0065}.}%
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{plain}
+
+\begin{abstract}
+We give an overview of the greedy-lattice-path approach to the subcritical phase of isotropic Poisson line Cox percolation. The quenched path criterion of~\cite{HJ26b} reduces positivity of the critical intensity to a statement about the line process alone: the maximal sum of line counts along lattice paths of length~$n$ grows linearly in~$n$. We reformulate this with a linear reward, prove an exact sandwich identity that counts thick bundles of lines without combinatorial loss, compute the densities of bundles of nearly parallel lines, and compare with the theory of greedy lattice animals for independent weights. We show rigorously that all path-level first-moment arguments fail, and that the dyadic coarse-graining scheme of Cox, Gandolfi, Griffin and Kesten fails for a different reason, namely polynomially likely highways formed by pairs of nearly parallel lines. We state the linear growth conjecture, give the heuristic exponents supporting it, and describe the hierarchical induction that a proof will require.
+\end{abstract}
+
+% =================================================================
+\section{Setting and the greedy criterion}
+\label{sec:setting}
+
+Let $\cL$ be a Poisson process of lines in~$\R^2$ with intensity measure $(\mu/\pi)\dd\theta\dd s$ in the parametrisation $\ell(\theta,s)=\{x\colon x\cdot(\cos\theta,\sin\theta)=s\}$, $\theta\in[0,\pi)$. The lines meeting a convex body~$K$ have mean number $(\mu/\pi)$ times the perimeter of~$K$. The Boolean model $\Xi_\lambda$ is the union of disks of radius~$r$ around the points of a Poisson process with intensity~$\lambda$ per unit length on every line, and $\lambda_c(\mu,r)$ is its critical intensity~\cite{HJ26}. By scaling, $\lambda_c(\mu,r)=r^{-1}\lambda_c(\mu r,1)$, and we take $r=1$ throughout.
+
+For $z\in\Z^2$ let $Q(z)\coloneqq z+[0,1]^2$, let $N(z)$ be the number of lines meeting~$Q(z)$, a Poisson variable with mean $4\mu/\pi$, and let $\operatorname{strip}(\ell)\coloneqq\{z\colon\ell\cap Q(z)\neq\varnothing\}$. A \emph{$2$-path} of length~$n$ is a self-avoiding sequence $\gamma=(z_0,\dots,z_n)$ in~$\Z^2$ with $\lVert z_i-z_{i-1}\rVert_\infty\le2$; $\Gamma_n(z_0)$ is the set of these paths, and $\#\Gamma_n(z_0)\le24^n$.
+
+Define
+\begin{equation*}
+  Y_n(z_0)\coloneqq\sum_{\gamma\in\Gamma_n(z_0)}\ \prod_{i=0}^nN(z_i),\qquad g^*\coloneqq\limsup_{n\to\infty}\frac1n\log\max_{\lVert z_0\rVert_\infty\le n}Y_n(z_0)\,.
+\end{equation*}
+
+\begin{theorem}[{Quenched path criterion, \cite[Theorem~5.1]{HJ26b}}]
+\label{thm:criterion}
+For every locally finite~$\cL$, the quenched critical intensity satisfies $\lambda_c(\cL)\ge\e^{-g^*}/\sqrt2$. If $\P(g^*<\infty)>0$, then $\lambda_c(\mu,1)>0$.
+\end{theorem}
+
+The proof is a union bound over occupied $2$-paths: given the lines, boxes are occupied independently with probability at most $\sqrt2\,\lambda N(z)$, and an unbounded occupied component through~$Q(z_0)$ contains occupied $2$-paths of every length from~$z_0$. Positivity of $\lambda_c(\mu,1)$ then follows from the quenched zero--one law~\cite[Proposition~3.3]{HJ26b}. The criterion involves only the line process and imposes no restriction on~$\mu$.
+
+\subsection{Linear reward}
+
+Since $\log N\le N$ for $N\ge1$ and $\#\Gamma_n\le24^n$, we have $g^*\le\log24+h_1^*$, where
+\begin{equation}
+\label{eq:h1}
+  h_1^*\coloneqq\limsup_{n\to\infty}\frac1n\max_{\lVert z_0\rVert_\infty\le n}\ \max_{\gamma\in\Gamma_n(z_0)}R(\gamma),\qquad
+  R(\gamma)\coloneqq\sum_{i=0}^nN(z_i)=\sum_{\ell\in\cL}\#\bigl(\gamma\cap\operatorname{strip}(\ell)\bigr)\,.
+\end{equation}
+The quantity $h_1^*$ is translation invariant, hence almost surely constant by ergodicity of~$\cL$. The reward $R(\gamma)$ is linear in the line process: $R(\gamma)=\sum_\ell f_\gamma(\ell)$ with $f_\gamma(\ell)=\#(\gamma\cap\operatorname{strip}(\ell))$. Trivially $h_1^*\ge1$, since every box met by a given line has $N\ge1$.
+
+\begin{conjecture}[Linear greedy growth]
+\label{conj:greedy}
+For every $\mu>0$, almost surely $h_1^*<\infty$. More precisely, $h_1^*=2+O(\mu^{3/2})$ as $\mu\to0$.
+\end{conjecture}
+
+By \cref{thm:criterion}, \cref{conj:greedy} implies $\lambda_c(\mu,r)\ge\e^{-\log24-h_1^*}/(\sqrt2\,r)>0$ for all $\mu,r>0$.
+
+\subsection{Comparison with greedy lattice animals}
+
+For independent nonnegative weights $(W_z)_{z\in\Z^d}$, the greedy lattice animal $M_n\coloneqq\max_{\lvert\xi\rvert=n}\sum_{z\in\xi}W_z$ over connected sets~$\xi$ of size~$n$ grows linearly, $M_n/n\to c<\infty$ almost surely, under the moment condition $\E W^d(\log^+W)^{d+\varepsilon}<\infty$~\cite{CGGK93}, and under the sharp condition
+\begin{equation}
+\label{eq:martin}
+  \int_0^\infty\P(W>w)^{1/d}\dd w<\infty
+\end{equation}
+by Martin~\cite{Mar02}. The condition reflects that an animal of size~$n$ can reach all sites with $W>w$ in a region of diameter~$n^{1/d}p^{-1/d}$ only if their density~$p=\P(W>w)$ is at most $n^{-1}$ per site visited; the exponent $1/d$ comes from the spacing $p^{-1/d}$ of such sites.
+
+The field $N$ has superexponentially light one-point tails, $\P(N(z)\ge k)\le(4\e\mu/(\pi k))^k$, so the one-point condition~\eqref{eq:martin} holds with room to spare. The difficulty is the dependence: a line contributes to $N$ along its whole strip, and \emph{bundles} of nearly parallel lines create long rows of boxes with large~$N$. The following two facts quantify this dependence~\cite[Lemma~7.1]{HJ26b}.
+
+\begin{lemma}[Shared lines]
+\label{lem:shared}
+For every $k\in\N$ there is $c_k<\infty$ such that, almost surely, for all large~$n$, any two boxes in $[-n,n]^2$ at distance at least $c_kn^{6/k}$ share fewer than~$k$ lines. Moreover, almost surely $\max_{\lVert z\rVert_\infty\le n}N(z)\le\log n$ for all large~$n$.
+\end{lemma}
+
+% =================================================================
+\section{Why path-level first moments fail}
+\label{sec:firstmoment}
+
+The natural way to prove $g^*<\infty$ or $h_1^*<\infty$ is a first moment followed by the Borel--Cantelli lemma. Every version of this fails, for the same reason. Let $M$ be the number of lines meeting both vertical sides of the strip $[0,(n+1)]\times[0,1]$. By~\cite[Lemma~2.1]{HJ26b}, $M$ is Poisson with mean $\nu_n\in[\mu/(5\pi(n+1)),2\mu/\pi]$, and each such line meets every box $Q(ke_1)$, $0\le k\le n$.
+
+\begin{proposition}[Superexponential moments]
+\label{prop:annealed}
+For every $\mu>0$: (i) $\lim_nn^{-1}\log\E Y_n(0)=\infty$; (ii) for a straight path~$\gamma$, $\E\e^{sR(\gamma)}=\infty$ for every $s>0$ and all large~$n$; (iii) for every $H\ge1$, the expected number of paths $\gamma\in\Gamma_{n/2}(0)$ with $R(\gamma)\ge Hn/2$ is at least $c\,2^{n/2}(\mu/n)^H/H!$.
+\end{proposition}
+
+\begin{proof}
+(i) With $j=\lceil n/\log n\rceil$, $\E Y_n(0)\ge\E M^{n+1}\ge j^{n+1}\P(M\ge j)\ge\e^{-2\mu/\pi}j^{n+1}(\nu_n/j)^j$, whose logarithm is $n\log n-O(n\log\log n)$.
+(ii) By the exponential formula, $\E\e^{sR(\gamma)}=\exp\int(\e^{sf_\gamma}-1)\dd\nu_\mu$, and the lines with $f_\gamma\ge t$ have measure $\asymp\mu n/t$ for a straight~$\gamma$, so the integral is at least $\sum_t\mu(n/t^2)\e^{st}=\infty$.
+(iii) On the event $\{M\ge H\}$, which has probability at least $c(\mu/n)^H/H!$, every $2$-path inside the rows $0$ and $-1$ that advances by $1$ or~$2$ in each step satisfies $R(\gamma)\ge H\#\gamma$, and there are at least $2^{n/2}$ such paths of length~$n/2$.
+\end{proof}
+
+Item~(iii) is the decisive one: not only the expected reward, but the expected \emph{number of bad paths} is exponentially large. Inside a bundle of $H$ lines, exponentially many micro-paths are bad, although the bundle itself is rare. Any union bound must therefore be taken over coarser objects than lattice paths. Spatial coarse-graining alone does not help: covering $\gamma$ by boxes of side~$K$ gives weights of order $Kj$ along a row of $K$-boxes in a $j$-bundle, and the union bound over $K$-animals inside that row reproduces~(iii) at scale~$K$.
+
+% =================================================================
+\section{The sandwich identity}
+\label{sec:sandwich}
+
+The level sets $D_m\coloneqq\{z\colon N(z)\ge m\}$ give $R(\gamma)=\sum_{m\ge1}\#(\gamma\cap D_m)$, and $\#(\gamma\cap D_m)\le\#\gamma$ for $m\le2$. A symmetric enumeration of $D_m$ by $m$-subsets of lines overcounts a $j$-bundle by a factor $\binom jm$, which destroys the exponential tails needed later (Bell-number blow-up). The following exact identity avoids this.
+
+For a box~$z$ with $N(z)\ge3$, order the lines through~$Q(z)$ by their angle in~$[0,\pi)$. A line~$\ell$ is \emph{sandwiched at~$z$} if it meets~$Q(z)$ and is neither the smallest nor the largest angle among these lines. Let $Z(\ell)\coloneqq\{z\colon\ell\text{ sandwiched at }z\}\subseteq\operatorname{strip}(\ell)$.
+
+\begin{lemma}[Sandwich identity]
+\label{lem:sandwich}
+For every box~$z$, $(N(z)-2)^+=\#\{\ell\colon\ell\text{ sandwiched at }z\}$. Consequently, for every path~$\gamma$,
+\begin{equation}
+\label{eq:sandwich}
+  R(\gamma)\le2\,\#\gamma+\sum_{\ell\in\cL}\#\bigl(\gamma\cap Z(\ell)\bigr)\,.
+\end{equation}
+Replacing "neither the smallest nor the largest" by "neither among the $a$ smallest nor among the $b$ largest" gives $(N-a-b)^+$.
+\end{lemma}
+
+\begin{proof}
+Among $N\ge3$ lines ordered by angle, exactly $N-2$ are neither first nor last. Summing over $z\in\gamma$ and interchanging the sums gives~\eqref{eq:sandwich}.
+\end{proof}
+
+A $j$-bundle of length~$t$ contributes exactly $(j-2)t$ to the right-hand side of~\eqref{eq:sandwich}. The identity reduces \cref{conj:greedy} to bounding the time a path can spend in sandwiched boxes of the lines.
+
+\paragraph{Partner intervals.} Fix~$\ell$. A line~$\ell'$ at angle~$\beta\in(0,\pi/2]$ to~$\ell$ is within distance~$2$ of~$\ell$ exactly on an interval of length $4/\sin\beta$ around their intersection, its \emph{partner interval} on~$\ell$. Given~$\ell$, the other lines are a Poisson process, and lines crossing~$\ell$ at angle in $[\beta,2\beta]$ do so at rate $\asymp\mu\beta^2$ per unit length of~$\ell$. Hence partner intervals of length in $[s,2s]$ start at rate $\asymp\mu/s^2$ per unit length. The expected coverage density of~$\ell$ by partner intervals is $O(\mu)$, dominated by short intervals; the interval length has finite mean and infinite second moment, the latter logarithmically. $Z(\ell)$ is the set of points of~$\ell$ covered by partner intervals on both angular sides. For small~$\mu$, a sandwiched run of length~$t$ is produced predominantly by two partners of length $\gtrsim t$, one on each side, with probability $\asymp(\mu/t)^2$ per unit length of~$\ell$.
+
+% =================================================================
+\section{Bundles and their densities}
+\label{sec:bundles}
+
+An \emph{$m$-bundle of length~$t$} is a set of $m$ lines lying within a strip of width $O(1)$ over a length~$t$; equivalently, $m$ lines with pairwise angles $O(1/t)$ meeting a common disk of radius $O(1)$. Its sites are a row of $\asymp t$ boxes with $N\ge m$.
+
+\begin{lemma}[Bundle densities]
+\label{lem:density}
+Distinct $m$-bundles of length in $[t,2t]$ have density $\rho_m(t)\asymp\mu^mt^{-m}$ per unit area, with constants depending on~$m$.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+Lines meeting a unit disk have measure $\asymp\mu$. Given one of them, a line within angle $1/t$ of it and within distance~$2$ of it at the disk has measure $\asymp\mu/t$. So the expected number of $m$-tuples of such lines meeting a given unit disk is $\asymp\mu(\mu/t)^{m-1}$. Each bundle of length $\asymp t$ meets $\asymp t$ unit disks along its length, so distinct bundles have density $\asymp\mu^mt^{-m}$. For $m=2$ this agrees with the intensity $\asymp\mu^2$ of intersection points and the density $\propto\sin\alpha$ of the angle~$\alpha$ at a typical intersection: pairs with $\alpha\le C/t$ have density $\asymp\mu^2t^{-2}$.
+\end{proof}
+
+\paragraph{Heuristic cluster bound.} A path of length~$n$ that visits bundles $C_1,\dots,C_k$ in this order gains at most $\sum_i\lvert C_i\rvert(m_i-2)$ from~\eqref{eq:sandwich} and spends at least $\sum_i\operatorname{dist}(C_i,C_{i+1})$ steps. Bundles of length~$t$ at level~$m$ have typical spacing $\rho_m(t)^{-1/2}\asymp\mu^{-m/2}t^{m/2}$, so
+\begin{equation*}
+  \frac{\text{size}}{\text{spacing}}\asymp\mu^{m/2}\,t^{1-m/2},
+\end{equation*}
+which is bounded for $m=2$ and decays in~$t$ for $m\ge3$. In the language of~\eqref{eq:martin}, with "sites" replaced by bundles and weights by their lengths, the tail $\P(W>t)\asymp t^{-m}$ per unit area satisfies Martin's condition for $m\ge3$ and fails logarithmically for $m=2$. The level-$2$ contribution to~\eqref{eq:sandwich} is zero, so this suggests $h_1^*\le2+\sum_{m\ge3}C\mu^{m/2}<\infty$ and the refined form of \cref{conj:greedy}. \Cref{lem:shared} supports the picture: far-apart bundles are built from disjoint sets of lines.
+
+% =================================================================
+\section{The dyadic scheme and the highway obstruction}
+\label{sec:dyadic}
+
+The proof of linear growth in~\cite{CGGK93} for independent weights proceeds by dyadic levels: sites with $W\in[2^k,2^{k+1})$ have density~$p_k$; coarse-grain to boxes of side $\ell_k\asymp p_k^{-1/d}$, so that each box contains $O(1)$ such sites; an animal of size~$n$ meets $O(n/\ell_k)$ boxes; a union bound over connected sets of boxes bounds the number of level-$k$ sites visited by $O(n/\ell_k)$, hence the level-$k$ reward by $O(2^kn/\ell_k)=O(np_k^{1/d}2^k)$, and summation over~$k$ gives~\eqref{eq:martin}.
+
+We attempted the same scheme for the runs of the sandwiched sets $Z(\ell)$. A maximal run of $Z(\ell)$ of length in $[2^k,2^{k+1})$ is of \emph{class~$k$}, $t\coloneqq2^k$; a path gains at most $2t$ from each class-$k$ run it touches. The bulk density of class-$k$ runs is $\rho_k\asymp\mu^3t^{-3}$ (the $3$-bundle witness), so we take boxes of side $\ell_k\asymp(t^3/\mu^3)^{1/2}$. A path of length~$n$ touches $O(n/\ell_k+1)$ such boxes, and if every connected set~$A$ of $m$ boxes in $[-3n,3n]^2$ contained at most $Km$ class-$k$ runs, the total gain would be
+\begin{equation*}
+  \sum_k2t\cdot K\cdot O(n/\ell_k+1)=O\bigl(K\mu^{3/2}n\bigr)\sum_k2^{-k/2}+o(n)<\infty\cdot n\,.
+\end{equation*}
+The union bound over the $\le c^m$ connected sets requires $\P(M_k(A)\ge Km)\le\e^{-c'm}$, where $M_k(A)$ counts class-$k$ runs starting in~$\bigcup A$. Thanks to \cref{lem:sandwich}, the two expected failure modes are harmless: a thick bundle of $j$ lines yields only $j-2$ runs at cost $(\mu/t)^j$, and crowding by $L$ lines costs $\e^{-L\log L}$.
+
+\begin{proposition}[Highways]
+\label{prop:highway}
+Let $A$ be a row of $m$ boxes of side~$\ell_k$. Then $\P(M_k(A)\ge Km)\ge c\,\mu^2\ell_k\,m^{-2}$ for all large~$m$. In particular the required exponential tail fails.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Lines crossing the row lengthwise have measure $\asymp\mu\ell_k/m$, and given one of them, a second line within angle $1/(m\ell_k)$ and within distance~$2$ of it has measure $\asymp\mu/m$. So a $2$-bundle $(\ell,\ell')$ along the whole row exists with probability $\asymp\mu^2\ell_k/m^2$. Given it, the class-$k$ runs of~$\ell$ are produced by third lines with partner intervals of length~$\asymp t$ on the side opposite to~$\ell'$; these occur at rate $\asymp\mu/t$ per unit length, so there are $\asymp\mu m\ell_k/t\asymp m\sqrt{t/\mu}$ of them, which exceeds $Km$ for large~$t$.
+\end{proof}
+
+The highway does not threaten \cref{conj:greedy}: the third lines cover only a fraction $O(\mu)$ of the highway, so the gain rate along it is $O(\mu)$. The scheme fails because it values each run at~$2t$ regardless of its surroundings, while class-$k$ runs are not spread with density~$\rho_k$ but cluster along $2$-bundles, which in turn cluster along $3$-bundles, and so on. The union bound must respect this hierarchy, and the same obstruction appears one level up when \cref{lem:sandwich} is applied to $(N-3)^+$: the highways are then $3$-bundles, with probability $\asymp\mu^3\ell_k/m^3$, still polynomial.
+
+% =================================================================
+\section{Outlook: a hierarchical induction}
+\label{sec:outlook}
+
+The picture that emerges is a hierarchy of carriers. A $j$-bundle of length~$T$ is a highway along which $(j+1)$-sub-bundles of length~$s$ occur at rate $\asymp\mu/s^2$ per unit length; the expected number of sub-bundles of length at least $T/2$ is $O(\mu/T)$, and the expected coverage of the highway by sub-bundles is $O(\mu)$. By~\eqref{eq:sandwich}, the reward of a path is
+\begin{equation*}
+  R(\gamma)\le2\,\#\gamma+\sum_{j\ge3}(j-2)\,\tau_j(\gamma),
+\end{equation*}
+where $\tau_j(\gamma)$ is the number of steps of~$\gamma$ spent in boxes that belong to a $j$-bundle but not to a $(j+1)$-bundle. \Cref{conj:greedy} would follow from
+\begin{equation}
+\label{eq:induction}
+  \text{a.s. for all large }n\colon\quad\max_{\lVert z_0\rVert_\infty\le n}\max_{\gamma\in\Gamma_n(z_0)}\tau_j(\gamma)\le\varepsilon_jn,\qquad\sum_{j\ge3}(j-2)\varepsilon_j<\infty\,.
+\end{equation}
+The base case is $j=2$: a greedy bound for the Poisson process of $2$-bundles, viewed as segments with length tail~$t^{-2}$, the borderline case of~\eqref{eq:martin} in dimension two. The $2$-bundles themselves carry no reward; they are only carriers of the $3$-bundles. The induction step from $j$ to $j+1$ then has to bound the time spent on $(j+1)$-sub-bundles of the $j$-bundles visited, using that sub-bundles are a Poisson process along each carrier with the rates above. A clean formulation of this carrier structure, with an enumeration of carriers that does not depend on the configuration and keeps the union bound over carriers rather than over paths, is the missing ingredient. We expect this to be a substantial project rather than a short argument.
+
+\paragraph{What is rigorous.} \Cref{thm:criterion}, the reduction to~\eqref{eq:h1}, \cref{lem:shared}, \cref{prop:annealed}, \cref{lem:sandwich}, and the density computations behind \cref{lem:density} and \cref{prop:highway} (stated as sketches above, with the constants worked out in the accompanying analysis notes). \Cref{conj:greedy}, the cluster heuristics of \cref{sec:bundles}, and the induction~\eqref{eq:induction} are not proved.
+
+\section*{Acknowledgements}
+
+BJ acknowledges the financial support of the Leibniz Association within the Leibniz Junior Research Group on Probabilistic Methods for Dynamic Communication Networks (DYCOMNET) as part of the Leibniz Competition (grant no.~J105/2020), of the Berlin Mathematics Research Center MATH+ through the project EF-MA-Sys-2 on Information Flow \& Emergent Behavior in Complex Networks, and of the Deutsche Forschungsgemeinschaft (DFG) through Project P27 within the SPP~2265.
+
+\section*{Use of AI tools}
+
+The simulations, proofs, computations, figures and the text of this note were developed with substantial assistance of the AI systems Claude (Anthropic) and ChatGPT Astra~6 (OpenAI), in an interactive process directed by the authors.
+
+\bibliographystyle{amsalpha}
+\bibliography{references}
+
+\end{document}

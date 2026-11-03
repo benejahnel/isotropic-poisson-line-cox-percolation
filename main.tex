@@ -1,0 +1,389 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+
+\runningtitle{Supercritical isotropic Poisson line Cox percolation}
+\hypersetup{pdftitle={A supercritical phase for isotropic Poisson line Cox percolation},pdfauthor={Christian Hirsch, Benedikt Jahnel}}
+
+\title{\textbf{A supercritical phase for isotropic\\ Poisson line Cox percolation}\\[0.6em] \large Working note}
+
+\author{%
+  Christian Hirsch\thanks{Institut f\"ur Mathematische Stochastik, Georg-August-Universit\"at G\"ottingen, Goldschmidtstra\ss e~7, 37077 G\"ottingen, Germany. \texttt{christian.hirsch@uni-goettingen.de}. \orcid{0000-0003-4136-3740}.}
+  \and
+  Benedikt Jahnel\thanks{Institut f\"ur Mathematische Stochastik, Technische Universit\"at Braunschweig, Universit\"atsplatz~2, 38106 Braunschweig, Germany, and Weierstrass Institute for Applied Analysis and Stochastics, Mohrenstra\ss e~39, 10117 Berlin, Germany. \texttt{benedikt.jahnel@tu-braunschweig.de}. \orcid{0000-0002-4212-0065}.}%
+}
+% TODO(BJ): Adressen und E-Mail-Adressen prüfen.
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{plain}
+
+\begin{abstract}
+We study the planar Boolean model formed by disks centred at Poisson points on isotropic Poisson lines. For every positive line intensity and disk radius, we establish percolation at a finite linear point intensity and obtain a logarithmic upper bound on the critical intensity in the limit of small line density at fixed radius. The proof is a multiscale argument for closed lattice crossings. Lines meeting two distant windows have normal angles in a short interval, so deleting these directions makes the two crossing events independent, and the angular losses remain summable over the scales.
+
+\medskip
+\noindent\textit{2020 Mathematics Subject Classification.} Primary 60K35; Secondary 60D05, 60G55.
+
+\noindent\textit{Key words and phrases.} Continuum percolation, Poisson line Cox process, Boolean model, renormalisation.
+\end{abstract}
+
+% =================================================================
+\section{Introduction}
+\label{sec:introduction}
+
+Poisson line Cox processes describe points distributed along a random system of straight lines. Choi and Baccelli~\cite[Section~II]{ChBa18} study this construction as a model for vehicles distributed along random roads. Placing a disk around each point gives a model of connectivity in which both the geometry of the lines and the gaps between points matter. We study the planar isotropic model, where the lines have no preferred direction and, conditionally on the lines, the points on each line form independent Poisson processes.
+
+Intersections between lines allow occupied paths to pass from one line to another. Increasing the point intensity makes such connections more likely locally, but a single line can also influence configurations in regions arbitrarily far apart. Establishing percolation therefore requires control of these connections across increasing spatial scales. The question is whether increasing the linear point intensity can produce an unbounded occupied component for every positive line intensity and disk radius.
+
+General criteria for Cox percolation were proved by Hirsch, Jahnel, and Cali~\cite[Section~2.1]{HJC19}. Their supercritical result assumes stabilisation of the directing random measure together with an additional connectivity condition. Poisson line length measures fall outside this framework because they do not satisfy the stabilisation hypothesis; see the discussion in Jahnel and T\'obi\'as~\cite[Section~3]{JT22}.
+
+Jahnel, Jhawar, and Vu~\cite{JJV23} establish phase transitions for a nonstabilising environment of horizontal and vertical Poisson lines. Their supercritical argument exploits the two coordinate directions to compare occupied connections along streets with bond percolation on a randomly stretched square lattice~\cite[Sections~1.3 and~2]{JJV23}. Their outlook~\cite[Section~1.4]{JJV23} identifies the general Poisson line environment as a further problem, for which this lattice representation is unavailable. Hil\'ario, S\'a, Sanchis, and Teixeira~\cite[Section~9]{HSST26} also ask whether the Poisson line Cox Boolean model has a nontrivial phase transition.
+
+Our main result, \cref{thm:main}, answers the supercritical part of this question in the planar isotropic case. For every positive line intensity~$\mu$ and disk radius~$r$, the Boolean model percolates almost surely once the linear point intensity exceeds a constant multiple of $r^{-1}[1+\logp(1/(\mu r))]$. In particular, the critical intensity grows at most logarithmically as the line density tends to zero at fixed radius.
+
+\Cref{sec:setting} introduces the model and states \cref{thm:main}. \Cref{sec:strategy} explains why deleting a short interval of directions decouples two distant crossings, states the three propositions on which the proof rests and deduces \cref{thm:main} from them. \Cref{sec:initial} constructs, at the initial scale, a polygon of four lines whose points block every closed crossing. \Cref{sec:recursion} proves the crossing recursion by deleting directions, and \cref{sec:boundary} converts the crossing bounds into an infinite open cluster.
+
+% =================================================================
+\section{Setting and main result}
+\label{sec:setting}
+
+We now specify the model and its normalisation. Put $n_\theta\coloneqq(\cos\theta,\sin\theta)$ and parametrise an unoriented line by
+\begin{equation*}
+  \ell(\theta,s)\coloneqq\{x\in\R^2\colon x\cdot n_\theta=s\},\qquad\theta\in[0,\pi),\ s\in\R\,.
+\end{equation*}
+Let $\cL$ be a Poisson process of lines with intensity measure $\nu_\mu(\d\theta\,\d s)\coloneqq(\mu/\pi)\dd\theta\dd s$, where $\mu>0$. Define $\Lambda(A)\coloneqq\sum_{\ell\in\cL}\cH^1(\ell\cap A)$ for Borel sets $A\subseteq\R^2$, with $\cH^1$ denoting length. Campbell's formula~\cite[Proposition~2.7]{LP17} and integration over line displacements give $\E\Lambda(A)=\mu\lvert A\rvert$ for bounded~$A$, where $\lvert A\rvert$ denotes area.
+
+Conditionally on~$\cL$, let $X_\lambda$ be Poisson with intensity measure~$\lambda\Lambda$, where $\lambda>0$. Equivalently, independently mark each line with a Poisson point process of intensity~$\lambda$ per unit length and superpose the marks. The marking theorem makes these pairs of lines and point configurations a Poisson process on the corresponding marked space~\cite[Theorem~5.6]{LP17}. Both $\Lambda$ and $X_\lambda$ are locally finite almost surely. Write $B(x,t)$ for the open Euclidean disk of radius~$t$ centred at~$x$. Fix $r>0$ and put
+\begin{equation*}
+  \Xi_\lambda\coloneqq\bigcup_{x\in X_\lambda}B(x,r)\,.
+\end{equation*}
+\Cref{fig:model} shows a realisation. Percolation means the existence of an unbounded connected component, and $\P$ denotes the joint law of the lines and their points. Define
+\begin{equation*}
+  \lambda_c(\mu,r)\coloneqq\inf\{\lambda>0\colon\P(\Xi_\lambda\text{ percolates})>0\}\,,
+\end{equation*}
+with $\inf\varnothing=\infty$, and $\logp t\coloneqq\max(0,\log t)$ for $t>0$.
+
+\begin{figure}[ht]
+  \centering
+  \input{figures/fig_model}
+  \caption{Numerical illustration of the model in the window $[0,12]\times[0,7]$ with $\mu=0.6$, $\lambda=1.4$ and $r=0.5$. Grey lines are the lines of~$\cL$ meeting the window, dots are the points of~$X_\lambda$ in the window, and disks are the balls $B(x,r)$. The largest connected component of $\Xi_\lambda$ within the window is shaded in teal. It passes from one line to another near intersections; the other components are separated from it by gaps between consecutive points along the lines. The bar below the window has length~$r$.}
+  \label{fig:model}
+\end{figure}
+
+Throughout, universal constants are positive and finite and do not depend on the model parameters, the scales, or the angular restrictions considered below. We use $C$ for the constant in the main bound, $c,C_0$ for those in the initial estimate, and subscripted constants for intermediate bounds. Their admissible choices are supplied in the proofs. Our main result quantifies the intensity sufficient for percolation.
+
+\begin{theorem}[Supercritical phase]
+\label{thm:main}
+There is a universal finite constant~$C$ such that, for every $\mu,r>0$,
+\begin{equation*}
+  \lambda_c(\mu,r)\le\frac{C}{r}\bigl[1+\logp(1/(\mu r))\bigr]<\infty\,.
+\end{equation*}
+Moreover, $\Xi_\lambda$ percolates almost surely whenever $\lambda\ge Cr^{-1}[1+\logp(1/(\mu r))]$.
+\end{theorem}
+
+\Cref{thm:main} applies at every positive line density, including arbitrarily sparse line environments. Rescaling space by $x\mapsto x/r$ gives $\lambda_c(\mu,r)=r^{-1}\lambda_c(\mu r,1)$, so the product~$\mu r$ is the dimensionless line density. For fixed~$r$, the theorem supplies a sufficient point intensity that grows at most logarithmically as $\mu$ tends to zero. The optimality of this upper bound and positivity of the critical intensity remain separate questions; \cref{rem:monotonicity} explains why the present argument does not address the latter.
+
+% =================================================================
+\section{Strategy and proof of the main theorem}
+\label{sec:strategy}
+
+The proof is a multiscale argument for closed lattice crossings, that is, chains of lattice sites without a Cox point nearby. A large crossing contains two smaller crossings far apart, and the probability of the large crossing should therefore be at most the square of the small one, up to a combinatorial factor. The obstacle is that the two small crossings are not independent: a single line can carry points near both of them, at every separation.
+
+\paragraph{Deleting directions.} The proof exploits the geometry of lines that meet two separated observation windows. When the separation is large compared with their diameters, all such lines have normal angles in a short interval, with angles understood modulo~$\pi$. Removing that interval leaves no line capable of meeting both windows, so the retained point configurations there are independent; see \cref{fig:deletion}. Deleting lines removes points and can only create more closed crossings, so the comparison goes in the right direction for an upper bound. Gou\'er\'e~\cite[Lemma~3.3]{Gou08} uses the same reduction of one large crossing to two separated smaller crossings to obtain a quadratic estimate for Poisson Boolean percolation. Estimates for lines meeting two separated sets also enter the study of Poisson cylinders by Tykesson and Windisch~\cite[Lemma~3.1]{TW12}, where the same geometric feature produces long-range dependence.
+
+\begin{figure}[ht]
+  \centering
+  \input{figures/fig_angular_deletion}
+  \caption{Angular deletion in two separated observation windows, schematic. (a)~The dashed amber lines have normal angles in the shaded sector of the inset; this sector contains every direction that permits a line to meet both squares. (b)~Removing all lines in this angular interval and their points leaves the same retained configuration as in~(a). No retained line meets both windows, which gives independence of the two restrictions of the marked Poisson process. Solid teal segments and dark dots show retained lines and points, and disks show neighbourhoods of the displayed points. Only points inside the windows are shown. The angular range and disk radii are enlarged for visibility.}
+  \label{fig:deletion}
+\end{figure}
+
+\paragraph{Paying for the deletion.} The comparison changes the angular distribution of the model, so the next scale sees a law with fewer directions. We therefore prove the crossing estimates uniformly over distributions obtained by deleting sets of directions of small total angular measure. At the initial scale, four suitable lines bound a polygon around an inner square, and sufficiently dense points along its boundary prevent a closed crossing and provide a connected open set around the square. This construction needs only a fixed fraction of the directions near the two coordinate axes and therefore survives the permitted deletions. Choosing increasing scale ratios makes the cumulative angular loss summable and small enough to preserve the construction, so the independence comparison can be iterated while keeping the point intensity fixed.
+
+\paragraph{From crossings to percolation.} A final boundary argument converts the resulting crossing bounds into positive probability of an infinite open component, and a mixing argument, again based on lines meeting two distant windows, upgrades this to probability one.
+
+\subsection{Lattice discretisation and the three inputs}
+
+We record nearby Cox points on a fixed lattice, so that an infinite connected set of open sites produces an occupied Boolean component. The initial estimate supplies the required starting probabilities, the crossing recursion propagates the estimate to larger scales, and the boundary estimate rules out finite open components containing the initial connected set. We state these three propositions in full and then prove \cref{thm:main}; their proofs occupy the subsequent sections.
+
+For a measurable set $E\subseteq[0,\pi)$, let $\P_E$ denote the same construction with line intensity measure $\1\{\theta\in E\}\nu_\mu(\d\theta\,\d s)$. The parameters $\mu,\lambda,r$ remain fixed, and the angular density is not renormalised after restriction. The original isotropic law is $\P=\P_{[0,\pi)}$. The restriction theorem for Poisson processes~\cite[Theorem~5.2]{LP17} identifies the retained marked process with the law just specified. Using the same marks on retained lines couples the two point configurations by inclusion. Throughout, $\lvert E\rvert$ denotes the Lebesgue measure of an angular set.
+
+For $v=(v_1,v_2)\in\R^2$, write $\lVert v\rVert_1\coloneqq\lvert v_1\rvert+\lvert v_2\rvert$, $\lVert v\rVert_2\coloneqq(v_1^2+v_2^2)^{1/2}$ and $\lVert v\rVert_\infty\coloneqq\max(\lvert v_1\rvert,\lvert v_2\rvert)$. Let $e_1\coloneqq(1,0)$ and $e_2\coloneqq(0,1)$, let $\N=\{1,2,\dots\}$, and write $\conv V$ for the convex hull of a set $V\subseteq\R^2$. Put $h\coloneqq r/8$ and work on~$h\Z^2$. Nearest neighbours are at Euclidean distance~$h$, whereas star neighbours are distinct sites at maximum-norm distance~$h$. A path is a finite sequence of sites with consecutive sites adjacent in the specified sense; connectedness means that every pair can be joined by such a path.
+
+A lattice site~$z$ is \emph{open} if $X_\lambda(B(z,r/2))\ge1$, and \emph{closed} otherwise. For each open site, choose a point $p_z\in X_\lambda\cap B(z,r/2)$. If $z,w$ are nearest neighbours, then $\lVert p_z-p_w\rVert_2<r+h<2r$, so the Boolean disks centred at $p_z,p_w$ intersect. Hence, for every connected open set of sites, the disks associated with its sites lie in one Boolean component. If the set of sites is infinite, it is unbounded because the lattice is locally finite. The points~$p_z$ are then unbounded as well, since $\lVert p_z-z\rVert_2<r/2$. Thus, an infinite nearest-neighbour open cluster implies percolation of~$\Xi_\lambda$.
+
+Write $Q_L(x)\coloneqq x+[-L,L]^2$ and $Q_L\coloneqq Q_L(0)$. All scales below belong to~$h\N$ and are at least~$r$, and every crossing centre~$x$ belongs to~$h\Z^2$. Let $\cB(x,L)$ be the event that a closed star path in $Q_{2L}(x)$ joins a site of $Q_L(x)$ to a site of $\partial Q_{2L}(x)$. Every site of the path lies in $Q_{2L}(x)$, and its state is determined by the points in its disk of radius~$r/2$. Hence, $\cB(x,L)$ depends only on points in $Q_{2L+r/2}(x)\subseteq Q_{3L}(x)$. Adding points can only change closed sites into open sites, so this event is decreasing under addition of points. Let $G(L)$ be the event that $Q_{2L}$ contains a finite nearest-neighbour connected set of open sites whose convex hull contains~$Q_L$. The two events describe the failures excluded by the initial construction: it prevents a closed crossing and supplies the connected open set needed to initiate the boundary argument. The first proposition estimates their probabilities uniformly over angular restrictions.
+
+\begin{proposition}[Uniform initial-scale estimate]
+\label{prop:initial}
+There are universal constants $c,C_0>0$ such that, whenever $\lvert[0,\pi)\setminus E\rvert\le10^{-3}$ and $L\in h\N$ with $L\ge r$,
+\begin{equation*}
+  \max\bigl\{\P_E(\cB(0,L)),\ \P_E(G(L)^\c)\bigr\}\le C_0\e^{-c\mu L}+C_0(1+L/r)\e^{-c\lambda r}\,.
+\end{equation*}
+\end{proposition}
+
+The first term on the right accounts for the line environment, which must supply four suitable lines, and the second for the points, which must cover these lines densely.
+
+We next specify the scales and the admissible loss of directions. Fix the universal integer $A\coloneqq2^{20}$. For $n\ge0$, set
+\begin{equation*}
+  a_n\coloneqq A(n+1)^2,\qquad L_{n+1}\coloneqq a_nL_n,\qquad\delta_n\coloneqq64\sum_{k=n}^\infty a_k^{-1}\,,
+\end{equation*}
+where $L_0\in h\N$ and $L_0\ge r$ will be chosen in the proof. Thus, $L_n=L_0A^n(n!)^2$, $\delta_n=\delta_{n+1}+64/a_n$, and $\delta_0<10^{-3}$. Define
+\begin{equation*}
+  \cE_n\coloneqq\bigl\{E\subseteq[0,\pi)\colon E\text{ is measurable and }\lvert[0,\pi)\setminus E\rvert\le\delta_n\bigr\},\qquad q_n\coloneqq\sup_{E\in\cE_n}\P_E(\cB(0,L_n))\,.
+\end{equation*}
+Each law~$\P_E$ is translation invariant, so $q_n$ also bounds these probabilities at every lattice translate. The site states can remain dependent at arbitrarily large distances. The identity for~$\delta_n$ allows a law in~$\cE_{n+1}$ to lose at most $64/a_n$ radians and still belong to~$\cE_n$. The next proposition uses precisely this allowance to bound two smaller crossings by independent events.
+
+\begin{proposition}[Recursion by deletion of directions]
+\label{prop:recursion}
+For every $n\ge0$,
+\begin{equation*}
+  q_{n+1}\le2401\,a_n^4q_n^2\,.
+\end{equation*}
+\end{proposition}
+
+The factor $2401\,a_n^4$ counts the pairs of positions of the two smaller crossings; the square~$q_n^2$ reflects their independence after the deletion.
+
+For the final input, let $\cD$ be the event that some finite star-connected set of closed sites has convex hull containing~$Q_{4L_0}$. This event includes the exterior boundaries relevant to any finite open component occurring on~$G(4L_0)$. Let $\cP$ denote the existence of an infinite nearest-neighbour open cluster. The final proposition bounds~$\cD$ by a sum of crossing probabilities and then combines this bound with~$G(4L_0)$. Both conclusions follow from event inclusions and union bounds, which apply despite the dependence between these events.
+
+\begin{proposition}[Exterior boundary estimate]
+\label{prop:boundary}
+Under the isotropic law,
+\begin{equation*}
+  \P_{[0,\pi)}(\cD)\le361\sum_{n=0}^\infty a_n^2q_n,\qquad\P_{[0,\pi)}(\cP)\ge\P_{[0,\pi)}(G(4L_0))-361\sum_{n=0}^\infty a_n^2q_n\,.
+\end{equation*}
+\end{proposition}
+
+The upgrade from positive probability to probability one rests on the following mixing property, which again uses the geometry of lines meeting two separated windows.
+
+\begin{lemma}[Mixing and zero--one law]
+\label{lem:mixing}
+Let $R>0$ and consider two fixed bounded observation windows contained in disks of radius~$R$ whose centres are separated by distance $D\ge4R$. Let $N_D$ count the lines meeting both windows and put $\kappa_D\coloneqq\E N_D$. Then
+\begin{equation*}
+  \kappa_D\le\frac{4\mu R}{\pi}\arcsin(2R/D)\le\frac{16\mu R^2}{\pi D}\xrightarrow[D\to\infty]{}0,\qquad\lvert\P(F\cap H)-\P(F)\P(H)\rvert\le3\kappa_D
+\end{equation*}
+for arbitrary events $F,H$ determined by the respective local configurations. Consequently, every translation-invariant event~$J$ satisfies $\P(J)\in\{0,1\}$.
+\end{lemma}
+
+\begin{proof}
+The decomposition according to lines meeting both windows parallels the mixing argument for Poisson cylinders in Tykesson and Windisch~\cite[Lemmas~3.1 and~3.3]{TW12}; we give the details for the present marked planar process. The point process is stationary because the line intensity measure is translation invariant and each line carries a homogeneous Poisson process.
+
+\emph{Step 1: Counting shared lines.} A line meeting both disks must have normal angle~$\theta$ satisfying $\lvert z\cdot n_\theta\rvert\le2R$, where $z$ is the vector between their centres. These angles have total measure $2\arcsin(2R/D)$, and for each such angle the allowed displacements form an interval of length at most~$2R$. This gives the first bound, and the second follows from $\arcsin t\le2t$ for $0\le t\le1/2$.
+
+\emph{Step 2: Covariance bound.} Delete the lines meeting both windows together with all their points. The remaining observations are independent restrictions of the marked Poisson process. In the deletion coupling, either local event and their intersection retain their original values whenever $N_D=0$. Each of the corresponding probability differences is therefore bounded by $\P(N_D\ge1)\le\kappa_D$; comparing the joint probabilities and then the two marginal factors gives the bound.
+
+\emph{Step 3: Zero--one law.} Let $J$ be translation invariant, fix $\alpha>0$ and choose a bounded-window event~$F$ with $\P(J\,\triangle\,F)<\alpha$. Such events approximate every event because observations in increasing bounded windows generate the configuration $\sigma$-field. For a translate~$F_z$, stationarity and invariance of~$J$ give $\P(J\,\triangle\,F_z)<\alpha$, whence $\lvert\P(J)-\P(F\cap F_z)\rvert\le2\alpha$. Also, $\lvert\P(J)^2-\P(F)^2\rvert\le2\alpha$. Letting $\lVert z\rVert_2\to\infty$ in the mixing bound gives $\lvert\P(J)-\P(J)^2\rvert\le4\alpha$. Since $\alpha$ is arbitrary, $\P(J)\in\{0,1\}$.
+\end{proof}
+
+\subsection{Proof of \texorpdfstring{\cref{thm:main}}{the main theorem}}
+
+The proof fixes the parameters in dependency order. The recursion turns an initial bound $q_0\le\varepsilon$ into the doubly exponential decay $q_n\le\e^{-t2^n}$ provided that $\varepsilon$ is small enough to absorb the growing prefactors $2401\,a_n^4$. \Cref{prop:initial} supplies such a small~$\varepsilon$ once the initial scale~$L_0$ and the intensity~$\lambda$ are large, and the logarithm in \cref{thm:main} is the price of choosing $L_0$ of order $1/\mu$ when the lines are sparse.
+
+\begin{proof}[Proof of \cref{thm:main}]
+\emph{Step 1: Universal constants.} The scale ratios $a_n=A(n+1)^2$ are fixed universal numbers. Put $b_n\coloneqq2401a_n^4$ and $S\coloneqq\sum_{n=0}^\infty2^{-n-1}\log b_n$. The identity $\log b_n=\log(2401A^4)+8\log(n+1)$ shows that $S<\infty$. For $t\ge1$, the series $\sum_{n\ge0}a_n^2\e^{-t2^n}$ is dominated by the convergent series $\sum_{n\ge0}a_n^2\e^{-2^n}$ and tends to zero as $t\to\infty$. Choose a universal $t\ge1$ with $361\sum_{n\ge0}a_n^2\e^{-t2^n}<1/4$, and set $\varepsilon\coloneqq\min(1/4,\e^{-S-t})$. These choices depend only on the constants in the recursion and boundary estimate.
+
+\emph{Step 2: Initial scale and intensity.} Let $c,C_0$ be the constants supplied by \cref{prop:initial}. Choose a universal $M\ge1$ such that $C_0\e^{-cM}\le\varepsilon/2$, and put $K\coloneqq11/2+4M$. We now fix the initial scale and a sufficient point intensity by
+\begin{align*}
+  L_0&\coloneqq h\bigl\lceil\max(r,M/\mu)/h\bigr\rceil,&C_1&\ge\frac1c\max\{1,\log(2C_0K/\varepsilon)\},\\
+  \lambda&\ge\frac{C_1}{r}\bigl[1+\logp(1/(\mu r))\bigr],&1+4L_0/r&\le K\max\{1,1/(\mu r)\}\,.
+\end{align*}
+Indeed, the definition of~$L_0$ gives $L_0\in h\N$, $L_0\ge r$, $\mu L_0\ge M$, and $L_0/r\le9/8+M/(\mu r)$, which proves the last inequality. To check the point-process term, put $u\coloneqq\logp(1/(\mu r))$. The choice of~$C_1$ implies $cC_1(1+u)\ge\log(2C_0K/\varepsilon)+u$, and consequently $C_0(1+4L_0/r)\e^{-c\lambda r}\le\varepsilon/2$.
+
+\emph{Step 3: Initial bounds.} Every $E\in\cE_0$ satisfies $\lvert[0,\pi)\setminus E\rvert\le\delta_0<10^{-3}$. Applying \cref{prop:initial} at~$L_0$, the environmental term is at most $C_0\e^{-cM}\le\varepsilon/2$, and the point-process term is bounded by its value with $4L_0$ in place of~$L_0$. Thus, $\P_E(\cB(0,L_0))\le\varepsilon$ uniformly over~$\cE_0$, giving $q_0\le\varepsilon$. Apply the same proposition with $E=[0,\pi)$ and scale~$4L_0$. The scale belongs to~$h\N$ and is at least~$r$, the environmental term has decreased, and the point-process term is the one already estimated. We obtain $\P(G(4L_0))\ge1-\varepsilon$.
+
+\emph{Step 4: Iteration and conclusion.} \Cref{prop:recursion} applies successively at every scale with these fixed values of $\mu,r,\lambda,L_0$. If $q_0=0$, it gives $q_n=0$ for all~$n$. Otherwise, substituting each bound into the next and using $q_0\le\e^{-S-t}$ yields
+\begin{align*}
+  q_n&\le q_0^{2^n}\prod_{j=0}^{n-1}b_j^{2^{n-1-j}}\le\exp\Bigl(-2^n\Bigl[S+t-\sum_{j=0}^{n-1}2^{-j-1}\log b_j\Bigr]\Bigr)\le\e^{-t2^n},\\
+  \P(\cP)&\ge\P(G(4L_0))-361\sum_{n=0}^\infty a_n^2q_n\ge1-\varepsilon-361\sum_{n=0}^\infty a_n^2\e^{-t2^n}>\frac12\,.
+\end{align*}
+For $n=0$, the product is empty and equals one. The last line uses \cref{prop:boundary}, whose crossing sum is finite by the preceding estimate. The lattice implication proved in the previous subsection now gives positive probability of Boolean percolation. Since every~$\lambda$ above the displayed threshold has been covered, the asserted bound on~$\lambda_c$ follows with $C=C_1$. Percolation of~$\Xi_\lambda$ is a translation-invariant event, so \cref{lem:mixing} shows that its probability is one.
+\end{proof}
+
+% =================================================================
+\section{The initial estimate}
+\label{sec:initial}
+
+At the initial scale, independence is not available and the estimate must come from a single configuration. Four lines, one close to each side of the square annulus $Q_{1.6L}\setminus Q_{1.3L}$, enclose the inner square~$Q_L$. If the points on these lines are dense, every closed path leaving~$Q_L$ must pass close to a Cox point, which is impossible, and the sites along the enclosing polygon form a connected open ring; see \cref{fig:polygon}. The lines only need directions near the two coordinate axes, and the deleted directions remove at most a small part of these, which yields uniformity in~$E$. Both the present proof and the proof of \cref{prop:boundary} use the following elementary support-function criterion.
+
+\begin{lemma}[Support-function criterion]
+\label{lem:support}
+Let $K_1,K_2\subseteq\R^2$ be nonempty compact sets with $K_2$ convex. If $\max_{w\in K_1}v\cdot w\le\max_{z\in K_2}v\cdot z$ for every direction $v\in\R^2$, then $K_1\subseteq K_2$.
+\end{lemma}
+
+\begin{proof}
+If $w\in K_1\setminus K_2$, take a nearest point $k\in K_2$ and put $v\coloneqq w-k$. Minimising squared distance along the segment from~$k$ to any $z\in K_2$ gives $v\cdot(z-k)\le0$, whereas $v\cdot w=v\cdot k+\lVert v\rVert_2^2>v\cdot k$. This contradicts the assumed support inequality.
+\end{proof}
+
+\begin{figure}[ht]
+  \centering
+  \input{figures/fig_polygon}
+  \caption{The construction in the proof of \cref{prop:initial} for $L=r=1$ and $h=1/8$. One line is selected from each of the families $\cF_T,\cF_B,\cF_R,\cF_L$; thin lines are their chords in~$Q_{2L}$ and the thick teal curve is the boundary~$\Gamma$ of the polygon~$P$. The dotted squares are $Q_{1.3L}\subseteq\interior P$ and $Q_{1.6L}\supseteq P$, the dashed square is~$Q_L$. Dots show one point in each interval of the partition of the chords, as on the event~$\cH$, at sampled positions. Shaded tiles are the tiles~$D_z$ with $z\in V$; on~$\cH$ all these sites are open, they are nearest-neighbour connected, and every closed star path from~$Q_L$ to~$\partial Q_{2L}$ would have to cross them. Schematic: the slopes are enlarged from at most $\eta=1/100$ to at most~$1/20$, which preserves both inclusions.}
+  \label{fig:polygon}
+\end{figure}
+
+\begin{proof}[Proof of \cref{prop:initial}]
+Fix an admissible angular set~$E$ and a scale $L\in h\N$ with $L\ge r$. We first bound the probability that the required lines exist, then bound the conditional probability that their relevant segments are sufficiently covered by Cox points, and finally verify the two implications on the resulting event.
+
+\emph{Step 1: Four families of lines.} Put $\eta\coloneqq1/100$. Let $\cF_T$ consist of lines $y=a+bx$ with $\lvert b\rvert\le\eta$ and $a\in[1.4L,1.5L]$, and let $\cF_B$ use $a\in[-1.5L,-1.4L]$ with the same slope range. Define $\cF_R$ and $\cF_L$ by the equations $x=a+by$ with these positive and negative intercept ranges, respectively. In all four families, retain only lines whose normal angles belong to~$E$. The letters $T,B,R,L$ specify the top, bottom, right, and left sides of the polygon to be constructed.
+
+For the horizontal families, a unit normal is $(-b,1)/\sqrt{1+b^2}$. As $b$ varies from~$-\eta$ to~$\eta$, its angle varies over an interval of length $2\arctan\eta$ around~$\pi/2$. At a fixed normal angle, the signed displacement of $y=a+bx$ is $a/\sqrt{1+b^2}$. Hence, an intercept interval of length~$L/10$ contributes a displacement interval of length $L/(10\sqrt{1+b^2})$. For a vertical line $x=a+by$, the same calculation uses the normal $(1,-b)/\sqrt{1+b^2}$. If its angle is outside $[0,\pi)$, changing the signs of both the normal and displacement gives our chosen line parametrisation and preserves the displacement interval length. The vertical angular interval is understood modulo~$\pi$ and has the same measure $2\arctan\eta$.
+
+Write~$J$ for either of these two normal-angle intervals. Its retained portion satisfies $\lvert J\cap E\rvert\ge2\arctan\eta-10^{-3}>0$. Integrating the displacement length over that portion gives, for each $i\in\{T,B,R,L\}$,
+\begin{gather*}
+  \nu_\mu(\cF_i)\ge\frac\mu\pi\int_{J\cap E}\frac{L}{10\sqrt{1+\eta^2}}\dd\theta\ge c_0\mu L,\\
+  c_0\coloneqq\frac{2\arctan\eta-10^{-3}}{10\pi\sqrt{1+\eta^2}}>0,\qquad\P_E(\text{some }\cF_i\text{ contains no line})\le4\e^{-c_0\mu L}\,.
+\end{gather*}
+The counts are Poisson, so the bound follows from their individual void probabilities and a union bound. The four families are also disjoint: the horizontal and vertical angular intervals are disjoint, and the positive and negative intercept ranges within either orientation do not overlap. Each family has finite intensity, so its realised count is finite almost surely.
+
+Let $\cA$ be the event that all four families contain a line. On~$\cA$, choose one line from each family using only the line environment, for example the line with the smallest angle, breaking any tie by its displacement. Denote their coefficients by $(a_T,b_T)$, $(a_B,b_B)$, $(a_R,b_R)$, and $(a_L,b_L)$. This is a measurable selection from four finite sets. Since no point marks enter the selection, conditional on the entire line environment the chosen lines still carry independent Poisson processes of intensity~$\lambda$ per unit length.
+
+\emph{Step 2: The polygon.} For a point $w=(w_1,w_2)\in\R^2$, define $P$ as the intersection of the inward half-planes of the four selected lines. The defining inequalities and the bounds they imply are
+\begin{gather*}
+  w_2\le a_T+b_Tw_1,\qquad w_2\ge a_B+b_Bw_1,\qquad w_1\le a_R+b_Rw_2,\qquad w_1\ge a_L+b_Lw_2,\\
+  1.3L(1+\eta)=1.313L<1.4L,\qquad\max(\lvert w_1\rvert,\lvert w_2\rvert)\le1.5L+\eta\max(\lvert w_1\rvert,\lvert w_2\rvert)\quad(w\in P),\\
+  Q_{1.3L}\subseteq\interior P,\qquad P\subseteq Q_{1.5L/(1-\eta)}\subseteq Q_{1.6L}\,.
+\end{gather*}
+For the first inclusion, if $\lvert w_1\rvert,\lvert w_2\rvert\le1.3L$, then $w_2-b_Tw_1\le1.313L<1.4L\le a_T$ and $w_2-b_Bw_1\ge-1.313L>-1.4L\ge a_B$. The right and left inequalities follow by interchanging the coordinates. For the outer inclusion, the top and bottom inequalities imply $\lvert w_2\rvert\le1.5L+\eta\lvert w_1\rvert$, and the other two imply $\lvert w_1\rvert\le1.5L+\eta\lvert w_2\rvert$. Taking the larger coordinate gives the bound in the display. Thus, $P$ is a bounded convex polygon with nonempty interior, and every point of its boundary $\Gamma\coloneqq\partial P$ lies on one of the four selected lines.
+
+\emph{Step 3: Covering the boundary by points.} Each selected horizontal line has a chord in~$Q_{2L}$ joining its two vertical sides. Indeed, for $\lvert w_1\rvert\le2L$, its second coordinate has absolute value at most $1.5L+2\eta L<2L$. The chord length is therefore $4L\sqrt{1+b_i^2}$, which lies between~$4L$ and~$5L$. The same statement holds for each selected vertical line with the coordinates interchanged. Since $P\subseteq Q_{1.6L}$, these four chords contain the entire polygon boundary.
+
+For a chord of length~$\ell_i$, let $N_i\coloneqq\lceil16\ell_i/r\rceil$ and divide it into $N_i$ intervals of equal arclength. Their lengths are at most~$r/16$. Also, $16\ell_i/r\ge64$, so $N_i\le32\ell_i/r$ and their lengths are at least~$r/32$. Choose half-open intervals, with the last endpoint included in the final interval, so they form a partition. Across the four chords there are at most $320L/r+4\le324(1+L/r)$ intervals. Fix $C_2\coloneqq324$ for this count.
+
+Conditional on the line environment, any one of these intervals is empty of points on its own selected line with probability at most~$\e^{-\lambda r/32}$. A union bound applies even though the same polygon will later be used for two conclusions. Let $\cH$ be the event that $\cA$ occurs and every interval in this partition contains a point. On~$\cA$, the conditional probability of failure of the point requirement is at most $C_2(1+L/r)\e^{-\lambda r/32}$. On~$\cH$, every point $w\in\Gamma$ belongs to one of the partition intervals and is within Euclidean distance at most~$r/16$ of a point of~$X_\lambda$ on that interval.
+
+\emph{Step 4: No closed crossing on~$\cH$.} Suppose a closed star path in~$Q_{2L}$ starts in~$Q_L$ and ends on~$\partial Q_{2L}$. Interpolate its successive edges by straight line segments. The initial point is in~$\interior P$, while the terminal point is outside~$P$, because $P\subseteq Q_{1.6L}$. By continuity, the interpolated path meets~$\Gamma$. If $w$ is such an intersection, one endpoint~$z$ of the edge containing~$w$ satisfies $\lVert z-w\rVert_2\le\sqrt2h$, the maximum length of a star edge. There is a Cox point~$p$ with $\lVert p-w\rVert_2\le r/16$, so $\lVert p-z\rVert_2\le r/16+\sqrt2h<r/2$. This makes~$z$ open, contradicting that all vertices of the path are closed. The argument also covers an intersection at a lattice vertex by taking that vertex as~$z$. Hence, $\cH$ excludes~$\cB(0,L)$.
+
+\emph{Step 5: An open ring on~$\cH$.} For $z\in h\Z^2$, let $D_z\coloneqq z+[-h/2,h/2]^2$, and put $V\coloneqq\{z\colon D_z\cap\Gamma\neq\varnothing\}$. Only finitely many tiles meet the bounded polygon. Every $z\in V$ is within distance $h/\sqrt2$ of some $w\in\Gamma$, and on~$\cH$ this~$w$ is within distance~$r/16$ of a Cox point. Since $h/\sqrt2+r/16<r/2$, every site of~$V$ is open. Furthermore, $\lVert z\rVert_\infty\le1.6L+h/2<2L$, so $V\subseteq Q_{2L}$.
+
+To check nearest-neighbour connectedness, traverse one closed side of~$\Gamma$. Away from grid vertices, the successive tiles met by that side are equal or share an edge. If the side passes through a grid vertex, all four closed tiles containing that vertex meet the side and are included in~$V$; their centres form a nearest-neighbour cycle that joins the incoming and outgoing tiles. If a portion of the side lies along a grid edge, the tiles on both sides are included and remain joined by nearest-neighbour steps. Thus, the centres of the tiles meeting each polygon side form a connected set. At a common vertex of two consecutive polygon sides, every tile containing that vertex meets both sides, so the two sets intersect. Traversing all sides proves that $V$ is nearest-neighbour connected.
+
+It remains to verify $Q_L\subseteq\conv V$. Fix a nonzero vector $v\in\R^2$ and choose $w\in\Gamma$ maximising $v\cdot w$ over~$P$. Such a maximiser lies on the boundary because $P$ has nonempty interior. The inclusion $Q_{1.3L}\subseteq P$ gives $v\cdot w\ge1.3L\lVert v\rVert_1$. A tile containing~$w$ has centre $z\in V$ with $\lVert z-w\rVert_2\le h/\sqrt2$, and therefore
+\begin{equation*}
+  \max_{z\in V}v\cdot z\ge1.3L\lVert v\rVert_1-\frac{h}{\sqrt2}\lVert v\rVert_2\ge L\lVert v\rVert_1=\max_{w\in Q_L}v\cdot w\,.
+\end{equation*}
+Here we used $\lVert v\rVert_2\le\lVert v\rVert_1$ and $h/\sqrt2\le0.3L$. Applying \cref{lem:support} with $K_1=Q_L$ and $K_2=\conv V$ proves $Q_L\subseteq\conv V$, so $\cH\subseteq G(L)$.
+
+\emph{Step 6: Conclusion.} Thus, $\cH$ implies both $\cB(0,L)^\c$ and~$G(L)$, so each failure probability in the proposition is at most~$\P_E(\cH^\c)$. Adding the environmental failure probability to the expectation of the conditional point failure probability on~$\cA$ gives
+\begin{equation*}
+  \P_E(\cH^\c)\le4\e^{-c_0\mu L}+C_2(1+L/r)\e^{-\lambda r/32}\,.
+\end{equation*}
+Taking $c\coloneqq\min(c_0,1/32)$ and $C_0\coloneqq\max(4,C_2)$ gives precisely the two asserted bounds with constants uniform in $E,L,\mu,\lambda,r$.
+\end{proof}
+
+% =================================================================
+\section{Deleting directions}
+\label{sec:recursion}
+
+The recursion separates the geometric extraction of two smaller crossings from the probabilistic comparison of a fixed pair. The extraction has the same geometric structure as the two-crossing reduction in Gou\'er\'e~\cite[Lemma~3.3]{Gou08}, applied here to closed lattice paths: a closed crossing of the annulus $Q_{2R}\setminus Q_R$ at scale $R=a_nL_n$ contains closed crossings of two annuli at scale~$L_n$ whose centres lie on the coarse lattice $L_n\Z^2$ at distance at least $(a_n-1)L_n$; see \cref{fig:recursion}. After covering all possible pairs by a deterministic finite family, we remove every direction that could allow one line to meet both observation windows. The removed angular set has measure at most $64/a_n$, so the modified law remains in the class used at the smaller scale, and independence and monotonicity give a uniform bound for each pair before the union bound is taken.
+
+\begin{figure}[ht]
+  \centering
+  \input{figures/fig_recursion}
+  \caption{Extraction of two crossings in the proof of \cref{prop:recursion}, schematic with $L=1$ and $a=6$; the proof uses $a\ge2^{20}$. Grey dots form the coarse lattice~$L\Z^2$. The dashed closed path joins~$Q_R$ to~$\partial Q_{2R}$; $u\in\partial Q_R$ and $v\in\partial Q_{2R}$ are consecutive boundary vertices of the path, rounded to the centres $x,y\in L\Z^2$. The thick parts witness $\cB(x,L)$ and~$\cB(y,L)$: they join $Q_L(x)$ to~$\partial Q_{2L}(x)$ inside~$Q_{2L}(x)$, and similarly for~$y$. The shaded windows $Q_{3L}(x)$ and $Q_{3L}(y)$ determine the two events, and deleting the angular set~$I$ removes every line meeting both, as in \cref{fig:deletion}.}
+  \label{fig:recursion}
+\end{figure}
+
+\begin{proof}[Proof of \cref{prop:recursion}]
+Fix an integer $n\ge0$ and write $L\coloneqq L_n$, $a\coloneqq a_n$, and $R\coloneqq L_{n+1}=aL$. Let $E\in\cE_{n+1}$.
+
+\emph{Step 1: Two separated crossings.} On~$\cB(0,R)$, choose a finite closed star path from a site of~$Q_R$ to~$\partial Q_{2R}$, contained in~$Q_{2R}$. Because $R$ and the site coordinates are integer multiples of~$h$, a star step changes each coordinate by at most~$h$ and cannot jump across a lattice boundary without hitting it. The path therefore has a vertex $u\in\partial Q_R$ followed by a vertex $v\in\partial Q_{2R}$. Restrict attention to the segment of the path between these two vertices. Their maximum-norm distance is at least~$R$: in a coordinate where $v$ has absolute value~$2R$, the corresponding coordinate of~$u$ has absolute value at most~$R$.
+
+Round each coordinate of $u$ and~$v$ to a nearest multiple of~$L$, using a fixed convention for ties, to obtain $x,y\in L\Z^2$ with $\lVert x-u\rVert_\infty,\lVert y-v\rVert_\infty\le L/2$. Since $L\in h\N$, these centres are also sites of~$h\Z^2$. They lie in~$Q_{3R}$, and the triangle inequality gives $\lVert x-y\rVert_\infty\ge R-L=(a-1)L$. The point~$u$ lies in~$Q_L(x)$, whereas $\lVert v-x\rVert_\infty\ge R-L/2>2L$. Truncate the path at its first visit to~$\partial Q_{2L}(x)$; it witnesses~$\cB(x,L)$. Applying the same argument to the reverse path starting at~$v$ gives~$\cB(y,L)$. In both cases the exact boundary is reached because its coordinates are multiples of~$h$.
+
+Define the deterministic set of pairs~$\cK$ to consist of $(x,y)\in(L\Z^2\cap Q_{3R})^2$ with $\lVert x-y\rVert_\infty\ge(a-1)L$. There are $(6a+1)^2\le49a^2$ possible centres, since $a$ is an integer. Hence, $\#\cK\le2401a^4$, and the preceding construction proves the event inclusion
+\begin{equation*}
+  \cB(0,R)\subseteq\bigcup_{(x,y)\in\cK}\bigl(\cB(x,L)\cap\cB(y,L)\bigr)\,.
+\end{equation*}
+We will bound the probability of the intersection for each fixed pair in~$\cK$. The centres used in that bound are deterministic; no conditioning on the path that produced a pair is involved.
+
+\emph{Step 2: The deleted directions.} Fix $(x,y)\in\cK$, put $d\coloneqq\lVert x-y\rVert_2$, and let $W_x\coloneqq Q_{3L}(x)$ and $W_y\coloneqq Q_{3L}(y)$ be the windows determining the two crossing events. The angular set to be removed and the retained angular set are
+\begin{equation*}
+  I\coloneqq\bigl\{\theta\in[0,\pi)\colon\lvert(x-y)\cdot n_\theta\rvert\le6\sqrt2L\bigr\},\qquad E'\coloneqq E\setminus I\,.
+\end{equation*}
+To see that this removes every shared line, suppose $\ell(\theta,s)$ meets~$W_x$ at~$p$ and~$W_y$ at~$q$. Since $p\cdot n_\theta=q\cdot n_\theta=s$, we have $\lvert(x-y)\cdot n_\theta\rvert\le\lVert x-p\rVert_2+\lVert q-y\rVert_2\le6\sqrt2L$. Thus, the normal angle of any line meeting both windows belongs to~$I$. The definition includes the endpoint angles, so lines at equality are removed as well.
+
+Write $x-y=d(\cos\varphi,\sin\varphi)$ for some angle~$\varphi$. The inequality defining~$I$ is $\lvert\cos(\theta-\varphi)\rvert\le6\sqrt2L/d$. Since $d\ge(a-1)L$ and $a\ge A>100$, its right-hand side is less than~$1/2$. Over an interval of length~$\pi$, this condition selects an angular interval, possibly split at~$0$, of total length $2\arcsin(6\sqrt2L/d)$. Consequently,
+\begin{gather*}
+  \lvert I\rvert=2\arcsin(6\sqrt2L/d)\le\frac{24\sqrt2}{a-1}\le\frac{64}{a},\\
+  \lvert[0,\pi)\setminus E'\rvert\le\lvert[0,\pi)\setminus E\rvert+\lvert I\rvert\le\delta_{n+1}+64/a=\delta_n\,.
+\end{gather*}
+Here $\arcsin t\le2t$ for $0\le t\le1/2$, and $24\sqrt2/(a-1)\le64/a$ for $a\ge100$. The second line proves $E'\in\cE_n$. The retained density is still~$\mu/\pi$ at every angle in~$E'$, exactly as in the definition of~$\P_{E'}$.
+
+\emph{Step 3: Coupling and independence.} Couple the laws by starting with the marked lines under~$\P_E$ and deleting those with angles in~$I$, retaining all marks on the other lines. The restriction and marking properties stated above give exactly the law~$\P_{E'}$ for the retained configuration. Since deletion removes points, each closed crossing present before deletion remains a closed crossing afterwards. Thus, the coupling gives the required inclusion for the intersection of the two crossing events.
+
+For the independence assertion, let $\cA_x$ be the set of line parameters $(\theta,s)$ with $\theta\in E'$ and $\ell(\theta,s)\cap W_x\neq\varnothing$, and define~$\cA_y$ in the same way. These measurable sets are disjoint by the geometric observation above. Their restrictions in the marked Poisson process are therefore independent. Every point that can affect~$\cB(x,L)$ lies on a line from~$\cA_x$, and its point marks are included in that restriction; the analogous statement holds for~$y$. Hence, the two crossing events are independent under~$\P_{E'}$. Their marginal laws are the local restrictions of the same stationary model with angular set~$E'$. Translation invariance and $E'\in\cE_n$ now give
+\begin{align*}
+  \P_E\bigl(\cB(x,L)\cap\cB(y,L)\bigr)&\le\P_{E'}\bigl(\cB(x,L)\cap\cB(y,L)\bigr)=\P_{E'}(\cB(x,L))\,\P_{E'}(\cB(y,L))\le q_n^2,\\
+  \P_E(\cB(0,R))&\le\sum_{(x,y)\in\cK}\P_E\bigl(\cB(x,L)\cap\cB(y,L)\bigr)\le2401a^4q_n^2\,.
+\end{align*}
+The first line is proved separately for every deterministic pair, and each pair may produce its own angular set~$E'$. This causes no additional loss because the same supremum~$q_n$ bounds every retained law in~$\cE_n$. In particular, the angular measures are not added over the pairs in~$\cK$. Taking the supremum of the last line over $E\in\cE_{n+1}$ proves $q_{n+1}\le2401a_n^4q_n^2$.
+\end{proof}
+
+% =================================================================
+\section{Excluding finite components}
+\label{sec:boundary}
+
+The initial event~$G(4L_0)$ supplies a finite open set around~$Q_{4L_0}$, but its open cluster might still be finite. A finite open cluster is surrounded by a closed set, and the task is to show that such a closed set forces a closed crossing at one of the chosen scales, whose probability the recursion has already made small. We first locate any finite closed connected set whose convex hull contains the initial square and show that it forces a controlled crossing. We then construct such a closed set from the exterior boundary of a finite open component containing the set in~$G(4L_0)$; see \cref{fig:boundary}. The exterior nearest-neighbour boundary of a finite nearest-neighbour connected set in the square lattice is star-connected, a special case of the boundary-connectivity results in Tim\'ar~\cite{Tim13}. We include the planar argument and the convex-hull containment needed for our event inclusion. The geometric construction gives an event inclusion, so the resulting probability bound uses neither independence between scales nor independence from the initial open event.
+
+\begin{figure}[ht]
+  \centering
+  \input{figures/fig_boundary}
+  \caption{The exterior boundary in the proof of \cref{prop:boundary}, for a finite open cluster~$S$ chosen for illustration (teal tiles and dots, with $h=1$). Amber tiles and dots form the set~$T$ of sites of the unbounded complement component~$U$ that are nearest neighbours of~$S$; all of them are closed. Thick amber segments mark the diagonal star steps that are needed to connect~$T$. The unshaded tiles enclosed by~$S$ belong to bounded components of the complement and contribute nothing to~$T$. The dashed polygons are $\conv S$ (teal) and $\conv T$ (amber), with $\conv S\subseteq\conv T$.}
+  \label{fig:boundary}
+\end{figure}
+
+\begin{proof}[Proof of \cref{prop:boundary}]
+\emph{Step 1: Covering~$\cD$ by crossings.} Suppose $\cD$ occurs and let~$T$ be a finite star-connected set of closed sites with $Q_{4L_0}\subseteq\conv T$. Write $d\coloneqq\max\{\lVert u-v\rVert_\infty\colon u,v\in T\}$ for its maximum-norm diameter. For each coordinate $j\in\{1,2\}$, the coordinate range of~$\conv T$ equals that of~$T$. It therefore contains $[-4L_0,4L_0]$, which gives $d\ge8L_0$. Furthermore, $0\in\conv T$ implies $\min_{u\in T}u_j\le0\le\max_{u\in T}u_j$. Since the difference of these two extremes is at most~$d$, each extreme has absolute value at most~$d$. Thus, $T\subseteq Q_d$. This prevents the location of~$T$ from varying independently of its diameter.
+
+The scales increase strictly to infinity. Choose the unique $n\ge0$ with $8L_n\le d<8L_{n+1}$, and choose $u,v\in T$ attaining the diameter. Round~$u$ to a centre $x\in L_n\Z^2$ with $\lVert x-u\rVert_\infty\le L_n/2$. The location and separation bounds are
+\begin{equation*}
+  \lVert x\rVert_\infty\le d+L_n/2<9L_{n+1},\qquad u\in Q_{L_n}(x),\qquad\lVert v-x\rVert_\infty\ge d-L_n/2>2L_n\,.
+\end{equation*}
+Star-connectedness of~$T$ supplies a finite closed star path from~$u$ to~$v$. Keep the path up to its first visit to~$\partial Q_{2L_n}(x)$. Such a visit occurs because the starting site is inside the inner square, the terminal site is outside the outer square, and a star step cannot skip a boundary at an integer multiple of~$h$. The retained path stays in~$Q_{2L_n}(x)$ and witnesses~$\cB(x,L_n)$.
+
+We have therefore covered~$\cD$ by crossings centred at $x\in L_n\Z^2\cap Q_{9L_{n+1}}$ for some $n\ge0$. This is a countable deterministic family, even though the construction of a witnessing~$T$ and its scale depends on the configuration. At scale~$n$, the number of possible centres is $(18a_n+1)^2\le361a_n^2$. The full angular set $[0,\pi)$ belongs to every~$\cE_n$, so translation invariance gives $\P(\cB(x,L_n))\le q_n$. Consequently,
+\begin{equation*}
+  \P(\cD)\le\sum_{n=0}^\infty\ \sum_{x\in L_n\Z^2\cap Q_{9L_{n+1}}}\P(\cB(x,L_n))\le361\sum_{n=0}^\infty a_n^2q_n\,.
+\end{equation*}
+The inequality holds whether or not the series is finite. In its application to \cref{thm:main}, the bound obtained from the recursion makes it summable.
+
+\emph{Step 2: The exterior boundary of a finite cluster.} Assume~$G(4L_0)$ occurs. Choose a finite nearest-neighbour connected open set $V\subseteq Q_{8L_0}$ with $Q_{4L_0}\subseteq\conv V$, and let~$S$ be the full open cluster containing~$V$. If $S$ is infinite, $\cP$ already occurs. Suppose instead that $S$ is finite. We will construct a finite closed star-connected set whose convex hull contains~$\conv S$, and hence contains~$Q_{4L_0}$.
+
+There is a unique unbounded nearest-neighbour component~$U$ of $h\Z^2\setminus S$. Indeed, choose a lattice square containing~$S$ in its interior. The sites outside this square form a connected set; every unbounded component of the complement must meet this set, so all such components coincide. Define~$T$ to consist of sites in~$U$ that are nearest neighbours of some site of~$S$. It is finite because $S$ is finite and each site has four nearest neighbours. Every site of~$T$ is closed: if one were open, its adjacency to~$S$ would put it in the same full open cluster.
+
+\emph{Step 3: Star-connectedness.} Place the closed tile $D_z=z+[-h/2,h/2]^2$ at every site $z\in S$, and form the finite plane graph consisting of all sides and vertices of these tiles. This graph is connected because tiles at nearest-neighbour sites share a side and $S$ is nearest-neighbour connected. The edges incident to its unbounded face can be followed in one closed boundary walk. Concretely, start on an edge adjacent to the unbounded face and follow the next edge in its cyclic order while keeping that face on the same side. For a connected finite plane graph this traversal visits all edges incident to that face; a separate boundary walk would require a separate graph component. Vertices may be revisited, which does not change the argument.
+
+Across each edge of this walk, the tile on the bounded side has its centre in~$S$, while the neighbouring tile across the edge has a centre in~$U$. The latter belongs to the unbounded lattice component because the exterior of the tile union corresponds to the unbounded face: a path through that open face can be perturbed to avoid grid vertices and then records nearest-neighbour steps between tiles outside~$S$. Conversely, if $z\in T$, a nearest-neighbour path from~$z$ to outside a square containing~$S$ gives a path from the interior of~$D_z$ to infinity outside the tile union. Therefore, the edge shared by~$D_z$ and a neighbouring tile from~$S$ is incident to the unbounded face and occurs in the boundary walk.
+
+Record the centres of the exterior tiles as the walk is traversed. Consecutive boundary edges share a grid vertex. Their exterior tiles both contain that vertex, so their centres are either equal or at maximum-norm distance~$h$. Thus, the recorded sequence is a star walk after repetitions are omitted, and the preceding paragraph shows that it visits every site of~$T$. This proves star-connectedness. Tiles facing bounded holes play no role because their edges are not incident to the unbounded face.
+
+\emph{Step 4: Convex hulls.} Fix a nonzero $v\in\R^2$ and choose $s\in S$ maximising $v\cdot s$. Choose a coordinate~$j$ with $v_j\neq0$ and put $z\coloneqq s+h\sign(v_j)e_j$. Then $v\cdot z=v\cdot s+h\lvert v_j\rvert>\max_{w\in S}v\cdot w$, so $z\notin S$. Every subsequent site on the ray $s+kh\sign(v_j)e_j$, $k\ge1$, has an even larger scalar product and is outside~$S$ as well. This ray proves $z\in U$, and adjacency to~$s$ gives $z\in T$. Hence, in every direction the support of~$\conv T$ is at least that of~$\conv S$. \Cref{lem:support} yields $\conv S\subseteq\conv T$.
+
+\emph{Step 5: Conclusion.} The constructed set~$T$ is therefore a witness for~$\cD$. We have proved that $G(4L_0)$ together with failure of~$\cP$ implies~$\cD$, or equivalently $G(4L_0)\setminus\cD\subseteq\cP$. Taking probabilities and using the bound from Step~1 gives
+\begin{equation*}
+  \P(\cP)\ge\P(G(4L_0)\setminus\cD)\ge\P(G(4L_0))-\P(\cD)\ge\P(G(4L_0))-361\sum_{n=0}^\infty a_n^2q_n\,,
+\end{equation*}
+which is the second assertion of the proposition.
+\end{proof}
+
+\begin{remark}[Direction of monotonicity]
+\label{rem:monotonicity}
+Deleting lines decreases occupied crossing events, so the comparison in \cref{prop:recursion} has the wrong direction for proving absence of occupied percolation at small~$\lambda$. Establishing $\lambda_c(\mu,r)>0$ consequently requires a separate argument. Throughout the present proof, the initial scale and one finite point intensity are fixed before the recursion is applied at larger scales.
+\end{remark}
+
+% =================================================================
+\section*{Acknowledgements}
+
+BJ acknowledges the financial support of the Leibniz Association within the Leibniz Junior Research Group on Probabilistic Methods for Dynamic Communication Networks (DYCOMNET) as part of the Leibniz Competition (grant no.~J105/2020), of the Berlin Mathematics Research Center MATH+ through the project EF-MA-Sys-2 on Information Flow \& Emergent Behavior in Complex Networks, and of the Deutsche Forschungsgemeinschaft (DFG) through Project P27 within the SPP~2265.
+
+\section*{Use of AI tools}
+
+% TODO(BJ): Formulierung prüfen.
+The simulations, proofs, computations, figures and the text of this paper were developed with substantial assistance of the AI systems Claude (Anthropic) and ChatGPT Astra~6 (OpenAI), in an interactive process directed by the authors.
+
+\bibliographystyle{amsalpha}
+\bibliography{references}
+
+\end{document}
