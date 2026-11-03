@@ -14,13 +14,13 @@ We extend the joint count of long connected runs from corridors with one common 
 
 \section{The estimate with changing supporting lines}
 
-The preceding note proves a uniform estimate for consecutive corridors with one common supporting line~\cite{OC26}. We now allow that line to change and keep the cost of dependence bounded for a continuous convex or concave chain, regardless of the number of changes. A single change also has a bound without continuity at the junction. The essential property of the longer chains is that a line can cross their graph at most once in each direction; the same two collections of independent counts therefore suffice throughout the chain.
+The preceding note proves a uniform estimate for consecutive corridors with one common supporting line~\cite{ORC26}. We now allow that line to change and keep the cost of dependence bounded for a continuous convex or concave chain, regardless of the number of changes. A single change also has a bound without continuity at the junction. The essential property of the longer chains is that a line can cross their graph at most once in each direction; the same two collections of independent counts therefore suffice throughout the chain.
 
 Fix $\mu>0$. Let $\cL$ be the Poisson line process with intensity $\nu_\mu(\dd\theta\,\dd s)=(\mu/\pi)\dd\theta\dd s$, where $\ell(\theta,s)=\{x\in\R^2:x\cdot n_\theta=s\}$, $n_\theta=(\cos\theta,\sin\theta)$, $0\le\theta<\pi$, and $s\in\R$. Write $\P$ and $\E$ for probability and expectation. Orient lines by $(-\sin\theta,\cos\theta)$ and measure their subsets in arclength. For nonparallel lines $\ell,\ell'$, let $J(\ell,\ell')$ be the interval on $\ell$ at distance at most $2$ from $\ell'$. Its length is $4/|\sin\alpha|$, where $\alpha$ is their relative angle. Parallel pairs have zero intensity in the applications below and are omitted.
 
 For a configuration $\eta$ of other lines, let $U_\ell^-(\eta)$ and $U_\ell^+(\eta)$ be the unions of these intervals over lines whose normal angles are, respectively, smaller and larger than $\theta(\ell)$. Put $V_\ell(\eta)=U_\ell^-(\eta)\cap U_\ell^+(\eta)$. A run is a connected component of $V_\ell(\eta)$. For a compact segment $I\subset\ell$ and $t>0$, let $H_t(\ell,I;\eta)$ count full runs of length at least $t$ meeting $I$, including runs entering through an endpoint.
 
-We use the explicit constant of the restricted component estimate in~\cite{OC26}. For $u\ge8$, put $F_\mu(u)=\mu\e^{4\mu}(64+12\log(1+u))/u$, and let $T_\mu$ be the least integer at least $\max(8,216\mu)$ with $F_\mu(T_\mu)\le1/6$. This integer exists because $F_\mu(u)\to0$. Set
+We use the explicit constant of the restricted component estimate in~\cite{ORC26}. For $u\ge8$, put $F_\mu(u)=\mu\e^{4\mu}(64+12\log(1+u))/u$, and let $T_\mu$ be the least integer at least $\max(8,216\mu)$ with $F_\mu(T_\mu)\le1/6$. This integer exists because $F_\mu(u)\to0$. Set
 \[
  A_\mu=\begin{cases}192\mu,&0<\mu\le1/32,\\T_\mu+1,&\mu>1/32,\end{cases}
  \qquad c_\mu=4\e^{4\mu}A_\mu.
@@ -48,7 +48,7 @@ For every deterministic tuple satisfying the preceding hypotheses, every $t\ge1$
 \end{equation}
 \end{theorem}
 
-For a single change, the allowance is at most $4r+1$. For any number of changes along a continuous convex or concave graph, it is $4r$, and the factor two in~\eqref{eq:moment} is independent of $q$. Thus, repeatedly changing the supporting line within this geometric class does not repeatedly multiply the loss in the exponential rate. With one supporting line, the sharper allowance and rate in~\cite{OC26} remain available.
+For a single change, the allowance is at most $4r+1$. For any number of changes along a continuous convex or concave graph, it is $4r$, and the factor two in~\eqref{eq:moment} is independent of $q$. Thus, repeatedly changing the supporting line within this geometric class does not repeatedly multiply the loss in the exponential rate. With one supporting line, the sharper allowance and rate in~\cite{ORC26} remain available.
 
 \section{Proof of the joint exponential-moment bound}
 
@@ -68,7 +68,7 @@ For every tuple in Theorem~\ref{thm:changes}, every $t>0$, and every background 
 For each $a\in\{1,2\}$, the sets $\mathscr Q_i$, $i\in J_a$, are pairwise disjoint.
 \end{proposition}
 
-The probabilistic input treats arbitrary deterministic restrictions. Its proof in~\cite{OC26} uses factorial moments and the Poisson disjoint-occurrence inequality, so it permits components created by splitting after deletion.
+The probabilistic input treats arbitrary deterministic restrictions. Its proof in~\cite{ORC26} uses factorial moments and the Poisson disjoint-occurrence inequality, so it permits components created by splitting after deletion.
 
 \begin{lemma}[Restricted component count]\label{lem:restriction}
 For every deterministic $\ell$, $I$, and measurable $\mathscr Q$, the restricted interval union has bounded components almost surely. For $t\ge1$ and $s\ge0$,
@@ -95,7 +95,7 @@ Empty collections contribute one, and $s=0$ gives equality. The exponent contain
 \end{proof}
 
 \begin{proof}[Proof of Lemma~\ref{lem:restriction}]
-This is Proposition~2.2 of~\cite{OC26}, with its angular set chosen to be $[0,\pi)$ and its deterministic restriction chosen to be $\mathscr Q$. The intensity, distance threshold, component convention, and constant $c_\mu$ are identical. That proposition also proves boundedness and includes the empty restriction.
+This is Proposition~2.2 of~\cite{ORC26}, with its angular set chosen to be $[0,\pi)$ and its deterministic restriction chosen to be $\mathscr Q$. The intensity, distance threshold, component convention, and constant $c_\mu$ are identical. That proposition also proves boundedness and includes the empty restriction.
 \end{proof}
 
 \section{Proof of the geometric reduction}
@@ -128,7 +128,7 @@ On $I_i$, the active supporting line fills one angular family, so $V_{\ell_i}$ a
 
 It remains to prove the disjointness assertion. For $\delta=1$, each collection uses one supporting line and disjoint horizontal interiors, so the unique intersection coordinate of a line can place it in at most one $\mathscr R_i$ within that collection. Hence, the smaller sets $\mathscr Q_i$ are also disjoint.
 
-For $\delta=0$, consider a nonvertical line with graph $h(x)=a+bx$. For graph lines, slope is strictly increasing in the normal angle on $(0,\pi)$. If this line belongs to $\mathscr Q_i$ with $i\in J_1$, then $b<v_i<b_{j(i)}$. At its intersection with the supporting segment, the function $F-h$ is affine in a neighborhood and has positive slope. If $i\in J_2$, the slope is negative because $b>b_{j(i)}$. A convex function can have at most one zero with positive local slope and at most one zero with negative local slope. More explicitly, at a zero $z$ with local slope $d>0$, convexity gives $(F-h)(x)\ge d(x-z)>0$ for every $x>z$; the assertion for $d<0$ follows on the left. The concave case follows by changing signs. Therefore, a line belongs to at most one $\mathscr Q_i$ in each collection. A vertical line has only one horizontal coordinate and also belongs to at most one of the sets, which completes the proof.
+For $\delta=0$, consider a nonvertical line with graph $h(x)=a+bx$. For graph lines, slope is strictly increasing in the normal angle on $(0,\pi)$. If this line belongs to $\mathscr Q_i$ with $i\in J_1$, then $b<v_i<b_{j(i)}$. At its intersection with the supporting segment, the function $F-h$ is affine in a neighbourhood and has positive slope. If $i\in J_2$, the slope is negative because $b>b_{j(i)}$. A convex function can have at most one zero with positive local slope and at most one zero with negative local slope. More explicitly, at a zero $z$ with local slope $d>0$, convexity gives $(F-h)(x)\ge d(x-z)>0$ for every $x>z$; the assertion for $d<0$ follows on the left. The concave case follows by changing signs. Therefore, a line belongs to at most one $\mathscr Q_i$ in each collection. A vertical line has only one horizontal coordinate and also belongs to at most one of the sets, which completes the proof.
 \end{proof}
 
 \section{Selection of supporting lines and junctions}
@@ -223,14 +223,10 @@ Fix an integer $q\ge2$ and a length $L>0$. Put $x_j=jL$ and $h_j=4+j/(q+1)$ for 
 \end{equation}
 The support slopes are all distinct, as are the base slopes, and the two magnitude ranges are disjoint. The horizontal line $h(x)=0$ crosses every supporting segment. Its slope lies farther from the support slope than the base slope does, so its normal angle belongs to the opposite set $A_j$ for every piece.
 
-The strip interval generated by this horizontal line consists of the points with $|f_j(x)|\le2$. The endpoint magnitudes of $f_j$ are at least $3$, so the entire interval lies inside the segment. Its horizontal length is $4/|f_j'|>8L/15$, and its arclength is at least that large. Consequently, if $L\ge2t$, this one generating line belongs to every effective set $\mathscr Q_j$ and produces an interval longer than $t$ in every corridor. The containment, angle, and length conditions all have a strict margin. A sufficiently small open neighborhood of the horizontal line has the same properties, so the overlap occurs on a set of positive line intensity for each fixed $q$.
+The strip interval generated by this horizontal line consists of the points with $|f_j(x)|\le2$. The endpoint magnitudes of $f_j$ are at least $3$, so the entire interval lies inside the segment. Its horizontal length is $4/|f_j'|>8L/15$, and its arclength is at least that large. Consequently, if $L\ge2t$, this one generating line belongs to every effective set $\mathscr Q_j$ and produces an interval longer than $t$ in every corridor. The containment, angle, and length conditions all have a strict margin. A sufficiently small open neighbourhood of the horizontal line has the same properties, so the overlap occurs on a set of positive line intensity for each fixed $q$.
 
 Thus, unrestricted turning permits an arbitrarily large number of effective sets to share the same Poisson lines. This rules out a uniform bound on that overlap under the present geometric hypotheses alone. It does not rule out concentration obtained by retaining the rarity of a selected oscillating tuple or by another joint argument. The missing step toward the original subcritical problem is to control these oscillations, or to reduce arbitrary relevant paths to a family for which the present uniform bounds suffice, while retaining all contributions to the path reward.
 
-\begin{thebibliography}{OC26}
-\bibitem[LP17]{LP17}
-G.~Last and M.~Penrose, \emph{Lectures on the Poisson Process}, Institute of Mathematical Statistics Textbooks, vol.~7, Cambridge University Press, Cambridge, 2017.
-\bibitem[OC26]{OC26}
-\emph{Uniform bounds for ordered corridors with one shared supporting line}, companion working note, November~3, 2026. Source and PDF included with the present note.
-\end{thebibliography}
+\bibliographystyle{amsalpha}
+\bibliography{references}
 \end{document}

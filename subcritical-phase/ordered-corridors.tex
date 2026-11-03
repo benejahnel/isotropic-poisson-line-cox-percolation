@@ -175,7 +175,7 @@ For every deterministic $\ell$, measurable $A\subset[0,\pi)$, and $h\ge0$,
 \]
 \end{lemma}
 
-For the second input, let $\xi$ be a marked Poisson process on $\R$ with a bounded spatial intensity density and a mark distribution that may depend measurably on position. For increasing measurable events $E_1,\ldots,E_k$ determined by the points with first coordinates in a common bounded interval, write $E_1\circ\cdots\circ E_k$ for the event that there are pairwise disjoint subsets of the realization, each of which suffices for its respective event. Here increasing means preserved under the addition of marked points. The next lemma is the Poisson disjoint-occurrence inequality in the form needed for the component extensions~\cite{vdB96}.
+For the second input, let $\xi$ be a marked Poisson process on $\R$ with a bounded spatial intensity density and a mark distribution that may depend measurably on position. For increasing measurable events $E_1,\ldots,E_k$ determined by the points with first coordinates in a common bounded interval, write $E_1\circ\cdots\circ E_k$ for the event that there are pairwise disjoint subsets of the realisation, each of which suffices for its respective event. Here increasing means preserved under the addition of marked points. The next lemma is the Poisson disjoint-occurrence inequality in the form needed for the component extensions~\cite{vdB96}.
 
 \begin{lemma}[Poisson disjoint occurrence]\label{lem:bk}
 For $\xi$ and $E_1,\ldots,E_k$ as specified above,
@@ -203,7 +203,7 @@ Here $x^+=\max(x,0)$. Endpoint coincidences have probability zero because start 
 
 Now impose $\mathscr R$. Its image is a Poisson process $\xi'$ with intensity measure $\nu'\le\rho\dd a\,G(\dd d)$; this remains true if more than one line maps to the same length mark. Write $X=X_t(\ell,I,A,\mathscr R;\cL)$, and identify $I$ with its arclength interval. For an integer $k\ge1$, put $(X)_k=X(X-1)\cdots(X-k+1)$. The multivariate Mecke formula expresses $\E(X)_k$ as the integral over ordered inserted intervals $(a_j,d_j)$, with $a_j\in I$, of the probability that these intervals start $k$ distinct components of length at least $t$ in their union with $\xi'$.
 
-For fixed inserted intervals, define $E_j$ to be the event that $[a_j,a_j+d_j]$, together with background intervals from $\xi'$ starting in $[a_j,a_j+t]$, connects $a_j$ to $a_j+t$. This event is increasing and depends on a bounded range of starts. If the inserted intervals start distinct long components, every component supplies a finite chain realizing its own event $E_j$ without using another inserted interval. The required background chains are disjoint, since the components are distinct. There are only finitely many possible starts in the relevant bounded ranges, so no limiting chain is needed. The Mecke integrand is consequently at most $\P(E_1\circ\cdots\circ E_k)$.
+For fixed inserted intervals, define $E_j$ to be the event that $[a_j,a_j+d_j]$, together with background intervals from $\xi'$ starting in $[a_j,a_j+t]$, connects $a_j$ to $a_j+t$. This event is increasing and depends on a bounded range of starts. If the inserted intervals start distinct long components, every component supplies a finite chain realising its own event $E_j$ without using another inserted interval. The required background chains are disjoint, since the components are distinct. There are only finitely many possible starts in the relevant bounded ranges, so no limiting chain is needed. The Mecke integrand is consequently at most $\P(E_1\circ\cdots\circ E_k)$.
 
 The spatial intensity density of $\xi'$ is bounded by $\rho$, with a measurable position-dependent length law. Lemma~\ref{lem:bk} applies and bounds this probability by $\prod_j\P(E_j)$. Coupling $\xi'$ with the full stationary process bounds each factor by $p_t(d_j)$: only the increasing connection event is compared under deletion. Integrating the inserted intervals against $\nu'$, and then enlarging each measure to $\rho\dd a\,G(\dd d)$, gives
 \begin{equation}\label{eq:factorial}
@@ -259,14 +259,6 @@ The exponential factor in~\eqref{eq:selected} is independent of the composition,
 
 At fixed $\mu$ and $K$, we have $a_t\to0$ and $\Phi(K,\epsilon_t)\to\infty$. Therefore, the bound decays exponentially in $M$ for all sufficiently large $t$, with a rate that can be made arbitrarily large. The argument resolves both growing losses in the preceding proof for ordered corridors sharing one line. It uses the unique intersection coordinate on that line at every stage; when the common supporting line changes, the resulting restrictions of line space need not be disjoint. A bound for those changes, together with the remaining contributions to the path reward, is still required to establish a subcritical interval for the Cox point intensity.
 
-\begin{thebibliography}{vdB96}
-\bibitem[CR26]{CR26}
-\emph{Connected-run counts along Poisson line corridors}, companion working note, November~3, 2026. Source and PDF included with the present note.
-\bibitem[JC26]{JC26}
-\emph{Joined corridors with a shared supporting line}, companion working note, November~3, 2026. Source and PDF included with the present note.
-\bibitem[LP17]{LP17}
-G.~Last and M.~Penrose, \emph{Lectures on the Poisson Process}, Institute of Mathematical Statistics Textbooks, vol.~7, Cambridge University Press, Cambridge, 2017.
-\bibitem[vdB96]{vdB96}
-J.~van den Berg, A note on disjoint-occurrence inequalities for marked Poisson point processes, \emph{J. Appl. Probab.} \textbf{33} (1996), no.~2, 420--426.
-\end{thebibliography}
+\bibliographystyle{amsalpha}
+\bibliography{references}
 \end{document}

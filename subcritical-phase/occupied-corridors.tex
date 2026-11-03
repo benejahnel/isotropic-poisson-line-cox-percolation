@@ -14,11 +14,11 @@ We estimate occupied passage through the oscillating configuration used in the p
 
 \section{The occupied-passage estimate}
 
-The preceding note constructs oscillating corridors with many full connected runs at probability cost $\exp\{-O(k\log k)\}$ over a total of $k^2$ corridor widths~\cite{OC26}. That calculation concerns the line environment. We now test whether occupied passage through the same geometry has a substantially larger cost after the Cox points are sampled. The estimate below retains every remaining line and permits all routes inside a tube following the selected graph.
+The preceding note constructs oscillating corridors with many full connected runs at probability cost $\exp\{-O(k\log k)\}$ over a total of $k^2$ corridor widths~\cite{OSC26}. That calculation concerns the line environment. We now test whether occupied passage through the same geometry has a substantially larger cost after the Cox points are sampled. The estimate below retains every remaining line and permits all routes inside a tube following the selected graph.
 
-Let $\mu,\lambda,K>0$. The Poisson line process $\cL$ has intensity $\nu_\mu(\dd\theta\,\dd s)=(\mu/\pi)\dd\theta\dd s$ on lines $\ell(\theta,s)=\{x\in\R^2:x\cdot(\cos\theta,\sin\theta)=s\}$, where $0\le\theta<\pi$ and $s\in\R$. Conditional on $\cL$, place an independent Poisson process of intensity $\lambda$ per unit arclength on every line. Let $X$ be their union and $\Xi=\bigcup_{z\in X}B(z,1)$, where $B(z,a)$ is the open Euclidean disk of radius $a$ centered at $z$. Write $\P$ and $\E$ for probability and expectation, and $\mathcal H^1$ for arclength.
+Let $\mu,\lambda,K>0$. The Poisson line process $\cL$ has intensity $\nu_\mu(\dd\theta\,\dd s)=(\mu/\pi)\dd\theta\dd s$ on lines $\ell(\theta,s)=\{x\in\R^2:x\cdot(\cos\theta,\sin\theta)=s\}$, where $0\le\theta<\pi$ and $s\in\R$. Conditional on $\cL$, place an independent Poisson process of intensity $\lambda$ per unit arclength on every line. Let $X$ be their union and $\Xi=\bigcup_{z\in X}B(z,1)$, where $B(z,a)$ is the open Euclidean disk of radius $a$ centred at $z$. Write $\P$ and $\E$ for probability and expectation, and $\mathcal H^1$ for arclength.
 
-We retain the parameters and selection sets of~\cite{OC26}. Fix an integer $t\ge\max(8,4\mu)$, put $w=(t/\mu)^{3/2}$, and assume $w/t\ge4096\e^{4\mu}(K+4)$. For positive integers $k$ divisible by $8t$, define
+We retain the parameters and selection sets of~\cite{OSC26}. Fix an integer $t\ge\max(8,4\mu)$, put $w=(t/\mu)^{3/2}$, and assume $w/t\ge4096\e^{4\mu}(K+4)$. For positive integers $k$ divisible by $8t$, define
 \begin{equation}\label{eq:parameters}
  M=k^2,\qquad L=kw,\qquad R=kL,\qquad b=\frac1{4t},\qquad
  H=\frac{bL}{2},\qquad x_i=iL\quad(0\le i\le k).
@@ -37,7 +37,7 @@ Put $\varepsilon=1/100$ and $N=\lfloor H/64\rfloor$. For a graph line $h(x)=a+vx
                            \ |v|\le\varepsilon/(kL)\},\quad 1\le j\le N.
 \end{aligned}
 \end{equation}
-Let $\mathscr U_k$ be their union, $E_k$ the event that each set contains exactly one line, and $\mathcal G_k$ the information supplied by $\cL$ inside $\mathscr U_k$. On $E_k$, denote the selected lines by $\sigma_i\in\mathscr S_i$, $\ell_i\in\mathscr B_i$, and $\gamma_j\in\mathscr H_j$, and their set by $\mathcal D_k$. The selection result in~\cite[Proposition~2.1]{OC26} states that these sets are pairwise disjoint for sufficiently large $k$ and, with $\rho=w/(512t)$,
+Let $\mathscr U_k$ be their union, $E_k$ the event that each set contains exactly one line, and $\mathcal G_k$ the information supplied by $\cL$ inside $\mathscr U_k$. On $E_k$, denote the selected lines by $\sigma_i\in\mathscr S_i$, $\ell_i\in\mathscr B_i$, and $\gamma_j\in\mathscr H_j$, and their set by $\mathcal D_k$. The selection result in~\cite[Proposition~2.1]{OSC26} states that these sets are pairwise disjoint for sufficiently large $k$ and, with $\rho=w/(512t)$,
 \begin{equation}\label{eq:selection-cost}
  \log\P(E_k)=-(2+2\rho)k\log k+O_{\mu,t}(k).
 \end{equation}
@@ -219,7 +219,7 @@ Work conditionally on $\mathcal G_k$ as above. The intensity bounds $a_-\le a_i\
 
 Every chosen line in group $i$ stays within $2\delta$ of $g_i+1/2$ on the corresponding actual segment, since $|x-c_i|\le L/2+a_0$. No condition is imposed on the residual lines outside these groups.
 
-Take horizontal coordinates $s_j=3/2+j(R-3)/m$, $0\le j\le m$, and squares of side $1/4$ centered at $(s_j,g(s_j)+1/2)$. Choose the supporting index active at $s_j$, using either index at a junction. Each of its $J$ additional lines contributes at least $1/8$ arclength to the square: at its center horizontal coordinate the height error is at most $2\delta$, and over horizontal displacement at most $1/16$ the further error is at most $1/16$. Their sum is less than the square's half-height $1/8$. Thus, conditional on the selected additional lines,
+Take horizontal coordinates $s_j=3/2+j(R-3)/m$, $0\le j\le m$, and squares of side $1/4$ centred at $(s_j,g(s_j)+1/2)$. Choose the supporting index active at $s_j$, using either index at a junction. Each of its $J$ additional lines contributes at least $1/8$ arclength to the square: at its center horizontal coordinate the height error is at most $2\delta$, and over horizontal displacement at most $1/16$ the further error is at most $1/16$. Their sum is less than the square's half-height $1/8$. Thus, conditional on the selected additional lines,
 \begin{equation}\label{eq:boxes}
  \P(\text{some square has no point from its chosen group})
  \le(m+1)\exp\{-\lambda J/8\}
@@ -231,7 +231,7 @@ When all squares receive points, choose one point from each. Consecutive chosen 
 
 This path also stays in $\mathcal T_k$. Each chosen point differs vertically from $g$ at its own horizontal coordinate by at most $3/4$. Along a segment between two consecutive points, linear interpolation of the two graph values differs from $g$ by at most half their horizontal separation, which is at most $3/8$. Hence, the vertical difference stays below $9/8<2$. The end segments satisfy the same bound, and every point has horizontal coordinate in $[1,R-1]$. This proves that the point event in~\eqref{eq:boxes} implies $C_k$, irrespective of all other lines and points. Cox points on the original selected lines are unnecessary for this lower bound; restoring them and all remaining points preserves the constructed path.
 
-Conditional on $\mathcal J_k$, the favorable point event uses only Cox points on the additional lines, whereas $F_k$ depends only on the remaining line process. These are independent. Lemma~\ref{lem:preserve} and~\eqref{eq:boxes} therefore give conditional probability at least $p/4$ for their intersection. We may now include the full probability cost of the additional groups. Using $J!\le J^J$,
+Conditional on $\mathcal J_k$, the favourable point event uses only Cox points on the additional lines, whereas $F_k$ depends only on the remaining line process. These are independent. Lemma~\ref{lem:preserve} and~\eqref{eq:boxes} therefore give conditional probability at least $p/4$ for their intersection. We may now include the full probability cost of the additional groups. Using $J!\le J^J$,
 \begin{equation}\label{eq:lower-cost}
 \begin{aligned}
  \P(F_k\cap C_k\mid\mathcal G_k)
@@ -280,7 +280,7 @@ For $0<\lambda<1/28$ and all sufficiently large admissible $k$,
 \end{proposition}
 
 \begin{proof}
-Conditional on $\mathcal G_k$, the selected centers form a Poisson process with intensity measure $\lambda\sum_{\tau\in\mathcal D_k}\mathcal H^1|_\tau$. By Lemma~\ref{lem:geometry}, every disk of radius $2$ centered in the slab $0\le x\le R$ has intensity at most $28\lambda$. The expected number of centers in $[0,2]\times\R$ is at most $2\sqrt2\lambda(2k+N)$, since all selected slopes have absolute value at most one.
+Conditional on $\mathcal G_k$, the selected centers form a Poisson process with intensity measure $\lambda\sum_{\tau\in\mathcal D_k}\mathcal H^1|_\tau$. By Lemma~\ref{lem:geometry}, every disk of radius $2$ centred in the slab $0\le x\le R$ has intensity at most $28\lambda$. The expected number of centers in $[0,2]\times\R$ is at most $2\sqrt2\lambda(2k+N)$, since all selected slopes have absolute value at most one.
 
 An occupied crossing in $\mathcal T_k$ gives a finite chain of distinct centers with successive distances less than $2$, all having horizontal coordinates in $[0,R]$, starting in $[0,2]\times\R$ and ending in $[R-2,R]\times\R$. To see this, cover its compact continuous path by finitely many of the disks meeting the path and take a simple chain in their intersection graph. Every center of a disk meeting the path belongs to the stated slab. Such a chain has at least $d_k$ edges, so its first $d_k$ edges suffice for an upper bound.
 
@@ -295,10 +295,6 @@ The conditional passage cost has negative logarithm of order $k(\log k)^2$, comp
 
 The upper bound is summable over $k$ for this prescribed construction. It is not an upper bound for the existence of a crossing in an arbitrary tube selected from the full environment, and the path cannot leave the stated tube. Since the theorem holds for every fixed positive point intensity, it does not by itself distinguish the subcritical and supercritical regimes. Extending the control to the relevant family of possible routes, with their selection cost and multiplicity, remains necessary for a subcritical theorem. The result settles the proposed occupied-passage test and supplies no proof that all other approaches fail.
 
-\begin{thebibliography}{OC26}
-\bibitem[OC26]{OC26}
-\emph{Repeated lines in oscillating corridors: a lower bound for full connected runs}, companion working note, November~3, 2026. Source and PDF included with the present note.
-\bibitem[LP17]{LP17}
-G.~Last and M.~Penrose, \emph{Lectures on the Poisson Process}, Institute of Mathematical Statistics Textbooks, vol.~7, Cambridge University Press, Cambridge, 2017.
-\end{thebibliography}
+\bibliographystyle{amsalpha}
+\bibliography{references}
 \end{document}
