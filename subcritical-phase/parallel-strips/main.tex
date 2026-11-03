@@ -1,0 +1,272 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+\DeclareMathOperator{\dist}{dist}
+
+\runningtitle{On the parallel-strip hypothesis}
+\hypersetup{pdftitle={On the parallel-strip hypothesis: a product bound under bounded multiplicity, and a counterexample},pdfauthor={Christian Hirsch, Benedikt Jahnel}}
+
+\title{\textbf{On the parallel-strip hypothesis:\\ a product bound under bounded multiplicity,\\ and a counterexample}\\[0.6em] \large Working note}
+
+\author{%
+  Christian Hirsch\thanks{Institut f\"ur Mathematische Stochastik, Georg-August-Universit\"at G\"ottingen, Goldschmidtstra\ss e~7, 37077 G\"ottingen, Germany. \texttt{christian.hirsch@uni-goettingen.de}. \orcid{0000-0003-4136-3740}.}
+  \and
+  Benedikt Jahnel\thanks{Institut f\"ur Mathematische Stochastik, Technische Universit\"at Braunschweig, Universit\"atsplatz~2, 38106 Braunschweig, Germany, and Weierstrass Institute for Applied Analysis and Stochastics, Mohrenstra\ss e~39, 10117 Berlin, Germany. \texttt{benedikt.jahnel@tu-braunschweig.de}. \orcid{0000-0002-4212-0065}.}%
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{plain}
+
+\begin{abstract}
+The strip-cover scheme of the companion note reduces the single-cluster bound, and with it the subcritical phase of isotropic Poisson line Cox percolation in the sparse regime, to a parallel-strip hypothesis~$\mathrm{(P)}$: a product bound for the incidence events of nearly parallel strips. We examine this hypothesis. On the positive side we prove, for an arbitrary family of finite sets of boxes in which no line meets more than $\rho$ of the sets, that the joint tail of the incidence counts is bounded by the product of the individual polynomial tails raised to the power~$1/\rho$; the proof combines the footprint classes of the companion note with a single Poisson tail for the union of the classes and the log-sum inequality. A convexity lemma shows that chains of strips whose directions bend monotonically, by at least a constant divided by the strip length, satisfy the multiplicity condition with $\rho=3$. On the negative side we show that~$\mathrm{(P)}$ is false as stated: for a \emph{staircase} of nearly parallel strips alternating between two lateral offsets, one bundle of $j_0$ lines along each offset makes every strip thick, and the joint probability exceeds the product bound by a polynomial factor in the number of strips. The staircase does not endanger the Peierls sum itself, because its probability is still far below the reciprocal of its entropy; what fails is the assignment of a separate cost to each strip. We describe the bookkeeping that the scheme must use instead, in which strips sharing a supporting bundle are charged jointly, and record what remains to be proved.
+\end{abstract}
+
+% =================================================================
+\section{Setting and the hypothesis}
+\label{sec:setting}
+
+We keep the notation of~\cite{SC26}. The Poisson line process $\cL$ has intensity measure $\nu(\d\theta\,\d p)=(\mu/\pi)\dd\theta\dd p$ in the parametrisation of a line by its direction angle $\theta\in[0,\pi)$ and its signed distance~$p$ from the origin. For a finite set $W\subseteq\Z^2$ of boxes $Q(z)=z+[0,1)^2$ we write
+\begin{equation*}
+  f_W(\ell)\coloneqq\#\{z\in W\colon\ell\cap Q(z)\neq\varnothing\},\qquad S_W\coloneqq\sum_{\ell\in\cL}f_W(\ell)\,,
+\end{equation*}
+for the footprint of a line on~$W$ and the number of line--box incidences on~$W$, and $\mu_1\coloneqq4\mu/\pi$ for the mean number of lines meeting one box. For $\lvert W\rvert=m\ge2$ and $\kappa\ge\kappa_0=5\cdot10^4\mu$, \cite[Theorem~2.1]{SC26} gives $\P(S_W\ge\kappa m)\le Cm^{-c\kappa}$ with $c=1/80$.
+
+A \emph{strip} $T=T(x,u,t)$ is the set of boxes within sup-norm distance~$2$ of the axis segment $\{x+su\colon0\le s\le t\}$, with $x\in\Z^2$, $u$ a unit vector and $t\ge1$; it has at most $5t+25$ boxes, and every point of a box of~$T$ lies within Euclidean distance~$5$ of the axis. The strip-cover scheme of~\cite[Section~3]{SC26} covers a thick cluster by strips $T_1,\dots,T_s$ along a walk, and charges strip~$i$ with the cost
+\begin{equation}
+\label{eq:stripcost}
+  \P(S_{T_i}\ge j_0t_i)\le C\,t_i^{-cj_0/30}\,,
+\end{equation}
+which follows from the fixed-set tail with $m=\lvert T_i\rvert$ and $\kappa=j_0t_i/m\ge j_0/30$. The scheme is complete if the costs of the strips of a cover multiply, up to a factor~$C^s$ and a uniform power. Strips in distinct direction classes are decoupled by the disjoint-occurrence inequality, and the hypothesis concerns the strips of one class.
+
+\begin{definition}[Hypothesis~$\mathrm{(P)}$, \cite{SC26}]
+\label{def:P}
+For every family of strips $T_1,\dots,T_s$ whose directions lie within angle $t^{-2/3}$ of a common unit vector~$u$, $t=\min_it_i$, and whose starting boxes lie along a common walk,
+\begin{equation}
+\label{eq:P}
+  \P\Bigl(\bigcap_{i\le s}\{S_{T_i}\ge j_0t_i\}\Bigr)\le C^s\prod_{i\le s}\P(S_{T_i}\ge j_0t_i)^{1/2}\,.
+\end{equation}
+\end{definition}
+
+The present note establishes three things. \Cref{thm:product} proves a product bound of the form~\eqref{eq:P}, with exponent~$1/\rho$ in place of~$1/2$, for every family of sets in which no line meets more than~$\rho$ of the sets. \Cref{lem:convex} identifies a geometric class of chains of strips, convex chains with bends of order $1/t$, for which this multiplicity condition holds with $\rho=3$. \Cref{prop:staircase} shows that~$\mathrm{(P)}$ fails for a family that violates the multiplicity condition, and \cref{sec:consequences} explains what this means for the scheme.
+
+% =================================================================
+\section{A product bound under bounded multiplicity}
+\label{sec:product}
+
+\begin{definition}[Multiplicity]
+\label{def:mult}
+A family $W_1,\dots,W_s$ of finite sets of boxes has \emph{multiplicity at most~$\rho$} if every line meets boxes of at most~$\rho$ of the sets, that is, $\#\{i\le s\colon f_{W_i}(\ell)\ge1\}\le\rho$ for every line~$\ell$.
+\end{definition}
+
+\begin{theorem}[Product bound]
+\label{thm:product}
+Let $\rho\ge1$ be an integer. There are constants $\kappa_0=\kappa_0(\mu,\rho)$ and, for every $\kappa\ge\kappa_0$, a constant $C=C(\mu,\rho,\kappa)$ such that the following holds. Let $W_1,\dots,W_s$ be finite sets of boxes with multiplicity at most~$\rho$, $m_i\coloneqq\lvert W_i\rvert\ge2$, and let $\kappa_1,\dots,\kappa_s\ge\kappa_0$. Then
+\begin{equation}
+\label{eq:product}
+  \P\Bigl(\bigcap_{i\le s}\{S_{W_i}\ge\kappa_im_i\}\Bigr)\le\prod_{i\le s}\bigl(C\,m_i^{-c\kappa_i/\rho}\bigr)\,,
+\end{equation}
+with the universal constant $c=1/80$ of~\cite[Theorem~2.1]{SC26}. One may take $\kappa_0=5\cdot10^4\rho\mu$, and $C$ is the constant of that theorem with $\mu$ replaced by $\rho\mu$.
+\end{theorem}
+
+For $\rho=1$ the sets are met by disjoint sets of lines, the counts are independent, and~\eqref{eq:product} is the fixed-set tail applied to each set. The point of the theorem is that a bounded overlap costs only the exponent, not the product structure.
+
+\begin{proof}
+\emph{Step 1: Classes and thresholds.} For each~$i$ let $K_i$ be the integer with $2^{K_i}\le m_i<2^{K_i+1}$, let $\mathcal C^{(i)}_k\coloneqq\{\ell\colon2^k\le f_{W_i}(\ell)<2^{k+1}\}$ for $0\le k\le K_i$, and let $n^{(i)}_k\coloneqq\#(\cL\cap\mathcal C^{(i)}_k)$ and $\nu^{(i)}_k\coloneqq\nu(\mathcal C^{(i)}_k)$. As in~\cite[(2.2)]{SC26}, $S_{W_i}\le\sum_kn^{(i)}_k2^{k+1}$. With $c_1\coloneqq1/20$ put
+\begin{equation}
+\label{eq:thr}
+  a^{(i)}_k\coloneqq\max\bigl\{2\e\rho\,\nu^{(i)}_k,\ c_1\kappa_i2^{(K_i-k)/2}\bigr\},\qquad\theta^{(i)}_k\coloneqq a^{(i)}_k2^{k+1}\,.
+\end{equation}
+By \cite[Lemma~2.2]{SC26}, $\sum_k\nu^{(i)}_k2^k\le\mu_1m_i$, hence
+\begin{equation*}
+  \sum_{k=0}^{K_i}\theta^{(i)}_k\le4\e\rho\mu_1m_i+9.7\,c_1\kappa_im_i\le\tfrac34\kappa_im_i
+\end{equation*}
+provided $\kappa_i\ge16\e\rho\mu_1$, which holds for $\kappa_i\ge\kappa_0$. Consequently, on $\{S_{W_i}\ge\kappa_im_i\}$ there is a class $k_i$ with $n^{(i)}_{k_i}>a^{(i)}_{k_i}$, and
+\begin{equation}
+\label{eq:vectorunion}
+  \P\Bigl(\bigcap_{i\le s}\{S_{W_i}\ge\kappa_im_i\}\Bigr)\le\sum_{(k_1,\dots,k_s)}\P\Bigl(\bigcap_{i\le s}\{n^{(i)}_{k_i}>a^{(i)}_{k_i}\}\Bigr)\,,
+\end{equation}
+where the sum runs over all $\prod_i(K_i+1)$ vectors of classes.
+
+\emph{Step 2: One Poisson tail for the union.} Fix a vector $(k_1,\dots,k_s)$ and write $a_i\coloneqq a^{(i)}_{k_i}$, $\nu_i\coloneqq\nu^{(i)}_{k_i}$, $\mathcal C_i\coloneqq\mathcal C^{(i)}_{k_i}$ and $n_i\coloneqq n^{(i)}_{k_i}$. Let $N\coloneqq\#(\cL\cap\bigcup_i\mathcal C_i)$ be the number of lines in the union of the classes; it is Poisson with mean $V\coloneqq\nu(\bigcup_i\mathcal C_i)\le\sum_i\nu_i$. By the multiplicity assumption every line lies in at most~$\rho$ of the classes~$\mathcal C_i$, so that $\sum_in_i\le\rho N$ and
+\begin{equation*}
+  \bigcap_{i\le s}\{n_i>a_i\}\subseteq\Bigl\{N\ge\frac1\rho\sum_ia_i\Bigr\}\,.
+\end{equation*}
+Put $A\coloneqq\sum_ia_i$. Since $a_i\ge2\e\rho\nu_i$ we have $A/\rho\ge2\e\sum_i\nu_i\ge V$, so the Poisson tail $\P(\mathrm{Poi}(V)\ge x)\le(\e V/x)^x$ for $x\ge V$ applies and gives, with $x=A/\rho$,
+\begin{equation}
+\label{eq:uniontail}
+  \P\Bigl(\bigcap_{i\le s}\{n_i>a_i\}\Bigr)\le\Bigl(\frac{\e\rho V}{A}\Bigr)^{A/\rho}\le\Bigl(\frac{\e\rho\sum_i\nu_i}{\sum_ia_i}\Bigr)^{A/\rho}\,.
+\end{equation}
+
+\emph{Step 3: The log-sum inequality.} For positive $a_i$ and non-negative $\nu_i$ the log-sum inequality $\sum_ia_i\log(a_i/\nu_i)\ge A\log(A/\sum_i\nu_i)$ gives
+\begin{equation*}
+  \Bigl(\frac{\sum_i\nu_i}{\sum_ia_i}\Bigr)^{A}\le\prod_{i\le s}\Bigl(\frac{\nu_i}{a_i}\Bigr)^{a_i}\,,
+\end{equation*}
+and therefore, from~\eqref{eq:uniontail},
+\begin{equation}
+\label{eq:factorised}
+  \P\Bigl(\bigcap_{i\le s}\{n_i>a_i\}\Bigr)\le\prod_{i\le s}\Bigl[\Bigl(\frac{\e\rho\,\nu_i}{a_i}\Bigr)^{a_i}\Bigr]^{1/\rho}\,.
+\end{equation}
+The right-hand side is a product over the sets, each factor being the Poisson tail that the fixed-set argument would use for class~$k_i$ of~$W_i$ alone, with $\nu_i$ replaced by $\rho\nu_i$ and the whole raised to the power~$1/\rho$.
+
+\emph{Step 4: Summation over the classes.} Inserting~\eqref{eq:factorised} into~\eqref{eq:vectorunion} and summing the product over all vectors of classes factorises the sum:
+\begin{equation*}
+  \P\Bigl(\bigcap_{i\le s}\{S_{W_i}\ge\kappa_im_i\}\Bigr)\le\prod_{i\le s}\Bigl[\sum_{k=0}^{K_i}\Bigl(\frac{\e\rho\,\nu^{(i)}_k}{a^{(i)}_k}\Bigr)^{a^{(i)}_k}\Bigr]^{1/\rho}\,.
+\end{equation*}
+The bracket is exactly the right-hand side of~\cite[(2.5)]{SC26} for the set~$W_i$, with the measure~$\nu$ replaced by~$\rho\nu$ in the numerator and in the first alternative of the thresholds~\eqref{eq:thr}. The proof of~\cite[Theorem~2.1]{SC26} from~(2.5) there uses only the two bounds of~\cite[Lemma~2.2]{SC26}, $\sum_k\nu_k2^k\le\mu_1m$ and $\nu_k\le144\mu m^{3/2}4^{-k}$, both of which hold for $\rho\nu$ with $\mu$ replaced by~$\rho\mu$, and the condition $\gamma=22144\rho\mu/\kappa\le1/2$, which is $\kappa\ge5\cdot10^4\rho\mu$. Hence the bracket is at most $C(\rho\mu,\kappa_i)\,m_i^{-c\kappa_i}$, and~\eqref{eq:product} follows.
+\end{proof}
+
+\begin{remark}
+\label{rem:weights}
+The proof allows set-dependent multiplicities. If positive numbers $R_1,\dots,R_s$ satisfy $\sum_{i\colon f_{W_i}(\ell)\ge1}1/R_i\le1$ for every line~$\ell$, then $N\ge\sum_in_i/R_i$, and the same argument with the thresholds $a^{(i)}_k=\max\{2\e R_i\nu^{(i)}_k,c_1\kappa_i2^{(K_i-k)/2}\}$ and the weighted log-sum inequality $\sum_ib_i\log(b_i/\nu_i)\ge(\sum_ib_i)\log(\sum_ib_i/\sum_i\nu_i)$, applied with $b_i=a_i/R_i$, yields $\prod_i(Cm_i^{-c\kappa_i/R_i})$ for $\kappa_i\ge5\cdot10^4R_i\mu$. Sets that are met by many lines, and therefore need a large~$R_i$, must then compensate with a larger~$\kappa_i$.
+\end{remark}
+
+\begin{remark}
+\label{rem:nolowclass}
+The multiplicity condition is imposed on all lines, not only on the lines with long footprints. The reason is Step~1: the threshold $a^{(i)}_k\ge2\e\rho\nu^{(i)}_k$ for \emph{every} class is what makes the union count exceed the mean, and the sum of the thresholds must stay below $\tfrac34\kappa_im_i$, which bounds~$\rho$ by a constant times~$\kappa_i/\mu_1$. A line crossing a family of $s$ parallel strips transversally has footprint about~$5$ on each of them, so a stack of parallel strips has multiplicity~$s$, and the theorem does not apply to it. \Cref{sec:consequences} returns to this point.
+\end{remark}
+
+% =================================================================
+\section{Convex chains have bounded multiplicity}
+\label{sec:convex}
+
+A \emph{chain} is a family of strips $T_1,\dots,T_q$, $T_i=T(V_{i-1},u_i,t_i)$, whose axes $A_i=[V_{i-1},V_i]$ form a polygonal path: strip $i+1$ starts where strip~$i$ ends. (In the covers of~\cite{SC26} the start of a strip is within distance~$2$ of the end of the previous one; this changes the constants below slightly and we ignore it.) Let $\varphi_i$ be the direction angle of~$u_i$ and $\beta_i\coloneqq\varphi_{i+1}-\varphi_i$ the turning angle at~$V_i$. The chain is \emph{convex} if all $\beta_i$ have the same sign, say $\beta_i>0$. We always assume that the total turning satisfies $\sum_i\beta_i\le1/10$, which holds for the strips of one direction class of~\cite{SC26} as soon as $t\ge100$. We use that every point of a box of a strip lies within Euclidean distance~$5$ of the axis, so that a line meeting a strip passes within distance~$5$ of a point of its axis.
+
+\begin{lemma}[Lines meet at most four strips of a bent convex chain]
+\label{lem:convex}
+Let $T_1,\dots,T_q$ be a convex chain with total turning at most~$1/10$ and
+\begin{equation}
+\label{eq:bend}
+  \beta_i\ge\frac{24}{\min\{t_i,t_{i+1}\}}\qquad(1\le i\le q-1)\,.
+\end{equation}
+Then no line meets three strips $T_i,T_j,T_k$ with $i+2\le j\le k-2$. Consequently every line meets at most four strips of the chain, and the chain has multiplicity at most~$4$.
+\end{lemma}
+
+\begin{proof}
+By~\eqref{eq:bend} and $\beta_i\le1/10$, every $t_i\ge240$. Suppose a line~$\ell$ meets $T_i$, $T_j$ and~$T_k$ with $i+2\le j\le k-2$, and pick points $P\in A_i$, $R\in A_j$, $Q\in A_k$ within distance~$5$ of~$\ell$. The path along the chain from~$P$ to~$R$ contains the whole segment~$A_{j-1}$, and the path from~$R$ to~$Q$ contains the whole segment~$A_{j+1}$.
+
+\emph{Step 1: $R$ is far from the chord $PQ$.} All direction angles of the chain lie in $[\varphi_i,\varphi_k]$, an interval of length at most~$1/10$. For a sub-path with pieces of lengths $w_p$ and direction angles~$\varphi_p$, the chord is $\sum_pw_p(\cos\varphi_p,\sin\varphi_p)$, of length at least $0.99\sum_pw_p$, and its angle~$\delta$ relative to a reference angle~$\varphi$ with $0\le\varphi_p-\varphi\le1/10$ for all~$p$ satisfies
+\begin{equation*}
+  \tan\delta=\frac{\sum_pw_p\sin(\varphi_p-\varphi)}{\sum_pw_p\cos(\varphi_p-\varphi)}\ge\frac{0.99\sum_pw_p(\varphi_p-\varphi)}{\sum_pw_p}\,,
+\end{equation*}
+and $\delta\ge0.99\tan\delta$ for $\tan\delta\le1/5$. Applied to the path from~$R$ to~$Q$ with $\varphi=\varphi_j$, which has a piece of length $t_{j+1}$ at angle $\varphi_{j+1}=\varphi_j+\beta_j$ and all other pieces at angles $\ge\varphi_j$, this gives for the angle $\delta_{RQ}$ of the chord $R\to Q$ relative to~$u_j$
+\begin{equation*}
+  \delta_{RQ}\ge0.98\,\frac{t_{j+1}\beta_j}{L_{RQ}}\ge0.97\,\frac{t_{j+1}\beta_j}{\lvert RQ\rvert}\,,
+\end{equation*}
+where $L_{RQ}\le\lvert RQ\rvert/0.99$ is the length of the path. In the same way, the chord $P\to R$ makes an angle $\delta_{PR}\ge0.97\,t_{j-1}\beta_{j-1}/\lvert PR\rvert$ with~$u_j$, on the other side. The angle at~$R$ between the two chords is $\psi=\delta_{PR}+\delta_{RQ}\le1/10$, and the distance~$h$ of~$R$ from the line through $P$ and~$Q$ is
+\begin{align*}
+  h=\frac{\lvert PR\rvert\,\lvert RQ\rvert\sin\psi}{\lvert PQ\rvert}
+  &\ge0.99\,\frac{\lvert PR\rvert\,\lvert RQ\rvert}{\lvert PR\rvert+\lvert RQ\rvert}\Bigl(\frac{0.97\,t_{j-1}\beta_{j-1}}{\lvert PR\rvert}+\frac{0.97\,t_{j+1}\beta_j}{\lvert RQ\rvert}\Bigr)\\
+  &\ge0.96\min\{t_{j-1}\beta_{j-1},\,t_{j+1}\beta_j\}\ge23\,,
+\end{align*}
+by~\eqref{eq:bend}, since $t_{j-1}\beta_{j-1}\ge24$ and $t_{j+1}\beta_j\ge24$.
+
+\emph{Step 2: $R$ is close to the chord $PQ$.} Let $P',Q',X\in\ell$ be the feet of $P,Q,R$ on~$\ell$. The distance from a point of~$\ell$ to the line~$PQ$ is an affine function of the position along~$\ell$; it is at most~$5$ at~$P'$ and at~$Q'$, since $\dist(P',PQ)\le\lvert P'P\rvert\le5$ and likewise for~$Q'$. Now $\lvert PQ\rvert\ge0.99\,t_{i+1}\ge237$ and $\ell$ passes within distance~$5$ of~$P$ and of~$Q$, so the angle between~$\ell$ and the chord~$PQ$ is at most $\arcsin(10/237)<0.05$; the chain directions are within $1/10$ of the direction of~$PQ$, hence within $0.15$ of the direction of~$\ell$, and the projection on~$\ell$ is strictly increasing along the chain from~$P$ to~$Q$. Thus $X$ lies between $P'$ and~$Q'$, so $\dist(X,PQ)\le5$, and $h=\dist(R,PQ)\le\lvert RX\rvert+\dist(X,PQ)\le10$. This contradicts Step~1.
+
+\emph{Step 3: Counting.} Let $I$ be the set of indices of strips met by~$\ell$. We have shown that $I$ contains no three indices with consecutive gaps at least~$2$. If $\lvert I\rvert\ge5$, let $i_1<\dots<i_5$ be five of its elements; then $i_1$, $i_3$ and $i_5$ have gaps at least~$2$, a contradiction. Hence $\lvert I\rvert\le4$.
+\end{proof}
+
+The bound four is attained by $I=\{i,i+1,j,j+1\}$: a secant of a convex chain can meet the chain near two far-apart vertices, and at each of them two strips. Convex chains of corridors also appear in~\cite{CS26}, where a chain of nearly parallel corridors with a changing supporting line is controlled along convex sub-chains; \cref{lem:convex} is the geometric reason why convexity helps there.
+
+\begin{corollary}[The hypothesis holds for bent convex chains]
+\label{cor:convex}
+Let $T_1,\dots,T_q$ be a convex chain as in \cref{lem:convex} with all $t_i\ge t_0$, and let $j_0\ge30\,\kappa_0(\mu,4)=6\cdot10^6\mu$. Then
+\begin{equation}
+\label{eq:convexproduct}
+  \P\Bigl(\bigcap_{i\le q}\{S_{T_i}\ge j_0t_i\}\Bigr)\le\prod_{i\le q}\bigl(C\,t_i^{-cj_0/120}\bigr)\,,
+\end{equation}
+with $c=1/80$ and $C=C(\mu,j_0)$. In particular such chains satisfy the inequality that the strip-cover scheme requires, namely~\eqref{eq:P} with the right-hand side replaced by $\prod_i(Ct_i^{-cj_0/30})^{1/4}$.
+\end{corollary}
+
+\begin{proof}
+Apply \cref{thm:product} with $\rho=4$, $W_i=T_i$, $m_i=\lvert T_i\rvert\le5t_i+25\le30t_i$ and $\kappa_i=j_0t_i/m_i\ge j_0/30\ge\kappa_0(\mu,4)$; the multiplicity bound is \cref{lem:convex}, and $m_i^{-c\kappa_i/4}=m_i^{-cj_0t_i/(4m_i)}\le t_i^{-cj_0/120}$ since $m_i\ge t_i$.
+\end{proof}
+
+The bend condition~\eqref{eq:bend} is not a restriction of the scheme but a property of the cover: if two consecutive strips of the same direction class turn by less than $24/\min\{t_i,t_{i+1}\}$, their pieces lie within a strip of width $O(1)$ around a common segment, and the cover may be coarsened by merging them into one strip of slightly larger width. The real restriction in \cref{cor:convex} is convexity, which excludes chains that turn back and forth. The next section shows that this restriction cannot simply be dropped.
+
+% =================================================================
+\section{The hypothesis fails for staircases}
+\label{sec:staircase}
+
+The form in which the scheme uses~$\mathrm{(P)}$ is the inequality obtained by inserting the strip cost~\eqref{eq:stripcost} on the right of~\eqref{eq:P},
+\begin{equation}
+\label{eq:Pneeded}
+  \P\Bigl(\bigcap_{i\le s}\{S_{T_i}\ge j_0t_i\}\Bigr)\le C^s\prod_{i\le s}t_i^{-cj_0/60}\,,
+\end{equation}
+and~\eqref{eq:P} implies~\eqref{eq:Pneeded}. We show that~\eqref{eq:Pneeded}, and hence~\eqref{eq:P}, fails for the following family. Let $w\coloneqq6$, let $t\ge1$ and $s$ be integers, and let $L\coloneqq s(t+w)$. The \emph{staircase} is the family of strips
+\begin{equation*}
+  T_i\coloneqq T\bigl(((i-1)(t+w),\,y_i),\ e_1,\ t\bigr),\qquad y_i\coloneqq\begin{cases}0,&i\text{ odd},\\ w,&i\text{ even},\end{cases}\qquad 1\le i\le s\,,
+\end{equation*}
+all of direction~$e_1$: the odd strips lie along the $x$-axis, the even strips along the line $y=w$, and consecutive strips are longitudinally separated by a gap of length~$w$. The family lies along a common walk, namely the $2$-path that runs through each strip along its axis and joins the end of strip~$i$ to the start of strip~$i+1$ by $w$ diagonal steps; no two of its strips fit into a common strip of width~$5$, since the boxes of an odd and of an even strip span a lateral interval of length~$w+5>5$. So the staircase is admissible in \cref{def:P} and in the covers of~\cite{SC26}. It has multiplicity $s/2$: a horizontal line at height $1/2$ meets every odd strip.
+
+\begin{proposition}[Failure of~$\mathrm{(P)}$]
+\label{prop:staircase}
+For the staircase with $s$ strips of length~$t$,
+\begin{equation}
+\label{eq:staircaselower}
+  \P\Bigl(\bigcap_{i\le s}\{S_{T_i}\ge j_0t\}\Bigr)\ge\frac{1}{(\e\,j_0!)^2}\Bigl(\frac{\mu}{20L}\Bigr)^{2j_0}\qquad(L\ge\mu)\,.
+\end{equation}
+Consequently, for every $C$ and every $j_0$, the inequality~\eqref{eq:Pneeded} with $c=1/80$ fails for $s=2\cdot10^4$ and all sufficiently large~$t$, and so does~\eqref{eq:P}.
+\end{proposition}
+
+\begin{proof}
+Let $\Lambda_0$ be the set of lines with direction angle $\lvert\theta\rvert\le1/(5L)$ and signed distance $p\in[0.3,0.7]$ from the origin, where the sign is chosen so that $p>0$ means that the line crosses the $y$-axis above the origin. Such a line is the graph of $y=a+bx$ with $b=\tan\theta$, $\lvert b\rvert\le1/(4L)$, and $a=p/\cos\theta\in[0.3,0.72]$, so that $a+bx\in[0,1)$ for all $x\in[0,L]$: the line meets every box $Q((x,0))$ with $0\le x<L$, and in particular all $t$ boxes on the axis of every odd strip. Hence on the event $E_0\coloneqq\{\#(\cL\cap\Lambda_0)\ge j_0\}$ every odd strip satisfies $S_{T_i}\ge j_0t$. Let $\Lambda_w$ be the translate of~$\Lambda_0$ by $(0,w)$ and $E_w$ the corresponding event, which makes all even strips thick. The sets $\Lambda_0$ and~$\Lambda_w$ are disjoint, so $E_0$ and~$E_w$ are independent, and
+\begin{equation*}
+  \nu(\Lambda_0)=\nu(\Lambda_w)=\frac\mu\pi\cdot\frac{2}{5L}\cdot0.4\ge\frac{\mu}{20L}\,.
+\end{equation*}
+For a Poisson variable with mean $\nu\le1$, $\P(\mathrm{Poi}(\nu)\ge j_0)\ge\e^{-\nu}\nu^{j_0}/j_0!\ge\nu^{j_0}/(\e\,j_0!)$, and $\nu(\Lambda_0)\le\mu/L\le1$ for $L\ge\mu$ since the measure of $\Lambda_0$ is increasing in the parameters; this gives~\eqref{eq:staircaselower}.
+
+For the second claim, the right-hand side of~\eqref{eq:Pneeded} is $C^st^{-sj_0/4800}$, while by~\eqref{eq:staircaselower} and $L\le7st$ the left-hand side is at least $c_{j_0,\mu}(st)^{-2j_0}$ with $c_{j_0,\mu}=(\mu/140)^{2j_0}(\e\,j_0!)^{-2}$. With $s=2\cdot10^4$ the exponent of~$t$ on the right is $sj_0/4800=\tfrac{25}6j_0>2j_0$, so the left-hand side exceeds the right-hand side as soon as
+\begin{equation*}
+  \tfrac{13}{6}j_0\log t>2j_0\log s+s\log C-\log c_{j_0,\mu}\,,
+\end{equation*}
+which holds for all large~$t$.
+\end{proof}
+
+\begin{remark}
+\label{rem:trueorder}
+The proof uses the exponent $cj_0/30$ of the fixed-set tail, which is far from sharp; the true order of $\P(S_T\ge j_0t)$ for a strip of length~$t$ is $t^{-(j_0-1)+o(1)}$, the lower bound being a bundle of $j_0$ lines within angle $1/t$ of each other along the strip. With the true order, \eqref{eq:P} already fails for the staircase with $s=5$ strips: the left-hand side is of order $(st)^{-2j_0}$, the right-hand side of order $t^{-5(j_0-1)/2}$, and $5(j_0-1)/2>2j_0$ for $j_0\ge6$. The mechanism is in either case the same: one bundle along each offset serves half of the strips, so the family pays for two bundles of length~$L$ instead of $s$ bundles of length~$t$, and $L^{-2(j_0-1)}\gg t^{-s(j_0-1)/2}$.
+\end{remark}
+
+\begin{remark}
+\label{rem:stack}
+A second family with large multiplicity is the \emph{stack}, $s$ parallel strips of length~$t$ at lateral distance~$5$ from each other, joined by $U$-turns of length $O(1)$. A line of slope between $5s/t$ and $10s/t$ crosses all $s$ strips, with footprint of order $t/s$ on each, and the stack has multiplicity~$s$. Unlike the staircase, the stack does not violate~\eqref{eq:P}: to make all its strips thick through shared lines one needs about $3sj_0$ such lines, whose $\nu$-measure is of order $\mu s/t$, so this mechanism has probability $\exp\{-3sj_0\log(t/(\mu s))(1+o(1))\}$, far below the product $t^{-s(j_0-1)/2}$. The stack shows only that the multiplicity condition of \cref{thm:product} is a genuine restriction and that the low footprint classes cannot be treated by the union-count argument for arbitrary families; it is not an obstruction to~$\mathrm{(P)}$. The staircase is.
+\end{remark}
+
+% =================================================================
+\section{Consequences for the strip-cover scheme}
+\label{sec:consequences}
+
+\Cref{prop:staircase} does not say that the staircase is a dangerous cluster. The thick-cluster event for the staircase cluster~$A$, which consists of the $s$ strips together with the $s-1$ diagonal pieces of $w-1=5$ interior boxes each, requires all interior boxes of the diagonal pieces to be thick as well, and none of them is met by the two bundles. Writing $W'$ for the set of these $5(s-1)$ boxes, the fixed-set tail with $\kappa=j_0$ gives $\P(\min_{z\in W'}N(z)\ge j_0)\le\P(S_{W'}\ge j_0\lvert W'\rvert)\le C(5s)^{-cj_0}$, and the true order is $\varepsilon_0^{5(s-1)}$ with $\varepsilon_0=(\e\mu_1/j_0)^{j_0}$. The staircase cluster of size $d=s(t+5)$ is therefore thick with probability of order at most $(\mu/L)^{2(j_0-1)}\varepsilon_0^{5(s-1)}$, which is far below $d^{-4}$ for every choice of $s$ and~$t$, and far below the reciprocal of the number of staircases with these parameters, which is polynomial in~$d$. What fails in the scheme is the \emph{assignment} of the cost: charging each of the $s$ long strips separately with~\eqref{eq:stripcost} overcharges by the factor $t^{-sj_0/4800}/L^{-2j_0}$, and this overcharge is not available. The scheme must instead charge the mechanism that actually produces the thick strips: one bundle per offset, over the whole extent~$L$.
+
+\paragraph{Supporting lines and bands.} Fix $\theta\in(0,1]$. A line~$\ell$ \emph{supports} the strip $T_i=T(x_i,u_i,t_i)$ if $f_{T_i}(\ell)\ge\theta t_i$. A supporting line makes an angle at most $10/(\theta t_i)$ with~$u_i$ and passes within distance~$5$ of the axis, so the whole axis lies within lateral distance $D\coloneqq10/\theta+5$ of~$\ell$. Two strips are \emph{co-supported} if some line supports both; they then lie within lateral distance~$D$ of a common line over the union of their extents. A line that is not supporting has footprint less than $\theta t_i$, and for the event $\{S_{T_i}\ge j_0t_i\}$ either the supporting lines contribute at least $j_0t_i/4$, which requires at least $j_0/4$ of them, or the non-supporting lines contribute at least $3j_0t_i/4$.
+
+The second alternative is cheaper than the strip cost~\eqref{eq:stripcost} by a power: in the proof of~\cite[Theorem~2.1]{SC26} the classes with footprint at most $\theta t_i$ are the classes $K_i-j$ with $2^j\ge1/(2\theta)$, and the $j$-th class contributes $m_i^{-c_1\kappa_i2^{j/2}/4}$ up to constants, so that restricting to footprints below~$\theta t_i$ multiplies the exponent by at least $(2\theta)^{-1/2}$. For $\theta=1/16$ this is a factor~$2\sqrt2$, more than enough to absorb an exponent~$1/2$. The first alternative is the bundle mechanism, and for it the correct cost is not per strip. Group the strips of a direction class into \emph{bands}: maximal sets of strips that are connected by co-support. A band~$G$ with total strip length $\ell_G\coloneqq\sum_{i\in G}t_i$ and extent $E_G$ (the length of the shortest segment whose $D$-neighbourhood contains all its strips) is served by lines within lateral distance~$D$ of a segment of length~$E_G$, of $\nu$-measure at most $C\mu D/E_G$ for $E_G\ge D$, and the event that each strip of the band has $j_0/4$ supporting lines implies that the band has at least $j_0/4$ lines in this set when all strips share them, and more lines, in smaller sub-bands, otherwise. For the staircase with $D\ge w$ the two offsets form one band of extent~$L$, and the bundle cost is $(C\mu D/L)^{j_0/4}$, which is the right order.
+
+\paragraph{What remains.} The band bookkeeping has to answer two questions that the per-strip bookkeeping did not face. First, the entropy of a band: a band is determined by its segment, its width and the lengths of its strips, but not by their positions, which the walk fixes; the sum over the lengths is the sum that the Peierls argument of~\cite[Section~3]{SC26} already performs, and the band's segment contributes a factor $CE_G$, so the entropy is manageable provided the cost of a band is at least $E_G^{-\beta'}$ with $\beta'$ larger than the number of free parameters, which the bundle cost $(C\mu D/E_G)^{j_0/4}$ gives for $j_0\ge16$. Second, and this is the actual difficulty, the co-support relation is not transitive in a controlled way: a chain of strips in which consecutive ones are co-supported by different lines, each turned by about $10/(\theta t)$ relative to the previous one, forms a band whose segment bends. Such a bending band is a \emph{curved} fixed set, and the lines supporting its strips are not a single bundle but a sequence of overlapping bundles, each of which is cheaper than a long one but more numerous. This is precisely the situation of the changing-support chains in~\cite{CS26}, where it is resolved for convex chains and shown in~\cite{OSC26} to produce a factor $\exp\{-C\sqrt M\log M\}$ rather than an exponential one for oscillating chains. The strip-level analogue, a bound of the form $\prod_{\text{bundles}}(C\mu D/E_b)^{j_0/4}$ for a bending band with bundle extents~$E_b$, with an entropy of the bending of at most $C^{\#\text{bundles}}$, is what has to be proved. \Cref{thm:product} is the natural tool for the step from a single band to the whole direction class, since distinct bands are co-supported by no line and the sets of lines supporting different bands are disjoint; the non-supporting lines, which may meet many bands, have to be separated first, by the two alternatives above, with a Cauchy--Schwarz step for strips that use the first alternative next to strips that use the second. Moreover, \cref{lem:convex} shows that bands which bend monotonically have bounded multiplicity, so that for them the product bound holds at once. Oscillating bands are the remaining case, and the staircase, which is an oscillating band of amplitude~$w$, is the simplest instance.
+
+% =================================================================
+\section{Summary}
+\label{sec:summary}
+
+\begin{enumerate}
+  \item \Cref{thm:product} is rigorous: for finite sets of boxes no $\rho+1$ of which are met by a common line, the joint tail of the incidence counts is at most the product of the fixed-set tails $Cm_i^{-c\kappa_i/\rho}$, for $\kappa_i\ge5\cdot10^4\rho\mu$. The proof is the class decomposition of~\cite{SC26} with one Poisson tail for the union of the classes, factorised by the log-sum inequality. \Cref{rem:weights} gives the weighted version.
+  \item \Cref{lem:convex} is rigorous: a convex chain of strips whose consecutive directions turn by at least $24/\min\{t_i,t_{i+1}\}$ is met by every line in at most four strips. Hence (\cref{cor:convex}) hypothesis~$\mathrm{(P)}$ holds, with exponent $1/4$, for bent convex chains.
+  \item \Cref{prop:staircase} is rigorous: hypothesis~$\mathrm{(P)}$ is false. For the staircase of $s$ nearly parallel strips alternating between two lateral offsets, the joint probability is at least $c(\mu/L)^{2j_0}$ with $L$ the total extent, while the product bound is $t^{-sj_0/4800}$; the two are incompatible for $s\ge2\cdot10^4$ and large~$t$ (for $s\ge5$ with the true order of the strip tail).
+  \item The staircase does not threaten the single-cluster bound: its thick-cluster probability is of order $(\mu/L)^{2(j_0-1)}\varepsilon_0^{5(s-1)}$, far below its entropy. It shows that the Peierls scheme must charge bundles rather than strips. \Cref{sec:consequences} formulates this as a band bookkeeping, identifies the bundle cost $(C\mu D/E)^{j_0/4}$ of a straight band of extent~$E$, and isolates the remaining task: a product-of-bundles bound for bands that bend, with the oscillating bands of~\cite{OSC26} as the critical case. The subcritical phase remains open.
+\end{enumerate}
+
+\section*{Acknowledgements}
+
+BJ acknowledges the financial support of the Leibniz Association within the Leibniz Junior Research Group on Probabilistic Methods for Dynamic Communication Networks (DYCOMNET) as part of the Leibniz Competition (grant no.~J105/2020), of the Berlin Mathematics Research Center MATH+ through the project EF-MA-Sys-2 on Information Flow \& Emergent Behavior in Complex Networks, and of the Deutsche Forschungsgemeinschaft (DFG) through Project P27 within the SPP~2265.
+
+\section*{Use of AI tools}
+
+The simulations, proofs, computations, figures and the text of this note were developed with substantial assistance of the AI systems Claude (Anthropic) and ChatGPT Astra~6 (OpenAI), in an interactive process directed by the authors.
+
+\bibliographystyle{amsalpha}
+\bibliography{references}
+
+\end{document}

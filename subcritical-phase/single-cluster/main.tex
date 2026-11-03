@@ -178,6 +178,11 @@ Hypothesis $\mathrm{(P)}$ holds if for every family of strips $T_1,\dots,T_s$ wi
 
 The exponent $1/2$ is a placeholder for any uniform positive power; it halves the exponent in~\eqref{eq:stripcost} and is harmless. Hypothesis $\mathrm{(P)}$ is the strip-level version of the "joined corridors" estimates of~\cite{JC26,ORC26}, which prove exactly such product bounds for corridors sharing one supporting line, and of the lower bound of~\cite{OSC26}, which shows that a factor $C^s$ cannot be avoided for oscillating families. In the present setting the oscillating families are not dangerous, since their strips have average line count of order~$2$ rather than~$j_0$, but a proof of~$\mathrm{(P)}$ must still exclude them explicitly.
 
+\begin{remark}[Added after the follow-up note~\cite{PS26}]
+\label{rem:Pfalse}
+Hypothesis~$\mathrm{(P)}$ is false in the form stated: for a \emph{staircase} of $s$ parallel strips alternating between two lateral offsets, one bundle of $j_0$ lines along each offset makes all strips thick, and the joint probability is of order $L^{-2j_0}$ with $L$ the total extent, which exceeds the product bound for large~$s$. The follow-up note proves the product bound under a bounded-multiplicity condition (no line meets more than $\rho$ strips), verifies that condition for bent convex chains, and explains that the scheme must charge bundles rather than strips. \Cref{prop:conditional} therefore rests on a hypothesis that has to be replaced by the band bookkeeping described there.
+\end{remark}
+
 \begin{proposition}[Conditional single-cluster bound]
 \label{prop:conditional}
 If $\mathrm{(P)}$ holds, then~\eqref{eq:target} holds with $\beta=cj_0/60-1$ for all $j_0\ge300/c$, and consequently, by~\cite[Theorem~1.2]{FM26} and the chain bookkeeping of~\cite[Section~3.1]{FM26}, $\lambda_c(\mu,1)>0$ for all $\mu\le\mu_0$.
@@ -195,7 +200,7 @@ Group the strips of a cover into direction classes of width $t^{-2/3}$; for dist
   \item \Cref{thm:fixed} is rigorous: for any fixed set of $m$ boxes the incidence count exceeds $\kappa m$ with probability $O(m^{-c\kappa})$, $c=1/80$, for $\kappa\ge5\cdot10^4\mu$. This is step~(ii) of the plan in~\cite[Section~5]{FM26}, for arbitrary sets rather than straight bundles only.
   \item \Cref{lem:row} is step~(i) for rows: long footprints on a row come from lines within angle $O(1/s)$ of the row, with measure $O(\mu m/s^2)$.
   \item The strip-cover scheme of \cref{sec:cover} replaces the union over connected sets by a union over covers by straight strips and applies \cref{thm:fixed} to the strips. It removes the entropy of paths inside bundles. Its one missing input is the parallel-strip hypothesis~$\mathrm{(P)}$, a product bound for nearly parallel strips.
-  \item Under~$\mathrm{(P)}$, \cref{prop:conditional} gives the single-cluster bound with $\beta=cj_0/60-1$ and, through~\cite{FM26}, a subcritical phase in the sparse regime. We estimate~$\mathrm{(P)}$ to be of the same nature as the joined-corridor estimates of the companion notes and therefore within reach, but it is not proved here.
+  \item Under~$\mathrm{(P)}$, \cref{prop:conditional} gives the single-cluster bound with $\beta=cj_0/60-1$ and, through~\cite{FM26}, a subcritical phase in the sparse regime. The follow-up note~\cite{PS26} shows that~$\mathrm{(P)}$ is false as stated (\cref{rem:Pfalse}) and proves it for families of bounded multiplicity; the scheme has to be reorganised around bundles rather than strips.
 \end{enumerate}
 
 \section*{Acknowledgements}
