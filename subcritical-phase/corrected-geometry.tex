@@ -1,0 +1,208 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+\runningtitle{Corrected counts along nearly parallel lines}
+\hypersetup{pdftitle={Corrected counts along nearly parallel Poisson lines},pdfauthor={}}
+\title{Corrected counts along nearly parallel Poisson lines}
+\author{}
+\date{November 3, 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We reconsider the proposed obstruction to a dyadic estimate for greedy paths in an isotropic Poisson line process. Intervals of length comparable to $t$ induced on a fixed line by other lines occur at rate of order $\mu/t^2$. At the proposed spatial scale $(t/\mu)^{3/2}$, their expected number per coarse box decreases with $t$. We prove an exponential upper bound for an excess of these intervals, uniformly over candidate pairs of nearly parallel lines in a prescribed rectangle. This corrects the earlier argument for a polynomial lower bound. We also correct the exponential-moment calculation for finite paths. These estimates leave open both the required bound for greedy paths and positivity of the critical point intensity.
+\end{abstract}
+
+\section{The estimate for pairs of nearly parallel lines}
+
+We examine the geometric construction used to dismiss the dyadic approach in the previous working note. The first task is to distinguish the number of long intervals from their total length. The second task is to control all candidate pairs of lines without conditioning on a pair chosen from the configuration.
+
+Fix $\mu>0$. The line process $\cL$ has intensity measure $\nu_\mu(\dd\theta\,\dd s)=(\mu/\pi)\dd\theta\dd s$ in the representation $\ell(\theta,s)=\{x:x\cdot(\cos\theta,\sin\theta)=s\}$, where $0\le\theta<\pi$ and $s\in\R$. Probability and expectation for this process are denoted by $\P$ and $\E$. We use unit lattice squares $Q(z)=z+[0,1]^2$, $z\in\Z^2$, and write $N(z)$ for the number of lines meeting $Q(z)$.
+
+For distinct nonparallel lines $\ell,\ell'$, let $J(\ell,\ell')$ be the closed interval of points of $\ell$ at Euclidean distance at most $2$ from $\ell'$. Its arclength is $4/|\sin\alpha|$, where $\alpha$ is their relative direction angle. Parallel pairs have intensity measure zero and are omitted from interval counts. For a line configuration $\eta$, a compact interval $I\subset\ell$, and $t\ge8$, define
+\[
+ P_t(\ell,I;\eta)
+ =\#\{\ell'\in\eta: t\le |J(\ell,\ell')|\le2t,
+                  \ J(\ell,\ell')\cap I\ne\varnothing\}.
+\]
+Here $|J|$ denotes arclength. In particular, this count includes intervals starting outside $I$ and entering it, which is useful when a geometric construction extends across the boundary of a region.
+
+We specify the candidate pairs using intercepts and slopes. For $w\ge1$, $m\in\N=\{1,2,\ldots\}$, and $L=mw$, write $\ell_{a,b}=\{(x,a+bx):x\in\R\}$ and $I_\ell=\ell\cap([0,L]\times\R)$. Let $D_{L,w}$ be the set of ordered pairs $(\ell_{a,b},\ell_{a',b'})$ satisfying
+\begin{equation}\label{eq:pairs}
+ |a|\le w/2,\qquad |a+bL|\le w/2,\qquad
+ |a'-a|\le2,\qquad |a'-a+(b'-b)L|\le2.
+\end{equation}
+The first line crosses both vertical sides of $[0,L]\times[-w/2,w/2]$, and their vertical separation over this range is at most $2$. Each pair consists of distinct lines; the diagonal has zero product intensity.
+
+For $t\ge\max(8,\mu)$, set $w=(t/\mu)^{3/2}$ and $L=mw$. For $K\in\N$, let $E_{m,t,K}$ be the event that some pair $(\ell,\ell')\in D_{L,w}$ of lines of $\cL$ satisfies $P_t(\ell,I_\ell;\cL\setminus\{\ell,\ell'\})\ge Km$. Define the deterministic constants
+\[
+ C_0=\frac{16}{\pi^2},\qquad
+ \varepsilon_t=\frac{10}{\sqrt{\mu t}}+\frac{6\mu}{t},\qquad
+ \Phi(K,u)=K\log(K/u)-K+u\quad (K>u>0).
+\]
+The next proposition controls this event for all candidate pairs together. Its scope is the additional intervals in the stated length range; connected components of unions of intervals are different objects.
+
+\begin{proposition}\label{prop:pair}
+For $\mu>0$, $t\ge\max(8,\mu)$, $m\in\N$, and $K\in\N$ with $K>\varepsilon_t$,
+\begin{equation}\label{eq:main}
+ \P(E_{m,t,K})\le \frac{C_0\mu^2}{m^2}
+                   \exp\{-m\Phi(K,\varepsilon_t)\}.
+\end{equation}
+In particular, if $\varepsilon_t\le K/(2\e)$, then
+$\P(E_{m,t,K})\le C_0\mu^2m^{-2}2^{-Km}$.
+\end{proposition}
+
+For every fixed $\mu>0$ and $K\in\N$, the last condition holds for all sufficiently large $t$. Thus, the proposed construction using one long pair and many individual intervals of length comparable to $t$ has an exponential upper bound in $m$ at large scales. The former calculation used $\mu/t$ as an interval rate and obtained growth proportional to $m\sqrt{t/\mu}$; that factor counts length rather than the number of intervals.
+
+\section{Proof of the estimate for pairs}
+
+The proof has two geometric inputs. The first computes the Poisson law of the additional intervals on a deterministic line, including intervals entering from outside the segment. The second bounds the product intensity of the candidate pairs; the Mecke formula then combines these inputs without a conditional independence assumption for a selected pair.
+
+Orient a deterministic line $\ell$ and use its arclength coordinate $x$. Relative direction angles belong to $(0,\pi)$, and an intersecting line is described by $(x,\alpha)$, where $x$ is its intersection with $\ell$. Define
+\[
+ q_t=\frac{\mu}{\pi}\int_{2/t\le\sin\alpha\le4/t}\sin\alpha\dd\alpha,
+ \qquad
+ b_t=\frac{4\mu}{\pi}\int_{2/t\le\sin\alpha\le4/t}\dd\alpha.
+\]
+The quantity $q_t$ is the number of interval starts per unit arclength, whereas $b_t$ is the expected number of intervals in this length range covering a fixed point. These quantities determine the interval count on a segment.
+
+\begin{lemma}\label{lem:intervals}
+For every deterministic line $\ell$, compact interval $I\subset\ell$ of length $D$, and $t\ge8$, the variable $P_t(\ell,I;\cL)$ is Poisson with mean $q_tD+b_t$. Moreover,
+\begin{equation}\label{eq:rates}
+\begin{aligned}
+ q_t&=\frac{2\mu}{\pi}
+       \big(\sqrt{1-4/t^2}-\sqrt{1-16/t^2}\big)
+       \le\frac{5\mu}{t^2},\\
+ b_t&=\frac{8\mu}{\pi}
+       \big(\arcsin(4/t)-\arcsin(2/t)\big)
+       \le\frac{6\mu}{t}.
+\end{aligned}
+\end{equation}
+\end{lemma}
+
+For the second input, let $B_{L,w}$ denote the number of ordered pairs of distinct lines of $\cL$ satisfying \eqref{eq:pairs}. We write $\nu_\mu^{\otimes2}$ for the product of the line intensity measure with itself. The bound below also provides the arclength estimate needed in the first input.
+
+\begin{lemma}\label{lem:pairs}
+For $w\ge1$, $m\in\N$, and $L=mw$,
+\[
+ \E B_{L,w}=\nu_\mu^{\otimes2}(D_{L,w})
+       \le C_0\mu^2/m^2.
+\]
+Every first line of a pair in $D_{L,w}$ satisfies $|I_\ell|\le2L$.
+\end{lemma}
+
+\begin{proof}[Proof of Proposition~\ref{prop:pair}]
+For a fixed pair in $D_{L,w}$, Lemmas~\ref{lem:intervals} and~\ref{lem:pairs} bound the mean of $P_t(\ell,I_\ell;\cL)$ by $10\mu L/t^2+6\mu/t$. The choice $L=m(t/\mu)^{3/2}$ and $m\ge1$ give a bound of $m\varepsilon_t$. If $X$ is Poisson with mean at most $m\varepsilon_t$, its exponential generating function, evaluated at $s=\log(K/\varepsilon_t)>0$, gives
+\[
+ \P(X\ge Km)\le
+ \exp\{-sKm+m\varepsilon_t(\e^s-1)\}
+ =\exp\{-m\Phi(K,\varepsilon_t)\}.
+\]
+All parameters of this bound are deterministic, so it holds uniformly over the fixed pairs being integrated.
+
+Let $V$ count the ordered pairs occurring in the definition of $E_{m,t,K}$. The two-point Mecke formula \cite[Theorem~4.4]{LP17} applies to the nonnegative measurable function that tests the geometric constraints and the interval count after deleting the two distinguished lines. Its intensity integral is finite by Lemma~\ref{lem:pairs}. Consequently,
+\[
+\begin{aligned}
+ \P(E_{m,t,K})&\le\E V\\
+ &=\int_{D_{L,w}}
+    \P\big(P_t(\ell,I_\ell;\cL)\ge Km\big)
+          \nu_\mu(\dd\ell)\nu_\mu(\dd\ell')\\
+ &\le C_0\mu^2m^{-2}\exp\{-m\Phi(K,\varepsilon_t)\}.
+\end{aligned}
+\]
+The remaining line process in this integral has the original Poisson law. This is the reason the calculation remains valid even though the pair in the event is selected from the environment. Finally, $\varepsilon_t\le K/(2\e)$ implies $\Phi(K,\varepsilon_t)\ge K\log2$, which proves the last assertion.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:intervals}]
+By isotropy, take $\ell$ to be the horizontal axis. The line crossing it at coordinate $x$ with direction angle $\alpha$ has signed normal displacement $-x\sin\alpha$, so the change of variables from normal displacement to intersection coordinate gives intensity $(\mu/\pi)\sin\alpha\dd x\dd\alpha$. Its interval on $\ell$ has length $d(\alpha)=4/\sin\alpha$ and center $x$. Replacing $x$ by the left endpoint $x-d(\alpha)/2$ preserves Lebesgue measure at each angle.
+
+For a fixed angle, the set of interval centers whose intervals meet $I$ has length $D+d(\alpha)$. Thus, the number of eligible lines is a Poisson count with mean
+\[
+ \frac{\mu}{\pi}\int_{2/t\le\sin\alpha\le4/t}
+       \sin\alpha\big(D+4/\sin\alpha\big)\dd\alpha
+       =q_tD+b_t.
+\]
+The two angular ranges are symmetric about $\pi/2$. Integrating over them gives the formulas in \eqref{eq:rates}; in particular, endpoints of intervals and intersection points have the same rate, although they occur at different locations.
+
+For $t\ge8$, rationalizing the difference of square roots gives
+\[
+\begin{aligned}
+ q_t&=\frac{24\mu}{\pi t^2
+           \big(\sqrt{1-4/t^2}+\sqrt{1-16/t^2}\big)}
+           \le\frac{5\mu}{t^2},\\
+ b_t&\le\frac{8\mu}{\pi}\,
+         \frac{2/t}{\sqrt{1-16/t^2}}
+         \le\frac{6\mu}{t}.
+\end{aligned}
+\]
+The same change of variables applies after rotating and translating $\ell$, which proves the assertion for every deterministic line.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:pairs}]
+In intercept and slope coordinates the intensity measure is
+$\nu_\mu(\dd a\,\dd b)=(\mu/\pi)(1+b^2)^{-3/2}\dd a\dd b$. The Jacobian follows from $\dd\theta=\dd b/(1+b^2)$ and, at fixed $b$, $\dd s=\dd a/\sqrt{1+b^2}$. Bounding this density by $\mu/\pi$, the first intercept has a range of length $w$, and its permitted slope range at a fixed intercept has length $w/L$. The first lines therefore have measure at most $\mu w^2/(\pi L)$. For each first line, the second intercept has a range of length $4$, and the permitted second slope at a fixed intercept has a range of length $4/L$. Its measure is consequently at most $16\mu/(\pi L)$.
+
+The factorial moment formula for a Poisson process, which is the configuration-independent case of the Mecke formula, therefore gives
+\[
+ \E B_{L,w}=\nu_\mu^{\otimes2}(D_{L,w})
+ \le\frac{\mu w^2}{\pi L}\frac{16\mu}{\pi L}
+ =\frac{C_0\mu^2}{m^2}.
+\]
+Finally, $|b|\le w/L\le1$ yields $|I_\ell|=L\sqrt{1+b^2}\le2L$. This also checks that the intensity and length bounds hold for every permitted $m$ and $w$.
+\end{proof}
+
+\section{Exponential moments of a finite path}
+
+The earlier note claimed that the exponential moment of the reward of a finite straight path is infinite. The correct statement is that these moments are finite at every finite length, but their logarithms grow faster than linearly in the length. Both facts follow from Poisson counts of lines, so the correction does not require a different probabilistic method.
+
+Let $e_1=(1,0)$, $\gamma_n=(0,e_1,\ldots,ne_1)$, and $R_n=\sum_{i=0}^nN(ie_1)$. Put $a_n=2\mu(n+2)/\pi$. Let $\nu_n$ be the intensity of the lines $y=a+bx$ with $1/4\le a\le1/2$ and $0\le b\le1/(4(n+1))$; the intercept-slope density gives $\mu/(32\pi(n+1))\le\nu_n\le\mu/(16\pi(n+1))$. The next proposition supplies the finite-length correction and the asymptotic statement that survives it.
+
+\begin{proposition}\label{prop:moments}
+For every $\mu>0$, $s>0$, and integer $n\ge0$,
+\[
+ \nu_n\big(\e^{s(n+1)}-1\big)
+ \le\log\E\e^{sR_n}
+ \le a_n\big(\e^{s(n+1)}-1\big)<\infty.
+\]
+Consequently, $\lim_{n\to\infty}n^{-1}\log\E\e^{sR_n}=\infty$.
+\end{proposition}
+
+\begin{proof}
+All squares of $\gamma_n$ lie in the rectangle $[0,n+1]\times[0,1]$. Its perimeter is $2(n+2)$, so the number $M_n$ of lines meeting it is Poisson with mean $a_n$, and $R_n\le(n+1)M_n$. Every line in the family defining $\nu_n$ stays between heights $1/4$ and $3/4$ over this rectangle and meets every square of the path. Its Poisson count $T_n$ therefore satisfies $R_n\ge(n+1)T_n$.
+
+The generating function of a Poisson random variable gives both inequalities directly. No independence between $M_n$ and $T_n$ is needed, since the bounds are applied separately. The lower bound on $\nu_n$ then gives the asserted limit. In the former exponential-formula calculation, a line can contribute at most $n+1$ to $R_n$; summing contributions beyond that value caused the erroneous infinity at a fixed $n$.
+\end{proof}
+
+The elementary counting obstruction for lattice paths survives this correction. To see it without an unsupported second row of squares, take $n=2p$ and all $2^p$ paths of $p$ steps on the horizontal axis whose increments are $e_1$ or $2e_1$. Each path remains in $\gamma_{2p}$, has distinct sites, and has reward at least $H(p+1)$ on $\{T_{2p}\ge H\}$, for every fixed integer $H\ge1$. Hence, the expected number of these paths with that reward is at least $2^p\e^{-\nu_{2p}}\nu_{2p}^H/H!$. This lower bound grows exponentially with $p$, although all these paths may be produced by the same rare collection of lines. It explains the failure of this direct counting argument and makes no assertion about every possible use of first moments.
+
+\section{The estimate still required for greedy paths}
+
+We now compare the interval count with the lattice reward. The required comparison must control connected components of interval unions. It must also remain valid when a path visits many different pairs.
+
+For a finite path $\gamma$, write $R(\gamma)=\sum_{z\in\gamma}N(z)$. Order the lines meeting each square by their normal angles in $[0,\pi)$, and let $Z(\ell)$ be the set of squares met by $\ell$ at which its angle is neither the smallest nor the largest. Almost surely there are no angle ties. Counting the interior positions in this order yields the exact identity and its consequence
+\[
+ (N(z)-2)^+=\sum_{\ell\in\cL}\mathbf1\{z\in Z(\ell)\},
+ \qquad
+ R(\gamma)\le2\#\gamma+
+             \sum_{\ell\in\cL}\#\big(\gamma\cap Z(\ell)\big),
+\]
+where $u^+=\max(u,0)$ and $\#\gamma$ is the number of sites in the path. The sums are finite for a finite path by local finiteness of the line process.
+
+If two lines meet the same unit square, every point of either line inside the square is within distance $\sqrt2<2$ of the other line. Thus, for a fixed $\ell$, the union of $Q(z)\cap\ell$ over $z\in Z(\ell)$ is contained in the intersection of two unions of intervals $J(\ell,\ell')$, one union for smaller normal angles and one for larger normal angles. The converse inclusion need not hold. This comparison supplies an upper covering by continuous intervals; it is not an identification of a set of lattice squares with a subset of a line.
+
+The components of this continuous covering can contain several overlapping intervals. A component of length in $[t,2t]$ need not be generated by one interval in that range: many shorter intervals may form a connected chain, and intersections of two long intervals may be short. Proposition~\ref{prop:pair} does not count such components. It also does not control the sum of rewards collected by a path visiting many different pairs, or the number of lines contributing to the same square.
+
+For clarity, an admissible path of $n$ steps is a sequence of distinct sites $z_0,\ldots,z_n\in\Z^2$ with $\|z_i-z_{i-1}\|_\infty\le2$. For paths of exactly $n$ steps, the sufficient target is finiteness, almost surely, of
+\[
+ \limsup_{n\to\infty}\frac1n
+ \max_{\|z_0\|_\infty\le n}
+ \max_{\gamma\text{ admissible from }z_0} R(\gamma).
+\]
+The quenched path criterion in the accompanying note would then yield a positive critical point intensity. The present calculation does not prove this target, even when $\mu$ is small.
+
+A complete synthesis must treat components entering from outside the visited region and scales exceeding the path length. The former sum of additive terms of order $2^k$ diverges, so its asserted $o(n)$ remainder was unjustified. Any union bound over connected sets must also specify their sizes and locations.
+
+The next concrete task is to control the connected components of the intersection of the two interval unions, retaining their lengths, multiplicities, and shared lines. The resulting bound must be useful after summation along paths. Proposition~\ref{prop:pair} removes the specified large-scale interval-counting obstruction; the component estimate remains open.
+
+\bibliographystyle{amsalpha}
+\bibliography{references}
+\end{document}

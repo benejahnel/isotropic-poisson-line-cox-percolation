@@ -1,0 +1,239 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+\runningtitle{Connected-run counts along Poisson line corridors}
+\hypersetup{pdftitle={Connected-run counts along Poisson line corridors},pdfauthor={}}
+\title{Connected-run counts along Poisson line corridors}
+\author{}
+\date{November 3, 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We prove an exponential upper bound for the number of long connected runs along a pair of nearly parallel lines in an isotropic Poisson line process. The estimate includes components assembled from arbitrarily many shorter intervals and holds after the pair is selected from the environment. The proof removes occupied portions of a one-dimensional Boolean model and compares the remaining component starts with a marked Poisson process. At the corridor width $(t/\mu)^{3/2}$, the resulting mean bound per unit of corridor length measured in these widths tends to zero as the run threshold $t$ increases. We also prove that a Poisson comparison at the smaller mean-density scale is impossible: one angular family can cover an entire long segment with probability of order its reciprocal length, allowing many components of the other family to survive. These conclusions control a prescribed straight corridor and identify a limitation of direct concentration. Uniform control over paths that move between supporting lines remains open.
+\end{abstract}
+
+\section{The corridor estimate}
+
+The connected-run estimate in the preceding note controls lengths and mean counts. To use it for a path selected from the environment, one also needs upper tails for the number of runs encountered. We first treat a straight corridor supported by a pair of nearly parallel lines, including all chains that contribute to a connected run. The selection of the pair is handled by the multivariate Mecke formula, whose general form is given in~\cite[Theorem~4.4]{LP17}.
+
+Fix $\mu>0$. Let $\cL$ be the Poisson line process with intensity $\nu_\mu(\dd\theta\,\dd s)=(\mu/\pi)\dd\theta\dd s$, where $\ell(\theta,s)=\{x\in\R^2:x\cdot n_\theta=s\}$, $n_\theta=(\cos\theta,\sin\theta)$, $0\le\theta<\pi$, and $s\in\R$. Write $\P$ and $\E$ for probability and expectation. Orient each line by $(-\sin\theta,\cos\theta)$ and use arclength coordinates. For nonparallel lines $\ell,\ell'$, the interval $J(\ell,\ell')$ consists of points of $\ell$ within distance $2$ of $\ell'$. Its length is $4/|\sin\alpha|$, where $\alpha$ is the relative angle. Parallel pairs have zero intensity and are omitted.
+
+For a configuration $\eta$ of other lines, let $U_\ell^-(\eta)$ and $U_\ell^+(\eta)$ be the unions of these intervals over lines whose normal angles are, respectively, smaller and larger than that of $\ell$. Put $V_\ell(\eta)=U_\ell^-(\eta)\cap U_\ell^+(\eta)$. A run is a connected component of $V_\ell(\eta)$. For a compact segment $I\subset\ell$, write $D=|I|$ for its length. For $t>0$, let $H_t(\ell,I;\eta)$ count runs of length at least $t$ meeting $I$. A run entering from outside $I$ is included. For $\ell\in\cL$, the other-line configuration is always $\cL\setminus\{\ell\}$.
+
+We retain explicit constants from the coverage estimate. For $u\ge8$, put $F_\mu(u)=\mu\e^{4\mu}(64+12\log(1+u))/u$. Let $T_\mu$ be the least integer at least $\max(8,216\mu)$ with $F_\mu(T_\mu)\le1/6$, and define
+\[
+ A_\mu=\begin{cases}192\mu,&0<\mu\le1/32,\\T_\mu+1,&\mu>1/32,\end{cases}
+ \qquad c_\mu=4\e^{4\mu}A_\mu,\qquad B_\mu=8A_\mu^2.
+\]
+The integer $T_\mu$ exists because $F_\mu(u)\to0$. For nonnegative random variables, $X\preceq Y$ means $\P(X\ge x)\le\P(Y\ge x)$ for every real $x$. We write $\operatorname{Poi}(a)$ for a random variable with the Poisson distribution of mean $a$.
+
+For $w\ge1$, an integer $m\ge1$, and $L=mw$, write $\ell_{a,b}=\{(x,a+bx):x\in\R\}$ and $I_\ell=\ell\cap([0,L]\times\R)$. Let $\mathcal D_{L,w}$ consist of ordered, distinct, nonparallel pairs $(\ell_{a,b},\ell_{a',b'})$ satisfying
+\begin{equation}\label{eq:pairs}
+ |a|\le w/2,\qquad |a+bL|\le w/2,\qquad
+ |a'-a|\le2,\qquad |a'-a+(b'-b)L|\le2.
+\end{equation}
+The first line crosses the rectangle $[0,L]\times[-w/2,w/2]$, and the second stays within vertical distance $2$ of it over this range. We call this rectangle a corridor. The constraints imply $I_\ell\subset J(\ell,\ell')$.
+
+For $t\ge\max(8,\mu)$, set $w=(t/\mu)^{3/2}$ and $L=mw$. For an integer $K\ge1$, let $\mathcal E_{m,t,K}$ be the event that some pair in $\mathcal D_{L,w}$ belonging to $\cL$ satisfies $H_t(\ell,I_\ell;\cL\setminus\{\ell\})\ge Km+2$. Define
+\[
+ \epsilon_t=\frac{2c_\mu}{\mu^{3/2}\sqrt t},\qquad C_0=\frac{16}{\pi^2},\qquad
+ \Phi(K,u)=K\log(K/u)-K+u\quad(K>u>0).
+\]
+The next theorem extends the earlier count of individual intervals to complete connected runs. Its first assertion also gives a comparison on any deterministic line without an inserted partner.
+
+\begin{theorem}\label{thm:corridor}
+For every deterministic line $\ell$, compact segment $I\subset\ell$, and $t\ge1$,
+\begin{equation}\label{eq:fixed-line}
+ H_t(\ell,I;\cL)\preceq1+\operatorname{Poi}(2c_\mu D/t^2).
+\end{equation}
+For $t\ge\max(8,\mu)$ and integers $m,K\ge1$ with $K>\epsilon_t$,
+\begin{equation}\label{eq:corridor}
+ \P(\mathcal E_{m,t,K})\le C_0\mu^2m^{-2}
+                  \exp\{-m\Phi(K,\epsilon_t)\}.
+\end{equation}
+If $\epsilon_t\le K/(2\e)$, the last bound is at most $C_0\mu^2m^{-2}2^{-Km}$.
+\end{theorem}
+
+For every fixed $\mu>0$ and $K\ge1$, the last condition holds for all sufficiently large $t$. If $\mu\le1/32$, then $\epsilon_t=1536\e^{4\mu}/\sqrt{\mu t}$. The constants are deliberately nonoptimal; the relevant fact is the decay in $t$ at every fixed line intensity.
+
+\section{Proof of the corridor estimate}
+
+We reduce the count on a fixed line to counts of components in a single angular family. A partner covering the corridor supplies one of the two families throughout the segment, leaving a one-family count and two possible boundary components. We then integrate over all candidate pairs, so no independence assumption is made for a pair chosen from the random environment.
+
+For a deterministic measurable set $A\subset[0,\pi)$ of normal angles and a deterministic line $\ell$, write $U_{\ell,A}(\eta)=\bigcup_{\ell'\in\eta:\theta(\ell')\in A}J(\ell,\ell')$. Let $Y_t(\ell,I,A)$ count components of $U_{\ell,A}(\cL)$ of length at least $t$ whose first endpoints belong to $I$. The following proposition supplies the only substantial input to the theorem.
+
+\begin{proposition}\label{prop:one-family}
+For every deterministic $\ell$, $A$, compact segment $I\subset\ell$, and $t\ge1$, all components of $U_{\ell,A}(\cL)$ are bounded almost surely and
+\begin{equation}\label{eq:one-family}
+ Y_t(\ell,I,A)\preceq\operatorname{Poi}(c_\mu D/t^2).
+\end{equation}
+\end{proposition}
+
+\begin{proof}[Proof of Theorem~\ref{thm:corridor}]
+First fix $\ell$ and $I$. A component of $V_\ell(\cL)$ starting in $I$ starts at the first endpoint of a component in at least one angular family. If the run has length at least $t$, that parent component also has length at least $t$. Distinct run starts give distinct parent starts, after assigning a color in the zero-probability case of a tie. At most one additional run enters $I$ through its first endpoint. Thus,
+\begin{equation}\label{eq:assign}
+ H_t(\ell,I;\cL)\le1+Y_t(\ell,I,[0,\theta))
+                         +Y_t(\ell,I,(\theta,\pi)),
+ \qquad \theta=\theta(\ell).
+\end{equation}
+The two terms on the right depend on disjoint restrictions of the Poisson process and are independent. Proposition~\ref{prop:one-family} and independent couplings with the two Poisson bounds prove~\eqref{eq:fixed-line}. An empty angular family gives a zero term and causes no exception.
+
+Now fix $(\ell,\ell')\in\mathcal D_{L,w}$ and insert these lines into an independent environment $\eta$ with the law of $\cL$. The partner $\ell'$ belongs to one angular family and its interval covers $I_\ell$. On this segment, $V_\ell(\eta\cup\{\ell'\})$ therefore agrees with the union from the opposite angular family. Every run contained in the interior of $I_\ell$ is a whole component of that opposite union. At most two further runs meet its endpoints. If $A$ is the opposite set of normal angles, then $H_t(\ell,I_\ell;\eta\cup\{\ell'\})\le2+Y_t(\ell,I_\ell,A)$.
+
+The slope constraints imply $|b|\le w/L\le1$, so $|I_\ell|\le2L$. Proposition~\ref{prop:one-family} bounds the last component count by a Poisson variable with mean at most $2c_\mu L/t^2=m\epsilon_t$. For $K>\epsilon_t$, the exponential moment of this Poisson variable, evaluated at $\log(K/\epsilon_t)$, gives an upper tail of $\exp\{-m\Phi(K,\epsilon_t)\}$ at level $Km$.
+
+It remains to count pairs. In intercept and slope coordinates, $\nu_\mu(\dd a\,\dd b)=(\mu/\pi)(1+b^2)^{-3/2}\dd a\dd b$. The first intercept ranges over an interval of length $w$, and its slope over an interval of length $w/L$. Given the first line, the second intercept and slope ranges have lengths $4$ and $4/L$. Consequently,
+\begin{equation}\label{eq:mecke}
+\begin{aligned}
+ \nu_\mu^{\otimes2}(\mathcal D_{L,w})
+   &\le\frac{\mu w^2}{\pi L}\frac{16\mu}{\pi L}
+    =C_0\mu^2m^{-2},\\
+ \P(\mathcal E_{m,t,K})
+   &\le\int_{\mathcal D_{L,w}}
+       \P\big(H_t(\ell,I_\ell;\cL\cup\{\ell'\})\ge Km+2\big)
+          \,\nu_\mu(\dd\ell)\nu_\mu(\dd\ell')\\
+   &\le C_0\mu^2m^{-2}\exp\{-m\Phi(K,\epsilon_t)\}.
+\end{aligned}
+\end{equation}
+The second line is Markov's inequality followed by the two-point Mecke formula. The inserted partner is retained in the tested covering, as required by the definition of the event. Finally, $\epsilon_t\le K/(2\e)$ implies $\Phi(K,\epsilon_t)\ge K\log2$, which proves the last assertion.
+\end{proof}
+
+\section{Proof of the one-family count estimate}
+
+Two inputs serve different purposes. A coverage bound controls the intensity of long component starts through stationarity. Regeneration at the end of a component then converts this intensity into a Poisson upper bound for the whole count. The latter step uses the vacant portions of the line as a new time coordinate and retains all chains within an occupied component.
+
+For a deterministic $\ell$, let $u_\mu(s)$ be the probability that a segment of length $s$ is covered by $U_{\ell,[0,\pi)}(\cL)$. Isotropy and stationarity make this independent of the line and segment. The coverage estimate from the preceding note is stated in full here, and its proof is included below to make the argument self-contained.
+
+\begin{lemma}\label{lem:coverage}
+For $\mu>0$ and $s\ge0$, $u_\mu(s)\le A_\mu/(1+s)$. The same upper bound holds after restriction to any deterministic measurable set of normal angles.
+\end{lemma}
+
+For the regeneration input, consider a stationary Poisson process $\xi$ of interval starts and lengths on $\R\times(0,\infty)$, with intensity $\rho\dd x\,G(\dd d)$, where $\rho>0$ and $G$ is a probability law with finite mean. A point $(x,d)$ contributes $[x,x+d]$ to a union $U$. Put $a=\rho\int d\,G(\dd d)$. Let $\kappa$ be the intensity measure of component lengths: $D\kappa(H)$ is the expected number of component starts in $[0,D]$ with lengths in a Borel set $H\subset(0,\infty)$. Component starts are among interval starts, so this measure is finite. Let $Y_t^U(D)$ count starts in $[0,D]$ of components of length at least $t$. These are the standard one-dimensional Boolean model objects; the general model is treated in~\cite[Chapter~17]{LP17}.
+
+The next lemma compares counts in physical length with counts after all occupied portions have been removed. Its hypothesis that the components are bounded will follow from Lemma~\ref{lem:coverage} in our application.
+
+\begin{lemma}\label{lem:regeneration}
+If all components of $U$ are bounded almost surely, then, for $D\ge0$ and $t>0$,
+\begin{equation}\label{eq:regeneration}
+ Y_t^U(D)\preceq\operatorname{Poi}\big(\e^a\kappa([t,\infty))D\big).
+\end{equation}
+\end{lemma}
+
+\begin{proof}[Proof of Proposition~\ref{prop:one-family}]
+Map another line to its intersection coordinate $x$ with $\ell$ and its relative angle $\alpha\in(0,\pi)$. The resulting intensity is $(\mu/\pi)\sin\alpha\dd x\dd\alpha$, and its interval has length $4/\sin\alpha$. Replacing the center coordinate by the first endpoint preserves Lebesgue measure for each angle. The Poisson mapping and restriction properties~\cite[Section~5.1]{LP17} therefore give a stationary process of interval starts and lengths. Its start rate $\rho$ is at most $2\mu/\pi$, and its mean coverage multiplicity $a$ is at most $4\mu$. If $\rho=0$, the union is empty and the conclusion holds directly.
+
+Lemma~\ref{lem:coverage} shows that the probability of covering a segment of length $s$ tends to zero. Every unbounded component contains a half-line from a rational coordinate. Stationarity, the estimate in both directions, and a countable union therefore show that every component is bounded. The intervals meeting any compact segment form a finite Poisson collection because $a<\infty$ and $\rho<\infty$; in particular, components and their endpoints are locally finite.
+
+Let $\kappa$ be the component-length intensity measure for this restricted union. Campbell's formula~\cite[Section~2.2]{LP17} counts the starts that allow a component to cover $[0,s]$. A component of length $b$ allows a set of starts of length $(b-s)^+$, where $x^+=\max(x,0)$. Hence, for $t\ge1$,
+\begin{equation}\label{eq:kappa}
+\begin{aligned}
+ \int(b-s)^+\,\kappa(\dd b)
+   &=\P([0,s]\subset U_{\ell,A}(\cL))\le\frac{A_\mu}{1+s},\\
+ \kappa([t,\infty))
+   &\le\frac2t\int(b-t/2)^+\,\kappa(\dd b)
+    \le\frac{4A_\mu}{t(t+2)}\le\frac{4A_\mu}{t^2}.
+\end{aligned}
+\end{equation}
+All hypotheses of Lemma~\ref{lem:regeneration} have now been checked. It gives a Poisson comparison with mean at most $\e^{4\mu}4A_\mu D/t^2=c_\mu D/t^2$, which proves the proposition.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:regeneration}]
+Explore the marked interval process in increasing order of its first coordinate, revealing the full length when an interval starts. When the current occupied component ends, no previously revealed interval extends further. That endpoint is a stopping time for this exploration: by coordinate $x$, whether the component has already ended can be decided from intervals starting at or before $x$. The future marked Poisson process is independent of this information and has its original law. This stopping-time form of independent increments follows first for stopping times on a deterministic mesh and then by approximation from above; the marked Poisson process is locally finite in its first coordinate. The usual marked Poisson memoryless property is described in~\cite[Section~7.2]{LP17}.
+
+Start with a vacant half-line to the left of zero, insert at zero an interval whose length has law $G$, and add an independent process of future starts. Denote the length of its occupied component by $B$, initially allowing $B=\infty$, and put $q_t=\P(B\ge t)$. Its law will describe each fresh component after a vacant gap.
+
+An interval starting at a prescribed coordinate begins a new component exactly when no earlier interval reaches that coordinate. The Poisson void probability for this event is $\e^{-a}$. It depends only on earlier starts and is independent of the new interval length and the future process. Applying the Mecke formula to starts of unbounded components gives $0=\rho\e^{-a}\P(B=\infty)$, so $B$ is finite almost surely. Applying the same formula to the other component starts gives
+\begin{equation}\label{eq:component-law}
+ \kappa([t,\infty))=\rho\e^{-a}q_t,\qquad
+ \kappa((0,\infty))=\rho\e^{-a}.
+\end{equation}
+Endpoint coincidences have probability zero because start coordinates have continuous distributions. Thus, the distinction between a vacant point and the final endpoint of a preceding component does not affect either intensity.
+
+For the stationary model, let $\tau=0$ if zero is vacant, and otherwise let $\tau$ be the final endpoint of the component containing zero. This is a finite stopping time in the exploration just described. Components with starts in $[0,D]$ all start after $\tau$, apart from a zero-probability start exactly at zero. The successive vacant gap lengths $E_1,E_2,\ldots$ after $\tau$ are independent exponential variables of rate $\rho$, and the successive occupied lengths $B_1,B_2,\ldots$ are independent with the law of $B$. The two sequences are independent: at each component end, the new Poisson process supplies an independent waiting time, seed length, and subsequent component exploration.
+
+The actual start $S_j$ of component $j$ after $\tau$ satisfies $S_j=\tau+\sum_{i=1}^jE_i+\sum_{i=1}^{j-1}B_i$. Write $T_j=\sum_{i=1}^jE_i$ for its start after the occupied portions have been deleted. Then
+\begin{equation}\label{eq:compression}
+ Y_t^U(D)=\sum_{j:S_j\le D}\mathbf1\{B_j\ge t\}
+ \le\sum_{j:T_j\le D}\mathbf1\{B_j\ge t\}
+ \ \stackrel{\mathrm d}=\ \operatorname{Poi}(\rho q_tD).
+\end{equation}
+The last equality is independent marking and thinning of a Poisson process; see~\cite[Sections~5.2--5.3]{LP17}. Substituting~\eqref{eq:component-law} proves~\eqref{eq:regeneration}, including components whose full lengths extend beyond $D$.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:coverage}]
+For the full angular family, the interval start rate is $2\mu/\pi$ and the mean coverage multiplicity is $4\mu$. Let $Q_\mu(y)$ be the rate of starts of intervals longer than $y$, and let $H_\mu(s)$ be the intensity of intervals covering both zero and $s$. For $y\ge8$, integration over the relative angles gives $Q_\mu(y)=(2\mu/\pi)(1-\sqrt{1-16/y^2})\le6\mu/y^2$. Therefore, $H_\mu(s)=\int_s^\infty Q_\mu(y)\dd y\le6\mu/s$ for $s\ge8$, and $H_\mu(s)\le4\mu$ for all $s\ge0$.
+
+Let $p=\e^{-4\mu}$ and let $W_s$ be the vacant length in $[0,s]$. Poisson void probabilities give $\E W_s=ps$ and joint vacancy at separation $x$ equal to $p^2\e^{H_\mu(x)}$. Full coverage implies $W_s=0$. Chebyshev's inequality and $\e^h-1\le h\e^{4\mu}$ for $0\le h\le4\mu$ yield, for $s\ge8$,
+\begin{equation}\label{eq:seed}
+ u_\mu(s)\le\frac{2}{s^2}\int_0^s(s-x)(\e^{H_\mu(x)}-1)\dd x
+ \le\frac{2\e^{4\mu}}s\int_0^sH_\mu(x)\dd x
+ \le F_\mu(s).
+\end{equation}
+This proves $u_\mu(T_\mu)\le1/6$.
+
+Coverage of $[0,3s]$ requires coverage of $[0,s]$ and $[2s,3s]$. The intervals meeting both of the latter segments have intensity $H_\mu(s)$. Remove them. The remaining intervals that can contribute to the two coverage events belong to disjoint Poisson restrictions, and deletion can only decrease each coverage probability. Thus,
+\begin{equation}\label{eq:recursion}
+ u_\mu(3s)\le u_\mu(s)^2+H_\mu(s)
+            \le u_\mu(s)^2+6\mu/s,\qquad s\ge8.
+\end{equation}
+This recursion concerns the complete union and includes every chain of shorter intervals.
+
+Starting at $T_\mu$, induction gives $u_\mu(3^jT_\mu)\le3^{-j}/6$ for integers $j\ge0$: its step follows from $1/36+6\mu/T_\mu\le1/18$. Monotonicity between successive scales gives $u_\mu(s)\le T_\mu/(2s)$ above $T_\mu$, and $u_\mu(s)\le1$ below it. Together these imply $(T_\mu+1)/(1+s)$.
+
+For $\mu\le1/32$, instead use $u_\mu(8)\le1-\e^{-4\mu}\le4\mu$. Induction in~\eqref{eq:recursion} gives $u_\mu(8\cdot3^j)\le6\mu3^{-j}$ because $36\mu3^{-j}+3/4\le2$. Between these scales, $u_\mu(s)\le144\mu/s\le192\mu/(1+s)$ for $s\ge8$. For $s\le8$, the bound $4\mu\le192\mu/(1+s)$ suffices. Restriction to a deterministic angular set deletes intervals, proving the final assertion.
+\end{proof}
+
+\section{Failure of concentration at the mean-density scale}
+
+The Poisson comparison above has a rate proportional to $t^{-2}$ on a fixed line. The mean run-start intensity obtained from the two independent angular families has the smaller upper bound $B_\mu t^{-3}$. We now show why the latter rate cannot replace the former in a Poisson comparison valid for arbitrarily long corridors: a single line can supply one angular family throughout the corridor with only polynomial cost.
+
+Fix the horizontal line $\ell_0=\ell(\pi/2,0)$, using its chosen arclength orientation. Let $X_t(D)$ count runs of $V_{\ell_0}(\cL)$ of length at least $t$ whose starts are in $[0,D]$. For $t\ge4$, put $\delta_t=4\mu\e^{-2\mu}/(\pi t^2)$. The next proposition gives both the mean bound and a polynomial lower bound at a larger linear level.
+
+\begin{proposition}\label{prop:obstruction}
+For every $\mu>0$, $t\ge4$, and $D>0$,
+\begin{equation}\label{eq:mean}
+ \E X_t(D)\le B_\mu D/t^3.
+\end{equation}
+For every $\mu>0$ and fixed $t\ge4$, for all sufficiently large $D$,
+\begin{equation}\label{eq:lower}
+ \P\big(X_t(D)\ge\delta_tD\big)\ge\frac{2\mu}{\pi D}.
+\end{equation}
+In particular, if $t>4\pi\e^{2\mu}A_\mu^2/\mu$, then the threshold in~\eqref{eq:lower} is greater than twice the upper bound in~\eqref{eq:mean}.
+\end{proposition}
+
+\begin{proof}
+The two angular unions are independent. Lemma~\ref{lem:coverage} gives $\P([0,s]\subset V_{\ell_0}(\cL))\le A_\mu^2/(1+s)^2$. Apply the component-start identity used in~\eqref{eq:kappa} to this intersection. Its components are bounded and locally finite by Proposition~\ref{prop:one-family}, and its starts are among the starts of the two parent unions. Its intensity of lengths at least $t$ is consequently at most $(2/t)A_\mu^2/(1+t/2)^2\le B_\mu/t^3$. Stationarity proves~\eqref{eq:mean}.
+
+On $\ell_0$, each of the two angular families has interval start rate $\mu/\pi$ and mean coverage multiplicity $2\mu$. The rate of its interval starts with length at least $y\ge4$ is
+\begin{equation}\label{eq:one-side-tail}
+ Q_+(y)=\frac\mu\pi\big(1-\sqrt{1-16/y^2}\big)
+       \ge\frac{8\mu}{\pi y^2}.
+\end{equation}
+Let $\kappa_+([t,\infty))$ denote its long-component start intensity. An interval of length at least $t$ starting at a vacant point begins such a component. The vacancy event depends only on earlier starts and has probability $\e^{-2\mu}$. Mecke's formula therefore yields $\kappa_+([t,\infty))\ge\e^{-2\mu}Q_+(t)\ge2\delta_t$.
+
+Let $Z_t(D)$ count components of $U_{\ell_0}^+$ of length at least $t$ contained in $(0,D)$. The process of long-component starts is stationary and ergodic with finite intensity: it is a translation-equivariant function of the marked interval process, whose restrictions to consecutive unit intervals of start coordinates are independent and identically distributed. The spatial ergodic theorem~\cite[Theorem~8.14]{LP17} gives convergence of the number of its starts in $[0,D]$, divided by $D$, to $\kappa_+([t,\infty))$ in probability. Excluding components that cross $D$ removes at most one start, and endpoint equalities have probability zero. Thus, $\P(Z_t(D)\ge\delta_tD)\to1$.
+
+Let $A_D$ be the event that one interval from the minus angular family covers all of $[0,D]$. It is independent of $Z_t(D)$. Its defining Poisson count has mean $h_-(D)=\int_D^\infty Q_+(y)\dd y\ge8\mu/(\pi D)$ for $D\ge4$, by the symmetry of the two families. For $D\ge\max(4,8\mu/\pi)$, $\P(A_D)\ge1-\e^{-8\mu/(\pi D)}\ge4\mu/(\pi D)$. On $A_D$, every plus component counted by $Z_t(D)$ is a whole run of the intersection, since it is strictly inside the segment and the minus family covers that segment. For all sufficiently large $D$,
+\begin{equation}\label{eq:product-lower}
+ \P(X_t(D)\ge\delta_tD)
+ \ge\P(A_D)\P(Z_t(D)\ge\delta_tD)
+ \ge\frac{4\mu}{\pi D}\frac12.
+\end{equation}
+This proves~\eqref{eq:lower}. Finally, $\delta_t>2B_\mu/t^3$ is exactly $t>4\pi\e^{2\mu}A_\mu^2/\mu$, which checks the last assertion.
+\end{proof}
+
+For any finite constant $C_\mu$, a comparison $X_t(D)\preceq b+\operatorname{Poi}(C_\mu D/t^3)$ with a fixed finite additive term $b$ would contradict Proposition~\ref{prop:obstruction} at sufficiently large fixed $t$ and then large $D$. Indeed, one can choose $t$ so that $\delta_t>C_\mu/t^3$; the Poisson upper tail at $\delta_tD-b$ then decays exponentially in $D$, whereas~\eqref{eq:lower} decays only as $D^{-1}$. This excludes the proposed mean-density Poisson comparison and exponential upper tails at those thresholds.
+
+\section{Consequences for the path argument}
+
+The corridor estimate controls complete runs on a selected nearly parallel pair. It removes the distinction between individual intervals and connected chains in the previous corridor calculation. The polynomial lower bound concerns a different threshold and is consistent with that estimate.
+
+More precisely, with $D$ proportional to $m(t/\mu)^{3/2}$, the threshold $\delta_tD$ in Proposition~\ref{prop:obstruction} is proportional to $m/\sqrt{\mu t}$ for fixed $\mu$. It is smaller than $Km$ at large $t$. Thus, persistence of one angular family obstructs concentration at the mean-density scale while permitting the exponential upper bound in Theorem~\ref{thm:corridor}.
+
+A union bound also controls any prescribed collection of at most $a^m$ straight corridor placements, for a fixed $a>1$, whenever $\Phi(K,\epsilon_t)>\log a$. Translations and rotations satisfy the same estimate because the one-family bound is uniform in the line and angular restriction, and the pair intensity is rotation invariant. The resulting upper bound is $C_0\mu^2m^{-2}\exp\{-m(\Phi(K,\epsilon_t)-\log a)\}$. At fixed $\mu,K,a$, this condition holds for sufficiently large $t$.
+
+A general admissible lattice path can move between many supporting pairs. The estimates proved here do not give joint upper tails for runs collected in those successive corridors, whose underlying lines can overlap. Consequently, they do not yet imply a finite uniform linear growth rate for the lattice reward, and they do not establish a subcritical interval for the Cox point intensity. A continuation of this approach must control that accumulation across changing lines while retaining the dependence exposed by Proposition~\ref{prop:obstruction}.
+
+\bibliographystyle{amsalpha}
+\bibliography{references}
+\end{document}

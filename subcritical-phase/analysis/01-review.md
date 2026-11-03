@@ -1,3 +1,5 @@
+> Historical analysis. The current status is in `00-summary.md`, and the corrections are proved in `../corrected-geometry.pdf`. Claims here about infinite exponential moments at finite path lengths, the complete failure of first-moment methods, bundle or run densities, and the necessity of a particular induction are not current conclusions. The sparse-regime path enumeration remains unproved. This file is retained to document the earlier attempts.
+
 # 01 — Adversarial review of the rigorous statements in `subcritical-phase/main.tex`
 
 Every constant and inequality was recomputed. Verdicts: **correct**, **minor fix**, **gap**, **wrong**.

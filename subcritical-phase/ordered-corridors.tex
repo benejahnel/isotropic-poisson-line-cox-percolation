@@ -1,0 +1,272 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+\runningtitle{Uniform bounds for ordered corridors}
+\hypersetup{pdftitle={Uniform bounds for ordered corridors},pdfauthor={}}
+\title{Uniform bounds for ordered corridors\\with one shared supporting line}
+\author{}
+\date{November 3, 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We prove a joint exponential bound for long connected runs in arbitrarily many consecutive corridors sharing one supporting line in the isotropic Poisson line process. The additive allowance is linear in the number of corridors, and the exponential rate is uniform in that number. The geometric observation is that the horizontal projection of an interval contained in a corridor contains the coordinate where its generating line intersects the shared line. This observation bounds the effect of inserted lines and separates the remaining counts into independent Poisson restrictions. A component-count estimate under deterministic restrictions follows from the Poisson disjoint-occurrence inequality. The bounds include selection of all supporting lines from the environment and a union over all integer subdivisions of a prescribed horizontal range. The subcritical problem for paths that change the shared supporting line remains open.
+\end{abstract}
+
+\section{The uniform corridor estimate}
+
+The preceding corridor estimates control complete connected runs, including components assembled from shorter intervals~\cite{CR26}. For consecutive corridors sharing one line, the earlier proof gives a quadratic insertion allowance and an exponential rate that deteriorates with the number of corridors~\cite{JC26}. We remove both losses for the ordered geometry considered here. The additional probabilistic input is a component-count bound under a deterministic restriction of the line process, obtained using the disjoint-occurrence inequality of van den Berg~\cite{vdB96}.
+
+Fix $\mu>0$. Let $\cL$ be the Poisson line process with intensity $\nu_\mu(\dd\theta\,\dd s)=(\mu/\pi)\dd\theta\dd s$, where $\ell(\theta,s)=\{x\in\R^2:x\cdot n_\theta=s\}$, $n_\theta=(\cos\theta,\sin\theta)$, $0\le\theta<\pi$, and $s\in\R$. Write $\P$ and $\E$ for probability and expectation. Orient each line by $(-\sin\theta,\cos\theta)$ and use arclength coordinates. For nonparallel lines $\ell,\ell'$, let $J(\ell,\ell')$ be the interval on $\ell$ at distance at most $2$ from $\ell'$. Its length is $4/|\sin\alpha|$, where $\alpha$ is the relative angle. Parallel pairs have zero intensity in every application below and are omitted.
+
+For a configuration $\eta$ of other lines, let $U_\ell^-(\eta)$ and $U_\ell^+(\eta)$ be the unions of these intervals over lines with normal angles smaller and larger than $\theta(\ell)$, respectively. Put $V_\ell(\eta)=U_\ell^-(\eta)\cap U_\ell^+(\eta)$. A run is a connected component of $V_\ell(\eta)$. For $t>0$ and a compact segment $I\subset\ell$, let $H_t(\ell,I;\eta)$ count full runs of length at least $t$ meeting $I$, including runs entering through an endpoint.
+
+We retain the explicit constants from the coverage estimate in~\cite{CR26}. For $u\ge8$, put $F_\mu(u)=\mu\e^{4\mu}(64+12\log(1+u))/u$, and let $T_\mu$ be the least integer at least $\max(8,216\mu)$ such that $F_\mu(T_\mu)\le1/6$. This integer exists since $F_\mu(u)\to0$. Define
+\[
+\begin{gathered}
+ A_\mu=\begin{cases}192\mu,&0<\mu\le1/32,\\T_\mu+1,&\mu>1/32,\end{cases}
+ \qquad c_\mu=4\e^{4\mu}A_\mu,\\
+ \Phi(K,u)=K\log(K/u)-K+u\quad(K>u>0).
+\end{gathered}
+\]
+
+We first specify the deterministic geometry. Fix an integer $r\ge1$, coordinates $x_0<\cdots<x_r$, and lines $\boldsymbol\ell=(\ell_0,\ldots,\ell_r)$ with distinct slopes, written as graphs of $f_i(x)=a_i+b_ix$. The common supporting line is $\ell_0$. For $1\le i\le r$, set $T_i=[x_{i-1},x_i]$ and $I_i=\{(x,f_i(x)):x\in T_i\}$, and assume
+\begin{equation}\label{eq:vertical}
+ |f_i(x)-f_0(x)|\le2\quad(x\in T_i).
+\end{equation}
+Thus, $I_i\subset J(\ell_i,\ell_0)$. The vertical bound in~\eqref{eq:vertical} is part of the hypothesis; containment in the Euclidean strip alone is a weaker condition. Write $\boldsymbol I=(I_1,\ldots,I_r)$, $D_i=|I_i|$, and $D=\sum_iD_i$. For a background configuration $\eta$, define
+\begin{equation}\label{eq:S}
+ S_t(\eta;\boldsymbol\ell,\boldsymbol I)
+ =\sum_{i=1}^r H_t\big(\ell_i,I_i;
+       \eta\cup\{\ell_j:0\le j\le r,\ j\ne i\}\big).
+\end{equation}
+Every other distinguished line remains in the covering. Let $p$ be the number of base angles below $\theta(\ell_0)$, and put $g=\1_{\{p>0\}}+\1_{\{p<r\}}$ and $\beta=3r-g$. The number $g$ is the number of nonempty angular groups on the two sides of the shared angle.
+
+For selection from the environment, fix positive integers $\boldsymbol m=(m_1,\ldots,m_r)$, set $M=\sum_i m_i$, and, for $w\ge8$, use $x_0=0$ and $x_i=w\sum_{j=1}^i m_j$. Let $\mathcal T_{\boldsymbol m,w}$ consist of all ordered graph tuples with distinct slopes satisfying
+\begin{equation}\label{eq:tuple}
+\begin{aligned}
+ |a_0|&\le w/2, & |a_0+b_0Mw|&\le w/2,\\
+ |f_i(x_{i-1})-f_0(x_{i-1})|&\le2,
+ &|f_i(x_i)-f_0(x_i)|&\le2\quad(1\le i\le r).
+\end{aligned}
+\end{equation}
+The endpoint conditions imply~\eqref{eq:vertical} by linear interpolation. For $t\ge\max(8,4\mu)$, set
+\[
+ w=(t/\mu)^{3/2},\qquad \epsilon_t=\frac{2c_\mu w}{t^2},\qquad
+ G_{\boldsymbol m,w}=\frac{16^r\mu^{r+1}w^{1-r}}
+          {\pi^{r+1}M\prod_{i=1}^r m_i}.
+\]
+For $K>0$, let $\mathcal E_{\boldsymbol m,t,K}$ be the event that some tuple in $\mathcal T_{\boldsymbol m,w}$ belonging to $\cL$ satisfies $\sum_iH_t(\ell_i,I_i;\cL\setminus\{\ell_i\})\ge\beta+KM$, where $\beta$ is evaluated for that tuple. The next theorem gives a rate that is uniform in the number and angular order of the base lines.
+
+\begin{theorem}\label{thm:uniform}
+For every deterministic tuple satisfying~\eqref{eq:vertical}, every $t\ge1$, and every $s\ge0$,
+\begin{equation}\label{eq:moment}
+ \E\e^{sS_t(\cL;\boldsymbol\ell,\boldsymbol I)}
+ \le\exp\big\{s\beta+(c_\mu D/t^2)(\e^s-1)\big\}.
+\end{equation}
+For every positive integer vector $\boldsymbol m$, $t\ge\max(8,4\mu)$, and $K>\epsilon_t$,
+\begin{equation}\label{eq:selected}
+ \P(\mathcal E_{\boldsymbol m,t,K})
+ \le G_{\boldsymbol m,w}\exp\{-M\Phi(K,\epsilon_t)\}.
+\end{equation}
+\end{theorem}
+
+The allowance satisfies $\beta\le3r-1\le3M$, and $\epsilon_t=2c_\mu/(\mu^{3/2}\sqrt t)\to0$ at fixed $\mu$. Thus, the exponential rate can be made arbitrarily large while retaining a linear threshold uniformly over $r$. The conclusion concerns ordered corridors with one common supporting line and allows every base line to change. It does not yet control a path that changes the common supporting line.
+
+\section{Proof of the uniform corridor estimate}
+
+Two propositions separate the geometric and probabilistic parts of the argument. The geometric proposition assigns every interior contribution to a range of intersection coordinates on the common line, while allowing a linear number of boundary and insertion contributions. The probabilistic proposition bounds long components after an arbitrary deterministic restriction; this step is necessary because deleting intervals may increase the number of components. Their combination gives independent counts for the different corridors before the multivariate Mecke formula is applied.
+
+For a deterministic line $\ell$, measurable angular set $A\subset[0,\pi)$, and measurable set $\mathscr R$ of lines, define $U_{\ell,A,\mathscr R}(\eta)=\bigcup_{\ell'\in\eta\cap\mathscr R:\theta(\ell')\in A}J(\ell,\ell')$. For a compact segment $I\subset\ell$, let $X_t(\ell,I,A,\mathscr R;\eta)$ count components of this union of length at least $t$ whose first endpoints belong to $I$. The first endpoint is taken in the specified orientation of $\ell$.
+
+For the fixed tuple, write $\theta_i=\theta(\ell_i)$ and set $A_i=[0,\theta_i)$ when $\theta_i<\theta_0$, and $A_i=(\theta_i,\pi)$ when $\theta_i>\theta_0$. For a line $\ell'$ nonparallel to $\ell_0$, let $z(\ell')$ be the horizontal coordinate of $\ell'\cap\ell_0$. Define $\mathscr R_i=\{\ell':z(\ell')\in(x_{i-1},x_i)\}$ and $Z_i(\eta)=X_t(\ell_i,I_i,A_i,\mathscr R_i;\eta)$. These are deterministic restrictions when the tuple is fixed. The first proposition identifies the contributions that they capture.
+
+\begin{proposition}\label{prop:geometry}
+For every tuple satisfying~\eqref{eq:vertical}, every $t>0$, and every background configuration $\eta$ with no lines parallel to the distinguished lines and with locally finite interval collections on the base lines,
+\begin{equation}\label{eq:transfer}
+ S_t(\eta;\boldsymbol\ell,\boldsymbol I)
+       \le\beta+\sum_{i=1}^r Z_i(\eta).
+\end{equation}
+\end{proposition}
+
+The next proposition controls each restricted count with the same constant as in the stationary one-family estimate. Its conclusion is an exponential-moment bound; no stochastic domination is required here.
+
+\begin{proposition}\label{prop:restriction}
+For every deterministic $\ell$, $I$, $A$, and $\mathscr R$, all components of $U_{\ell,A,\mathscr R}(\cL)$ are bounded almost surely. For $t\ge1$ and $s\ge0$,
+\begin{equation}\label{eq:restriction}
+ \E\exp\{sX_t(\ell,I,A,\mathscr R;\cL)\}
+ \le\exp\big\{(c_\mu|I|/t^2)(\e^s-1)\big\}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}[Proof of Theorem~\ref{thm:uniform}]
+Fix a tuple satisfying~\eqref{eq:vertical}. A compact segment of length $D_i$ meets finitely many intervals from $\cL$ almost surely: in interval-start coordinates their mean count is at most $2\mu D_i/\pi+4\mu$. Lines parallel to any of the finitely many distinguished lines form a null set. Thus, Proposition~\ref{prop:geometry} applies almost surely. The line sets $\mathscr R_i$ are pairwise disjoint, so the Poisson restriction property makes $Z_1(\cL),\ldots,Z_r(\cL)$ independent, even when their angular families overlap. Proposition~\ref{prop:restriction} gives
+\begin{equation}\label{eq:independent}
+ \E\e^{sS_t}
+ \le\e^{s\beta}\prod_{i=1}^r\E\e^{sZ_i}
+ \le\exp\big\{s\beta+(c_\mu D/t^2)(\e^s-1)\big\}.
+\end{equation}
+This proves~\eqref{eq:moment}, including $s=0$.
+
+For a tuple in $\mathcal T_{\boldsymbol m,w}$, the endpoint conditions imply $|b_0|\le1/M$ and $|b_i-b_0|\le4/(m_iw)$. Since $w\ge8$, we have $|b_i|\le3/2$ and $D_i=m_iw\sqrt{1+b_i^2}\le2m_iw$. The moment bound therefore has $c_\mu D/t^2\le M\epsilon_t$. At $s=\log(K/\epsilon_t)>0$, exponential Markov inequality yields
+\begin{equation}\label{eq:tail}
+ \P(S_t\ge\beta+KM)
+ \le\exp\{-sKM+M\epsilon_t(\e^s-1)\}
+ =\exp\{-M\Phi(K,\epsilon_t)\}.
+\end{equation}
+The bound is uniform over the tuple, including its angular order.
+
+In graph coordinates, $\nu_\mu(\dd a\,\dd b)=(\mu/\pi)(1+b^2)^{-3/2}\dd a\dd b\le(\mu/\pi)\dd a\dd b$. The shared-line constraints have area $w/M$ in intercept and slope. Given that line, the two relative heights of base line $i$ each range over an interval of length $4$; the determinant of their map from intercept and slope is $m_iw$. Consequently, the tuple intensity is at most $G_{\boldsymbol m,w}$. Markov's inequality for the number of eligible tuples and the multivariate Mecke formula~\cite[Theorem~4.4]{LP17} now give
+\begin{equation}\label{eq:mecke}
+\begin{aligned}
+ \nu_\mu^{\otimes(r+1)}(\mathcal T_{\boldsymbol m,w})
+ &\le\frac{\mu w}{\pi M}\prod_{i=1}^r\frac{16\mu}{\pi m_iw}
+   =G_{\boldsymbol m,w},\\
+ \P(\mathcal E_{\boldsymbol m,t,K})
+ &\le\int_{\mathcal T_{\boldsymbol m,w}}
+       \P(S_t(\cL;\boldsymbol\ell,\boldsymbol I)\ge\beta+KM)
+                  \,\nu_\mu^{\otimes(r+1)}(\dd\boldsymbol\ell)\\
+ &\le G_{\boldsymbol m,w}\exp\{-M\Phi(K,\epsilon_t)\}.
+\end{aligned}
+\end{equation}
+All inserted lines appear in $S_t$ exactly as required after the Mecke insertion. The common line is integrated once, and all angular orders are already included in the same integral. Local finiteness makes the component counts measurable, and the finite intensity bound justifies the integral.
+\end{proof}
+
+\section{Proof of the geometric transfer bound}
+
+The essential geometric fact concerns the intersection of a generating line with the common line. Whenever its whole strip interval lies inside one corridor segment, that intersection has a horizontal coordinate inside the same interval. This fact charges each inserted line to at most one corridor and shows that every remaining interior component survives the corresponding restriction of the random lines. We prove these two consequences within the same construction.
+
+\begin{proof}[Proof of Proposition~\ref{prop:geometry}]
+Fix $i$ and a generating line $\ell'$ nonparallel to $\ell_i$ and $\ell_0$. Suppose that $J(\ell_i,\ell')$ is contained in the relative interior of $I_i$. If $\ell'$ is vertical, its strip interval has horizontal projection $[z(\ell')-2,z(\ell')+2]$, so it contains $z(\ell')$. Otherwise, write $\ell'$ as the graph of $f'(x)=a'+b'x$, and let $u<v$ be the horizontal coordinates of the two endpoints of $J(\ell_i,\ell')$. At those endpoints, $f'-f_i$ takes the two values $-R$ and $R$, where $R=2\sqrt{1+(b')^2}\ge2$. The vertical bound gives
+\begin{equation}\label{eq:root}
+ \min\{f'(u)-f_0(u),f'(v)-f_0(v)\}\le -R+2\le0,
+ \qquad
+ \max\{f'(u)-f_0(u),f'(v)-f_0(v)\}\ge R-2\ge0.
+\end{equation}
+The affine function $f'-f_0$ has its unique zero between $u$ and $v$. Thus, the horizontal projection of the interval contains $z(\ell')\in(x_{i-1},x_i)$.
+
+Let $W_i$ be the union of the inserted intervals $J(\ell_i,\ell_j)$ with $1\le j\le r$ and $\theta_j\in A_i$. Let $k_i$ be the number of components of $W_i$ contained in the relative interior of $I_i$. Each such component contains a whole constituent interval. Choose one generating index $j$ from that component. By the preceding argument, $z(\ell_j)$ lies in its horizontal projection and hence in $(x_{i-1},x_i)$. A given index cannot be chosen for two components on one base line, since its interval is connected. It cannot be chosen for two different corridors, since their horizontal interiors are disjoint.
+
+On either nonempty side of $\theta_0$, the base angle closest to $\theta_0$ belongs to none of the opposite angular sets $A_i$. These $g$ base lines therefore never occur in any $W_i$. The assignment just constructed uses at most the other $r-g$ indices, and consequently $\sum_i k_i\le r-g$.
+
+The inserted common line fills one angular family throughout $I_i$. On that segment, the union defining runs agrees with the union of $W_i$ and the opposite-family intervals from $\eta$. At most two full runs meet the endpoints of $I_i$. Every other run counted by $H_t$ is contained in the relative interior and is a whole component of that opposite union: any continuation there would also continue the run, while a continuation out of the segment would pass through an endpoint.
+
+If such a run meets $W_i$, it contains a whole component of $W_i$ lying inside $I_i$. Distinct runs contain distinct components, so at most $k_i$ runs have this property. Every remaining run is a whole component of the opposite union from $\eta$. All intervals contributing to it are contained in that run and therefore, by~\eqref{eq:root} and its vertical-line case, have generating lines in $\mathscr R_i$. The restriction retains the entire component and adds no intervals. Its first endpoint lies in $I_i$, its full length is unchanged, and it is counted by $Z_i(\eta)$. We obtain
+\begin{equation}\label{eq:charge}
+\begin{aligned}
+ H_t\big(\ell_i,I_i;\eta\cup\{\ell_j:j\ne i\}\big)
+   &\le2+k_i+Z_i(\eta),\\
+ S_t(\eta;\boldsymbol\ell,\boldsymbol I)
+   &\le2r+(r-g)+\sum_iZ_i(\eta)=\beta+\sum_iZ_i(\eta).
+\end{aligned}
+\end{equation}
+This also includes components entering the segment and requires no independence assumption on $\eta$.
+\end{proof}
+
+\section{Proof of the component bound under restrictions}
+
+The restriction of the line process generally destroys stationarity in interval-start coordinates. We therefore estimate factorial moments by assigning one interval start to each long component and using disjoint occurrence for their separate extensions. The first input bounds the probability of such an extension in the stationary process; the second controls their joint occurrence in the restricted process. This argument concerns connectivity events, whose probabilities decrease under deletion, while keeping the component count itself unchanged in the Mecke calculation.
+
+For a deterministic line $\ell$ and angular set $A$, let $U_{\ell,A}$ denote the interval union from all lines of $\cL$ with angle in $A$. Let $u_{\ell,A}(h)$ be the probability that a prescribed segment of length $h\ge0$ is contained in this union. Stationarity along $\ell$ makes the location of the segment immaterial. The following coverage input is the previously proved estimate, with its uniformity in $A$ stated explicitly.
+
+\begin{lemma}[Coverage estimate]\label{lem:coverage}
+For every deterministic $\ell$, measurable $A\subset[0,\pi)$, and $h\ge0$,
+\[
+ u_{\ell,A}(h)\le A_\mu/(1+h).
+\]
+\end{lemma}
+
+For the second input, let $\xi$ be a marked Poisson process on $\R$ with a bounded spatial intensity density and a mark distribution that may depend measurably on position. For increasing measurable events $E_1,\ldots,E_k$ determined by the points with first coordinates in a common bounded interval, write $E_1\circ\cdots\circ E_k$ for the event that there are pairwise disjoint subsets of the realization, each of which suffices for its respective event. Here increasing means preserved under the addition of marked points. The next lemma is the Poisson disjoint-occurrence inequality in the form needed for the component extensions~\cite{vdB96}.
+
+\begin{lemma}[Poisson disjoint occurrence]\label{lem:bk}
+For $\xi$ and $E_1,\ldots,E_k$ as specified above,
+\[
+ \P(E_1\circ\cdots\circ E_k)\le\prod_{j=1}^k\P(E_j).
+\]
+\end{lemma}
+
+\begin{proof}[Proof of Proposition~\ref{prop:restriction}]
+Map every line with angle in $A$ to the first endpoint and length of its interval on $\ell$. For relative angle $\alpha\in(0,\pi)$, the intensity in intersection and angle coordinates is $(\mu/\pi)\sin\alpha\dd x\dd\alpha$, and the interval length is $4/\sin\alpha$. Moving the intersection coordinate to the first endpoint preserves Lebesgue measure for each angle. Thus, the mapped process is a stationary marked Poisson process with intensity $\rho\dd a\,G(\dd d)$, where $G$ is a probability law on positive lengths, $\rho\le2\mu/\pi$, and $v=\rho\int d\,G(\dd d)\le4\mu$. This use of the Poisson mapping theorem is standard~\cite[Section~5.1]{LP17}. If $\rho=0$, every restricted count is zero and the assertion follows directly; assume henceforth that $\rho>0$.
+
+Let $U$ be the stationary interval union before restriction, and let $\kappa$ be its component-length intensity measure: $D\kappa(B)$ is the expected number of component starts in an interval of length $D$ whose lengths lie in the Borel set $B\subset(0,\infty)$. Every compact interval meets finitely many generating intervals almost surely, since their expected number is $\rho D+v$. Lemma~\ref{lem:coverage} rules out an unbounded component: such a component would contain a half-line from a rational coordinate, whereas the probability of covering increasingly long segments from that coordinate tends to zero. The same conclusion holds for every restriction, whose components lie inside components of $U$.
+
+Start instead with a single interval $[0,d]$ and only the independent stationary process of starts to its right. Let $p_t(d)$ be the probability that its connected component reaches $t$, and put $q_t=\int p_t(d)G(\dd d)$. An interval start in the stationary model starts a component exactly when no earlier interval reaches it. That event has probability $\e^{-v}$ and is independent of its length and all future starts. Mecke's formula therefore gives $\kappa([t,\infty))=\rho\e^{-v}q_t$. Campbell's formula for component starts and Lemma~\ref{lem:coverage} yield, for $t\ge1$,
+\begin{equation}\label{eq:q}
+\begin{aligned}
+ \int(b-h)^+\kappa(\dd b)&=\P([0,h]\subset U)
+                                   \le\frac{A_\mu}{1+h},\quad h\ge0,\\
+ \rho q_t=\e^v\kappa([t,\infty))
+   &\le\e^{4\mu}\frac2t\int(b-t/2)^+\kappa(\dd b)
+    \le\frac{4\e^{4\mu}A_\mu}{t(t+2)}\le\frac{c_\mu}{t^2}.
+\end{aligned}
+\end{equation}
+Here $x^+=\max(x,0)$. Endpoint coincidences have probability zero because start coordinates have a continuous distribution, so each component has a unique generating interval with the smallest first coordinate.
+
+Now impose $\mathscr R$. Its image is a Poisson process $\xi'$ with intensity measure $\nu'\le\rho\dd a\,G(\dd d)$; this remains true if more than one line maps to the same length mark. Write $X=X_t(\ell,I,A,\mathscr R;\cL)$, and identify $I$ with its arclength interval. For an integer $k\ge1$, put $(X)_k=X(X-1)\cdots(X-k+1)$. The multivariate Mecke formula expresses $\E(X)_k$ as the integral over ordered inserted intervals $(a_j,d_j)$, with $a_j\in I$, of the probability that these intervals start $k$ distinct components of length at least $t$ in their union with $\xi'$.
+
+For fixed inserted intervals, define $E_j$ to be the event that $[a_j,a_j+d_j]$, together with background intervals from $\xi'$ starting in $[a_j,a_j+t]$, connects $a_j$ to $a_j+t$. This event is increasing and depends on a bounded range of starts. If the inserted intervals start distinct long components, every component supplies a finite chain realizing its own event $E_j$ without using another inserted interval. The required background chains are disjoint, since the components are distinct. There are only finitely many possible starts in the relevant bounded ranges, so no limiting chain is needed. The Mecke integrand is consequently at most $\P(E_1\circ\cdots\circ E_k)$.
+
+The spatial intensity density of $\xi'$ is bounded by $\rho$, with a measurable position-dependent length law. Lemma~\ref{lem:bk} applies and bounds this probability by $\prod_j\P(E_j)$. Coupling $\xi'$ with the full stationary process bounds each factor by $p_t(d_j)$: only the increasing connection event is compared under deletion. Integrating the inserted intervals against $\nu'$, and then enlarging each measure to $\rho\dd a\,G(\dd d)$, gives
+\begin{equation}\label{eq:factorial}
+ \E(X)_k
+ \le\int_{(I\times(0,\infty))^k}\prod_{j=1}^kp_t(d_j)
+                    \,\prod_{j=1}^k\nu'(\dd a_j\,\dd d_j)
+ \le(\rho|I|q_t)^k\le(c_\mu|I|/t^2)^k.
+\end{equation}
+The inequalities also hold at $k=0$ with $(X)_0=1$. Since $X$ is finite almost surely and all terms are nonnegative, the binomial identity and Tonelli's theorem give
+\begin{equation}\label{eq:mgf-proof}
+ \E\e^{sX}
+ =\sum_{k=0}^\infty\frac{(\e^s-1)^k}{k!}\E(X)_k
+ \le\exp\big\{(c_\mu|I|/t^2)(\e^s-1)\big\},\qquad s\ge0.
+\end{equation}
+This proves the required bound for every deterministic restriction.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:coverage}]
+This is Lemma~3.1 of~\cite{CR26}, with the same line intensity, strip radius, and constant $A_\mu$. Its proof first bounds the full angular union and then uses monotonicity of the coverage event for every measurable angular restriction, including the empty set.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:bk}]
+For two events, this is the theorem in Section~2 of~\cite{vdB96}, which permits an inhomogeneous spatial intensity and position-dependent marks. The stated disjoint-subset definition agrees with that theorem for increasing events. Iteration gives the finite-event form: disjoint occurrence of the first $k-1$ events is increasing, depends on the same bounded interval, and must occur disjointly from the last event.
+\end{proof}
+
+\section{All subdivisions of a fixed horizontal range}
+
+The uniform rate permits a union over the possible numbers and lengths of the consecutive corridors. We keep one shared line throughout the prescribed range and sum the tuple intensity over all positive integer subdivisions. This also permits the subdivision and the supporting tuple to be selected after observing the environment, within the stated deterministic class.
+
+Fix an integer $M\ge1$, $t\ge\max(8,4\mu)$, and $K>\epsilon_t$, with $w$ and $\epsilon_t$ as above. Set $a_t=16\mu/(\pi w)$. Let $\mathcal F_{M,t,K}$ be the event that, for some integer $r\in\{1,\ldots,M\}$, some positive integer vector $\boldsymbol m$ with sum $M$, and some tuple in $\mathcal T_{\boldsymbol m,w}$ belonging to $\cL$, the total full-run count is at least $(K+3)M$. The following consequence includes all these choices in one probability estimate.
+
+\begin{corollary}\label{cor:subdivisions}
+For $M,t,K$ specified above,
+\begin{equation}\label{eq:subdivisions}
+ \P(\mathcal F_{M,t,K})
+ \le\frac{\mu w}{\pi M}\,a_t(1+a_t)^{M-1}
+                  \exp\{-M\Phi(K,\epsilon_t)\}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+For every eligible tuple, $\beta\le3r\le3M$, so its event at threshold $(K+3)M$ is contained in the event used in Theorem~\ref{thm:uniform}. There are $\binom{M-1}{r-1}$ positive integer compositions of $M$ with $r$ parts. Moreover, $\prod_i m_i\ge1$. Summing~\eqref{eq:selected} first over those compositions and then over $r$ gives
+\[
+\begin{aligned}
+ \sum_{r=1}^M\ \sum_{m_1+\cdots+m_r=M}G_{\boldsymbol m,w}
+ &\le\frac{\mu w}{\pi M}\sum_{r=1}^M
+                         \binom{M-1}{r-1}a_t^r\\
+ &=\frac{\mu w}{\pi M}\,a_t(1+a_t)^{M-1}.
+\end{aligned}
+\]
+The exponential factor in~\eqref{eq:selected} is independent of the composition, which proves~\eqref{eq:subdivisions}.
+\end{proof}
+
+At fixed $\mu$ and $K$, we have $a_t\to0$ and $\Phi(K,\epsilon_t)\to\infty$. Therefore, the bound decays exponentially in $M$ for all sufficiently large $t$, with a rate that can be made arbitrarily large. The argument resolves both growing losses in the preceding proof for ordered corridors sharing one line. It uses the unique intersection coordinate on that line at every stage; when the common supporting line changes, the resulting restrictions of line space need not be disjoint. A bound for those changes, together with the remaining contributions to the path reward, is still required to establish a subcritical interval for the Cox point intensity.
+
+\begin{thebibliography}{vdB96}
+\bibitem[CR26]{CR26}
+\emph{Connected-run counts along Poisson line corridors}, companion working note, November~3, 2026. Source and PDF included with the present note.
+\bibitem[JC26]{JC26}
+\emph{Joined corridors with a shared supporting line}, companion working note, November~3, 2026. Source and PDF included with the present note.
+\bibitem[LP17]{LP17}
+G.~Last and M.~Penrose, \emph{Lectures on the Poisson Process}, Institute of Mathematical Statistics Textbooks, vol.~7, Cambridge University Press, Cambridge, 2017.
+\bibitem[vdB96]{vdB96}
+J.~van den Berg, A note on disjoint-occurrence inequalities for marked Poisson point processes, \emph{J. Appl. Probab.} \textbf{33} (1996), no.~2, 420--426.
+\end{thebibliography}
+\end{document}

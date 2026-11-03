@@ -1,39 +1,19 @@
-# 04 — Plan step 1: Lemma D for high levels. Result: not achieved; a sharper reduction and a new obstruction
+# Dyadic estimate: corrected assessment, November 3, 2026
 
-Conventions as in `02`: $r=1$, $N(z)$ = number of lines meeting $Q(z)$, $R(\gamma)=\sum_{z\in\gamma}N(z)$, target $h_1^*<\infty$ a.s.
+The previous claimed obstruction is withdrawn. Its rate calculation confused the number of intervals with the total length they cover. See `../corrected-geometry.tex` and its compiled PDF for the complete proof replacing that calculation.
 
-## 1. Correction to the exponent table of `02`
+For a fixed line and t>=8, the rate of intervals of length in [t,2t] is
+q_t=(2mu/pi)(sqrt(1-4/t^2)-sqrt(1-16/t^2)) <= 5mu/t^2.
+The expected number of such intervals covering a fixed point is
+b_t=(8mu/pi)(arcsin(4/t)-arcsin(2/t)) <= 6mu/t.
+The number meeting a segment of length D is Poisson with mean q_t D+b_t.
 
-The density of *distinct* $m$-bundles of length $\approx t$ (all $m$ lines within a strip of width $O(1)$ over length $t$) is
-$$\rho_m(t)\asymp\mu^m\,t^{-m}\qquad(\text{not }\mu^mt^{1-m}/m!),$$
-because the strip-counting in `02` counted each bundle once per unit position along its length. Check for $m=2$: intersection points have intensity $\asymp\mu^2$ and the angle $\alpha$ at a typical intersection has density $\propto\sin\alpha$, so pairs of size $\ge t$ (angle $\le C/t$) have density $\asymp\mu^2t^{-2}$. Consequences: size/spacing of $m$-bundles $\asymp\mu^{m/2}t^{1-m/2}$, bounded for $m=2$, decaying for $m\ge3$; Martin's integrability condition $\int P(W>w)^{1/2}dw<\infty$ holds for $m\ge3$ and fails logarithmically for $m=2$ — harmless since the level-2 contribution is trivially $\le1$ per site. The qualitative conclusions of `02` are unchanged.
+For a row of length L=mw and width w, the specified first lines have intensity of order mu w^2/L, and their close partners have intensity of order mu/L. The product intensity of the ordered pairs is therefore of order mu^2/m^2. An upper bound with constant 16/pi^2 is proved for the explicit intercept and slope ranges in the correction note.
 
-## 2. An exact "sandwich" identity (rigorous)
+At w=(t/mu)^(3/2), the mean number of additional intervals per pair is at most m epsilon_t, with epsilon_t=10/sqrt(mu t)+6mu/t. The Mecke formula followed by the Poisson Chernoff bound gives an exponential upper bound in m at every sufficiently large t, uniformly over all pairs satisfying those geometric constraints. Thus, the previous argument using a single long pair does not give the claimed polynomial lower bound at large scales.
 
-For a box $z$ with $N(z)\ge3$, order the lines through $Q(z)$ by their angle in $[0,\pi)$. Call $\ell$ **sandwiched at $z$** if $\ell$ meets $Q(z)$ and is neither the smallest nor the largest angle among the lines through $Q(z)$. Let $Z(\ell)=\{z:\ell\text{ sandwiched at }z\}\subseteq\operatorname{strip}(\ell)$. Then for every box $z$, $(N(z)-2)^+=\#\{\ell:\ell\text{ sandwiched at }z\}$, hence for every path $\gamma$
-$$R(\gamma)=\sum_{z\in\gamma}N(z)\le2\,\#\gamma+\sum_{\ell\in\mathcal L}\#\bigl(\gamma\cap Z(\ell)\bigr).\qquad(\dagger)$$
-This replaces the level-set/cluster bookkeeping of `02` and the triple-counting attempted here: **no symmetric enumeration over $m$-subsets is needed**, and thick bundles are counted exactly (a $j$-bundle of length $t$ contributes $(j-2)t$ to the right-hand side, not $\binom j3t$). The same identity with "neither among the two smallest nor the largest" gives $(N-3)^+$, etc., so "plan step 1 ($m\ge4$)" is the statement for $Z_2(\ell)$ = boxes where $\ell$ has at least two lines on one angular side and one on the other.
+The positive result does not control the full number of maximal connected runs. Runs may be formed by chains of shorter intervals, or by intersections of longer intervals, and the lattice set is only covered by the continuous construction. The heuristic density mu^3/t^3 for maximal runs has not been proved. Shared-line estimates do not imply disjoint line families, and bounds for single pairs do not control paths that visit many pairs.
 
-Structure of $Z(\ell)$: a line $\ell'$ at angle $\beta$ to $\ell$ is within distance $2$ of $\ell$ on an interval of length $4/\sin\beta$ (its *partner interval*). Given $\ell$, the partner intervals form a Poisson process along $\ell$; intervals of length $\in[s,2s]$ start at rate $\asymp\mu/s^2$ per unit length (crossing rate $\propto\mu\beta\,d\beta$ at angle $\beta\approx4/s$). $Z(\ell)$ is the set of points of $\ell$ covered by partner intervals on *both* angular sides. Expected coverage density is $O(\mu)$, dominated by short intervals; $E(\text{interval length})<\infty$, $E(\text{length}^2)=\infty$ (log).
+The former dyadic synthesis also left the additive terms at large scales untreated. Their sum cannot be declared o(n) without a separate estimate. The ranges of the size and location of connected sets must be specified before applying an exponential union bound.
 
-## 3. The dyadic (CGGK-type) scheme and where it breaks
-
-Decompose $Z(\ell)$ into maximal runs; a run of length $\in[2^k,2^{k+1})$ is of class $k$, $t=2^k$. A path $\gamma$ of length $n$ gains at most $2t$ from each class-$k$ run it touches. Coarse-grain to boxes of side $\ell_k$ with $\rho_k\ell_k^2=1$, where $\rho_k\asymp\mu^3t^{-3}$ is the bulk density of class-$k$ runs (dominant witness: a 3-bundle of length $\approx t$ with $\ell$ in the middle). Then $\gamma$ touches $\le49(8n/\ell_k+5)$ such boxes and
-$$\text{gain}_k\le2t\cdot K\cdot49(8n/\ell_k+5)\quad\Longrightarrow\quad\sum_k\text{gain}_k\le CK\mu^{3/2}n\sum_k2^{-k/2}+o(n),$$
-**provided** that a.s. for large $n$ every connected set $A$ of $m$ boxes of side $\ell_k$ in $[-3n,3n]^2$ satisfies $M_k(A)\le Km$, where $M_k(A)$ is the number of class-$k$ runs with left endpoint in $\bigcup A$. (For large $\mu$ the same scheme works with $\mu$-dependent constants: runs shorter than $T_0(\mu)\approx e^{c\mu}$ have density $\mu/T_0$ and contribute a finite constant.)
-
-The union bound over the $\le c^m$ connected sets needs $P(M_k(A)\ge Km)\le e^{-c'm}$ with $c'>\log c$. **This fails.** Take $A$ a row of $m$ boxes (a thin region of length $m\ell_k$). With probability $\asymp\mu^2\ell_k/m^2$ (polynomial in $m$) there is a 2-bundle $(\ell,\ell')$ running along the whole row. Given such a "highway", the class-$k$ runs of $\ell$ are produced by third lines with partner intervals of length $\approx t$ on the other side, which occur at rate $\asymp\mu/t$ per unit length; so $M_k(A)\asymp\mu m\ell_k/t\asymp m\sqrt{t/\mu}\gg Km$ with probability $\gtrsim\mu^2\ell_k/m^2$. Hence
-$$P(M_k(A)\ge Km)\ge c\,\mu^2\ell_k\,m^{-2},$$
-not exponentially small, and the union bound is lost. (Thick bundles and crowding, the two failure modes identified in `02`/`03`, are *not* the problem here: thanks to $(\dagger)$ a thick bundle of $j$ lines costs $(\mu/t)^j$ for $j-2$ runs, and crowding costs $e^{-L\log L}$ for $L$ lines, both fine.)
-
-The greedy gain itself is not large on a highway: the third lines cover only a fraction $O(\mu)$ of the highway, so the gain rate along it is $O(\mu)$. The scheme fails only because it bounds "gain $\le2t\times$(number of runs)" while on a highway the runs are dense but each is worth exactly its length. In other words, class-$k$ runs are **not** spread with density $\rho_k$: they cluster along 2-bundles, those along 3-bundles, etc. The level-set clusters of `02` have a hierarchical structure, and any proof must respect it.
-
-## 4. Consequence for the plan
-
-* Step 1 of the plan (high levels $m\ge4$ first) does **not** avoid the obstruction: for $Z_2(\ell)$ the highways are 3-bundles (probability $\asymp\mu^3\ell_k/m^3$, still polynomial) and the argument fails identically.
-* What a proof needs is an induction over bundle levels $j=1,2,3,\dots$: a $j$-bundle of length $T$ is a highway along which $(j+1)$-sub-bundles of length $s$ occur at rate $\asymp\mu/s^2$ per unit length (so the expected number of sub-bundles of length $\ge T/2$ is $O(\mu/T)$ and the expected sub-bundle *coverage* is $O(\mu)$). The gain of a path is $\sum_j(\text{time spent on }j\text{-bundles})\times(j-2)^+$, and the induction must show that the time a path of length $n$ can spend on $j$-bundles is $\le\varepsilon_jn$ with $\sum_j(j-2)\varepsilon_j<\infty$. The $j=2$ level is where Martin's condition is borderline, which is exactly why the highway probability is only polynomial.
-* I could not carry out this induction in the session. The $j=2$ base case alone requires a greedy bound for a Poisson process of segments (the 2-bundles) with length tail $t^{-2}$, i.e. the borderline case of Martin (2002), **plus** the fact that a path gains nothing from a 2-bundle itself (level-2 contribution $\le1$) — the segments only act as carriers of the next level. A clean formulation of this "carrier" structure is the missing idea.
-
-## 5. Verdict on plan step 1 (stop rule)
-
-Not achieved. The session produced: the correction in §1, the exact identity $(\dagger)$ (which removes the Bell-number bookkeeping that was the declared obstacle in `02`/`03`), the explicit computation showing that the dyadic union-bound scheme fails for a *new* reason (polynomially likely highways), and the identification of the required hierarchical induction. Per the stop rule, I recommend not continuing with the same approach; the next attempt should start from the hierarchical induction of §4, and I would estimate it as a multi-week project rather than a session.
+The correct current verdict is that this dyadic route remains unresolved. The calculation supplies a positive bound for a specific contribution, and removes the earlier stated reason for rejecting that contribution. It proves neither a subcritical phase nor that every other obstruction can be overcome.

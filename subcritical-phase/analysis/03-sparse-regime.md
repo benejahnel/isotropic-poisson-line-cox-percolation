@@ -1,3 +1,5 @@
+> Historical analysis. The current status is in `00-summary.md`, and the corrections are proved in `../corrected-geometry.pdf`. Claims here about infinite exponential moments at finite path lengths, the complete failure of first-moment methods, bundle or run densities, and the necessity of a particular induction are not current conclusions. The sparse-regime path enumeration remains unproved. This file is retained to document the earlier attempts.
+
 # 03 — The sparse regime $\mu r\le m_0$: a stretch-renormalised first moment
 
 Scaling: $\lambda_c(\mu,r)=r^{-1}\lambda_c(\mu r,1)$, so take $r=1$ throughout; $\mu$ is then the dimensionless line density. By Prop 3.1, $\lambda_c(\mu,1)$ is nonincreasing in $\mu$, so it suffices to prove $\lambda_c(m_0,1)>0$ for **one** small $m_0$.

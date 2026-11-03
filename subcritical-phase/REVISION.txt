@@ -1,0 +1,85 @@
+Latest follow-up dated November 3, 2026: occupied passage through oscillating corridors
+
+START WITH occupied-corridors.pdf (source: occupied-corridors.tex).
+Theorem 1.1 proves matching logarithmic probability orders -k(log k)^2 for occupied passage through a tube of fixed width following the original oscillating configuration. The remaining Poisson line process and all Cox points are retained. The lower bound simultaneously preserves the original large full-run count. The joint probability including original line selection has the same order.
+
+Proposition 2.1 bounds all routes inside the prescribed tube using separating rectangles and the Poisson exponential formula. Lemma 3.1 bounds any line's total arclength in these rectangles by 5kw. Proposition 2.2 constructs additional groups of nearly parallel lines supporting a continuous occupied path, and Lemma 4.1 preserves the distinct full components. Proposition 5.1 gives exponential decay when only the original selected lines are retained and lambda<1/28.
+
+With M=k^2, the full probability scale is exp(-constant sqrt(M)(log M)^2), which precludes a bound A exp(-aM). This settles the occupied-passage test for this geometry. It does not prove subcriticality or control arbitrary tubes selected from the environment. The upper bound holds for every fixed lambda>0 and therefore does not distinguish phases. See analysis/00-summary.md and analysis/11-occupied-corridors.md for the current assessment.
+
+Latest follow-up dated November 3, 2026: joint cost of oscillating corridors
+
+START WITH oscillating-corridors.pdf (source: oscillating-corridors.tex).
+Theorem 1.1 proves a lower bound exp(-C sqrt(M) log(M)) for the existence of an oscillating tuple with at least (K+4)M full connected runs, along an infinite sequence of M, for each fixed mu,K and sufficiently large fixed integer t. The lower bound includes selection of all supporting, base, and repeated generating lines and retains the complete remaining environment.
+
+Proposition 2.1 computes the joint selection probability exactly up to a linear error in its logarithm. Proposition 2.2 uses vacant separating points to keep a positive fraction of the generated intervals in distinct full components. No independence between those vacancy events is assumed.
+
+Consequently, an exponential upper bound A exp(-cM) cannot hold for the unrestricted oscillating extension of the earlier class. This supersedes the suggestion below that joint selection cost might restore that particular tail. The estimates for convex or concave chains remain valid. A weaker uniform upper bound with adequate control across run scales remains a separate open possibility; the lower bound here does not establish it.
+
+The original subcritical percolation problem remains open. No occupied Cox crossing is constructed and no counterexample to positive critical Cox intensity is asserted. See analysis/00-summary.md and analysis/10-oscillating-corridors.md for the current assessment. Earlier records below describe their historical stages.
+
+Latest follow-up dated November 3, 2026: changing the supporting line
+
+START WITH changing-supports.pdf (source: changing-supports.tex).
+Theorem 1.1 proves a bound for a single supporting-line change with allowance 4r+1 and a factor of two in the exponential rate. It also proves the same factor, with allowance 4r, for arbitrarily many supporting-line changes along a continuous convex or concave graph. The dependence cost is applied once to the entire sequence.
+
+Theorem 1.1 retains all distinguished supporting and base lines. Corollary 4.1 includes selection from the Poisson environment, with actual junctions allowed to vary over intervals of positive width. It also sums over integer subdivisions, consecutive groupings by supporting line, and an exponentially large family of vertical positions. The full restricted component estimate from ordered-corridors.pdf remains the probabilistic input and is restated in full.
+
+Section 5 gives a precise limitation of the intersection argument for oscillating graphs: one positive-intensity set of generating lines can affect every corridor. This does not establish a failure of concentration for selected oscillating tuples. The geometric probability cost of those tuples and their repeatedly used generating lines remains a possible source of control.
+
+The full isotropic subcritical theorem and the unrestricted path reward bound remain unproved. No submission-ready proof of positivity of the critical Cox point intensity is asserted. See analysis/00-summary.md and analysis/09-changing-supports.md for the current assessment. All earlier notes are retained as valid inputs or historical stages, with their earlier descriptions of unresolved supporting-line changes superseded to the extent proved here.
+
+Latest follow-up dated November 3, 2026: uniform ordered corridors
+
+START WITH ordered-corridors.pdf (source: ordered-corridors.tex).
+Theorem 1.1 removes both growing losses in the previous joined-corridor proof, for arbitrarily many consecutive corridors with one common supporting line and the stated vertical-distance geometry. The insertion allowance is beta=3r-g<=3r-1, where g counts the nonempty angular groups on either side of the common angle. The exponential rate has no loss depending on r.
+
+Proposition 2.1 proves the deterministic geometric transfer. Proposition 2.2 proves the component-count exponential bound under arbitrary deterministic restrictions using factorial moments and the Poisson disjoint-occurrence inequality. Theorem 1.1 retains every inserted line and handles tuple selection by Mecke's formula. Corollary 5.1 also sums over every positive integer subdivision of a fixed horizontal range.
+
+The common supporting line must remain fixed. The proof uses vertical distance at most 2 from it; Euclidean strip containment alone is not the asserted hypothesis. A change of common supporting line can create overlap between the restrictions, which is still uncontrolled. The original subcritical theorem remains open. No submission-ready proof of positive critical Cox point intensity is asserted.
+
+The closing discussion of growing losses in joined-corridors.pdf is superseded for the ordered geometry by this follow-up. Earlier notes are retained as historical stages. The current account is in analysis/00-summary.md and analysis/08-ordered-corridors.md.
+
+Latest follow-up dated November 3, 2026: joined corridors
+
+START WITH joined-corridors.pdf (source: joined-corridors.tex).
+Theorem 1.1 proves a joint upper-tail estimate for consecutive corridors that share one supporting line. It retains all distinguished lines after insertion and counts the shared line once in the multivariate Mecke formula. The proof uses the fully stated one-family input from corridor-runs.pdf, which remains included.
+
+For two corridors, the full exponential rate is preserved when the shared angle lies between the base-line angles. If both base angles lie on one side, the rate loses a factor of two and the additive allowance increases from four to five. Both cases give a useful joint estimate at fixed large run scale.
+
+The same proof for r base lines has an exponential-rate loss max(p,r-p) and an additive allowance 2r+choose(p,2)+choose(r-p,2), where p base angles lie below the shared angle. These losses grow with r. They are limitations of this proof, not lower bounds showing that a uniform estimate is impossible. Subdividing a segment on one unchanged base line has only a linear boundary allowance and no growing loss in the Poisson comparison.
+
+The required uniform bound across an unbounded number of base-line changes remains open. No subcritical phase theorem or submission-ready proof of positivity is asserted. See analysis/00-summary.md and analysis/07-joined-corridors.md for the current assessment.
+
+Earlier follow-up dated November 3, 2026: connected-run counts in corridors
+
+START WITH corridor-runs.pdf (source: corridor-runs.tex).
+Theorem 1.1 proves an exponential upper tail for complete connected runs along any candidate nearly parallel pair in the prescribed corridor. It includes chains of short intervals, boundary components, and selection of the pair from the environment. The proof uses a Poisson comparison for one-family component starts obtained by deleting occupied lengths from the line.
+
+Proposition 4.1 also proves a limitation: concentration at the smaller t^(-3) mean-density scale is impossible. One angular family can persist along a segment of length D with probability of order 1/D and allow order D/t^2 runs of the other family. This lower bound concerns a smaller threshold than the new corridor upper bound and is consistent with it.
+
+The remaining task is joint control when a path moves between many supporting lines or pairs. The full subcritical problem remains open. See analysis/00-summary.md and analysis/06-corridor-runs.md for the current assessment. The complete source and PDF of the new note are included alongside the preceding notes, which are retained as historical stages.
+
+Earlier follow-up dated November 3, 2026: connected-run estimate
+
+START WITH connected-runs.pdf (source: connected-runs.tex).
+Theorem 1.1 proves the tail bound for complete connected runs, including chains of shorter intervals and runs entering a region from outside. Corollary 1.2 proves the almost-sure bound O(n^(2/3+epsilon)) for the largest run meeting a square of radius n. This supplies the previously missing large-scale remainder in the dyadic bookkeeping.
+
+The full greedy-path bound and positivity of the critical point intensity remain open. The component density estimate is an upper bound, and no independent or Poisson law is asserted for the collection of runs across lines.
+
+The earlier notes are retained as intermediate stages. In particular, references in corrected-geometry.pdf and greedy-animals/main.pdf to the fixed-line component-length question as open describe their earlier status. The current assessment is in analysis/00-summary.md and analysis/05-connected-runs.md. No submission-ready subcritical theorem is asserted.
+
+Revision dated November 3, 2026
+
+The subcritical problem remains open. No submission-ready proof of positivity is asserted.
+
+Start with corrected-geometry.pdf (editable source: corrected-geometry.tex).
+Its Proposition 1.1 proves an exponential upper bound for large interval counts over the specified candidate pairs of nearly parallel lines. The calculation includes boundary-entering intervals and selection of the pair from the environment. Proposition 3.1 corrects the finite-path moment statement.
+
+greedy-animals/main.tex was revised to correct the false moment claim, repair the row-zero path counting, withdraw the unsupported dyadic obstruction and small-intensity refinement, and distinguish density heuristics from established estimates. Its PDF was rebuilt.
+
+The original main.tex retains its existing results. Focused changes correct the g*=-infinity case of the path-criterion proof, distinguish Cox centers from arbitrary points of the occupied union, add the missing constant in the dyadic logarithm bound, and narrow statements that had excluded entire classes of methods. Its PDF was rebuilt.
+
+analysis/00-summary.md and analysis/04-plan-step1.md state the corrected assessment. Other analysis files retain historical content with a notice. The presence of these historical files is not an endorsement of their unproved claims.
+
+The revision is a mathematical correction and follow-up calculation. It is not a full editorial or bibliographic audit, and no novelty claim is made for the elementary geometric estimates.

@@ -1,0 +1,206 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+\runningtitle{Joined corridors with a shared supporting line}
+\hypersetup{pdftitle={Joined corridors with a shared supporting line},pdfauthor={}}
+\title{Joined corridors with a shared supporting line}
+\author{}
+\date{November 3, 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We bound long connected runs in consecutive corridors sharing one supporting line in the isotropic Poisson line process. For two corridors, the exponential rate is preserved when the shared angle lies between the base-line angles. When both base angles lie on one side, the bound loses a factor of two in the exponent. The shared line is counted once when selecting tuples from the environment. For more base lines, the same argument gives explicit bounds whose constants deteriorate with their number. Partitioning a segment on one unchanged base line has only a linear boundary cost. The uniform path estimate remains open.
+\end{abstract}
+
+\section{The estimate for joined corridors}
+
+The single-corridor estimate controls complete connected runs, including chains of shorter intervals~\cite{CR26}. We now estimate their joint count when consecutive corridors have different base lines and a common supporting line. The angular order determines which remaining counts are independent and which require H\"older's inequality, with every inserted line retained in the covering.
+
+Fix $\mu>0$. Let $\cL$ be the Poisson process of lines with intensity $\nu_\mu(\dd\theta\,\dd s)=(\mu/\pi)\dd\theta\dd s$, using $\ell(\theta,s)=\{x\in\R^2:x\cdot n_\theta=s\}$, $n_\theta=(\cos\theta,\sin\theta)$, $0\le\theta<\pi$, and $s\in\R$. Probability and expectation are denoted by $\P$ and $\E$. Orient a line by $(-\sin\theta,\cos\theta)$ and measure its subsets in arclength. For nonparallel lines $\ell,\ell'$, let $J(\ell,\ell')$ be the interval on $\ell$ at distance at most $2$ from $\ell'$; its length is $4/|\sin\alpha|$, where $\alpha$ is their relative angle.
+
+For a configuration $\eta$ of other lines, let $U_\ell^-(\eta)$ and $U_\ell^+(\eta)$ be the unions of $J(\ell,\ell')$ over lines with normal angles smaller and larger than that of $\ell$, respectively. Set $V_\ell(\eta)=U_\ell^-(\eta)\cap U_\ell^+(\eta)$. A run is a connected component of $V_\ell(\eta)$. For a compact segment $I\subset\ell$ and $t>0$, let $H_t(\ell,I;\eta)$ count runs of length at least $t$ meeting $I$, including components entering from outside.
+
+We use the constants in the preceding note. For $u\ge8$, put $F_\mu(u)=\mu\e^{4\mu}(64+12\log(1+u))/u$, and let $T_\mu$ be the least integer at least $\max(8,216\mu)$ for which $F_\mu(T_\mu)\le1/6$. This integer exists because $F_\mu(u)\to0$. Define
+\[
+ A_\mu=\begin{cases}192\mu,&0<\mu\le1/32,\\T_\mu+1,&\mu>1/32,\end{cases}
+ \qquad c_\mu=4\e^{4\mu}A_\mu.
+\]
+For $K>u>0$, define $\Phi(K,u)=K\log(K/u)-K+u$. This is the Poisson upper-tail rate used below.
+
+We first define the joint count for a deterministic tuple. Let $r\ge1$ be an integer and let $\boldsymbol\ell=(\ell_0,\ell_1,\ldots,\ell_r)$ consist of lines with distinct normal angles. The line $\ell_0$ is the shared supporting line, and $\ell_i$ is the base line of segment $I_i$ for $1\le i\le r$. The compact segments $\boldsymbol I=(I_1,\ldots,I_r)$ satisfy $I_i\subset J(\ell_i,\ell_0)$. Write $D_i=|I_i|$, $D=\sum_iD_i$, and
+\begin{equation}\label{eq:joint-count}
+ S_t(\eta;\boldsymbol\ell,\boldsymbol I)
+ =\sum_{i=1}^r H_t\big(\ell_i,I_i;
+                 \eta\cup\{\ell_j:0\le j\le r,\ j\ne i\}\big).
+\end{equation}
+Thus, the shared line and every other distinguished base line remain present. Let $p$ be the number of base-line angles smaller than $\theta(\ell_0)$, and define
+\[
+ q_{r,p}=\max(p,r-p),\qquad
+ b_{r,p}=2r+\binom p2+\binom{r-p}2,
+ \qquad 0\le p\le r.
+\]
+We use $\binom02=\binom12=0$. The factor $q_{r,p}$ will measure the loss in the exponential rate, and $b_{r,p}$ will account for boundary components and the additional inserted intervals.
+
+To select tuples from the random environment, fix positive integers $\boldsymbol m=(m_1,\ldots,m_r)$ and set $M=\sum_i m_i$. For $w\ge8$, put $x_0=0$ and $x_i=w\sum_{j=1}^i m_j$. In graph coordinates $\ell_i=\{(x,a_i+b_ix):x\in\R\}$, let $\mathcal T_{\boldsymbol m,w,p}$ be the set of ordered tuples with distinct normal angles, exactly $p$ base angles below the shared angle, and
+\begin{equation}\label{eq:geometry}
+\begin{aligned}
+ |a_0|&\le w/2, & |a_0+b_0Mw|&\le w/2,\\
+ |a_i-a_0+(b_i-b_0)x_{i-1}|&\le2,
+ &|a_i-a_0+(b_i-b_0)x_i|&\le2\quad(1\le i\le r).
+\end{aligned}
+\end{equation}
+For these tuples, $I_i=\ell_i\cap([x_{i-1},x_i]\times\R)$. The shared line crosses the full rectangle $[0,Mw]\times[-w/2,w/2]$, and the base line stays within vertical distance $2$ of it on its own segment. At each joining coordinate $x_i$, consecutive base points are at distance at most $4$. These are geometric joins; no connection in the occupied Cox set is asserted by this definition.
+
+For $t\ge\max(8,4\mu)$, set $w=(t/\mu)^{3/2}$, so $w\ge8$, and put
+\[
+ \epsilon_t=\frac{2c_\mu w}{t^2},\qquad
+ G_{\boldsymbol m,w}
+ =\frac{16^r\mu^{r+1}w^{1-r}}{\pi^{r+1}M\prod_{i=1}^r m_i}.
+\]
+For $K>0$, let $\mathcal E_{\boldsymbol m,t,p,K}$ be the event that there is a tuple in $\mathcal T_{\boldsymbol m,w,p}$ belonging to $\cL$ for which
+$\sum_{i=1}^rH_t(\ell_i,I_i;\cL\setminus\{\ell_i\})\ge b_{r,p}+KM$.
+The next theorem counts the shared line once and gives the dependence on the number of base lines explicitly.
+
+\begin{theorem}\label{thm:joined}
+For every $\mu>0$, integer $r\ge1$, positive integer vector $\boldsymbol m$, $p\in\{0,\ldots,r\}$, $t\ge\max(8,4\mu)$, and $K>\epsilon_t$,
+\begin{equation}\label{eq:main}
+ \P(\mathcal E_{\boldsymbol m,t,p,K})
+ \le G_{\boldsymbol m,w}
+       \exp\big\{-\tfrac{M}{q_{r,p}}\Phi(K,\epsilon_t)\big\}.
+\end{equation}
+\end{theorem}
+
+For two corridors, $M=m_1+m_2$ and $G_{\boldsymbol m,w}=256\mu^3/(\pi^3wMm_1m_2)$. If $\theta(\ell_0)$ lies between $\theta(\ell_1)$ and $\theta(\ell_2)$, then $p=1$, $q_{2,1}=1$, and $b_{2,1}=4$. The upper tail at $4+KM$ therefore has the full exponential factor $\exp\{-M\Phi(K,\epsilon_t)\}$. If both base angles lie on one side, then $q_{2,p}=2$ and $b_{2,p}=5$, giving $\exp\{-M\Phi(K,\epsilon_t)/2\}$ at $5+KM$. For the union of all three angular cases at the latter threshold, one may use $3G_{\boldsymbol m,w}\exp\{-M\Phi(K,\epsilon_t)/2\}$.
+
+For every fixed $\mu$ and $K$, $\epsilon_t=2c_\mu/(\mu^{3/2}\sqrt t)\to0$. Thus, the two-corridor exponential rate can be made arbitrarily large by increasing $t$. The result remains useful after a union bound over exponentially many prescribed placements of such joined pairs.
+
+\section{Proof of the joined-corridor estimate}
+
+We first separate the probabilistic estimate for a fixed tuple from the count of eligible tuples. The probabilistic estimate retains the influence of every inserted line and uses independence only between angular restrictions lying on different sides of the shared angle. The intensity calculation then supplies one factor for the common line and one for each base line.
+
+The following proposition is the central input. Its segments need not satisfy the corridor constraints; only their containment in the strips of the shared line is required.
+
+\begin{proposition}\label{prop:moment}
+For every deterministic tuple and segments specified before~\eqref{eq:joint-count}, every $t\ge1$, and every $s\ge0$,
+\begin{equation}\label{eq:moment}
+ \E\exp\{sS_t(\cL;\boldsymbol\ell,\boldsymbol I)\}
+ \le\exp\Big\{s b_{r,p}
+       +\frac{c_\mu D}{q_{r,p}t^2}
+                        (\e^{q_{r,p}s}-1)\Big\}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}[Proof of Theorem~\ref{thm:joined}]
+Fix a tuple in $\mathcal T_{\boldsymbol m,w,p}$. Linear interpolation in~\eqref{eq:geometry} gives $I_i\subset J(\ell_i,\ell_0)$ for every $i$. The same constraints imply $|b_0|\le1/M$ and $|b_i-b_0|\le4/(m_iw)$. Since $w\ge8$, $|b_i|\le3/2$ and hence $D_i=m_iw\sqrt{1+b_i^2}\le2m_iw$. Proposition~\ref{prop:moment} therefore applies with $D\le2Mw$. Exponential Markov inequality at $s=q_{r,p}^{-1}\log(K/\epsilon_t)>0$ gives
+\begin{equation}\label{eq:fixed-tail}
+\begin{aligned}
+ \P\big(S_t(\cL;\boldsymbol\ell,\boldsymbol I)\ge b_{r,p}+KM\big)
+ &\le\exp\big\{-sKM+M\epsilon_t
+                      (\e^{q_{r,p}s}-1)/q_{r,p}\big\}\\
+ &=\exp\big\{-M\Phi(K,\epsilon_t)/q_{r,p}\big\}.
+\end{aligned}
+\end{equation}
+Every constant in this estimate is uniform over the tuple being integrated.
+
+The line intensity in graph coordinates is $(\mu/\pi)(1+b^2)^{-3/2}\dd a\dd b\le(\mu/\pi)\dd a\dd b$. For the shared line, the allowed intercept range has length $w$ and the slope range at fixed intercept has length $1/M$. Given that line, parametrize base line $i$ by its relative height at $x_{i-1}$ and its relative slope. The two endpoint constraints give an area of $16/(m_iw)$ in these coordinates; the change from intercept and slope has determinant one. Thus,
+\begin{equation}\label{eq:tuple-intensity}
+ \nu_\mu^{\otimes(r+1)}(\mathcal T_{\boldsymbol m,w,p})
+ \le\frac{\mu w}{\pi M}\prod_{i=1}^r\frac{16\mu}{\pi m_iw}
+ =G_{\boldsymbol m,w}.
+\end{equation}
+Imposing the angular order and excluding coincidences only decreases this integral.
+
+Count the ordered tuples occurring in $\mathcal E_{\boldsymbol m,t,p,K}$. The multivariate Mecke formula~\cite[Theorem~4.4]{LP17} expresses its expectation by inserting the entire tuple into an independent copy of $\cL$. Each tested base line uses the other inserted lines exactly as in~\eqref{eq:joint-count}. Consequently,
+\begin{equation}\label{eq:mecke}
+\begin{aligned}
+ \P(\mathcal E_{\boldsymbol m,t,p,K})
+ &\le\int_{\mathcal T_{\boldsymbol m,w,p}}
+       \P\big(S_t(\cL;\boldsymbol\ell,\boldsymbol I)\ge b_{r,p}+KM\big)
+                         \,\nu_\mu^{\otimes(r+1)}(\dd\boldsymbol\ell)\\
+ &\le G_{\boldsymbol m,w}
+                \exp\big\{-M\Phi(K,\epsilon_t)/q_{r,p}\big\}.
+\end{aligned}
+\end{equation}
+The intensity integral is finite by~\eqref{eq:tuple-intensity}, and the integrand is nonnegative and measurable through the locally finite interval covering. The argument counts the shared supporting line once; it does not replace the joint event by a product of pair events.
+\end{proof}
+
+\section{Proof of the joint exponential-moment estimate}
+
+The shared supporting line fills one angular family on each segment. Long runs strictly inside that segment must therefore be long components of the opposite family. Additional inserted lines can change those components, so we first account for them deterministically and then estimate the remaining random counts.
+
+For a deterministic line $\ell$, angular set $A\subset[0,\pi)$, and segment $I\subset\ell$, let $U_{\ell,A}(\eta)$ be the union of $J(\ell,\ell')$ over $\ell'\in\eta$ with normal angle in $A$. Let $Y_t(\ell,I,A;\eta)$ count components of this union of length at least $t$ with first endpoint in $I$. For random variables $X,Y$, write $X\preceq Y$ when $\P(X\ge x)\le\P(Y\ge x)$ for every real $x$, and let $\operatorname{Poi}(a)$ denote a Poisson variable of mean $a$. We use the following previously proved one-family comparison, stated in full to specify its uniformity.
+
+\begin{lemma}[One-family comparison]\label{lem:one-family}
+For every deterministic line $\ell$, deterministic measurable angular set $A$, compact segment $I\subset\ell$, and $t\ge1$, all components of $U_{\ell,A}(\cL)$ are bounded almost surely and
+\begin{equation}\label{eq:one-family}
+ Y_t(\ell,I,A;\cL)\preceq\operatorname{Poi}(c_\mu|I|/t^2).
+\end{equation}
+\end{lemma}
+
+\begin{proof}[Proof of Proposition~\ref{prop:moment}]
+Write $\theta_i=\theta(\ell_i)$. For base line $i$, define its opposite angular family by $A_i=[0,\theta_i)$ if $\theta_i<\theta_0$, and by $A_i=(\theta_i,\pi)$ if $\theta_i>\theta_0$. Let $h_i$ count the other inserted base lines whose angles belong to $A_i$, and put $Y_i=Y_t(\ell_i,I_i,A_i;\cL)$. These definitions concern the fixed tuple, so $A_i$ and $h_i$ are deterministic.
+
+Because $\ell_0$ covers all of $I_i$, the intersection defining runs agrees on this segment with the opposite union, including its inserted lines. A run strictly inside $I_i$ is a whole component of that union, while at most two runs meet the endpoints. Adding one interval to a locally finite union with bounded components replaces the components it meets by one component and leaves the others unchanged. Therefore, the number of components of length at least $t$ with first endpoint in $I_i$ can increase by at most one per inserted interval. In particular,
+\begin{equation}\label{eq:insertion}
+\begin{aligned}
+ H_t\big(\ell_i,I_i;\cL\cup\{\ell_j:0\le j\le r,\ j\ne i\}\big)&\le2+h_i+Y_i,\\
+ \sum_{i=1}^rh_i&=\binom p2+\binom{r-p}2,\qquad
+ S_t(\cL;\boldsymbol\ell,\boldsymbol I)\le b_{r,p}+\sum_{i=1}^rY_i.
+\end{aligned}
+\end{equation}
+For the middle identity, each pair of base angles below $\theta_0$ contributes once, as does each pair above $\theta_0$; pairs on different sides contribute zero. This also checks that the other distinguished base lines have not been discarded from the covering.
+
+Let $J_- =\{i:\theta_i<\theta_0\}$ and $J_+=\{i:\theta_i>\theta_0\}$. For a nonempty group $J$ among these, put $n_J=|J|$ and $\Lambda_J=\sum_{i\in J}c_\mu D_i/t^2$. H\"older's inequality and Lemma~\ref{lem:one-family} give
+\begin{equation}\label{eq:holder}
+ \E\exp\big\{s\sum_{i\in J}Y_i\big\}
+ \le\prod_{i\in J}\big(\E\e^{n_JsY_i}\big)^{1/n_J}
+ \le\exp\big\{\Lambda_J(\e^{n_Js}-1)/n_J\big\}.
+\end{equation}
+No independence within a group is assumed. All variables in $J_-$ depend only on lines with angles below $\theta_0$, and all variables in $J_+$ depend only on lines with angles above $\theta_0$. The two groups are therefore independent Poisson restrictions, even though their spatial segments may be close.
+
+For $s\ge0$, the quantity $(\e^{ns}-1)/n=\int_0^s\e^{nu}\dd u$ is nondecreasing in $n>0$. Since every nonempty group has size at most $q_{r,p}$, multiplying their bounds in~\eqref{eq:holder} gives
+\begin{equation}\label{eq:combine}
+ \E\exp\big\{s\sum_{i=1}^rY_i\big\}
+ \le\exp\Big\{\frac{c_\mu D}{q_{r,p}t^2}
+                          (\e^{q_{r,p}s}-1)\Big\}.
+\end{equation}
+An empty group contributes the factor one. Combining this inequality with the pointwise bound~\eqref{eq:insertion} proves~\eqref{eq:moment}, including $s=0$.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:one-family}]
+This is Proposition~2.1 of~\cite{CR26}, with exactly the same line intensity, strip radius, and constant $c_\mu$. Its proof treats arbitrary deterministic angular sets, including an empty family, and counts components by their full lengths even when they continue beyond $I$.
+\end{proof}
+
+\section{Repeated joining and the unchanged-base case}
+
+The two-corridor estimate permits exponentially many prescribed placements. Joining more base lines around the shared supporting line introduces growing losses. We compute these losses and then compare them with subdivisions on one unchanged base line.
+
+For $r$ base lines, at least one angular group has size at least $\lceil r/2\rceil$. The constants in the proved bound satisfy
+\begin{equation}\label{eq:losses}
+ q_{r,p}\ge\lceil r/2\rceil,\qquad
+ b_{r,p}=\frac{3r}{2}+\frac{p^2+(r-p)^2}{2}
+          \ge\frac{r^2}{4}+\frac{3r}{2}.
+\end{equation}
+Thus, even the most balanced angular order loses a factor proportional to $r$ in the displayed exponential rate. The allowance for inserted intervals is quadratic in $r$. When $m_i=1$ for every $i$, the total length in corridor widths is $M=r$, so this allowance already exceeds the desired linear scale.
+
+These losses reflect the use of H\"older's inequality for nested angular families and the separate count of every possible insertion interaction. The geometric prefactor $G_{\boldsymbol m,w}$ decreases with the number of lines in suitable regimes, but we have not converted that decrease into a uniform linear path estimate. We have not proved either loss optimal or excluded a better joint bound.
+
+There is a useful case in which repeated joining does have uniform constants. Fix a deterministic base line $\ell$ and a compact segment $I$ of length $D$, partitioned into $r$ consecutive closed subsegments $I_1,\ldots,I_r$ with disjoint interiors. Use the same covering $V_\ell(\cL)$ on every piece. Each run meeting several pieces is counted once for its first piece and once for each intervening partition point that it contains. At most one run contains any partition point. Consequently,
+\begin{equation}\label{eq:same-base}
+\begin{aligned}
+ \sum_{i=1}^r H_t(\ell,I_i;\cL)&\le H_t(\ell,I;\cL)+r-1,\\
+ H_t(\ell,I;\cL)&\preceq1+\operatorname{Poi}(2c_\mu D/t^2),\\
+ \sum_{i=1}^r H_t(\ell,I_i;\cL)&\preceq r+\operatorname{Poi}(2c_\mu D/t^2).
+\end{aligned}
+\end{equation}
+For the second row, a run starting in $I$ starts at a component endpoint of at least one angular union, whose component is at least as long as the run. Distinct run starts can be assigned to distinct such parent starts, and there is at most one run entering through the first endpoint of $I$. Lemma~\ref{lem:one-family} applies to the two independent angular families, and the sum of their Poisson bounds has the displayed mean. This proves the second row and hence the last row. The first row is deterministic for every partition, so the last bound also holds for any measurable choice of the partition made after observing the environment, with $I$ and $r$ fixed in advance.
+
+The comparison~\eqref{eq:same-base} treats subdivisions together without multiplying probability estimates. Changes of base line still require control of overlapping angular families and inserted-line effects with uniform constants. Positivity of the critical Cox point intensity remains unproved.
+
+\begin{thebibliography}{CR26}
+\bibitem[CR26]{CR26}
+\emph{Connected-run counts along Poisson line corridors}, companion working note, November~3, 2026. Source and PDF included with the present note.
+\bibitem[LP17]{LP17}
+G.~Last and M.~Penrose, \emph{Lectures on the Poisson Process}, Institute of Mathematical Statistics Textbooks, vol.~7, Cambridge University Press, Cambridge, 2017.
+\end{thebibliography}
+\end{document}

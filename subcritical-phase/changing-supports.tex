@@ -1,0 +1,236 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+\runningtitle{Changing the supporting line}
+\hypersetup{pdftitle={Changing the supporting line},pdfauthor={}}
+\title{Changing the supporting line:\\uniform bounds along convex chains}
+\author{}
+\date{November 3, 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We extend the joint count of long connected runs from corridors with one common supporting line to corridors whose supporting line changes. A single change admits an exponential bound with a linear allowance and a factor of two in the exponential rate. The same factor suffices for arbitrarily many changes when the supporting segments form a continuous convex or concave graph. The proof assigns interior contributions to intersections with that graph and divides the remaining counts into two collections, each based on disjoint restrictions of the Poisson line process. Every distinguished line is retained in the covering. A multivariate Mecke calculation includes selection of the supporting lines, their junctions, and a family of subdivisions and vertical positions with exponentially many choices. The argument leaves paths with unrestricted oscillation of their supporting directions unresolved.
+\end{abstract}
+
+\section{The estimate with changing supporting lines}
+
+The preceding note proves a uniform estimate for consecutive corridors with one common supporting line~\cite{OC26}. We now allow that line to change and keep the cost of dependence bounded for a continuous convex or concave chain, regardless of the number of changes. A single change also has a bound without continuity at the junction. The essential property of the longer chains is that a line can cross their graph at most once in each direction; the same two collections of independent counts therefore suffice throughout the chain.
+
+Fix $\mu>0$. Let $\cL$ be the Poisson line process with intensity $\nu_\mu(\dd\theta\,\dd s)=(\mu/\pi)\dd\theta\dd s$, where $\ell(\theta,s)=\{x\in\R^2:x\cdot n_\theta=s\}$, $n_\theta=(\cos\theta,\sin\theta)$, $0\le\theta<\pi$, and $s\in\R$. Write $\P$ and $\E$ for probability and expectation. Orient lines by $(-\sin\theta,\cos\theta)$ and measure their subsets in arclength. For nonparallel lines $\ell,\ell'$, let $J(\ell,\ell')$ be the interval on $\ell$ at distance at most $2$ from $\ell'$. Its length is $4/|\sin\alpha|$, where $\alpha$ is their relative angle. Parallel pairs have zero intensity in the applications below and are omitted.
+
+For a configuration $\eta$ of other lines, let $U_\ell^-(\eta)$ and $U_\ell^+(\eta)$ be the unions of these intervals over lines whose normal angles are, respectively, smaller and larger than $\theta(\ell)$. Put $V_\ell(\eta)=U_\ell^-(\eta)\cap U_\ell^+(\eta)$. A run is a connected component of $V_\ell(\eta)$. For a compact segment $I\subset\ell$ and $t>0$, let $H_t(\ell,I;\eta)$ count full runs of length at least $t$ meeting $I$, including runs entering through an endpoint.
+
+We use the explicit constant of the restricted component estimate in~\cite{OC26}. For $u\ge8$, put $F_\mu(u)=\mu\e^{4\mu}(64+12\log(1+u))/u$, and let $T_\mu$ be the least integer at least $\max(8,216\mu)$ with $F_\mu(T_\mu)\le1/6$. This integer exists because $F_\mu(u)\to0$. Set
+\[
+ A_\mu=\begin{cases}192\mu,&0<\mu\le1/32,\\T_\mu+1,&\mu>1/32,\end{cases}
+ \qquad c_\mu=4\e^{4\mu}A_\mu.
+\]
+
+Fix integers $1\le q\le r$ and coordinates $y_0<\cdots<y_r$. Partition the indices $1,\ldots,r$ into $q$ consecutive nonempty blocks using integers $0=k_0<k_1<\cdots<k_q=r$. Write $j(i)$ for the block containing $i$. Let $\sigma_1,\ldots,\sigma_q$ be the supporting lines and $\ell_1,\ldots,\ell_r$ the base lines, with all $q+r$ slopes distinct. Write these lines as graphs of $g_j(x)=a_j+b_jx$ and $f_i(x)=u_i+v_ix$, respectively. The reference function $F$ agrees with $g_{j(i)}$ on each open interval $(y_{i-1},y_i)$. Values at a junction may be assigned from either adjacent piece when there is a jump.
+
+Define $I_i=\{(x,f_i(x)):y_{i-1}\le x\le y_i\}$, $D_i=|I_i|$, and $D=\sum_iD_i$. We assume
+\begin{equation}\label{eq:close}
+ |f_i(x)-g_{j(i)}(x)|\le2\quad(y_{i-1}\le x\le y_i).
+\end{equation}
+This is a vertical-distance condition in the fixed coordinate system. It implies that the active supporting line supplies one angular family throughout $I_i$. Let $\mathcal D=\{\sigma_1,\ldots,\sigma_q,\ell_1,\ldots,\ell_r\}$ be the set of distinguished lines, and define
+\begin{equation}\label{eq:S}
+ S_t(\eta)=\sum_{i=1}^rH_t\big(\ell_i,I_i;\eta\cup(\mathcal D\setminus\{\ell_i\})\big).
+\end{equation}
+The fixed geometric data in $S_t$ are suppressed. Every other base line and every supporting line remains present in each count.
+
+We consider tuples for which either $q\le2$, or $F$ extends to a continuous convex or concave function on $[y_0,y_r]$. Put $\delta=0$ when the latter condition holds and $\delta=1$ otherwise, and set $B=4r+\delta$. In particular, $\delta=1$ can occur only for two supporting lines with a jump at their junction. The next theorem gives one dependence cost for the entire sequence.
+
+\begin{theorem}\label{thm:changes}
+For every deterministic tuple satisfying the preceding hypotheses, every $t\ge1$, and every $s\ge0$,
+\begin{equation}\label{eq:moment}
+ \E\e^{sS_t(\cL)}
+ \le\exp\Big\{sB+\frac{c_\mu D}{2t^2}(\e^{2s}-1)\Big\}.
+\end{equation}
+\end{theorem}
+
+For a single change, the allowance is at most $4r+1$. For any number of changes along a continuous convex or concave graph, it is $4r$, and the factor two in~\eqref{eq:moment} is independent of $q$. Thus, repeatedly changing the supporting line within this geometric class does not repeatedly multiply the loss in the exponential rate. With one supporting line, the sharper allowance and rate in~\cite{OC26} remain available.
+
+\section{Proof of the joint exponential-moment bound}
+
+We separate the geometric assignment of runs from the estimate for a restricted component count. The assignment leaves two collections of counts, each depending on disjoint sets of Poisson lines. We apply H\"older's inequality once between these two collections, after controlling every count within a collection independently. This order avoids a new loss at each supporting-line change.
+
+Write $\theta_i=\theta(\ell_i)$ and $\varphi_j=\theta(\sigma_j)$. For each $i$, define the opposite angular set $A_i=[0,\theta_i)$ if $\theta_i<\varphi_{j(i)}$, and $A_i=(\theta_i,\pi)$ if $\theta_i>\varphi_{j(i)}$. Let $\mathscr R_i$ be the set of lines that intersect $\sigma_{j(i)}$ at a point with horizontal coordinate in $(y_{i-1},y_i)$. The effective set of generating lines is $\mathscr Q_i=\{\ell'\in\mathscr R_i:\theta(\ell')\in A_i\}$.
+
+For a deterministic line $\ell$, a compact segment $I\subset\ell$, and a measurable set $\mathscr Q$ of lines, let $X_t(\ell,I,\mathscr Q;\eta)$ count components of $\bigcup_{\ell'\in\eta\cap\mathscr Q}J(\ell,\ell')$ of length at least $t$ whose first endpoints lie in $I$. Put $Z_i(\eta)=X_t(\ell_i,I_i,\mathscr Q_i;\eta)$. For $\delta=0$, partition the base indices into $J_1=\{i:\theta_i<\varphi_{j(i)}\}$ and $J_2=\{i:\theta_i>\varphi_{j(i)}\}$. For $\delta=1$, instead use the two consecutive supporting blocks, $J_1=\{1,\ldots,k_1\}$ and $J_2=\{k_1+1,\ldots,r\}$.
+
+The following proposition supplies the geometric reduction and the disjointness needed within those two collections. Both conclusions concern the same intersections with the supporting segments.
+
+\begin{proposition}\label{prop:geometry}
+For every tuple in Theorem~\ref{thm:changes}, every $t>0$, and every background $\eta$ with locally finite interval collections on the base lines and no lines parallel to the distinguished lines,
+\begin{equation}\label{eq:transfer}
+ S_t(\eta)\le B+\sum_{i=1}^rZ_i(\eta).
+\end{equation}
+For each $a\in\{1,2\}$, the sets $\mathscr Q_i$, $i\in J_a$, are pairwise disjoint.
+\end{proposition}
+
+The probabilistic input treats arbitrary deterministic restrictions. Its proof in~\cite{OC26} uses factorial moments and the Poisson disjoint-occurrence inequality, so it permits components created by splitting after deletion.
+
+\begin{lemma}[Restricted component count]\label{lem:restriction}
+For every deterministic $\ell$, $I$, and measurable $\mathscr Q$, the restricted interval union has bounded components almost surely. For $t\ge1$ and $s\ge0$,
+\begin{equation}\label{eq:restricted}
+ \E\e^{sX_t(\ell,I,\mathscr Q;\cL)}
+ \le\exp\big\{(c_\mu|I|/t^2)(\e^s-1)\big\}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}[Proof of Theorem~\ref{thm:changes}]
+The interval collection on a compact base segment of length $D_i$ is finite almost surely: its expected size is at most $2\mu D_i/\pi+4\mu$. Parallel lines form a null restriction of $\nu_\mu$. Proposition~\ref{prop:geometry} therefore applies almost surely. For $a\in\{1,2\}$, put $T_a=\sum_{i\in J_a}Z_i(\cL)$ and $D_a=\sum_{i\in J_a}D_i$, with empty sums equal to zero. Within $J_a$, the variables depend on disjoint restrictions of the Poisson process and are independent. Lemma~\ref{lem:restriction} yields
+\begin{equation}\label{eq:group}
+ \E\e^{2sT_a}
+ =\prod_{i\in J_a}\E\e^{2sZ_i}
+ \le\exp\big\{(c_\mu D_a/t^2)(\e^{2s}-1)\big\}.
+\end{equation}
+There may be dependence between $T_1$ and $T_2$. Applying H\"older's inequality to these two variables once, and using $D_1+D_2=D$, gives
+\begin{equation}\label{eq:holder}
+ \E\e^{sS_t}
+ \le\e^{sB}(\E\e^{2sT_1})^{1/2}(\E\e^{2sT_2})^{1/2}
+ \le\exp\Big\{sB+\frac{c_\mu D}{2t^2}(\e^{2s}-1)\Big\}.
+\end{equation}
+Empty collections contribute one, and $s=0$ gives equality. The exponent contains the same factor two for every $q$ covered by the theorem.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:restriction}]
+This is Proposition~2.2 of~\cite{OC26}, with its angular set chosen to be $[0,\pi)$ and its deterministic restriction chosen to be $\mathscr Q$. The intensity, distance threshold, component convention, and constant $c_\mu$ are identical. That proposition also proves boundedness and includes the empty restriction.
+\end{proof}
+
+\section{Proof of the geometric reduction}
+
+We first locate the intersection associated with an interval contained in a corridor. We then count how often an inserted line can contribute such an interval, retaining all supporting lines in this count. Finally, we use the direction of a crossing of a convex graph to prove disjointness within each of the two collections. The single-change case with a jump uses the two supporting blocks instead.
+
+\begin{proof}[Proof of Proposition~\ref{prop:geometry}]
+Fix a base index $i$ and a generating line $\ell'$ for which $J(\ell_i,\ell')$ lies in the relative interior of $I_i$. If $\ell'$ is vertical, its horizontal coordinate lies in the horizontal projection of that interval and hence in $(y_{i-1},y_i)$. Otherwise, write $\ell'$ as the graph of $h(x)=a+bx$ and let $u<v$ be the endpoints of that projection. The difference $h-f_i$ takes the two values $-R$ and $R$ at $u,v$, where $R=2\sqrt{1+b^2}\ge2$. By~\eqref{eq:close},
+\begin{equation}\label{eq:intersection}
+\begin{aligned}
+ \min\{h(u)-g_{j(i)}(u),h(v)-g_{j(i)}(v)\}&\le-R+2\le0,\\
+ \max\{h(u)-g_{j(i)}(u),h(v)-g_{j(i)}(v)\}&\ge R-2\ge0.
+\end{aligned}
+\end{equation}
+Since the lines are nonparallel, their unique intersection has a horizontal coordinate between $u$ and $v$. Thus, $\ell'$ belongs to $\mathscr R_i$. This also proves that its intersection coordinate lies in the projection of the particular component containing the interval.
+
+Let $W_i$ be the union of intervals generated on $\ell_i$ by distinguished lines with angles in $A_i$, excluding $\ell_i$ itself. Let $n_i$ count the components of $W_i$ contained in the relative interior of $I_i$. Every such component contains a whole constituent interval. Assign one of its generating lines to it. On a fixed supporting line, a given generator can be assigned at most once across all the corridors using that support: its unique intersection coordinate must lie in the horizontal projection of the assigned component, and distinct components or corridor interiors have disjoint projections there.
+
+Suppose first that $\delta=1$, so there are two supporting blocks. Each of the $r$ inserted base lines is assigned at most twice, once on each supporting line. Neither supporting line can contribute through its own block, because it belongs to the angular family opposite to $A_i$. The two supporting lines meet at one horizontal coordinate. A contribution of the first in the second block requires this coordinate to lie in that block, whereas a contribution of the second in the first block requires it to lie in the other block. Since the block interiors are disjoint, their combined contribution is at most one. Therefore, $\sum_i n_i\le2r+1$.
+
+Now suppose that $\delta=0$. For a continuous convex piecewise affine $F$, any affine function distinct from all its pieces intersects its graph at at most two points. Indeed, three distinct zeros of the convex function $F-h$ would force it to vanish on the interval between the first and last: its secant slopes on the two intervening intervals both equal zero, and monotonicity of convex secant slopes forces equality throughout. This would make $h$ agree with an affine piece, contrary to the distinct-slope assumption. The same conclusion holds for concave $F$ by changing signs. Consequently, each inserted base line can be assigned at most twice across the entire chain.
+
+Each supporting line extends an affine piece of $F$. For convex $F$, this extension lies below the whole graph; for concave $F$, it lies above. Equality can occur only on its own supporting block and at its endpoints, since the supporting slopes are distinct. Its interval therefore cannot be contained in the interior of a corridor using another supporting line, by~\eqref{eq:intersection}. In its own block it again does not belong to $A_i$. Thus, supporting lines contribute no assignments when $\delta=0$, and in both cases $\sum_i n_i\le2r+\delta$.
+
+On $I_i$, the active supporting line fills one angular family, so $V_{\ell_i}$ agrees there with the union of $W_i$ and the opposite-family intervals from $\eta$. At most two full runs meet the endpoints. Any other full run meeting $I_i$ is a whole component of this opposite union contained in the relative interior: an extension inside the segment would extend the run, and an extension outside would pass through an endpoint. If it meets $W_i$, it contains a component counted by $n_i$; distinct runs contain distinct such components. Otherwise, every generating interval lies wholly in the run and hence belongs to $\mathscr R_i$ by~\eqref{eq:intersection}. Its generating angle belongs to $A_i$, so the restriction to $\mathscr Q_i$ retains the entire run as a component of unchanged length. We obtain
+\begin{equation}\label{eq:assign}
+ S_t(\eta)\le\sum_i\big(2+n_i+Z_i(\eta)\big)
+             \le4r+\delta+\sum_iZ_i(\eta)=B+\sum_iZ_i(\eta).
+\end{equation}
+
+It remains to prove the disjointness assertion. For $\delta=1$, each collection uses one supporting line and disjoint horizontal interiors, so the unique intersection coordinate of a line can place it in at most one $\mathscr R_i$ within that collection. Hence, the smaller sets $\mathscr Q_i$ are also disjoint.
+
+For $\delta=0$, consider a nonvertical line with graph $h(x)=a+bx$. For graph lines, slope is strictly increasing in the normal angle on $(0,\pi)$. If this line belongs to $\mathscr Q_i$ with $i\in J_1$, then $b<v_i<b_{j(i)}$. At its intersection with the supporting segment, the function $F-h$ is affine in a neighborhood and has positive slope. If $i\in J_2$, the slope is negative because $b>b_{j(i)}$. A convex function can have at most one zero with positive local slope and at most one zero with negative local slope. More explicitly, at a zero $z$ with local slope $d>0$, convexity gives $(F-h)(x)\ge d(x-z)>0$ for every $x>z$; the assertion for $d<0$ follows on the left. The concave case follows by changing signs. Therefore, a line belongs to at most one $\mathscr Q_i$ in each collection. A vertical line has only one horizontal coordinate and also belongs to at most one of the sets, which completes the proof.
+\end{proof}
+
+\section{Selection of supporting lines and junctions}
+
+The preceding estimate is uniform over deterministic tuples. We now integrate over tuples selected from the Poisson environment and then sum over subdivisions and vertical positions. Junction coordinates between distinct supporting lines are allowed to vary over intervals of positive length; requiring an intersection at a prescribed coordinate would instead produce a set of zero product intensity. Repeated uses of one supporting line are grouped before applying the Mecke formula, so each distinct supporting line is inserted once.
+
+Fix $t\ge\max(8,4\mu)$ and set $w=(t/\mu)^{3/2}$. For positive integers $\boldsymbol m=(m_1,\ldots,m_r)$, let $M=\sum_i m_i$ and $x_i=w\sum_{h=1}^i m_h$, with $x_0=0$. Choose a consecutive block partition $\boldsymbol k=(k_0,\ldots,k_q)$ as above, and put $M_j=\sum_{i=k_{j-1}+1}^{k_j}m_i$. Let $\boldsymbol n=(n_0,\ldots,n_r)$ be integers with $n_0=0$ and $|n_i-n_{i-1}|\le m_i$. The prescribed vertical coordinates are $wn_i$.
+
+Let $\mathcal T_{\boldsymbol m,\boldsymbol k,\boldsymbol n,w}$ be the set of ordered tuples of $q$ supporting lines and $r$ base lines, all with distinct slopes, satisfying the following conditions. The supporting slopes are strictly increasing or strictly decreasing in their block order, and
+\begin{equation}\label{eq:anchors}
+ |g_j(x_{k_{j-1}})-wn_{k_{j-1}}|\le w/2,\qquad
+ |g_j(x_{k_j})-wn_{k_j}|\le w/2\quad(1\le j\le q).
+\end{equation}
+For each $j<q$, the horizontal coordinate of $\sigma_j\cap\sigma_{j+1}$ lies in $[x_{k_j}-w/4,x_{k_j}+w/4]$; define $y_{k_j}$ to be that coordinate. At all other indices set $y_i=x_i$, including $i=0,r$. The base lines satisfy~\eqref{eq:close} at the two endpoints of their resulting segments, and hence throughout them. The junction ranges are disjoint and ordered, and this construction makes $F$ continuous and convex or concave.
+
+For $K>u>0$, define $\Phi(K,u)=K\log(K/u)-K+u$. Set
+\begin{equation}\label{eq:constants}
+ \epsilon_t=\frac{4c_\mu w}{t^2},\qquad
+ a_\mu=\frac{32\mu^2}{\pi^2},\qquad
+ G_{\boldsymbol m,\boldsymbol k,w}
+ =\frac{(\mu w/\pi)^q(32\mu/(\pi w))^r}
+        {\prod_{j=1}^qM_j\prod_{i=1}^r m_i}.
+\end{equation}
+For $K>0$, let $\mathcal E_{\boldsymbol m,\boldsymbol k,\boldsymbol n,t,K}$ be the event that a tuple from this set occurs in $\cL$ and its full-run sum $\sum_iH_t(\ell_i,I_i;\cL\setminus\{\ell_i\})$ is at least $4r+KM$. Let $\mathcal F_{M,t,K}$ be the event that some such tuple has full-run sum at least $(K+4)M$, allowing all $r$, compositions $\boldsymbol m$ of $M$, block partitions $\boldsymbol k$, and integer vectors $\boldsymbol n$ specified above.
+
+For comparison with a single change without continuity, when $q\le2$ let $\mathcal E^{(2)}_{\boldsymbol m,\boldsymbol k,\boldsymbol n,t,K}$ use $y_i=x_i$ at every junction, impose only~\eqref{eq:anchors} and~\eqref{eq:close} on the tuple, and use threshold $4r+1+KM$. This definition does not require the supporting lines to intersect near their junction. The next corollary handles both forms of tuple selection and gives the uniform sum for continuous convex or concave chains.
+
+\begin{corollary}\label{cor:selected}
+For the specified geometric data and $K>\epsilon_t$,
+\begin{equation}\label{eq:selected}
+ \P(\mathcal E_{\boldsymbol m,\boldsymbol k,\boldsymbol n,t,K})
+ \le G_{\boldsymbol m,\boldsymbol k,w}
+             \exp\{-M\Phi(K,\epsilon_t)/2\}.
+\end{equation}
+The same bound holds for $\mathcal E^{(2)}_{\boldsymbol m,\boldsymbol k,\boldsymbol n,t,K}$ when $q\le2$. For all $M\ge1$,
+\begin{equation}\label{eq:all}
+ \P(\mathcal F_{M,t,K})
+ \le3^M a_\mu(1+2a_\mu)^{M-1}
+                  \exp\{-M\Phi(K,\epsilon_t)/2\}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Fix a tuple in the continuous class. Its horizontal segment lengths $L_i=y_i-y_{i-1}$ satisfy $L_i\ge(m_i-1/2)w\ge m_iw/2$ and $\sum_iL_i=Mw$. The anchor increments imply $|n_{k_j}-n_{k_{j-1}}|\le M_j$, and~\eqref{eq:anchors} therefore gives $|b_j|\le1+1/M_j\le2$. The base endpoint conditions imply $|v_i-b_{j(i)}|\le4/L_i\le8/(m_iw)\le1$, since $w\ge8$. Consequently, $|v_i|\le3$ and $D=\sum_iL_i\sqrt{1+v_i^2}\le4Mw$. Theorem~\ref{thm:changes} applies with $B=4r$. At $s=\frac12\log(K/\epsilon_t)>0$, it gives
+\begin{equation}\label{eq:tail}
+ \P(S_t(\cL)\ge4r+KM)
+ \le\exp\big\{-sKM+(M\epsilon_t/2)(\e^{2s}-1)\big\}
+ =\exp\{-M\Phi(K,\epsilon_t)/2\}.
+\end{equation}
+For the two-support class, $L_i=m_iw$ and the same slope and length bounds hold. Theorem~\ref{thm:changes} has $B\le4r+1$, so the same calculation applies at its stated threshold.
+
+In graph coordinates, the line intensity is bounded by $(\mu/\pi)\dd a\dd b$. For support $j$, the two endpoint ranges in~\eqref{eq:anchors} each have length $w$, and their map from intercept and slope has determinant $M_jw$. Its integral is at most $\mu w/(\pi M_j)$. Given all supports, the coordinates $y_i$ are fixed. The two relative heights of base line $i$ each range over an interval of length $4$, giving an area $16/L_i\le32/(m_iw)$. The product intensity is therefore at most $G_{\boldsymbol m,\boldsymbol k,w}$. The multivariate Mecke formula~\cite[Theorem~4.4]{LP17}, applied to the $q+r$ distinct lines, yields
+\begin{equation}\label{eq:mecke}
+\begin{aligned}
+ \nu_\mu^{\otimes(q+r)}(\mathcal T_{\boldsymbol m,\boldsymbol k,\boldsymbol n,w})
+ &\le\prod_{j=1}^q\frac{\mu w}{\pi M_j}
+                   \prod_{i=1}^r\frac{32\mu}{\pi m_iw}
+   =G_{\boldsymbol m,\boldsymbol k,w},\\
+ \P(\mathcal E_{\boldsymbol m,\boldsymbol k,\boldsymbol n,t,K})
+ &\le\int_{\mathcal T_{\boldsymbol m,\boldsymbol k,\boldsymbol n,w}}
+       \P(S_t(\cL)\ge4r+KM)\,
+                         \nu_\mu^{\otimes(q+r)}(\dd\boldsymbol\sigma\,\dd\boldsymbol\ell)\\
+ &\le G_{\boldsymbol m,\boldsymbol k,w}\exp\{-M\Phi(K,\epsilon_t)/2\}.
+\end{aligned}
+\end{equation}
+Each tested count retains every other inserted line. All junctions are measurable functions of the supporting tuple on the nonparallel set, and the finite interval counts give measurable events. The fixed-junction two-support case has the same intensity bound and the larger threshold already treated, proving its assertion as well.
+
+For the final union, $\mu w/\pi=t^{3/2}/(\pi\sqrt\mu)\ge2t/\pi>1$, because $t\ge4\mu$ and $t\ge8$. Since $q\le r$ and all $M_j,m_i\ge1$, we have $G_{\boldsymbol m,\boldsymbol k,w}\le a_\mu^r$. For a fixed composition, the number of block partitions is $2^{r-1}$, and the number of allowed vertical vectors is at most $\prod_i(2m_i+1)\le3^M$. There are $\binom{M-1}{r-1}$ positive integer compositions with $r$ parts. Finally, $(K+4)M\ge4r+KM$. Thus,~\eqref{eq:selected} and the finite union bound give
+\begin{equation}\label{eq:sum}
+\begin{aligned}
+ \P(\mathcal F_{M,t,K})
+ &\le3^M\exp\{-M\Phi(K,\epsilon_t)/2\}
+       \sum_{r=1}^M\binom{M-1}{r-1}2^{r-1}a_\mu^r\\
+ &=3^M a_\mu(1+2a_\mu)^{M-1}
+                 \exp\{-M\Phi(K,\epsilon_t)/2\}.
+\end{aligned}
+\end{equation}
+Every choice in the definition of $\mathcal F_{M,t,K}$ has been included. No independence between candidate tuples or subdivisions is used.
+\end{proof}
+
+At fixed $\mu$ and $K>0$, $\epsilon_t=4c_\mu/(\mu^{3/2}\sqrt t)\to0$, so $\Phi(K,\epsilon_t)\to\infty$. In particular,~\eqref{eq:all} decays exponentially in $M$ once $\Phi(K,\epsilon_t)/2>\log3+\log(1+2a_\mu)$, and the rate can be made arbitrarily large by increasing $t$. The junction constraints have positive width and allow open sets of tuples, for example near a gently curved polygonal graph with vertices inside the anchor ranges. The selection bound therefore does not rely on a null geometric class.
+
+\section{What unrestricted turns still require}
+
+The two-support estimate treats one change without a continuity assumption. The convex and concave cases explain how its dependence cost remains controlled through arbitrarily many changes, provided the supporting slopes retain their order and the reference graph is continuous. We now give an explicit configuration showing why the disjointness argument cannot be extended to arbitrary oscillating graphs by the same intersection count. The construction concerns overlap of the generating-line sets, and makes no lower-tail claim for the actual run count.
+
+Fix an integer $q\ge2$ and a length $L>0$. Put $x_j=jL$ and $h_j=4+j/(q+1)$ for $0\le j\le q$. Let $F$ be the continuous piecewise affine function with $F(x_j)=(-1)^j h_j$, and let $g_j$ be its affine piece on $[x_{j-1},x_j]$. Use one base line on each piece, with graph $f_j=3g_j/4$. Then
+\begin{equation}\label{eq:oscillation}
+ |f_j-g_j|\le5/4<2,\qquad
+ 8/L<|g_j'|<10/L,\qquad
+ 6/L<|f_j'|<15/(2L).
+\end{equation}
+The support slopes are all distinct, as are the base slopes, and the two magnitude ranges are disjoint. The horizontal line $h(x)=0$ crosses every supporting segment. Its slope lies farther from the support slope than the base slope does, so its normal angle belongs to the opposite set $A_j$ for every piece.
+
+The strip interval generated by this horizontal line consists of the points with $|f_j(x)|\le2$. The endpoint magnitudes of $f_j$ are at least $3$, so the entire interval lies inside the segment. Its horizontal length is $4/|f_j'|>8L/15$, and its arclength is at least that large. Consequently, if $L\ge2t$, this one generating line belongs to every effective set $\mathscr Q_j$ and produces an interval longer than $t$ in every corridor. The containment, angle, and length conditions all have a strict margin. A sufficiently small open neighborhood of the horizontal line has the same properties, so the overlap occurs on a set of positive line intensity for each fixed $q$.
+
+Thus, unrestricted turning permits an arbitrarily large number of effective sets to share the same Poisson lines. This rules out a uniform bound on that overlap under the present geometric hypotheses alone. It does not rule out concentration obtained by retaining the rarity of a selected oscillating tuple or by another joint argument. The missing step toward the original subcritical problem is to control these oscillations, or to reduce arbitrary relevant paths to a family for which the present uniform bounds suffice, while retaining all contributions to the path reward.
+
+\begin{thebibliography}{OC26}
+\bibitem[LP17]{LP17}
+G.~Last and M.~Penrose, \emph{Lectures on the Poisson Process}, Institute of Mathematical Statistics Textbooks, vol.~7, Cambridge University Press, Cambridge, 2017.
+\bibitem[OC26]{OC26}
+\emph{Uniform bounds for ordered corridors with one shared supporting line}, companion working note, November~3, 2026. Source and PDF included with the present note.
+\end{thebibliography}
+\end{document}

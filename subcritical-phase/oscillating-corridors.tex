@@ -1,0 +1,207 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+\runningtitle{Repeated lines in oscillating corridors}
+\hypersetup{pdftitle={Repeated lines in oscillating corridors},pdfauthor={}}
+\title{Repeated lines in oscillating corridors:\\a lower bound for full connected runs}
+\author{}
+\date{November 3, 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We examine the joint probability cost of an oscillating supporting tuple and the generating lines it repeatedly uses. For sufficiently large fixed run threshold, a family of corridors with total horizontal length $M$ in corridor widths can contain a prescribed linear number of full connected runs with probability at least $\exp\{-C\sqrt M\log M\}$ along an infinite sequence of $M$. The construction selects only order $\sqrt M$ lines, including its supports, base lines, and repeated generators. A conditional vacancy argument ensures that many of the forced intervals belong to distinct full components after the rest of the Poisson environment is restored. Thus, an exponential upper tail in $M$ cannot hold for the unrestricted oscillating extension of the earlier corridor class. The result concerns an environmental count and leaves the subcritical percolation problem open.
+\end{abstract}
+
+\section{The lower bound}
+
+The preceding note controls arbitrarily many supporting-line changes along continuous convex or concave graphs~\cite{CS26}. Its oscillating example allows a generating line to affect every corridor, but does not estimate the probability of choosing the whole configuration from the Poisson environment. We compute that joint cost here and retain the full connected-run count. The resulting lower bound rules out the proposed exponential tail for unrestricted oscillations, even on one prescribed subdivision and one prescribed sequence of vertical positions.
+
+Fix $\mu>0$. Let $\cL$ be the Poisson line process with intensity $\nu_\mu(\dd\theta\,\dd s)=(\mu/\pi)\dd\theta\dd s$, where $\ell(\theta,s)=\{x\in\R^2:x\cdot(\cos\theta,\sin\theta)=s\}$, $0\le\theta<\pi$, and $s\in\R$. Write $\P$ and $\E$ for probability and expectation. For nonparallel lines $\ell,\ell'$, let $J(\ell,\ell')$ be the interval on $\ell$ at distance at most $2$ from $\ell'$. Its arclength is $4/|\sin\alpha|$, where $\alpha$ is the relative angle. Parallel pairs have zero intensity in the construction below.
+
+For a configuration $\eta$ of other lines, let $U_\ell^-(\eta)$ and $U_\ell^+(\eta)$ be the unions of these intervals over lines with normal angle smaller and larger than $\theta(\ell)$, respectively. A run is a connected component of $V_\ell(\eta)=U_\ell^-(\eta)\cap U_\ell^+(\eta)$. For a compact segment $I\subset\ell$, let $H_t(\ell,I;\eta)$ count full runs of arclength at least $t$ meeting $I$. Thus, components extending beyond the segment are included.
+
+Fix $K>0$ and an integer $t\ge\max(8,4\mu)$. Put $w=(t/\mu)^{3/2}$ and assume
+\begin{equation}\label{eq:scale}
+ \frac wt\ge4096\e^{4\mu}(K+4).
+\end{equation}
+For every fixed $\mu,K$, all sufficiently large integers $t$ satisfy this condition. For a positive integer $k$ divisible by $8t$, define
+\[
+ M=k^2,\qquad L=kw,\qquad b=\frac1{4t},\qquad
+ H=\frac{bL}{2}=\frac{kw}{8t},\qquad x_i=iL\quad(0\le i\le k).
+\]
+The prescribed vertex heights are $\zeta_0=0$ and $\zeta_i=(-1)^{i+1}H$ for $1\le i\le k$. Each nominal corridor has horizontal length $L=kw$, so its length in widths is $k$ and the total is $M$. Moreover, $\zeta_i/w$ are integers, their successive differences have absolute value at most $k$, and the initial height is zero.
+
+Let $\mathcal T_k$ consist of ordered tuples of supporting lines $\sigma_1,\ldots,\sigma_k$ and base lines $\ell_1,\ldots,\ell_k$, all with distinct slopes. Write their graphs as $g_i$ and $f_i$. We require
+\begin{equation}\label{eq:anchors}
+ |g_i(x_{i-1})-\zeta_{i-1}|\le w/2,\qquad
+ |g_i(x_i)-\zeta_i|\le w/2\quad(1\le i\le k).
+\end{equation}
+For $1\le i<k$, the horizontal coordinate $y_i$ of $\sigma_i\cap\sigma_{i+1}$ must belong to $[x_i-w/4,x_i+w/4]$. Set $y_0=0$, $y_k=kL$, and require $|f_i(x)-g_i(x)|\le2$ for $y_{i-1}\le x\le y_i$. Let $I_i$ be the resulting segment of $\ell_i$. The intervals of allowed junction coordinates are disjoint and ordered, and the active supporting segments form a continuous graph. Their slopes have no monotonicity restriction.
+
+For a tuple in $\mathcal T_k$ belonging to $\cL$, let $S_t=\sum_{i=1}^kH_t(\ell_i,I_i;\cL\setminus\{\ell_i\})$. All other supporting and base lines, together with every remaining line of the environment, are retained. Let $\mathcal A_k$ be the event that such a tuple exists with $S_t\ge(K+4)k^2$. This is a subclass of the unrestricted oscillating extension of the selection class in~\cite{CS26}. In the theorem below, $C>0$ and $k_0$ denote constants depending on the fixed parameters $\mu,t,K$.
+
+\begin{theorem}\label{thm:lower}
+Constants $C$ and $k_0$ can be chosen so that, for every $k\ge k_0$ divisible by $8t$,
+\begin{equation}\label{eq:lower}
+ \P(\mathcal A_k)\ge\exp\{-Ck\log k\}.
+\end{equation}
+Consequently, for every $c>0$,
+\[
+ \limsup_{\substack{k\to\infty\\8t\mid k}}
+             \e^{ck^2}\P(\mathcal A_k)=\infty.
+\]
+\end{theorem}
+
+Since $M=k^2$, the lower bound can be written as $\exp\{-C\sqrt M\log M\}$ after changing its constant. In particular, no upper bound $A\exp\{-cM\}$ with finite $A$ and positive $c$ can hold uniformly in $M$ for the larger unrestricted class at these fixed parameters. The conclusion does not apply to the convex or concave class, whose supporting slopes cannot realize the configuration used below.
+
+\section{Proof of the lower bound}
+
+The construction has two parts. We first select a slowly oscillating sequence of supporting and base lines together with many nearly horizontal generating lines that persist across its full horizontal range. We then keep a positive fraction of the gaps between the generated intervals vacant in the remaining environment. The two propositions below quantify the selection cost and the resulting number of distinct full components, respectively.
+
+Put $\varepsilon=1/100$, $p=\e^{-4\mu}$, $c_i=(i-1/2)L$, $d_i=(\zeta_{i-1}+\zeta_i)/2$, and $\beta_i=(\zeta_i-\zeta_{i-1})/L$. Thus, $d_1=H/2$, $\beta_1=b/2$, and, for $i\ge2$, $d_i=0$ and $\beta_i=(-1)^{i+1}b$. For a graph line with affine function $h(x)=a+vx$, define the following measurable sets of lines:
+\begin{equation}\label{eq:cells}
+\begin{aligned}
+ \mathscr S_i&=\{h:|h(c_i)-d_i|\le\varepsilon,
+                       \ |v-\beta_i|\le\varepsilon/L\},\quad 1\le i\le k,\\
+ \mathscr B_i&=\{h:|h(c_i)-d_i|\le\varepsilon,
+               \ |v-\beta_i+\operatorname{sign}(\beta_i)/L|\le\varepsilon/L\},
+                      \quad 1\le i\le k,\\
+ \mathscr H_j&=\{h:|h(0)-16j|\le\varepsilon,
+                       \ |v|\le\varepsilon/(kL)\},\quad 1\le j\le N,
+\end{aligned}
+\end{equation}
+where $N=\lfloor H/64\rfloor$. The slope of each base line is slightly closer to zero than that of its support. Let $\mathscr U_k$ be the union of all these sets, and let $E_k$ be the event that each set contains exactly one line of $\cL$. Write $\rho=w/(512t)$, so $N=\lfloor\rho k\rfloor$. The first proposition calculates the cost of every selected line, including the repeated generators.
+
+\begin{proposition}\label{prop:cost}
+For all sufficiently large $k$, the $2k+N$ sets in~\eqref{eq:cells} are pairwise disjoint, and
+\begin{equation}\label{eq:cost}
+ \log\P(E_k)=-(2+2\rho)k\log k+O_{\mu,t}(k).
+\end{equation}
+\end{proposition}
+
+On $E_k$, denote the selected lines by $\sigma_i\in\mathscr S_i$, $\ell_i\in\mathscr B_i$, and $\gamma_j\in\mathscr H_j$. Their full-run sum is denoted by $S_k$, and $Q_k=(k-3)(N-1)$. The next proposition restores the rest of the environment and ensures that many of the generated intervals remain in distinct full components.
+
+\begin{proposition}\label{prop:runs}
+For all sufficiently large $k$ divisible by $8t$, the selected supporting and base tuple belongs to $\mathcal T_k$ almost surely on $E_k$, and
+\begin{equation}\label{eq:conditional}
+ \P(S_k\ge pQ_k/2\mid E_k)\ge p/2.
+\end{equation}
+\end{proposition}
+
+\begin{proof}[Proof of Theorem~\ref{thm:lower}]
+Take $k$ large enough for both propositions, $k\ge6$, and $H\ge256$. The floor in $N$ then gives $N-1\ge H/128$, while $k-3\ge k/2$. Therefore,
+\begin{equation}\label{eq:threshold}
+ \frac{pQ_k}{2}
+ \ge\frac{pkH}{512}
+ =\frac{pw}{4096t}k^2
+ \ge(K+4)k^2,
+\end{equation}
+where the last inequality is~\eqref{eq:scale}. The selected tuple is admissible on $E_k$ by Proposition~\ref{prop:runs}; hence, that proposition and Proposition~\ref{prop:cost} give
+\begin{equation}\label{eq:synthesis}
+ \P(\mathcal A_k)
+ \ge\P(E_k)\P(S_k\ge pQ_k/2\mid E_k)
+ \ge\frac p2\exp\{-(2+2\rho)k\log k+O_{\mu,t}(k)\}
+ \ge\exp\{-Ck\log k\}
+\end{equation}
+for a sufficiently large fixed $C$ and all sufficiently large admissible $k$. This proves the first assertion. For every $c>0$, $ck^2-Ck\log k\to\infty$ along the same infinite sequence, which proves the second assertion and rules out any finite exponential prefactor.
+\end{proof}
+
+\section{Proof of the joint selection cost}
+
+We count the supporting, base, and generating lines in the same Poisson configuration. The sets selecting the first two kinds have intensity proportional to $L^{-1}$, while each nearly horizontal generator must persist over length $kL$ and has intensity proportional to $(kL)^{-1}$. Since only order $k$ lines are selected, their combined logarithmic cost has order $k\log k$. The calculation uses the restriction property: restrictions of a Poisson process to disjoint measurable sets are independent Poisson processes with the corresponding restricted intensities~\cite[Theorem~5.2]{LP17}.
+
+\begin{proof}[Proof of Proposition~\ref{prop:cost}]
+For sufficiently large $k$, the slope intervals around $b/2$ and $b/2-1/L$ are disjoint from each other and from the intervals around $b$, $b-1/L$, $-b$, $-b+1/L$, and zero. The intervals around $b$ and $b-1/L$ are also disjoint, as are those around $-b$ and $-b+1/L$, because $2\varepsilon<1$. The only remaining possible overlaps among supporting or base sets are between indices with the same central slope and center height zero. A line in two such sets would have values within $\varepsilon$ of zero at two centers separated by at least $L$. Its slope has absolute value at least $b/2$, so the difference of those values is at least $bL/2=H>2\varepsilon$ for large $k$, a contradiction. The horizontal sets are disjoint because their intercept centers differ by $16$, and their slopes separate them from every other set. Thus, all the sets are pairwise disjoint.
+
+In intercept and slope coordinates, $\nu_\mu(\dd a\,\dd v)=(\mu/\pi)(1+v^2)^{-3/2}\dd a\dd v$. Replacing the intercept by the height at $c_i$ has determinant one. Every selected slope has absolute value at most one for large $k$, so the density lies between $\mu/(3\pi)$ and $\mu/\pi$. Consequently,
+\begin{equation}\label{eq:areas}
+\begin{aligned}
+ \frac{4\mu\varepsilon^2}{3\pi L}
+ &\le\nu_\mu(\mathscr S_i),\nu_\mu(\mathscr B_i)
+                         \le\frac{4\mu\varepsilon^2}{\pi L},\\
+ \frac{4\mu\varepsilon^2}{3\pi kL}
+ &\le\nu_\mu(\mathscr H_j)\le\frac{4\mu\varepsilon^2}{\pi kL},
+ \qquad \nu_\mu(\mathscr U_k)=O_{\mu,t}(1).
+\end{aligned}
+\end{equation}
+The last assertion follows from $L=kw$ and $N=\lfloor\rho k\rfloor$.
+
+For a Poisson variable of mean $a$, the probability of exactly one point is $a\e^{-a}$. Independence of the restrictions therefore gives the exact product and its logarithm:
+\begin{equation}\label{eq:product}
+\begin{aligned}
+ \P(E_k)&=\e^{-\nu_\mu(\mathscr U_k)}
+       \prod_{i=1}^k\nu_\mu(\mathscr S_i)\nu_\mu(\mathscr B_i)
+       \prod_{j=1}^N\nu_\mu(\mathscr H_j),\\
+ \log\P(E_k)&=-2k\log L-N\log(kL)+O_{\mu,t}(k)\\
+             &=-(2+2\rho)k\log k+O_{\mu,t}(k).
+\end{aligned}
+\end{equation}
+This includes the cost of keeping each generating line nearly horizontal across the entire configuration. The estimate uses no independence assumption between the geometric effects of a selected line in different corridors.
+\end{proof}
+
+\section{Proof of the full-component lower bound}
+
+We first verify that every allowed selection gives the required corridor tuple and long intervals from the nearly horizontal lines. We next choose a point between each consecutive pair of these intervals on each of the central base segments, and check that none of the selected opposite-family lines covers that point. Conditional on the selected configuration, the remaining Poisson process leaves each point vacant with a uniform positive probability. An expectation bound then preserves a positive fraction of the separating points without any independence assumption between them.
+
+\begin{proof}[Proof of Proposition~\ref{prop:runs}]
+Work on $E_k$ and write $\bar g_i(x)=d_i+\beta_i(x-c_i)$ for the nominal supporting function. The corresponding segments join the consecutive points $(x_i,\zeta_i)$. Every selected support differs from $\bar g_i$ at either nominal endpoint by at most $3\varepsilon/2$. Adjacent nominal support slopes differ by $3b/2$ at the first junction and by $2b$ thereafter. For large $k$, the selected adjacent slopes therefore differ by at least $b$. Put $a_0=3\varepsilon/b$. Their actual junction coordinates and the base-support differences satisfy
+\begin{equation}\label{eq:admissible}
+\begin{aligned}
+ |y_i-x_i|&\le a_0\le w/4,\qquad 1\le i<k,\\
+ |f_i(x)-g_i(x)|
+ &\le\frac12+3\varepsilon+(1+2\varepsilon)\frac{a_0}{L}<1,
+                 \qquad y_{i-1}\le x\le y_i.
+\end{aligned}
+\end{equation}
+The first line uses $w/t\ge4096\e^{4\mu}(K+4)$ and $a_0=12\varepsilon t$. The second line follows by comparing the central slopes, whose absolute difference is $1/L$, and then adding the two allowed height and slope errors; it holds for all sufficiently large $k$ since $a_0/L\to0$. Condition~\eqref{eq:anchors} also holds, with endpoint error at most $3\varepsilon/2<w/2$. All selected slopes are pairwise distinct almost surely, since the intensity has a density. Thus, the supporting and base tuple belongs to $\mathcal T_k$.
+
+For $i\ge2$, the support slope is close to $(-1)^{i+1}b$, and the base slope is closer to zero by $1/L$, with an error of at most $2\varepsilon/L$ in their difference. For large $k$, its absolute value lies between $b/2$ and $b$. Every horizontal generator has slope of absolute value at most $\varepsilon/(kL)$. For a graph line of slope $v$, the normal angle is $\pi/2+\arctan v$. Thus, when the base slope is positive, the generator angle is below the base angle, which is below the support angle. When it is negative, both orders reverse. Every generator consequently belongs to the opposite angular family from the active support on these segments.
+
+Throughout $0\le x\le kL$, the height of $\gamma_j$ differs from $16j$ by at most $2\varepsilon$. At each nominal endpoint, the height of $f_i$ differs from the prescribed height by at most $1/2+3\varepsilon/2$. Moving to the actual endpoint adds at most $ba_0=3\varepsilon$, since the base slope has absolute value at most $b$ for $i\ge2$. Thus, the two endpoint heights of $f_i$ differ from $-H,H$ by less than one. Since $16N\le H/4$, each full strip interval $J(\ell_i,\gamma_j)$ lies strictly inside $I_i$: at the endpoints the base-generator height difference has opposite signs and absolute value at least $3H/4-1-2\varepsilon$, which exceeds $2\sqrt{1+v_j^2}$, where $v_j$ is the slope of $\gamma_j$. The relative sine is at most the absolute slope difference, which is at most $2b$. Therefore, $|J(\ell_i,\gamma_j)|\ge2/b=8t$. By~\eqref{eq:admissible}, the active support covers all of $I_i$ in the other angular family. Every one of these long intervals is therefore contained in $V_{\ell_i}(\cL\setminus\{\ell_i\})$, even after the remaining environment is restored.
+
+For $4\le i\le k$ and $1\le j<N$, let $z_{ij}$ be the point on $\ell_i$ whose vertical coordinate is $16j+8$. This coordinate is positive and at most $H/4$. If $z_{ij}^{(1)}$ denotes its horizontal coordinate, the base height and slope bounds give
+\begin{equation}\label{eq:gap-geometry}
+\begin{aligned}
+ |z_{ij}^{(1)}-c_i|
+ &\le\frac{H/4+\varepsilon}{b-(1+\varepsilon)/L}\le L/6,\\
+ \operatorname{dist}(z_{ij},\gamma_h)
+ &\ge\frac{8-2\varepsilon}{\sqrt2}>2\quad(1\le h\le N),\\
+ \operatorname{dist}(z_{ij},\tau)
+ &\ge\frac{H}{2\sqrt2}>2
+ \quad\big(\tau\in\{\sigma_h,\ell_h:1\le h\le k,\ h\ne i\}\big),
+\end{aligned}
+\end{equation}
+for all sufficiently large $k$. For the second line, the horizontal generators have heights within $2\varepsilon$ of multiples of $16$, whereas $z_{ij}$ lies at a midpoint. To check the last line when $h\ge2$ and $h\ne i$, the point is at horizontal distance at least $5L/6$ from $c_h$. Every selected line in that corridor has center height within $\varepsilon$ of zero and absolute slope at least $b/2$. Its absolute height there is at least $5H/6-\varepsilon$; subtracting the height of $z_{ij}$ leaves at least $7H/12-\varepsilon\ge H/2$. For $h=1$, the center height is within $\varepsilon$ of $H/2$ and the slope is at least $b/4$. Since $i\ge4$, the point lies at least $17L/6$ to the right of $c_1$, which gives the same lower bound. All selected slopes have absolute value at most one, justifying the factors $\sqrt2$. The point lies inside $I_i$ by the first line of~\eqref{eq:gap-geometry} and~\eqref{eq:admissible}.
+
+The active support $\sigma_i$ belongs to the other angular family, and $\ell_i$ itself is excluded. Hence, no selected opposite-family line covers $z_{ij}$. Let $A_i$ be that opposite set of normal angles, and let $W_{ij}$ be the event that no remaining line with angle in $A_i$ lies within distance $2$ of $z_{ij}$. Conditional on the complete configuration inside $\mathscr U_k$, its complement is still an independent Poisson process with intensity $\nu_\mu$ restricted to that complement. The intensity of all lines within distance $2$ of a fixed point is $4\mu$. Thus, every $W_{ij}$ has conditional probability at least $p=\e^{-4\mu}$, uniformly in the selected lines.
+
+On $W_{ij}$, the point $z_{ij}$ is outside the opposite union and hence outside $V_{\ell_i}$. Throughout $J(\ell_i,\gamma_h)$, the vertical distance from level $16h$ is at most $2\sqrt{1+v_h^2}+2\varepsilon<3$ for large $k$. Thus, $z_{ij}$ lies between the intervals generated by $\gamma_j$ and $\gamma_{j+1}$. The order may be reversed on a descending base, which does not affect separation. Each vacant midpoint divides the ordered sequence of generated intervals into distinct nonempty groups; intervals in different groups cannot belong to the same full component of a subset of a line. If $Y_k=\sum_{i=4}^k\sum_{j=1}^{N-1}\1_{W_{ij}}$, then $S_k\ge Y_k$ for the complete environment. This comparison uses full components; extensions and mergers across other gaps are allowed.
+
+Write $\mathcal G_k$ for the information supplied by the configuration inside $\mathscr U_k$. On $E_k$, the preceding conditional void bounds and $0\le Y_k\le Q_k$ imply
+\begin{equation}\label{eq:vacancy}
+\begin{aligned}
+ pQ_k&\le\E(Y_k\mid\mathcal G_k)
+       \le\frac{pQ_k}{2}
+          +Q_k\P(Y_k\ge pQ_k/2\mid\mathcal G_k),\\
+ \P(S_k\ge pQ_k/2\mid\mathcal G_k)
+       &\ge\P(Y_k\ge pQ_k/2\mid\mathcal G_k)\ge p/2.
+\end{aligned}
+\end{equation}
+Averaging over the selected configuration conditional on $E_k$ proves~\eqref{eq:conditional}. The possible dependence between vacancy events has been retained throughout.
+\end{proof}
+
+\section{Consequences for the subcritical approach}
+
+The lower bound includes the geometric probability cost that was absent from the earlier deterministic oscillation example. It also retains all remaining lines and counts distinct full connected runs. In particular, the joint selection cost does not restore an exponential tail in the total number $M$ of corridor widths for the unrestricted extension of this class.
+
+The configuration uses $k$ supports, $k$ bases, and $N=\rho k+O(1)$ generating lines. The nearly horizontal generators are reused across order $k$ base segments, producing order $k^2$ opportunities for distinct full runs. The selected geometry costs only order $k\log k$ in its negative logarithmic probability. This accounts for the mismatch with a proposed exponential bound in $M=k^2$.
+
+The theorem does not assert a crossing in the occupied Cox set, whose points have not been sampled here, and it gives no counterexample to a positive critical Cox intensity. It also does not rule out a suitable almost-sure growth bound for the environmental reward. A stretched exponential upper bound for the entire class, if established with adequate control across run scales, could still be summable and useful. Such an upper bound must allow the repeated-line configurations proved here; neither its validity nor the required passage to arbitrary relevant paths has been established.
+
+\begin{thebibliography}{CS26}
+\bibitem[CS26]{CS26}
+\emph{Changing the supporting line: uniform bounds along convex chains}, companion working note, November~3, 2026. Source and PDF included with the present note.
+\bibitem[LP17]{LP17}
+G.~Last and M.~Penrose, \emph{Lectures on the Poisson Process}, Institute of Mathematical Statistics Textbooks, vol.~7, Cambridge University Press, Cambridge, 2017.
+\end{thebibliography}
+\end{document}

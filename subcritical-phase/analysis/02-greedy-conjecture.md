@@ -1,3 +1,5 @@
+> Historical analysis. The current status is in `00-summary.md`, and the corrections are proved in `../corrected-geometry.pdf`. Claims here about infinite exponential moments at finite path lengths, the complete failure of first-moment methods, bundle or run densities, and the necessity of a particular induction are not current conclusions. The sparse-regime path enumeration remains unproved. This file is retained to document the earlier attempts.
+
 # 02 — Conjecture 7.2 (linear greedy growth): reformulations, obstructions, and a reduction
 
 Notation as in the note: $r=1$ w.l.o.g., $Q(z)=z+[0,1]^2$, $N(z)=\#\{\ell\in\mathcal L:\ell\cap Q(z)\neq\emptyset\}$, $\Gamma_n(z_0)$ the self-avoiding $2$-paths of length $n$, and
