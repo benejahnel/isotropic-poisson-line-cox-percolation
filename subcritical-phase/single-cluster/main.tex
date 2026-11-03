@@ -1,0 +1,212 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+
+\runningtitle{Line counts on fixed sets of boxes}
+\hypersetup{pdftitle={Line counts on fixed sets of boxes: a polynomial tail, and the strip-cover scheme},pdfauthor={Christian Hirsch, Benedikt Jahnel}}
+
+\title{\textbf{Line counts on fixed sets of boxes:\\ a polynomial tail, and the strip-cover scheme}\\[0.6em] \large Working note}
+
+\author{%
+  Christian Hirsch\thanks{Institut f\"ur Mathematische Stochastik, Georg-August-Universit\"at G\"ottingen, Goldschmidtstra\ss e~7, 37077 G\"ottingen, Germany. \texttt{christian.hirsch@uni-goettingen.de}. \orcid{0000-0003-4136-3740}.}
+  \and
+  Benedikt Jahnel\thanks{Institut f\"ur Mathematische Stochastik, Technische Universit\"at Braunschweig, Universit\"atsplatz~2, 38106 Braunschweig, Germany, and Weierstrass Institute for Applied Analysis and Stochastics, Mohrenstra\ss e~39, 10117 Berlin, Germany. \texttt{benedikt.jahnel@tu-braunschweig.de}. \orcid{0000-0002-4212-0065}.}%
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{plain}
+
+\begin{abstract}
+For a Poisson line process of intensity~$\mu$ and an arbitrary fixed set~$W$ of $m$ unit boxes, we prove that the total number of line--box incidences on~$W$ exceeds $\kappa m$ with probability at most $Cm^{-c\kappa}$, for all $\kappa\ge\kappa_0(\mu)$. The proof decomposes the lines by the size of their footprint on~$W$, bounds the mass of long footprints by a pair count, and applies Poisson tail estimates class by class. For a straight row of boxes the lines with long footprints are automatically nearly parallel to the row, which is the structural statement needed for the thick-cluster lemma of the companion note. We then describe a Peierls argument over covers of a thick cluster by straight strips, which applies the fixed-set bound to the strips and thereby avoids the entropy of paths inside bundles, and we isolate the one estimate it still requires: a product bound for the incidence events of nearly parallel strips. The single-cluster bound, and hence the unconditional subcritical theorem, remain open.
+\end{abstract}
+
+% =================================================================
+\section{Setting}
+\label{sec:setting}
+
+Let $\cL$ be a Poisson line process with intensity measure $\nu=\nu_\mu$, $\nu(\d\theta\,\d s)=(\mu/\pi)\dd\theta\dd s$. For $z\in\Z^2$ let $Q(z)=z+[0,1)^2$ and let $N(z)$ be the number of lines meeting~$Q(z)$, a Poisson variable with mean $\mu_1\coloneqq4\mu/\pi$. For a finite set $W\subseteq\Z^2$ of $m$ boxes put
+\begin{equation*}
+  S_W\coloneqq\sum_{z\in W}N(z)=\sum_{\ell\in\cL}f_W(\ell),\qquad f_W(\ell)\coloneqq\#\{z\in W\colon\ell\cap Q(z)\neq\varnothing\}\,,
+\end{equation*}
+the number of line--box incidences on~$W$; $f_W(\ell)$ is the \emph{footprint} of~$\ell$ on~$W$. We recall from~\cite[Lemma~3.2]{HJ26b} that two unit boxes whose centres are at Euclidean distance~$D$ are both met by lines of $\nu$-measure at most $2\mu/D$ when $D\ge2\sqrt2$, and at most $\mu_1$ always; hence
+\begin{equation}
+\label{eq:twobox}
+  \nu\bigl(\{\ell\colon\ell\text{ meets }Q(z)\text{ and }Q(z')\}\bigr)\le\frac{6\mu}{1+\lvert z-z'\rvert}\qquad(z\neq z')\,.
+\end{equation}
+
+The companion note~\cite{FM26} reduces the subcritical phase, for $\lambda<1/(576\sqrt2(j_0-1))$, to a thick-cluster lemma whose core is the single-cluster bound: for a $2$-connected set~$A$ of $d$ boxes through a fixed box, all boxes of which are met by at least $j_0$ lines,
+\begin{equation}
+\label{eq:target}
+  \P\bigl(\exists\,2\text{-connected }A\ni0,\ \lvert A\rvert=d,\ \min_{z\in A}N(z)\ge j_0\bigr)\le C\,d^{-\beta},\qquad\beta>4\,.
+\end{equation}
+The present note proves the analogous bound for a \emph{fixed} set~$W$ in place of the union over~$A$, which is the first of the two steps proposed there, and sets up the second.
+
+% =================================================================
+\section{The fixed-set tail}
+\label{sec:fixed}
+
+\begin{theorem}[Polynomial tail for fixed sets]
+\label{thm:fixed}
+There are constants $\kappa_0=\kappa_0(\mu)$, $C=C(\mu,\kappa)$ and a universal $c>0$ such that for every finite set $W\subseteq\Z^2$ of $m\ge2$ boxes and every $\kappa\ge\kappa_0$,
+\begin{equation}
+\label{eq:fixed}
+  \P(S_W\ge\kappa m)\le C\,m^{-c\kappa}\,.
+\end{equation}
+One may take $c=1/80$ and $\kappa_0=5\cdot10^4\mu$.
+\end{theorem}
+
+The constants are not optimised. The bound is polynomial because of lines whose footprint is comparable to~$m$: for a straight row~$W$, $\kappa$ nearly parallel lines along the row produce $S_W\ge\kappa m$ with probability of order $m^{-(\kappa-1)}$, so an exponent linear in~$\kappa$ is the correct order. For sets that are not row-like the true tail is much smaller, and the theorem is correspondingly lossy there.
+
+\subsection{Footprint classes}
+
+Fix~$W$ with $\lvert W\rvert=m$ and write $f=f_W$. Let $K$ be the integer with $2^K\le m<2^{K+1}$, and for $0\le k\le K$ let $\mathcal C_k\coloneqq\{\ell\colon2^k\le f(\ell)<2^{k+1}\}$, the \emph{class-$k$ lines}; every line with $f(\ell)\ge1$ belongs to exactly one class. Let $n_k\coloneqq\#(\cL\cap\mathcal C_k)$ and $\nu_k\coloneqq\nu(\mathcal C_k)$, so that $n_k$ is Poisson with mean~$\nu_k$ and
+\begin{equation}
+\label{eq:classsum}
+  S_W\le\sum_{k=0}^Kn_k2^{k+1}\,.
+\end{equation}
+
+\begin{lemma}[Mass of the classes]
+\label{lem:mass}
+For every $W$ with $\lvert W\rvert=m$,
+\begin{equation}
+\label{eq:mass}
+  \sum_{k=0}^K\nu_k2^k\le\int f\dd\nu=\mu_1m,\qquad
+  \nu_k\le\nu(f\ge2^k)\le144\,\mu\,m^{3/2}\,4^{-k}\quad(k\ge1)\,.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The first inequality is $\int f\dd\nu=\sum_{z\in W}\nu(\ell\text{ meets }Q(z))=\mu_1m$. For the second, $\int f(f-1)\dd\nu=\sum_{z\neq z'\in W}\nu(\ell\text{ meets }Q(z)\text{ and }Q(z'))\le\sum_{z\in W}\sum_{z'\in W\setminus\{z\}}6\mu/(1+\lvert z-z'\rvert)$ by~\eqref{eq:twobox}. For fixed~$z$, the number of lattice points at distance in $[j-1,j)$ from~$z$ is at most $8j$ for $j\ge1$, so the inner sum is at most $\sum_{j\le R}8j/j=8R$, where $R$ is the smallest integer with $\sum_{j\le R}8j\ge m$, i.e. $R\le\sqrt{m/4}+1\le1.5\sqrt m$. Hence $\int f(f-1)\dd\nu\le72\mu m^{3/2}$, and for $s\ge2$, Markov's inequality gives $\nu(f\ge s)\le\int f(f-1)\dd\nu/(s(s-1))\le144\mu m^{3/2}/s^2$.
+\end{proof}
+
+The second bound in~\eqref{eq:mass} is sharp up to constants for a disk, where every line has footprint of order~$\sqrt m$, and loses a factor $\sqrt m$ for a straight row, where $\nu(f\ge s)\asymp\mu m/s^2$ (\cref{sec:row}). It suffices for a polynomial tail in both cases.
+
+\subsection{Thresholds and Poisson tails}
+
+\begin{proof}[Proof of \cref{thm:fixed}]
+Put $c_1\coloneqq1/20$ and, for $0\le k\le K$,
+\begin{equation}
+\label{eq:thresholds}
+  a_k\coloneqq\max\bigl\{2\e\nu_k,\ c_1\kappa2^{(K-k)/2}\bigr\},\qquad\theta_k\coloneqq a_k2^{k+1}\,.
+\end{equation}
+By~\eqref{eq:mass} and $2^{K+1}\le2m$,
+\begin{equation*}
+  \sum_{k=0}^K\theta_k\le4\e\sum_k\nu_k2^k+c_1\kappa2^{K/2+1}\sum_{k=0}^K2^{k/2}
+  \le4\e\mu_1m+\frac{c_1\kappa\,2^{K+3/2}}{1-2^{-1/2}}\le4\e\mu_1m+9.7\,c_1\kappa m\le\frac34\kappa m
+\end{equation*}
+provided $\kappa\ge16\e\mu_1$. Hence, on $\{S_W\ge\kappa m\}$, by~\eqref{eq:classsum} some class satisfies $n_k2^{k+1}>\theta_k$, that is $n_k>a_k$, and
+\begin{equation}
+\label{eq:union}
+  \P(S_W\ge\kappa m)\le\sum_{k=0}^K\P(n_k>a_k)\le\sum_{k=0}^K\Bigl(\frac{\e\nu_k}{a_k}\Bigr)^{a_k}\,,
+\end{equation}
+using $\P(\mathrm{Poi}(\nu)\ge a)\le(\e\nu/a)^a$ for $a\ge\nu$, which applies since $a_k\ge2\e\nu_k$. Because $a_k\ge2\e\nu_k$, every term is at most $2^{-a_k}\le2^{-c_1\kappa2^{(K-k)/2}}$.
+
+Let $k_1\coloneqq\lceil2K/3\rceil$. For $k<k_1$ we have $2^{(K-k)/2}\ge2^{K/6}\ge(m/2)^{1/6}$, so these at most $K+1\le2\log_2m$ terms contribute at most $2\log_2m\cdot2^{-c_1\kappa(m/2)^{1/6}}$, which is $O(m^{-\kappa})$.
+
+For $k\ge k_1$ we use the second bound in~\eqref{eq:mass} together with $a_k\ge c_1\kappa2^{(K-k)/2}$ and $m^{3/2}\le2^{3(K+1)/2}$:
+\begin{equation*}
+  \frac{\e\nu_k}{a_k}\le\frac{144\e\mu\,2^{3(K+1)/2}4^{-k}}{c_1\kappa2^{(K-k)/2}}=\frac{144\e2^{3/2}\mu}{c_1\kappa}\,2^{K-3k/2}=:r_k\,.
+\end{equation*}
+Writing $k=K-j$ with $0\le j\le K-k_1\le K/3+1$, we get $r_{K-j}=\gamma\,2^{-K/2}2^{3j/2}$ with $\gamma\coloneqq144\e2^{3/2}\mu/(c_1\kappa)=22144\mu/\kappa$, and $a_{K-j}\ge c_1\kappa2^{j/2}$. For $\kappa\ge\kappa_0=5\cdot10^4\mu$ we have $\gamma\le1/2$, and since $j\le K/3+1$ we have $2^{3j/2}\le2^{K/2+3/2}$, so $r_{K-j}\le2^{3/2}\gamma\le2^{1/2}$; the terms with $r_{K-j}\ge1/2$ are still bounded by $2^{-a_k}$ from the first remark, which gives $2^{-c_1\kappa2^{j/2}}$ for those~$j$, and these $j$ satisfy $2^{3j/2}\ge2^{K/2}/(2\gamma)$, i.e. $2^{j/2}\ge(2^{K/2}/(2\gamma))^{1/3}\ge(m/2)^{1/6}$, so their total contribution is again $O(m^{-\kappa})$. For the remaining~$j$, $r_{K-j}<1/2$, and
+\begin{equation*}
+  \Bigl(\frac{\e\nu_k}{a_k}\Bigr)^{a_k}\le r_{K-j}^{c_1\kappa2^{j/2}}=\bigl(\gamma2^{-K/2}\bigr)^{c_1\kappa2^{j/2}}2^{(3j/2)c_1\kappa2^{j/2}}\,.
+\end{equation*}
+With $x\coloneqq\gamma2^{-K/2}\le\gamma\sqrt{2/m}$, the $j$-th term is at most $\exp\{c_1\kappa2^{j/2}h(j)\}$ with $h(j)\coloneqq\log x+1.04j$, where $1.04\ge\tfrac32\log2$. On the range where $r_{K-j}<1/2$ we have $2^{3j/2}<2^{K/2}/(2\gamma)$, hence $1.04j\le\tfrac12\log m+\log(1/(2\gamma))$ and $h(j)\le\log(\gamma\sqrt2)+\log(1/(2\gamma))=-\tfrac12\log2<-0.34$. Put $j^*\coloneqq(-\log x)/2.08$. For $j\le j^*$ we have $h(j)\le\tfrac12\log x$, so the term is at most $x^{c_1\kappa2^{j/2}/2}$, and these terms are bounded by a geometric series with sum at most $2x^{c_1\kappa/2}$. For $j>j^*$ we have $2^{j/2}\ge2^{j^*/2}\ge(1/x)^{1/6}\ge(m/2)^{1/12}\gamma^{-1/6}$, and $h(j)<-0.34$, so each of these at most $K$ terms is at most $\exp\{-0.34c_1\kappa(m/2)^{1/12}\}$, which is $O(m^{-\kappa})$ in total.
+
+Collecting the contributions, $\P(S_W\ge\kappa m)\le2x^{c_1\kappa/2}+O(m^{-\kappa})\le2(\gamma\sqrt2)^{c_1\kappa/2}m^{-c_1\kappa/4}+O(m^{-\kappa})$, which gives~\eqref{eq:fixed} with $c=c_1/4=1/80$, and a fortiori with $c=1/140$.
+\end{proof}
+
+\begin{remark}
+The proof uses only two properties of the footprint measure: $\int f\dd\nu\le\mu_1m$, and $\nu(f\ge s)\le C\mu m^{3/2}/s^2$. Any random environment whose line--box incidences satisfy these two bounds, with the line counts of disjoint sets of lines independent, obeys the same tail. The pair bound~\eqref{eq:twobox} is the only geometric input.
+\end{remark}
+
+\subsection{Straight rows and nearly parallel lines}
+\label{sec:row}
+
+For a straight row $R=\{(i,0)\colon0\le i<m\}$ the footprints have a simpler structure, which gives the "nearly parallel groups" statement of step~(i) in~\cite[Section~5]{FM26}.
+
+\begin{lemma}[Rows]
+\label{lem:row}
+Let $R$ be a straight row of $m$ boxes and let $\ell$ make the angle $\alpha\in[0,\pi/2]$ with the row direction. Then $f_R(\ell)\le\min\{m,\ 1/\sin\alpha+2\}$. Consequently every line with $f_R(\ell)\ge s\ge3$ satisfies $\sin\alpha\le1/(s-2)$, and $\nu(f_R\ge s)\le3\mu m/(s-2)^2+\mu/(s-2)$ for $s\ge3$.
+\end{lemma}
+
+\begin{proof}
+The line meets the strip $[0,m]\times[0,1]$ in a segment whose horizontal extent is at most $1/\tan\alpha\le1/\sin\alpha$, so it meets at most $1/\sin\alpha+2$ boxes of the row. Lines with direction angle in $[\alpha,\alpha+\d\alpha]$ meeting the strip have $\nu$-measure $(\mu/\pi)(m\sin\alpha+\cos\alpha)\dd\alpha$, the width of the strip in the normal direction; integrating over $\sin\alpha\le1/(s-2)$ gives at most $(\mu/\pi)\bigl(m\alpha_s^2/2\cdot(1+o(1))+\alpha_s\bigr)\cdot2$ with $\alpha_s\le\pi/(2(s-2))$, hence the stated bound.
+\end{proof}
+
+Thus for a row the lines of class $k$ are exactly those within angle $O(2^{-k})$ of the row: long footprints come from nearly parallel lines, and \cref{thm:fixed} for a row is a statement about bundles of nearly parallel lines. With the sharper measure bound of \cref{lem:row} in place of~\eqref{eq:mass}, the proof of \cref{thm:fixed} gives the exponent $c\kappa$ with $c=1/40$ and $\kappa_0=2\cdot10^3\mu$ for rows; we omit the arithmetic.
+
+% =================================================================
+\section{The strip-cover scheme}
+\label{sec:cover}
+
+\Cref{thm:fixed} bounds the tail for one set. The single-cluster bound~\eqref{eq:target} needs a union over all $2$-connected sets of size~$d$ through the origin, of which there are up to $24^d$, and a union bound with~\eqref{eq:fixed} fails: inside a bundle of $j_0$ lines of length~$d$, of probability $\asymp(\mu/d)^{j_0-1}$, every one of the $\ge2^d$ paths in the bundle's strip is thick. The entropy must be organised around low-entropy sets to which \cref{thm:fixed} applies. We describe the scheme and the estimate it needs.
+
+\paragraph{Strips.} A \emph{strip} is a set $T=T(x,u,t)\subseteq\Z^2$ of the boxes within sup-norm distance~$2$ of the segment $\{x+su\colon0\le s\le t\}$, $x\in\Z^2$, $u$ a unit vector, $t\ge1$; it has at most $5t+25$ boxes. Up to the discretisation of~$u$ to precision~$1/t$, which changes~$T$ by $O(1)$ boxes per unit length and is absorbed in the width, the number of strips of length~$t$ with a given starting box is at most $Ct$.
+
+\paragraph{Covers.} Let $A\ni0$ be $2$-connected with $\lvert A\rvert=d$. Walk along a spanning $2$-path of~$A$ with at most $2d$ steps and cut it into maximal pieces that stay inside a strip of their own direction: a piece is a sub-path contained in $T(x,u,t)$ with $t$ comparable to the piece's displacement. Each piece has length at most~$2t+C$, and the pieces' strips $T_1,\dots,T_s$ cover~$A$ with $\sum_i\lvert T_i\rvert\le C\sum_it_i\le Cd$; consecutive strips start within distance~$2$ of the end of the previous one. Short pieces, of length at most~$t_0$, are kept as they are. The data $(u_i,t_i)_{i\le s}$ determine the cover, with entropy at most $\prod_i(Ct_i)$ for long pieces and $24^{t_0}$ for short ones. The point of the construction is that the walk is free to wiggle inside each strip: its wiggles are not part of the data.
+
+\paragraph{Cost of a strip.} If every box of~$A$ is thick, then $S_{T_i}\ge\sum_{z\in A\cap T_i}N(z)\ge j_0\lvert A\cap T_i\rvert\ge j_0t_i$, because the piece inside~$T_i$ visits at least~$t_i$ distinct boxes. By \cref{thm:fixed} applied to the fixed set~$T_i$, with $m=\lvert T_i\rvert\le5t_i+25$ and $\kappa=j_0t_i/m\ge j_0/30$,
+\begin{equation}
+\label{eq:stripcost}
+  \P(S_{T_i}\ge j_0t_i)\le C\,t_i^{-cj_0/30}\qquad(t_i\ge t_0)\,,
+\end{equation}
+and for short pieces, every box thick costs at least the probability $\varepsilon_0\coloneqq(\e\mu_1/j_0)^{j_0}$ that one given box is thick.
+
+\paragraph{Peierls sum, if the strips were independent.} With $w_t\coloneqq Ct\cdot Ct^{-cj_0/30}$ for $t\ge t_0$ and $w_t\coloneqq24^{t}\varepsilon_0$ for $t<t_0$, the sum over covers of the product of the strip costs is bounded by the coefficient of $x^{d}$ in $\sum_{s\ge1}g(x)^s$ with $g(x)=\sum_tw_tx^t$. If $cj_0/30>2$ and $j_0$ is large enough that $g(1)<1/2$, then this coefficient is at most $Cd^{1-cj_0/30}$: a cover reaching total length~$d$ with $s$ pieces has a piece of length at least $d/s$, and $\sum_ss\,w_{d/s}\,g(1)^{s-1}=O(d^{1-cj_0/30})$. This is the single-cluster bound~\eqref{eq:target} with $\beta=cj_0/30-1$, which exceeds~$4$ for $j_0\ge150/c$.
+
+\paragraph{What is missing.} The strip events $\{S_{T_i}\ge j_0t_i\}$ are not independent: a line may have a long footprint on several strips. The product bound $\P(\bigcap_i\{S_{T_i}\ge j_0t_i\})\le\prod_i\P(S_{T_i}\ge j_0t_i)$ is therefore not justified as it stands. Two observations limit the dependence.
+
+\begin{lemma}[Long footprints select directions]
+\label{lem:direction}
+Let $T=T(x,u,t)$ and $T'=T(x',u',t')$ be strips whose directions make an angle $\alpha\ge10/F$, and let~$\ell$ be a line. Then $\min\{f_T(\ell),f_{T'}(\ell)\}\le F$.
+\end{lemma}
+
+\begin{proof}
+A line meeting more than $F$ boxes of~$T$ has a segment of length at least $F/5-C$ inside a strip of width~$5$, hence makes an angle at most $\arcsin(5/(F/5-C))\le30/F$ with~$u$ for $F\ge C'$; the same for~$T'$. Both cannot hold if the directions differ by more than $60/F$; the constant~$10$ in the statement is adjusted accordingly.
+\end{proof}
+
+In the proof of \cref{thm:fixed} only the classes $k\ge k_1$, i.e. footprints at least $m^{2/3}$, contribute the polynomial part of the tail; the lower classes are controlled by Poisson tails that are stretched-exponential in~$m$ and depend only on the total measure of short-footprint lines, which is dominated by the number of lines meeting the strip and is handled uniformly as in~\cite[Lemma~3.2]{FM26}. Hence the dependence that matters is through lines with footprint at least $t_i^{2/3}$ on strip~$i$, and by \cref{lem:direction} such a line can serve two strips only if their directions are within angle $O(t^{-2/3})$. For strips in distinct direction classes the long-footprint line sets are disjoint, and van den Berg's disjoint-occurrence inequality for Poisson processes~\cite{vdB96}, in the form used in the companion corridor notes~\cite{ORC26}, gives the product bound for the long-footprint parts of the events. What remains is the following.
+
+\begin{definition}[Parallel-strip hypothesis]
+\label{def:parallel}
+Hypothesis $\mathrm{(P)}$ holds if for every family of strips $T_1,\dots,T_s$ with pairwise nearly parallel directions (within angle $t^{-2/3}$ of a common~$u$, $t=\min t_i$) and starting boxes along a common walk as above, the probability that all of them have $S_{T_i}\ge j_0t_i$ is at most $C^s\prod_i\P(S_{T_i}\ge j_0t_i)^{1/2}$.
+\end{definition}
+
+The exponent $1/2$ is a placeholder for any uniform positive power; it halves the exponent in~\eqref{eq:stripcost} and is harmless. Hypothesis $\mathrm{(P)}$ is the strip-level version of the "joined corridors" estimates of~\cite{JC26,ORC26}, which prove exactly such product bounds for corridors sharing one supporting line, and of the lower bound of~\cite{OSC26}, which shows that a factor $C^s$ cannot be avoided for oscillating families. In the present setting the oscillating families are not dangerous, since their strips have average line count of order~$2$ rather than~$j_0$, but a proof of~$\mathrm{(P)}$ must still exclude them explicitly.
+
+\begin{proposition}[Conditional single-cluster bound]
+\label{prop:conditional}
+If $\mathrm{(P)}$ holds, then~\eqref{eq:target} holds with $\beta=cj_0/60-1$ for all $j_0\ge300/c$, and consequently, by~\cite[Theorem~1.2]{FM26} and the chain bookkeeping of~\cite[Section~3.1]{FM26}, $\lambda_c(\mu,1)>0$ for all $\mu\le\mu_0$.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Group the strips of a cover into direction classes of width $t^{-2/3}$; for distinct classes use the disjoint-occurrence inequality on the long-footprint parts and the uniform short-footprint bound; inside a class use~$\mathrm{(P)}$. The Peierls sum then runs as above with $w_t$ replaced by $C\,t\cdot t^{-cj_0/60}$, and the chain bookkeeping of~\cite{FM26} converts the single-cluster bound into hypothesis~$\mathrm{(T)}$ there.
+\end{proof}
+
+% =================================================================
+\section{Summary}
+\label{sec:summary}
+
+\begin{enumerate}
+  \item \Cref{thm:fixed} is rigorous: for any fixed set of $m$ boxes the incidence count exceeds $\kappa m$ with probability $O(m^{-c\kappa})$, $c=1/80$, for $\kappa\ge5\cdot10^4\mu$. This is step~(ii) of the plan in~\cite[Section~5]{FM26}, for arbitrary sets rather than straight bundles only.
+  \item \Cref{lem:row} is step~(i) for rows: long footprints on a row come from lines within angle $O(1/s)$ of the row, with measure $O(\mu m/s^2)$.
+  \item The strip-cover scheme of \cref{sec:cover} replaces the union over connected sets by a union over covers by straight strips and applies \cref{thm:fixed} to the strips. It removes the entropy of paths inside bundles. Its one missing input is the parallel-strip hypothesis~$\mathrm{(P)}$, a product bound for nearly parallel strips.
+  \item Under~$\mathrm{(P)}$, \cref{prop:conditional} gives the single-cluster bound with $\beta=cj_0/60-1$ and, through~\cite{FM26}, a subcritical phase in the sparse regime. We estimate~$\mathrm{(P)}$ to be of the same nature as the joined-corridor estimates of the companion notes and therefore within reach, but it is not proved here.
+\end{enumerate}
+
+\section*{Acknowledgements}
+
+BJ acknowledges the financial support of the Leibniz Association within the Leibniz Junior Research Group on Probabilistic Methods for Dynamic Communication Networks (DYCOMNET) as part of the Leibniz Competition (grant no.~J105/2020), of the Berlin Mathematics Research Center MATH+ through the project EF-MA-Sys-2 on Information Flow \& Emergent Behavior in Complex Networks, and of the Deutsche Forschungsgemeinschaft (DFG) through Project P27 within the SPP~2265.
+
+\section*{Use of AI tools}
+
+The simulations, proofs, computations, figures and the text of this note were developed with substantial assistance of the AI systems Claude (Anthropic) and ChatGPT Astra~6 (OpenAI), in an interactive process directed by the authors.
+
+\bibliographystyle{amsalpha}
+\bibliography{references}
+
+\end{document}

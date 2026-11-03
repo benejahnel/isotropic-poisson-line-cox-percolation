@@ -1,0 +1,216 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+
+\runningtitle{Critical isotropic Poisson line Cox percolation}
+\hypersetup{pdftitle={On the critical behaviour of isotropic Poisson line Cox percolation},pdfauthor={Christian Hirsch, Benedikt Jahnel}}
+
+\title{\textbf{On the critical behaviour of isotropic\\ Poisson line Cox percolation}\\[0.6em] \large Working note}
+
+% TODO(BJ): Autorenliste prüfen; die Notiz entstand als Vergleich mit arXiv:2611.01490.
+\author{%
+  Christian Hirsch\thanks{Institut f\"ur Mathematische Stochastik, Georg-August-Universit\"at G\"ottingen, Goldschmidtstra\ss e~7, 37077 G\"ottingen, Germany. \texttt{christian.hirsch@uni-goettingen.de}. \orcid{0000-0003-4136-3740}.}
+  \and
+  Benedikt Jahnel\thanks{Institut f\"ur Mathematische Stochastik, Technische Universit\"at Braunschweig, Universit\"atsplatz~2, 38106 Braunschweig, Germany, and Weierstrass Institute for Applied Analysis and Stochastics, Mohrenstra\ss e~39, 10117 Berlin, Germany. \texttt{benedikt.jahnel@tu-braunschweig.de}. \orcid{0000-0002-4212-0065}.}%
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{plain}
+
+\begin{abstract}
+We record what is known about the behaviour of the planar Boolean model driven by an isotropic Poisson line Cox process at its critical point intensity, and we compare the model with independent long-range percolation, for which the absence of an infinite cluster at criticality was recently proved under a tail condition on the interaction. We show that the percolation probability at the critical intensity is zero or one, so that the question is a dichotomy. We then express the line environment as a long-range interaction and find that it lies outside the summable regime: the counterpart of the tail quantity is the number of lines meeting a box, which grows linearly with the side of the box, and the pair correlation of the Cox process decays like the inverse distance. We identify which steps of the renormalisation argument survive conditionally on the lines, and we show that its final contour count has no annealed analogue, because large line-free regions cost only exponentially in their diameter. The critical question is thereby reduced to a quenched exploration in a random environment, which we formulate as a programme.
+
+\medskip
+\noindent\textit{2020 Mathematics Subject Classification.} Primary 60K35; Secondary 60D05, 60G55.
+
+\noindent\textit{Key words and phrases.} Continuum percolation, Poisson line Cox process, Boolean model, critical point, long-range percolation, Kozma--Nitzan inequality.
+\end{abstract}
+
+% =================================================================
+\section{Introduction}
+\label{sec:introduction}
+
+Let $X_\lambda$ be a Poisson line Cox process in the plane: the points of a homogeneous Poisson process of intensity~$\lambda$ on each line of an isotropic Poisson line process of intensity~$\mu$. The companion notes~\cite{HJ26,HJ26sub} study the Boolean model $\Xi_\lambda$ of disks of radius~$r$ around these points. The first note shows that $\Xi_\lambda$ percolates once $\lambda\ge Cr^{-1}[1+\logp(1/(\mu r))]$, so that the critical intensity $\lambda_c(\mu,r)$ is finite. The second note reduces the positivity of $\lambda_c(\mu,r)$ to a greedy-path statement about the line process and explains why the usual subcritical arguments fail. The present note concerns the next question, the behaviour at $\lambda=\lambda_c(\mu,r)$.
+
+The occasion is a recent result on independent long-range percolation. Pei~\cite{Pei26} proves that long-range bond percolation on~$\Z^d$, $d\ge2$, with connection probabilities $1-\e^{-\beta J(x-y)}$ has no infinite cluster at the critical parameter whenever the kernel~$J$ is symmetric under the lattice symmetries, positive on nearest neighbours, and satisfies the tail condition $\liminf_{n\to\infty}n^d\sum_{\lVert x\rVert>n}J(x)=0$. The proof adapts the renormalisation scheme of Kozma and Nitzan~\cite{KN24}, driven by the gluing inequality they conjectured and which is now proved~\cite{OAI26a,BR26,Gou26}, together with the seed-and-exploration method of Grimmett and Marstrand~\cite{GM90}. The Poisson line environment produces dependence at all distances, as do long edges, and one may ask whether the two mechanisms are comparable.
+
+\paragraph{Results.} \Cref{prop:dichotomy} shows that $\theta(\lambda_c,\mu,r)\in\{0,1\}$ whenever $0<\lambda_c(\mu,r)<\infty$, so that the percolation function is a step function and the critical question is whether the step is taken at or after the critical intensity. \Cref{sec:longrange} recalls the long-range result in the form we need. \Cref{sec:comparison} translates the line environment into the language of long-range interactions: the quantity that must vanish in the tail condition is replaced by the number of lines meeting a box, which equals $8\mu\ell/\pi$ for a box of side~$2\ell$ (\cref{lem:lines}), and the pair correlation function of~$X_\lambda$ equals $1+1/(\pi\mu\lvert x-y\rvert)$ (\cref{lem:paircorr}). The model therefore lies outside the summable regime of~\cite{Pei26}, beyond the excluded borderline case. \Cref{sec:transfer} examines the four steps of the renormalisation argument. Conditionally on the lines, the point process is Poisson on a union of segments, and the local steps survive. The final step, a planar contour count over bad coarse cubes, has no annealed analogue: \cref{prop:blob} shows that $k$~cubes arranged in a block are simultaneously free of lines with probability at least $\exp(-c\mu\ell\sqrt k)$, which exceeds any bound of the form~$f^k$. \Cref{sec:programme} formulates the remaining quenched exploration as a programme and relates it to the open positivity problem.
+
+\paragraph{Status.} We do not prove $\theta(\lambda_c,\mu,r)=0$, and we do not know whether $\lambda_c(\mu,r)>0$. All statements below are proved under the standing assumption $0<\lambda_c(\mu,r)<\infty$ where this is needed, and heuristic statements are labelled as such.
+
+% =================================================================
+\section{Setting and the critical dichotomy}
+\label{sec:setting}
+
+We use the notation of~\cite{HJ26,HJ26sub}. Put $n_\theta\coloneqq(\cos\theta,\sin\theta)$ and $\ell(\theta,s)\coloneqq\{x\in\R^2\colon x\cdot n_\theta=s\}$ for $\theta\in[0,\pi)$ and $s\in\R$. Let $\cL$ be a Poisson process of lines with intensity measure $\nu_\mu(\d\theta\,\d s)\coloneqq(\mu/\pi)\dd\theta\dd s$, let $\Lambda(A)\coloneqq\sum_{\ell\in\cL}\cH^1(\ell\cap A)$, and, conditionally on~$\cL$, let $X_\lambda$ be a Poisson process with intensity measure~$\lambda\Lambda$ \cite[Theorem~5.6]{LP17}. For $r>0$ put $\Xi_\lambda\coloneqq\bigcup_{x\in X_\lambda}B(x,r)$, where $B(x,t)$ is the open disk of radius~$t$ centred at~$x$. Percolation means the existence of an unbounded connected component of~$\Xi_\lambda$. Write $\theta(\lambda,\mu,r)$ for its probability, $\theta_\cL(\lambda)\coloneqq\P(\Xi_\lambda\text{ percolates}\mid\cL)$ for the quenched percolation probability, and
+\begin{equation*}
+  \lambda_c(\mu,r)\coloneqq\inf\{\lambda>0\colon\theta(\lambda,\mu,r)>0\}\,.
+\end{equation*}
+For a bounded set~$A$, the lines meeting~$A$ are the lines meeting its convex hull, and their $\nu_\mu$-measure is $(\mu/\pi)$ times the perimeter of the hull, by integrating the width over all directions~\cite[Theorem~8.4.4]{SW08}. We write $Q_\ell\coloneqq[-\ell,\ell]^2$ and $\lvert A\rvert$ for the area of~$A$.
+% TODO(Claude): Stelle in Schneider--Weil prüfen (Cauchy-Formel für die Maß der Geraden, die eine konvexe Menge treffen).
+
+By~\cite[Theorem~2.1]{HJ26}, $\lambda_c(\mu,r)<\infty$. By~\cite[Proposition~3.3]{HJ26sub}, for almost every~$\cL$ and every $\lambda>0$ the quenched probability $\theta_\cL(\lambda)$ lies in~$\{0,1\}$, and the quenched threshold is almost surely equal to $\lambda_c(\mu,r)$. In particular, $\theta(\lambda,\mu,r)\in\{0,1\}$ for $\lambda\ne\lambda_c(\mu,r)$. The same is true at the critical intensity.
+
+\begin{proposition}[Critical dichotomy]
+\label{prop:dichotomy}
+Let $\mu,r>0$ and assume $0<\lambda_c(\mu,r)<\infty$. Then $\theta(\lambda_c(\mu,r),\mu,r)\in\{0,1\}$. Consequently, $\lambda\mapsto\theta(\lambda,\mu,r)$ is either $\1\{\lambda>\lambda_c(\mu,r)\}$ or $\1\{\lambda\ge\lambda_c(\mu,r)\}$.
+\end{proposition}
+
+\begin{proof}
+Write $\lambda_c\coloneqq\lambda_c(\mu,r)$. By~\cite[Proposition~3.3]{HJ26sub}, $\theta_\cL(\lambda_c)\in\{0,1\}$ almost surely, so $\theta(\lambda_c,\mu,r)=\P(\theta_\cL(\lambda_c)=1)$. The event $\{\theta_\cL(\lambda_c)=1\}$ is measurable in~$\cL$ and invariant under translations of~$\cL$: translating the lines translates the conditional law of~$X_\lambda$, and percolation is translation invariant. By the mixing property of the line process~\cite[Lemma~3.2]{HJ26sub}, every translation-invariant event has probability $0$ or~$1$. The second assertion combines this with the values of~$\theta$ off the critical intensity recalled above.
+\end{proof}
+
+\begin{remark}[Formulations of the critical question]
+\label{rem:question}
+Under the assumption of \cref{prop:dichotomy}, the following are equivalent: $\theta(\lambda_c,\mu,r)=0$; the function $\theta(\cdot,\mu,r)$ is continuous; and almost surely, given the lines, the Boolean model at the critical intensity does not percolate. The alternative is that $\Xi_{\lambda_c}$ percolates almost surely. The same dichotomy holds for the critical line intensity $\mu_c(\lambda,r)\coloneqq\inf\{\mu>0\colon\theta(\lambda,\mu,r)>0\}$ at fixed~$\lambda$, since $\theta$ is nondecreasing in~$\mu$ by~\cite[Proposition~3.1]{HJ26sub} and the argument above does not use which parameter is varied. We expect $\theta(\lambda_c,\mu,r)=0$, by analogy with planar Boolean percolation, but the argument of~\cite{DST16} for slabs and finite-range models uses independence across disjoint regions, which the line environment destroys.
+\end{remark}
+
+% =================================================================
+\section{Long-range percolation with fast-decaying interactions}
+\label{sec:longrange}
+
+We recall the result of~\cite{Pei26} in the form needed for the comparison. Let $d\ge1$ and let $J\colon\Z^d\setminus\{0\}\to[0,\infty)$ satisfy $J(x)=J(-x)$ and $\sum_xJ(x)<\infty$. In long-range percolation at parameter $\beta>0$, each pair $\{x,y\}$ of distinct vertices of~$\Z^d$ is open independently with probability $1-\e^{-\beta J(x-y)}$. Write $\theta^{\mathrm{lr}}(\beta)$ for the probability that the origin lies in an infinite open cluster and $\beta_c\coloneqq\inf\{\beta\colon\theta^{\mathrm{lr}}(\beta)>0\}$. With $\lVert x\rVert\coloneqq\max_i\lvert x_i\rvert$ and
+\begin{equation*}
+  T(n)\coloneqq\sum_{\lVert x\rVert>n}J(x)\,,
+\end{equation*}
+the hypotheses are the following.
+
+\begin{assumption}
+\label{ass:pei}
+The kernel~$J$ satisfies the following three conditions.
+\begin{itemize}
+  \item[(Sym)] $J$ is invariant under coordinate permutations and sign changes of coordinates.
+  \item[(Pos)] $J(e_1)>0$ for the first unit vector~$e_1$.
+  \item[(Tail)] $\liminf_{n\to\infty}n^dT(n)=0$.
+\end{itemize}
+\end{assumption}
+
+\begin{theorem}[{\cite[Theorem~1.1 and Corollaries~1.2, 1.3]{Pei26}}]
+\label{thm:pei}
+Let $d\ge2$ and let $J$ satisfy \cref{ass:pei}. Then $0<\beta_c<\infty$ and $\theta^{\mathrm{lr}}(\beta_c)=0$. In particular, $\theta^{\mathrm{lr}}(\beta_c)=0$ holds for every kernel with $c\lVert x\rVert^{-d-\alpha}\le J(x)\le C\lVert x\rVert^{-d-\alpha}$ and $\alpha>d$, for every exponentially decaying kernel, and for every finite-range kernel, provided that (Sym) and (Pos) hold. Together with Berger's theorem for heavy tails~\cite[Theorem~2.6]{Ber02}, which covers $0<\alpha<d$, the power-law case is settled for every $\alpha\ne d$.
+\end{theorem}
+
+\paragraph{Idea of the proof.} Assume $\theta^{\mathrm{lr}}(\beta_c)>0$. First, a box $\Lambda_m$ connects, inside a cube $\Lambda_\ell$, to each outer thick quarter-face of that cube with high probability; only finitely many radii~$\ell$ are needed, so the estimates persist at some $q<\beta_c$. Second, an extension lemma shows that if a vertex~$o$ outside a box~$B$ reaches~$B$, then it reaches with almost the same probability any target that every point near~$B$ can hit through a quarter-face. The cluster of~$o$ enters a neighbourhood of~$B$ at many points, at each of which a seed box gives a relay point; the gluing inequality
+\begin{equation}
+\label{eq:gluing}
+  \P(s\leftrightarrow A,\ s\leftrightarrow t)\ \ge\ \P(s\leftrightarrow A)\,\min_{a\in A}\P(a\leftrightarrow t)\,,
+\end{equation}
+valid for independent bond percolation on a finite graph with arbitrary edge probabilities~\cite[Proposition~2.1]{OAI26a}, turns the good relay points into a connection. Third, a fixed sequence of extensions relays a connection from the centre of one coarse cube to the centre of a neighbouring one. Fourth, coarse cubes indexed by~$\Z^2$ are explored one at a time, keeping the conditional connection probability of each pending cube high; a planar contour count then produces an infinite cluster at $q<\beta_c$, a contradiction.
+
+Long edges enter at two places. A path that leaves a box need not pass through its boundary; this is handled by outer faces of width~$w$ and the bound $\beta(2\ell+1)^dT(w)$ on the expected number of open edges of length exceeding~$w$ with one endpoint in~$\Lambda_\ell$. In the extension lemma, every vertex of the outside cluster has edges into the box; the number of boundary neighbours is replaced by the crossing weight $W\coloneqq\sum_{x\in\mathcal C}\sum_{z\in B}\beta J(x-z)$, and the probability that all crossing edges are closed equals~$\e^{-W}$. The condition (Tail) is used once, at a pair of scales $(w,\ell)$ with $\ell\le C_0w$, to make $\beta\ell^dT(w)$ small. At the borderline $\alpha=d$ the quantity $n^dT(n)$ stays bounded away from zero, long edges leave the cube $[-n,n]^d$ with probability of order one at every scale, and the argument gives nothing~\cite[Remark~7.2]{Pei26}; in $d=1$ with $J(x)\asymp\lvert x\rvert^{-2}$ the transition is discontinuous~\cite{AN86}.
+
+% =================================================================
+\section{The line environment as a long-range interaction}
+\label{sec:comparison}
+
+The tail condition controls how often a box communicates with far-away vertices. We compute the corresponding quantities for the line environment.
+
+\begin{lemma}[Lines through a box]
+\label{lem:lines}
+Let $\ell>0$. The number of lines of~$\cL$ meeting~$Q_\ell$ is Poisson with mean $8\mu\ell/\pi$. Almost surely, every such line carries points of~$X_\lambda$ outside $Q_{\ell+w}$ for every $w>0$. Hence, for every $w>0$, the expected number of lines meeting~$Q_\ell$ that carry a point of~$X_\lambda$ at distance exceeding~$w$ from~$Q_\ell$ equals $8\mu\ell/\pi$, and the probability that no such line exists equals $\e^{-8\mu\ell/\pi}$.
+\end{lemma}
+
+\begin{proof}
+The perimeter of~$Q_\ell$ is~$8\ell$, which gives the mean. Given~$\cL$, each line carries a homogeneous Poisson process of intensity~$\lambda>0$, which almost surely has points in both unbounded components of the line minus a bounded set. The remaining assertions follow, as the number of lines is Poisson.
+\end{proof}
+
+In the language of \cref{sec:longrange}, the quantity $\beta(2\ell+1)^dT(w)$ bounds the expected number of open edges of length exceeding~$w$ leaving~$\Lambda_\ell$, and (Tail) makes it small for $w$ a fixed fraction of~$\ell$. The counterpart for the Cox model is the expected number of lines through~$Q_\ell$ carrying a point beyond distance~$w$, and by \cref{lem:lines} this equals $8\mu\ell/\pi$ for every~$w$ and tends to infinity with~$\ell$. The analogous quantity for pairs of points diverges even for a fixed box, as the next lemma shows.
+
+\begin{lemma}[Pair correlation of the Cox process]
+\label{lem:paircorr}
+The second factorial moment measure of~$X_\lambda$ has density
+\begin{equation*}
+  \rho^{(2)}(x,y)=\lambda^2\mu^2+\frac{\lambda^2\mu}{\pi\lvert x-y\rvert}\,,\qquad x\ne y\,,
+\end{equation*}
+with respect to Lebesgue measure on $\R^2\times\R^2$. Equivalently, the pair correlation function is $g(x,y)=1+1/(\pi\mu\lvert x-y\rvert)$. In particular, for every $\ell>0$ and $w>0$, the expected number of pairs of points of~$X_\lambda$ on a common line with one point in~$Q_\ell$ and the other at distance exceeding~$w$ from it is infinite.
+\end{lemma}
+
+\begin{proof}
+Given~$\cL$, the process~$X_\lambda$ is Poisson with intensity measure~$\lambda\Lambda$, so its second factorial moment measure is $\lambda^2\Lambda\otimes\Lambda$ \cite[Corollary~4.10]{LP17}.
+% TODO(Claude): Stelle in Last--Penrose prüfen (faktorielle Momentenmaße des Poisson-Prozesses). Taking expectations and splitting $\Lambda\otimes\Lambda$ into pairs of distinct lines and the diagonal, Campbell's formula gives, for Borel sets $A,B\subseteq\R^2$,
+\begin{equation*}
+  \E[\Lambda(A)\Lambda(B)]=\mu^2\lvert A\rvert\lvert B\rvert+\int\nu_\mu(\d\ell)\,\cH^1(\ell\cap A)\,\cH^1(\ell\cap B)\,.
+\end{equation*}
+For the second term, write the inner lengths as integrals over points $u\in\ell\cap A$ and $v\in\ell\cap B$. The map $(\theta,s,u,v)\mapsto(u,v)\in\R^2\times\R^2$, where $u,v$ are the points with arc-length coordinates $u,v$ on $\ell(\theta,s)$, has Jacobian $\lvert u-v\rvert$; this is the planar case of the affine Blaschke--Petkantschin formula~\cite[Theorem~7.2.7]{SW08}. Hence the second term equals $(\mu/\pi)\int_A\int_B\lvert x-y\rvert^{-1}\dd y\dd x$, which proves the density. The expected number of pairs on a common line with $x\in Q_\ell$ and $\lvert y-x\rvert>w$ is $(\lambda^2\mu/\pi)\int_{Q_\ell}\int_{\lvert z\rvert>w}\lvert z\rvert^{-1}\dd z\dd x$, and the inner integral diverges.
+\end{proof}
+% TODO(Claude): Konstante $1/\pi$ und Normierung der Blaschke--Petkantschin-Formel in Schneider--Weil prüfen; die Skalierung $\lvert x-y\rvert^{-1}$ folgt bereits aus Translations-, Rotations- und Skaleninvarianz.
+
+\begin{remark}[Position relative to the long-range regimes]
+\label{rem:regime}
+If one reads the same-line part of~$\rho^{(2)}$ as an effective kernel, it decays like $\lvert x-y\rvert^{-1}=\lvert x-y\rvert^{-d-\alpha}$ with $d=2$ and $\alpha=-1$. This is not summable, so the model lies outside the class of kernels considered in~\cite{Pei26} and in~\cite{Ber02}, beyond the borderline $\alpha=d$ excluded in \cref{thm:pei}. The comparison is only an analogy: in long-range percolation the long edges are independent connections, whereas in the Cox model the lines are a shared environment on which the points are placed, and the points connect only over distance~$2r$. The pair correlation is a statistic of the environment, not a connection probability. In particular, Berger's sprinkling argument, which uses the long edges to percolate at a slightly smaller parameter, has no counterpart. The quantity that does transfer is the mixing coefficient: by~\cite[Lemma~3.2]{HJ26sub}, two windows of radius~$R$ at distance~$D$ share lines of expected number at most $16\mu R^2/(\pi D)$, which for $R\asymp D\asymp n$ is of order~$\mu n$. The dependence between neighbouring boxes of side~$n$ therefore does not decay with~$n$; this is the quantitative form of the failure of stabilisation noted in~\cite[Section~3]{JT22}.
+\end{remark}
+
+% =================================================================
+\section{Which steps of the argument transfer}
+\label{sec:transfer}
+
+We go through the four steps of the proof of \cref{thm:pei} and ask what survives for the Cox model. The natural setting is quenched: given~$\cL$, the process~$X_\lambda$ is Poisson on the union of the lines, and the restrictions to disjoint regions are independent.
+
+\paragraph{Faces at the critical intensity.} In the Boolean model, every path from~$Q_m$ to the complement of~$Q_\ell$ passes through the shell $Q_{\ell+2r}\setminus Q_\ell$, since disks of radius~$r$ connect only over distance~$2r$. The thick outer faces of~\cite{Pei26} are therefore unnecessary, and the long-exit term $\beta(2\ell+1)^dT(w)$ has no counterpart. Annealed, the argument of~\cite[Lemma~3.2]{Pei26} goes through: if $\theta(\lambda_c,\mu,r)>0$, then by \cref{prop:dichotomy} and~\cite[Proposition~3.3]{HJ26sub} the model percolates almost surely, the box~$Q_m$ meets the infinite component with probability tending to one as $m\to\infty$, and by the symmetries of the isotropic law and the Harris inequality for the Poisson process~\cite[Theorem~20.4]{LP17}, each of the eight quarter-faces is reached with high probability. The events involved depend on the points in a bounded window and are continuous in~$\lambda$ by thinning, so they persist at some $q<\lambda_c$. The quenched version fails: given~$\cL$, the law is neither translation invariant nor symmetric, and the face events of a cube with no line in it have probability zero.
+
+% TODO(Claude): Stelle in Last--Penrose prüfen (Harris--FKG-Ungleichung, Theorem 20.4).
+
+\paragraph{Extension and relay.} Conditionally on~$\cL$, the restrictions of~$X_\lambda$ to a box and to its complement are independent, and the cluster of a point~$o$ outside a box enters it only through the shell of width~$2r$. The crossing weight of~\cite{Pei26} is replaced by the number of shell points adjacent to the outside cluster. Both ingredients of the extension lemma are thus available quenched: a layer argument over the shells at spacing~$2r$, and independent seed attempts at the landing points. The gluing inequality~\eqref{eq:gluing} is stated for independent bond percolation on a finite graph. Given~$\cL$, cutting the lines in a bounded window into segments of length~$\varepsilon$ and recording whether a segment carries a point gives independent bits, and connection events of the Boolean model are determined, up to an $\varepsilon$-perturbation of the radius, by a site percolation on the graph of segments with adjacency when the corresponding disks can intersect. The inequality~\eqref{eq:gluing} is proved for hypergraphs in~\cite[Proposition~2.1]{OAI26a} and is applied there to site percolation; we expect that it applies to this quenched site model, but we have not checked the details.
+% TODO(Claude): Prüfen, ob die Site-Version der Gluing-Ungleichung in [OAI26a] für den diskretisierten Cox-Fall direkt anwendbar ist.
+
+The relay between neighbouring coarse cubes requires that the face events have probability close to one for every cube involved. Annealed this holds for the typical cube; quenched it holds only for cubes whose line configuration permits it. The relay is therefore a quenched statement for cubes that are \emph{environment-good}, a notion that depends on~$\cL$ alone.
+
+\paragraph{Exploration and contour count.} The last step of~\cite{Pei26} explores coarse cubes indexed by~$\Z^2$ and requires, in~\cite[Lemma~6.3]{Pei26}, that any $k$ prescribed cubes are simultaneously bad with probability at most~$f^k$, with $f$ small enough to beat the planar contour entropy~$2n3^n$. Quenched, the bits of a pending cube are fresh, as in the independent case. Annealed, the statement fails for every notion of badness that includes the absence of lines.
+
+\begin{proposition}[Line-free blocks]
+\label{prop:blob}
+Let $\ell>0$ and let $A$ be a bounded set. Then
+\begin{equation*}
+  \P(\text{no line of }\cL\text{ meets }A)=\exp\bigl(-(\mu/\pi)\operatorname{per}(\conv A)\bigr)\,.
+\end{equation*}
+In particular, for every $k\in\N$ and every union~$A_k$ of $k$ cubes of side~$\ell$ contained in a square of side $\ell\lceil\sqrt k\,\rceil$,
+\begin{equation*}
+  \P(\text{no line meets }A_k)\ge\exp\bigl(-4\mu\ell(\sqrt k+1)/\pi\bigr)\,.
+\end{equation*}
+Consequently, for every $f\in(0,1)$ and every~$\ell$, there is~$k$ such that no family of events $(\mathcal A_v)_{v\in\Z^2}$ with $\mathcal A_v\supseteq\{\text{no line meets the cube }v\}$ satisfies $\P(\bigcap_{v\in V}\mathcal A_v)\le f^{\lvert V\rvert}$ for all finite $V\subseteq\Z^2$.
+\end{proposition}
+
+\begin{proof}
+The lines meeting~$A$ are those meeting $\conv A$, their number is Poisson with mean $(\mu/\pi)\operatorname{per}(\conv A)$, and the convex hull of~$A_k$ lies in a square of perimeter $4\ell\lceil\sqrt k\,\rceil$. The last assertion follows by taking~$V$ to be a block of $k$ cubes and $k$ so large that $\exp(-4\mu\ell(\sqrt k+1)/\pi)>f^k$.
+\end{proof}
+
+In the exploration of~\cite{Pei26}, a cube without lines has no points and cannot relay a connection, so it is bad under any reasonable definition. By \cref{prop:blob}, the probability that all cubes in a block of side~$\sqrt k$ are bad decays only like $\exp(-c\mu\ell\sqrt k)$, whereas the contour count requires $f^k$. A dual cycle of length~$n$ around the explored set can be a thin curve filling a square of side of order~$\sqrt n$, so the cubes along it can all lie in a line-free region of cost $\exp(-c\mu\ell\sqrt n)$, against an entropy of~$3^n$ cycles. Enlarging the cube side~$\ell$ does not help, because the comparison is between $\sqrt k$ and $k$. The planar contour count of~\cite[Lemma~2.3]{Pei26} therefore has no annealed version in the Cox model, and the exploration must be run quenched, on the environment-good cubes.
+
+\begin{remark}[Direction of monotonicity]
+\label{rem:monotone}
+Adding lines adds points, so every connection event of the Boolean model is increasing in~$\cL$, and the badness of a cube is a decreasing event of the line process. Decreasing events are positively correlated under the Poisson law. The obstruction in \cref{prop:blob} is thus of the same type as in the subcritical analysis~\cite[Section~6]{HJ26sub}, where the union bound over paths fails because of bundles of nearly parallel lines: in both cases a single geometric feature of the line process, a bundle there and a line-free region here, has a cost that is linear in its diameter and not in its area or length. The supercritical note~\cite{HJ26} avoids this issue because deleting directions is a comparison in the opposite direction, see~\cite[Remark~6.1]{HJ26}.
+\end{remark}
+
+% =================================================================
+\section{A quenched programme}
+\label{sec:programme}
+
+The discussion of \cref{sec:transfer} suggests the following two-layer structure for a proof of $\theta(\lambda_c,\mu,r)=0$, assuming $\lambda_c(\mu,r)>0$.
+
+\paragraph{Environment layer.} Define, as a function of~$\cL$ alone, a notion of environment-good coarse cube at a scale $\ell\gg r$: for instance, the cube contains a connected arrangement of lines joining its centre to each neighbouring cube with segments of total length bounded in terms of~$\ell$, so that the relay step has a chance to succeed for a point intensity of order~$\lambda_c$. The required statement is that the environment-good cubes form, almost surely, an infinite connected set in~$\Z^2$ with a boundary structure that supports a contour count. The bad cubes are a decreasing event of the line process with correlations decaying like the inverse distance, and the line-free regions of \cref{prop:blob} show that the bad set contains blocks of side~$\sqrt k$ at cost $\exp(-c\mu\ell\sqrt k)$. This is a dependent site percolation in the spirit of the stretched lattices of Hoffman and of Hil\'ario, S\'a, Sanchis and Teixeira~\cite{HSST26}, where columns and rows of bad sites have a cost linear in their length; the static renormalisation of~\cite{HSST26} is the natural template, and~\cite{JJV23} shows how it enters in the Manhattan environment.
+
+\paragraph{Point layer.} Given~$\cL$ and the set of environment-good cubes, run the seed-and-exploration argument of~\cite{Pei26} on this set, with the quenched Poisson randomness of the points. The faces, extension and relay steps are available quenched as explained in \cref{sec:transfer}, provided the gluing inequality~\eqref{eq:gluing} applies to the discretised site model. The exploration must route around the bad cubes, so the contour count has to be adapted to a random subgraph of~$\Z^2$; the existing extensions of the Kozma--Nitzan scheme to quasi-transitive graphs~\cite{OAI26b} do not cover random environments.
+
+\paragraph{Relation to the positivity problem.} The environment layer is a statement about the line process alone, like~\cite[Conjecture~7.2]{HJ26sub}, but it is of a different nature: it asks for a robust infinite structure of good cubes, which is a supercritical property of the environment, whereas the greedy-path conjecture asks for the absence of paths collecting too many lines. The environment layer does not need the point intensity and would be unaffected by the value of~$\lambda_c$. We record the following consequence of \cref{prop:dichotomy}: if the two layers can be carried out at every $\lambda$ with $\theta_\cL(\lambda)=1$, they produce percolation at some $q<\lambda$, and therefore $\theta_\cL(\lambda_c)=0$ almost surely.
+
+\paragraph{Compatibility with the absence of exponential decay.} By~\cite[Proposition~4.1]{HJ26sub}, connection probabilities over distance~$n$ are at least $\exp(-(4+o(1))(\log n)^2/(\lambda r))$ for every~$\lambda$, so no sharpness-type argument can be used in this model. The route of \cref{sec:longrange} does not require any decay of connection probabilities: it uses finitely many face estimates at the critical intensity and their persistence slightly below it. In this respect it is the appropriate tool for the critical question, and the quasi-polynomial decay in the subcritical phase, which we expect to be sharp, is not an obstacle to it.
+
+\paragraph{Heuristics for the critical point.} For sparse lines, $\mu r\to0$, we expect $\lambda_c(\mu,r)$ of order $r^{-1}\log(1/(\mu r))$, and the critical model consists of long occupied stretches along lines between intersections~\cite[Section~7]{HJ26sub}. At criticality, a finite cluster is then a tree-like structure of line segments, and the quenched exploration of the point layer sees an environment of line segments whose intersection graph percolates. For dense lines, $\mu r\to\infty$, the Cox process resembles a Poisson process of intensity~$\lambda\mu$, and we expect the critical behaviour of planar Boolean percolation, for which continuity is known. In neither regime do we have a proof.
+
+% =================================================================
+\section*{Acknowledgements}
+
+BJ acknowledges the financial support of the Leibniz Association within the Leibniz Junior Research Group on Probabilistic Methods for Dynamic Communication Networks (DYCOMNET) as part of the Leibniz Competition (grant no.~J105/2020), of the Berlin Mathematics Research Center MATH+ through the project EF-MA-Sys-2 on Information Flow \& Emergent Behavior in Complex Networks, and of the Deutsche Forschungsgemeinschaft (DFG) through Project P27 within the SPP~2265.
+
+\section*{Use of AI tools}
+
+% TODO(BJ): Formulierung prüfen.
+The text of this note, including the comparison with~\cite{Pei26}, was drafted with substantial assistance of the AI system Claude (Anthropic) in an interactive process directed by the authors. The note has not been independently refereed.
+
+\bibliographystyle{amsalpha}
+\bibliography{references}
+
+\end{document}
