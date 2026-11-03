@@ -1,0 +1,211 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+
+\runningtitle{A first-moment route to the subcritical phase}
+\hypersetup{pdftitle={A first-moment route to the subcritical phase: the skeleton bound and the thick-cluster lemma},pdfauthor={Christian Hirsch, Benedikt Jahnel}}
+
+\title{\textbf{A first-moment route to the subcritical phase:\\ the skeleton bound and the thick-cluster lemma}\\[0.6em] \large Working note}
+
+\author{%
+  Christian Hirsch\thanks{Institut f\"ur Mathematische Stochastik, Georg-August-Universit\"at G\"ottingen, Goldschmidtstra\ss e~7, 37077 G\"ottingen, Germany. \texttt{christian.hirsch@uni-goettingen.de}. \orcid{0000-0003-4136-3740}.}
+  \and
+  Benedikt Jahnel\thanks{Institut f\"ur Mathematische Stochastik, Technische Universit\"at Braunschweig, Universit\"atsplatz~2, 38106 Braunschweig, Germany, and Weierstrass Institute for Applied Analysis and Stochastics, Mohrenstra\ss e~39, 10117 Berlin, Germany. \texttt{benedikt.jahnel@tu-braunschweig.de}. \orcid{0000-0002-4212-0065}.}%
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{plain}
+
+\begin{abstract}
+We set up a first-moment argument for the absence of percolation at small point intensity in the isotropic Poisson line Cox Boolean model. Boxes met by fewer than $j_0$ lines are crossed at an exponential cost once $\lambda j_0$ is small, and the union bound is organised so that clusters of boxes met by at least $j_0$ lines, which the points may cross for free, are traversed as single steps. This removes the micro-path entropy inside bundles that defeats the naive first moment. The result is an explicit lower bound $\lambda_c(\mu,1)\ge c/j_0$ conditional on one statement about the line process, the thick-cluster lemma: clusters of boxes with at least $j_0$ lines through every box cannot be chained to give free advance of order~$n$. We prove the part of that lemma that concerns lines with short footprints, reduce the rest to a pair-structure statement about lines with long footprints, and identify it with the large-deviation form of the linear growth conjecture at the single level~$j_0$. The oscillating corridors of the companion notes have average line count $2+o(1)$ and are therefore irrelevant for it. The unconditional statement remains open.
+\end{abstract}
+
+% =================================================================
+\section{Setting and result}
+\label{sec:setting}
+
+Let $\cL$ be a Poisson line process with intensity measure $(\mu/\pi)\dd\theta\dd s$, and, given $\cL$, let $X_\lambda$ be a Poisson process with intensity~$\lambda$ per unit length on every line. The Boolean model is $\Xi_\lambda=\bigcup_{x\in X_\lambda}B(x,1)$; two disks intersect if and only if their centres are at distance less than~$2$. By scaling, the radius~$1$ is no restriction~\cite[Proposition~3.1]{HJ26b}. For $z\in\Z^2$ let $Q(z)=z+[0,1)^2$ and let $N(z)$ be the number of lines meeting~$Q(z)$. A $2$-path is a self-avoiding sequence in~$\Z^2$ with steps of sup-norm at most~$2$; there are at most~$24$ steps from each site. Distances between sets of boxes are sup-norm distances.
+
+Fix an integer $j_0\ge2$. A box~$z$ is \emph{thin} if $N(z)<j_0$ and \emph{thick} otherwise. Let $T=T_{j_0}$ be the set of thick boxes and let $\mathcal C$ be the set of connected components of~$T$ for $2$-adjacency, the \emph{thick clusters}. Two distinct clusters are at distance at least~$3$. For a cluster~$C$ write $\lvert C\rvert$ for its number of boxes and $\operatorname{diam}C$ for its diameter.
+
+\paragraph{Cluster chains.} A \emph{cluster chain} from a box~$z_0$ is a finite sequence $(C_1,\dots,C_k)$ of thick clusters, $k\ge0$, repetitions allowed, together with integers $g_0,\dots,g_k\ge0$ such that
+\begin{equation}
+\label{eq:gaps}
+  g_0\ge\tfrac12\bigl(\operatorname{dist}(z_0,C_1)-2\bigr),\qquad g_i\ge\tfrac12\bigl(\operatorname{dist}(C_i,C_{i+1})-2\bigr)\quad(1\le i<k)\,.
+\end{equation}
+Its \emph{free advance} is $F=\sum_{i=1}^k(\operatorname{diam}C_i+4)$ and its \emph{paid length} is $G=\sum_{i=0}^kg_i$; the chain \emph{reaches}~$n$ if $F+2G\ge n$. For $0<\rho<1$ its weight is $w_\rho=\prod_{i=1}^k\lvert C_i\rvert\prod_{i=0}^k\rho^{g_i}$.
+
+\begin{definition}[Thick-cluster lemma, hypothesis $\mathrm{(T)}_\rho$]
+\label{def:T}
+Hypothesis $\mathrm{(T)}_\rho$ holds if the expected total weight of chains from~$0$ with free advance at least~$n/2$ tends to zero,
+\begin{equation}
+\label{eq:T}
+  \Phi_n(\rho)\coloneqq\E\Bigl[\ \sum_{\text{chains from }0\text{ with }F\ge n/2}w_\rho\Bigr]\xrightarrow[n\to\infty]{}0\,,
+\end{equation}
+and if the expected total weight of all chains from~$0$ with $k\ge1$ is finite.
+\end{definition}
+
+\begin{theorem}[Conditional lower bound]
+\label{thm:main}
+Let $j_0\ge2$ and $0<\lambda<1/(576\sqrt2\,(j_0-1))$, and put $\rho\coloneqq576\sqrt2\,\lambda(j_0-1)<1$. If $\mathrm{(T)}_{\sqrt\rho}$ holds, then $\Xi_\lambda$ does not percolate almost surely. In particular, if $\mathrm{(T)}_{\sqrt\rho}$ holds for some $\rho<1$ and $j_0\ge2$, then
+\begin{equation*}
+  \lambda_c(\mu,1)\ge\frac{\rho}{576\sqrt2\,(j_0-1)}>0\,.
+\end{equation*}
+\end{theorem}
+
+\Cref{sec:skeleton} proves the theorem. \Cref{sec:T} discusses the hypothesis: we reduce it to a bound on the size of a single thick cluster, prove the part of that bound concerning lines with short footprints, and show that the remaining part is the large-deviation form of~\cite[Conjecture~1.2]{GA26} at the single level~$j_0$. We have not proved it.
+
+% =================================================================
+\section{The skeleton bound}
+\label{sec:skeleton}
+
+Conditionally on~$\cL$, call a box~$z$ \emph{occupied} if $X_\lambda(Q(z))\ge1$. Occupation events of distinct boxes are independent, and since each line meets $Q(z)$ in a segment of length at most~$\sqrt2$,
+\begin{equation}
+\label{eq:occ}
+  \P(z\text{ occupied}\,\vert\,\cL)\le\min\{1,\sqrt2\,\lambda N(z)\}\le
+  \begin{cases}\sqrt2\,\lambda(j_0-1)=\rho/576,& z\text{ thin},\\ 1,& z\text{ thick}.\end{cases}
+\end{equation}
+
+\begin{lemma}[From occupied paths to chains]
+\label{lem:skeleton}
+Suppose an unbounded component of~$\Xi_\lambda$ meets~$Q(z_0)$. Then for every $n\ge\lVert z_0\rVert_\infty$ there is an occupied $2$-path $\gamma=(z_0,\dots,z_m)$ with $\lVert z_m-z_0\rVert_\infty\ge n$. Decompose~$\gamma$ into maximal thin stretches and maximal thick stretches. The thick stretches lie in clusters $C_1,\dots,C_k$, listed in the order of their visits, and the thin stretches have lengths $g_0,\dots,g_k$, where $g_0$ is the length of the initial thin stretch, possibly zero. Then $(C_1,\dots,C_k;g_0,\dots,g_k)$ is a cluster chain from~$z_0$ that reaches~$n$.
+\end{lemma}
+
+\begin{proof}
+The first assertion is in the proof of~\cite[Theorem~5.1]{HJ26b}: the occupied boxes of the component form an infinite $2$-connected set containing~$z_0$, which contains vertices at every graph distance, and a shortest path to such a vertex is a self-avoiding $2$-path. A maximal thick stretch is $2$-connected and consists of thick boxes, so it lies in one cluster. The $i$-th thin stretch, of $g_i\ge1$ boxes, starts within distance~$2$ of a box of~$C_i$ and ends within distance~$2$ of a box of~$C_{i+1}$, and its consecutive boxes are within distance~$2$, so $\operatorname{dist}(C_i,C_{i+1})\le2+2(g_i-1)+2=2g_i+2$; if $g_i=0$ the two thick stretches are $2$-adjacent and lie in the same cluster, so $\operatorname{dist}=0$ and~\eqref{eq:gaps} holds. The same argument gives the condition on~$g_0$. The displacement of~$\gamma$ is at most the sum of the displacements of its stretches and of the $2k$ transitions between stretches, each a step of sup-norm at most~$2$: a thick stretch in~$C_i$ contributes at most $\operatorname{diam}C_i$, a thin stretch of $g_i$ boxes at most $2g_i$, and the transitions at most~$4k$; hence $n\le F+2G$. Interior thin stretches have $g_i\ge1$ because maximal stretches alternate.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}]
+Fix~$\cL$. By \cref{lem:skeleton} and the union bound, the conditional probability that an unbounded component meets~$Q(z_0)$ is at most the sum, over cluster chains from~$z_0$ that reach~$n$, of the number of occupied paths realising the chain times a bound on the conditional probability of each. We count realisations by their thin stretches and by the entry and exit boxes of each cluster visit: a thin stretch of~$g$ boxes has at most $24^{g}$ realisations given the box it starts from; the entry box of a cluster is within distance~$2$ of the last thin box, at most~$24$ choices; the exit box has at most $\lvert C_i\rvert$ choices; the path inside the cluster is not counted, since by~\eqref{eq:occ} its boxes are occupied with conditional probability at most~$1$. By~\eqref{eq:occ} and conditional independence, all thin boxes of a realisation are occupied with conditional probability at most $(\rho/576)^{G}$. Since interior thin stretches have $g_i\ge1$, we have $24^k\le24\cdot24^{G}$, and therefore
+\begin{equation}
+\label{eq:quenched}
+  \P(\text{unbounded component meets }Q(z_0)\,\vert\,\cL)\le\sum_{\text{chains}}24^{k+G}\Bigl(\frac{\rho}{576}\Bigr)^{G}\prod_{i=1}^k\lvert C_i\rvert\le24\sum_{\text{chains}}w_\rho\,,
+\end{equation}
+where both sums run over the chains from~$z_0$ reaching~$n$. A chain reaching~$n$ has $F\ge n/2$ or $G\ge n/4$. For the latter, $\rho^{G}\le\rho^{n/8}\rho^{G/2}$. Taking expectations and using stationarity,
+\begin{equation*}
+  \P(\text{unbounded component meets }Q(0))\le24\,\rho^{n/8}\,\E\Bigl[\sum_{\text{all chains from }0}w_{\sqrt\rho}\Bigr]+24\,\Phi_n(\sqrt\rho)\,.
+\end{equation*}
+The expectation is finite by $\mathrm{(T)}_{\sqrt\rho}$: chains with $k=0$ contribute $\sum_{g\ge0}\rho^{g/2}<\infty$, and chains with $k\ge1$ have finite expected total weight by assumption. The second term tends to zero by~\eqref{eq:T}. Hence the origin box meets no unbounded component almost surely, and a union over $z_0\in\Z^2$ proves the first assertion. The second follows from the definition of~$\lambda_c$.
+\end{proof}
+
+\begin{remark}[What the skeleton bound achieves]
+\label{rem:skeleton}
+The bound~\eqref{eq:quenched} contains no sum over micro-paths inside thick clusters: a cluster is entered, traversed at cost~$1$, and left, with the exit box as the only choice. This is exactly the step that the path-level first moments of~\cite[Section~2]{GA26} lack. The price is that thick clusters give free advance, and~$\mathrm{(T)}$ asks that this free advance be controlled in expectation. Thin boxes have $N<j_0$, so their cost is uniform, and the superexponential annealed moments of the line counts play no role. The constant~$576=24^2$ comes from the number of $2$-steps and is not optimised.
+\end{remark}
+
+% =================================================================
+\section{On the thick-cluster lemma}
+\label{sec:T}
+
+\subsection{Reduction to single clusters}
+\label{sec:single}
+
+Thick boxes are rare: $N(z)$ is Poisson with mean $4\mu/\pi$, so a given box is thick with probability at most $(4\e\mu/(\pi j_0))^{j_0}$. The danger is the size of clusters, since a cluster of diameter~$d$ gives free advance~$d$. We formulate the single-cluster bound that would drive~$\mathrm{(T)}$.
+
+\begin{definition}[Single-cluster bound, hypothesis $\mathrm{(S)}$]
+\label{def:S}
+Hypothesis $\mathrm{(S)}_{\beta,A}$ holds if, for every box~$z$ and every $d\ge1$,
+\begin{equation}
+\label{eq:S}
+  \P\bigl(\exists\,C\in\mathcal C\colon z\in C,\ \operatorname{diam}C\ge d\bigr)\le A\,d^{-\beta}\,.
+\end{equation}
+\end{definition}
+
+The expected value of~$\beta$ is $j_0-1$: a thick cluster of diameter~$d$ containing~$z$ is typically a bundle of $j_0$ lines of length~$d$ through~$z$, with probability of order $\mu(\mu/d)^{j_0-1}$, see~\cite[Section~4]{GA26}. Any $\beta>3$ suffices for the heuristic count that follows; we take $\beta>3$ as the target.
+
+\paragraph{From $\mathrm{(S)}$ to $\mathrm{(T)}$, heuristic count.} Suppose the clusters were an independent collection with the size tail~\eqref{eq:S}. The expected weight of the chains with one cluster is at most $\sum_{z}\rho^{(\lVert z\rVert_\infty-2)^+/2}\,\E[\lvert C(z)\rvert\,1\{z\in T\}]$, where $C(z)$ is the cluster of~$z$. With $\lvert C\rvert\le(2\operatorname{diam}C+1)^2$ and~\eqref{eq:S}, $\E[\lvert C(z)\rvert1\{z\in T\}]\le\sum_dA(2d+1)^2d^{-\beta}<\infty$ for $\beta>3$, and the sum over~$z$ is finite. Each further cluster multiplies the expected weight by at most $\eta\coloneqq\sup_C\sum_{C'}\lvert C'\rvert\rho^{(\operatorname{dist}(C,C')-2)/2}$ in expectation, which for independent clusters is bounded by the perimeter of~$C$ times the same finite sum, i.e. by $C\lvert C\rvert\sum_dA(2d+1)^2d^{-\beta}$; the factor $\lvert C\rvert$ is absorbed by one more moment of the size, which is finite for $\beta>4$. The resulting constant~$\eta$ carries the factor $\mu(\mu/\cdot)^{j_0-1}$ from~\eqref{eq:S} and is small for small~$\mu$ or large~$j_0$, so $\sum_k\eta^k<\infty$ and the expected weight of all chains is finite. For the constraint $F\ge n/2$, at least one cluster of a $k$-chain has diameter at least $n/(2k)-2$, which costs an extra factor $A(n/2k)^{-\beta}(2n/k)^2$ relative to the unconstrained bound; summing $k\eta^{k-1}$ times this over~$k$ gives $O(n^{2-\beta})\to0$ for $\beta>2$. This is the content of~$\mathrm{(T)}$.
+
+The clusters are not independent, because two clusters may share lines. In a first moment over clusters this dependence is handled by the Mecke formula on the witnessing lines: a cluster of diameter~$d$ containing~$z$ is witnessed by $j_0$ lines through~$Q(z)$, and a chain of clusters by the union of their witnesses. Lines shared between two witnesses reduce the number of fresh lines but constrain the second cluster to lie along the shared line, which reduces its positional entropy from two dimensions to one. For clusters at distance~$D$ the shared configuration is cheaper than the fresh one only if $D\lesssim1/\mu$, and the expected number of clusters within distance $1/\mu$ of a given one is of order $\mu^{j_0-2}$. We expect this bookkeeping to go through along the lines of the Poisson disjoint-occurrence and factorial-moment arguments used in the companion corridor notes, but we have not carried it out, and the hypothesis~$\mathrm{(T)}$ is stated separately for this reason.
+
+\subsection{The short-footprint part of $\mathrm{(S)}$}
+\label{sec:short}
+
+A thick cluster containing~$z$ with diameter at least~$d$ contains a $2$-connected set~$A$ of thick boxes with $z\in A$ and $\lvert A\rvert=d$. For such a set,
+\begin{equation}
+\label{eq:incidence}
+  \sum_{\ell\in\cL}f_A(\ell)\ge j_0d,\qquad f_A(\ell)\coloneqq\#\{z'\in A\colon\ell\cap Q(z')\neq\varnothing\}\,,
+\end{equation}
+and every line with $f_A(\ell)\ge1$ meets the disk $B(z,2d+2)$. Call~$\ell$ \emph{short for~$A$} if $f_A(\ell)<F$ and \emph{long} otherwise, where
+\begin{equation}
+\label{eq:F}
+  F\coloneqq\Bigl\lceil\frac{j_0}{64\e\mu}\Bigr\rceil\,.
+\end{equation}
+
+\begin{lemma}[Short lines, uniformly over animals]
+\label{lem:short}
+Assume $\mu\le j_0/(192\e)$ and $d\ge2$. Let $M_d$ be the number of lines meeting $B(z,2d+2)$, a Poisson variable with mean $m_d=2\mu(2d+2)$. On the event $\{M_d\le2\e\,m_d\}$, which has probability at least $1-\e^{-m_d}$, every $2$-connected set~$A\ni z$ of $d$ boxes satisfies $\sum_{\ell\text{ short for }A}f_A(\ell)\le j_0d/4$, and therefore, if~$A$ is thick,
+\begin{equation}
+\label{eq:long}
+  \sum_{\ell\text{ long for }A}f_A(\ell)\ge\tfrac34\,j_0d,\qquad\#\{\ell\text{ long for }A\}\ge\tfrac34\,j_0\,.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The Poisson tail $\P(M_d\ge2\e m_d)\le\e^{-m_d}(\e m_d/(2\e m_d))^{2\e m_d}\le\e^{-m_d}$ gives the probability. On the event, for every~$A$, the short lines contribute at most $F\cdot M_d\le8\e\mu(d+1)F\le8\e\mu(d+1)\bigl(j_0/(64\e\mu)+1\bigr)=j_0(d+1)/8+8\e\mu(d+1)$. For $\mu\le j_0/(192\e)$ the last term is at most $j_0(d+1)/24$, and $j_0(d+1)/8+j_0(d+1)/24=j_0(d+1)/6\le j_0d/4$ for $d\ge2$. Subtracting from~\eqref{eq:incidence} gives the first inequality in~\eqref{eq:long}, and $f_A(\ell)\le\lvert A\rvert=d$ gives the count.
+\end{proof}
+
+Hence, up to an exponentially small probability, a thick animal of size~$d$ forces at least $3j_0/4$ lines each meeting at least $F\asymp j_0/\mu$ of its boxes, carrying three quarters of all incidences. The constant~$F$ is large for small~$\mu$, so these long lines run along~$A$ for a long stretch.
+
+\subsection{The long-footprint part and its pair structure}
+\label{sec:long}
+
+For two lines $\ell,\ell'$ at angle $\alpha\in(0,\pi/2]$, the boxes met by both lie within distance $2\sqrt2/\sin\alpha+2$ of their intersection point along either line, so
+\begin{equation}
+\label{eq:pair}
+  \#\{z'\colon\ell\cap Q(z')\neq\varnothing\neq\ell'\cap Q(z')\}\le\frac{c_0}{\sin\alpha}+c_0
+\end{equation}
+for a universal $c_0$. By Bonferroni's inequality applied to the sets $A_\ell=\{z'\in A\colon\ell\cap Q(z')\neq\varnothing\}$ for long~$\ell$,
+\begin{equation*}
+  \sum_{\ell\text{ long}}f_A(\ell)\le\Bigl\lvert\bigcup_{\ell\text{ long}}A_\ell\Bigr\rvert+\sum_{\{\ell,\ell'\}\text{ long}}\lvert A_\ell\cap A_{\ell'}\rvert\le d+\sum_{\{\ell,\ell'\}\text{ long}}\min\Bigl\{\frac{c_0}{\sin\alpha_{\ell\ell'}}+c_0,\ d\Bigr\}\,.
+\end{equation*}
+Combined with~\eqref{eq:long}, a thick animal of size~$d$ forces, on the event of \cref{lem:short},
+\begin{equation}
+\label{eq:pairsum}
+  \sum_{\{\ell,\ell'\}\text{ long for }A}\min\Bigl\{\frac{c_0}{\sin\alpha_{\ell\ell'}}+c_0,\ d\Bigr\}\ge\Bigl(\frac34j_0-1\Bigr)d\,.
+\end{equation}
+This is a statement about pairs of lines with small mutual angles, i.e. about nearly parallel pairs, and no longer about the boxes of~$A$ except through the qualification "long for~$A$". The qualification is essential: without it, the left-hand side summed over all pairs of lines meeting $B(z,2d+2)$ has expectation of order $(\mu d)^2\log d$, which exceeds $j_0d$ for $d\gg j_0/(\mu^2\log d)$, because many pairs cross at small angles far from~$A$. What is needed is that the pairs contributing to~\eqref{eq:pairsum} have their common zone \emph{inside}~$A$, and this reintroduces the union over connected sets~$A$.
+
+\begin{proposition}[What remains for $\mathrm{(S)}$]
+\label{prop:remains}
+Hypothesis $\mathrm{(S)}_{\beta,A}$ with $\beta>3$ follows from the following statement about the line process alone: for every box~$z$ and $d\ge1$,
+\begin{equation}
+\label{eq:remains}
+  \P\Bigl(\exists\,2\text{-connected }A\ni z,\ \lvert A\rvert=d,\ \sum_{z'\in A}N(z')\ge j_0d\Bigr)\le A\,d^{-\beta}\,.
+\end{equation}
+The converse direction, from~\eqref{eq:remains} back to the general linear growth conjecture, is not needed here.
+\end{proposition}
+
+\begin{proof}
+A thick cluster of diameter at least~$d$ containing~$z$ contains a $2$-connected set $A\ni z$ of exactly~$d$ boxes, all thick, so $\sum_AN\ge j_0d$.
+\end{proof}
+
+The statement~\eqref{eq:remains} is the large-deviation form of the linear growth conjecture~\cite[Conjecture~1.2]{GA26}: that conjecture asserts that the maximal average of~$N$ over $2$-paths of length~$n$ in a box of side~$n$ stays bounded, and the heuristic value of the bound is $2+O(\mu^{3/2})$, while~\eqref{eq:remains} asks for the probability that some animal of size~$d$ through a fixed box reaches the much larger average~$j_0$. Two features distinguish it from the general conjecture.
+
+First, only one level is involved, and it can be chosen large: $j_0$ is of order $1/\lambda$, and \cref{thm:main} only needs $j_0$ large enough that the bundle cost $(\mu/d)^{j_0-1}$ is summable against the chain combinatorics, say $j_0\ge6$. Second, the oscillating corridors of~\cite{OSC26}, which defeat the uniform exponential tail for run counts, are harmless here: along such a tube of total length $M w$ the full runs have total length of order $t(K+4)M$, so the average of~$N$ over the tube is $2+O(t(K+4)/w)=2+O(\mu^{3/2}/\sqrt t)$, far below~$j_0$. To reach average~$j_0$ an animal must spend a positive fraction of its boxes in genuine $j_0$-bundles, and a $j_0$-bundle of length~$s$ costs $(\mu/s)^{j_0}$. Chaining $m$ bundles of lengths $s_1,\dots,s_m$ with $\sum s_i\ge cd$ costs at most $\prod_i(\mu/s_i)^{j_0-1}$ up to the positional entropy of the chain, and the cheapest way to pay is a single bundle of length~$cd$, which gives the exponent $\beta=j_0-1$ in~\eqref{eq:S}. What is missing is a proof that no other configuration of lines produces a thick animal more cheaply; the obstacle is the union over the $24^d$ connected sets~$A$ in~\eqref{eq:remains}, which must be organised around the long lines of \cref{lem:short} rather than taken over the sets themselves.
+
+% =================================================================
+\section{Summary}
+\label{sec:summary}
+
+\begin{enumerate}
+  \item \Cref{thm:main} is rigorous: for $\lambda<1/(576\sqrt2(j_0-1))$, absence of percolation follows from the thick-cluster hypothesis $\mathrm{(T)}_{\sqrt\rho}$, a statement about the line process at the single level~$j_0$. The proof contains no micro-path entropy inside bundles.
+  \item $\mathrm{(T)}$ follows, by a first moment over chains of clusters, from the single-cluster bound $\mathrm{(S)}$ with exponent $\beta>4$, once the sharing of lines between clusters is controlled by the Mecke formula (\cref{sec:single}, not carried out).
+  \item \Cref{lem:short} proves, uniformly over all animals, that thick animals are carried by at least $3j_0/4$ lines with footprints of length at least $j_0/(32\e\mu)$, and~\eqref{eq:pairsum} reduces $\mathrm{(S)}$ to a statement about nearly parallel pairs among these long lines.
+  \item The remaining statement~\eqref{eq:remains} is the large-deviation form of the linear growth conjecture at level~$j_0$. The expected exponent is $\beta=j_0-1$, the oscillating corridors do not interfere, and the obstacle is the union over connected sets. A proof of~\eqref{eq:remains} for one $j_0\ge6$ and one $\mu>0$ would give $\lambda_c(\mu',1)>0$ for all $\mu'\le\mu$ by monotonicity, i.e. a subcritical phase in the sparse regime.
+\end{enumerate}
+
+\section*{Acknowledgements}
+
+BJ acknowledges the financial support of the Leibniz Association within the Leibniz Junior Research Group on Probabilistic Methods for Dynamic Communication Networks (DYCOMNET) as part of the Leibniz Competition (grant no.~J105/2020), of the Berlin Mathematics Research Center MATH+ through the project EF-MA-Sys-2 on Information Flow \& Emergent Behavior in Complex Networks, and of the Deutsche Forschungsgemeinschaft (DFG) through Project P27 within the SPP~2265.
+
+\section*{Use of AI tools}
+
+The simulations, proofs, computations, figures and the text of this note were developed with substantial assistance of the AI systems Claude (Anthropic) and ChatGPT Astra~6 (OpenAI), in an interactive process directed by the authors.
+
+\bibliographystyle{amsalpha}
+\bibliography{references}
+
+\end{document}
