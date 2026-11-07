@@ -202,13 +202,56 @@ The lemma shows the correct order $d^{-(j_0-1)}$ for the leading term; the lower
 \paragraph{What a proof of the single-cluster bound now needs.} A \emph{structure lemma} for minimal witnesses: an ordering of the lines of a minimal witness~$\Lambda$ of diameter at least~$d$, determined by~$\Lambda$ up to a factor $C^n$, such that the conditional $\nu$-measure of each line given the previous ones is at most $\mu_1$ for a line that is fresh at a box determined by the previous lines up to a bounded choice, and at most $C\mu/t$ for a line that accompanies an earlier line over Euclidean length~$t$, with the product of these bounds, summed over the admissible structures, at most $C\,d^{-\beta}$. For a bundle the ordering is the one of \cref{lem:bundleterm}; for a chain of stars it is the order along the path; for an arrangement mixing bundles of various lengths, stars and crossings the ordering has to be built from the geodesic of $C(\Lambda)$ and the first and last boxes of each line on it, and the difficulty is to charge the $j_0-1$ companion constraints of a bundle at the moment its last box is reached rather than when its lines are placed. We expect this to be a finite combinatorial argument about line arrangements, with no probabilistic input beyond the two-box bound and the Poisson measure, and we regard it as the remaining step of the programme.
 
 % =================================================================
+\section{Minimal witnesses meet the geodesic; the exit cost; relays}
+\label{sec:relay}
+
+We record three facts about the integral~\eqref{eq:Mn} that a structure lemma will have to use.
+
+\begin{lemma}[Every line is critical on the geodesic]
+\label{lem:critical}
+Let $\Lambda$ be a minimal witness and let $\gamma=(z_0,\dots,z_m)$ be any geodesic in $C(\Lambda)$ from~$0$ to a box~$w$ with $\lVert w\rVert_\infty\ge d/2$. Then every $\ell\in\Lambda$ meets a box of~$\gamma$ that is met by exactly $j_0$ lines of~$\Lambda$. In particular $\lvert\Lambda\rvert\le j_0(m+1)$, and the lines of~$\Lambda$ are determined by their traces on the $2$-neighbourhood of~$\gamma$.
+\end{lemma}
+
+\begin{proof}
+If every box of~$\gamma$ met by~$\ell$ is met by at least $j_0+1$ lines of~$\Lambda$, then $\gamma\subseteq\Theta(\Lambda\setminus\{\ell\})$, so $C(\Lambda\setminus\{\ell\})$ contains $\gamma$ and has diameter at least $\lVert w\rVert_\infty\ge d/2$; with the convention $\diam\ge d$ replaced by the equivalent "contains a box at sup-distance $\ge d/2$ from~$0$", which we adopt throughout, this contradicts minimality. A box met by exactly $j_0$ lines accounts for at most $j_0$ of them.
+\end{proof}
+
+\begin{lemma}[Exit cost]
+\label{lem:exit}
+Let $\ell_0$ be a line, $x$ a point of~$\ell_0$ and $s\ge1$. The lines~$\ell$ that enter the $1$-neighbourhood of~$\ell_0$ in the unit interval of~$\ell_0$ at~$x$ and leave it in the unit interval at distance~$s$ from~$x$ have $\nu$-measure at most $21\mu/s^2$, and at most $21\mu/s^3$ for $s\ge4$. The lines meeting the unit intervals of~$\ell_0$ at~$x$ and at distance~$s$ from~$x$, with no condition on where they leave, have measure at most $6\mu/s$, and this cannot be improved.
+\end{lemma}
+
+\begin{proof}
+Parametrise~$\ell$ by its angle $\alpha\in(0,\pi/2]$ with~$\ell_0$ and the position~$c$ of its crossing with~$\ell_0$; in the $(\theta,p)$ parametrisation, $\d\theta=\d\alpha$ and $\d p=\sin\alpha\dd c$. A line at angle~$\alpha$ stays within distance~$1$ of~$\ell_0$ along a stretch of length $2/\sin\alpha$ centred at~$c$. If it enters the $1$-neighbourhood in the unit interval at~$x$ and leaves it in the unit interval at distance~$s$, then $2/\sin\alpha\in[s-1,s+1]$, so $\sin\alpha$ lies in an interval of length $4/(s^2-1)\le8/s^2$ for $s\ge2$, and for $s\ge4$ we have $\sin\alpha\le2/3$, $\cos\alpha\ge1/2$, hence $\alpha$ lies in an interval of length at most $16/s^2$. Given~$\alpha$, the entry point determines~$c$, so $c$ lies in an interval of length~$1$, and $\sin\alpha\le2/(s-1)\le4/s$. The measure is therefore at most $(\mu/\pi)\cdot(16/s^2)\cdot(4/s)\le21\mu/s^3$ for $s\ge4$. For $1\le s<4$ the measure is at most that of the lines meeting a unit interval of~$\ell_0$ within distance~$1$, which is at most $\mu_1\le21\mu/s^2$. The second statement is the two-box bound of~\cite[Lemma~3.2]{HJ26b}, and the example of the lines at angle at most $1/s$ through both intervals shows that it is sharp.
+\end{proof}
+
+The distinction matters for the entropy of the anchors. Consider the \emph{relay} family: $j_0-1$ lines through $Q(0)$ that stay within distance~$1$ of each other over length~$m$, together with a sequence of \emph{companions} $\ell'_1,\dots,\ell'_k$, where $\ell'_i$ stays within distance~$1$ of the bundle over the stretch $[x_{i-1},x_i]$ of the bundle, $0=x_0<x_1<\dots<x_k=m$, and leaves it at~$x_i$. Every box of the bundle's core is then met by $j_0$ lines, the $j_0-1$ bundle lines and the companion current there, so the relay is a witness, and it is minimal: each companion is the $j_0$-th line on its stretch and each bundle line is needed everywhere. The positions $x_1,\dots,x_{k-1}$ are free, and the relays with $k$ companions are a family of minimal witnesses indexed by the compositions $m=s_1+\dots+s_k$ of~$m$.
+
+\begin{lemma}[Relays]
+\label{lem:relay}
+Let $R_m$ be the expected number of minimal witnesses of relay type with bundle length~$m$ and let $B_m\le\mu_1(12\mu/m)^{j_0-2}$ be the measure of the $(j_0-1)$-bundle. If the companions are charged with the exit cost of \cref{lem:exit}, then
+\begin{equation}
+\label{eq:relay}
+  R_m\le B_m\sum_{k\ge1}\ \sum_{s_1+\dots+s_k=m}\ \prod_{i=1}^k\frac{21\mu}{s_i^2}
+  = B_m\,[x^m]\,\frac{1}{1-21\mu\,\mathrm{Li}_2(x)}\le\frac{B_m}{1-7\pi^2\mu/2}\qquad(\mu<\tfrac{2}{7\pi^2})\,,
+\end{equation}
+where $\mathrm{Li}_2(x)=\sum_{s\ge1}x^s/s^2$. If instead the companions are charged with the two-box bound $6\mu/s_i$, the same sum equals $B_m[x^m](1+6\mu\log(1-x))^{-1}$, which grows like $B_m\,(1-\e^{-1/(6\mu)})^{-m}$, exponentially in~$m$.
+\end{lemma}
+
+\begin{proof}
+Given the bundle and the composition, companion~$i$ enters the bundle's $1$-neighbourhood at~$x_{i-1}$ and leaves it at~$x_i$, so by \cref{lem:exit} its measure is at most $21\mu/s_i^2$, and the Mecke formula gives the first inequality; the companions have distinct stretches, so no $1/k!$ is lost or needed. The sum over compositions is the coefficient of $x^m$ in $\sum_k\bigl(21\mu\,\mathrm{Li}_2(x)\bigr)^k$, and a power series with non-negative coefficients bounds each coefficient by its value at $x=1$, which is $(1-21\mu\cdot\pi^2/6)^{-1}$. With the weights $6\mu/s$ the generating function is $\sum_k(-6\mu\log(1-x))^k=(1+6\mu\log(1-x))^{-1}$, whose smallest singularity is at $x_0=1-\e^{-1/(6\mu)}<1$, so its coefficients grow like $x_0^{-m}$.
+\end{proof}
+
+\Cref{lem:relay} shows two things. The right-hand side of~\eqref{eq:witness} is of the order $d^{-(j_0-2)}$ on the relay family, one power of~$d$ worse than the bundle, which is the true order of relays and harmless. And the bookkeeping has to charge a line that \emph{leaves} the structure with the exit cost $O(\mu/\sigma^3)$, of which $21\mu/\sigma^2$ already suffices: with the pair bound $\mu/\sigma$ the sum over the positions at which companions are exchanged diverges exponentially, because the pair bound counts a line of span~$\sigma'$ once for every sub-stretch of length~$\sigma$ it contains. A line whose last box on the geodesic is where the \emph{geodesic} turns away, rather than where the line leaves, is charged $\mu/\sigma$ only, and the position of such a turn has to be paid by the lines that start there. The structure lemma has to separate the two cases, and \cref{lem:critical} says that the lines starting there are critical at a box of the geodesic, which is what makes the turn visible in the arrangement.
+
+% =================================================================
 \section{Summary}
 \label{sec:summary}
 
 \begin{enumerate}
   \item \Cref{prop:decorations} is rigorous: the expected number of thick $2$-connected sets of size $d$ through the origin is at least $c\,d^{-j_0}(1+p_0)^{d/2}$, so no first moment over sub-objects of a cluster, and in particular no Peierls sum over strip or band covers, can prove the single-cluster bound~\eqref{eq:S} for all~$d$. Wider covers reduce the rate of the exponential factor but do not remove it. The bound~\eqref{eq:S} itself, a statement about components, is unaffected, and so is the conditional theorem of~\cite{FM26}.
   \item \Cref{lem:geodesic} and \cref{lem:nobundle} are rigorous: a cluster of diameter~$d$ contains a thick path without shortcuts, and with probability $1-O(d^{-\beta})$ no $j_0/2$ lines pass through two boxes at distance $d^{1/2+\epsilon}$ or more in $[-d,d]^2$, for $j_0$ large.
-  \item \Cref{prop:witness} is rigorous and, we believe, the right first moment: $\P(\diam C(0)\ge d)$ is at most the expected number of \emph{minimal witness sets of lines}, a geometric integral over line arrangements with no sum over boxes, in which decorations are excluded by minimality and bundles are charged jointly. The leading term is of the correct order $d^{-(j_0-1)}$ (\cref{lem:bundleterm}). The remaining step is a structure lemma for minimal arrangements.
+  \item \Cref{prop:witness} is rigorous and, we believe, the right first moment: $\P(\diam C(0)\ge d)$ is at most the expected number of \emph{minimal witness sets of lines}, a geometric integral over line arrangements with no sum over boxes, in which decorations are excluded by minimality and bundles are charged jointly. The leading term is of the correct order $d^{-(j_0-1)}$ (\cref{lem:bundleterm}). Every line of a minimal witness is critical at a box of any geodesic (\cref{lem:critical}), lines that leave a structure after span~$\sigma$ cost $O(\mu/\sigma^3)$ rather than $\mu/\sigma$ (\cref{lem:exit}), and with this cost the relay family, in which companions are exchanged along a $(j_0-1)$-bundle, contributes $O(d^{-(j_0-2)})$ (\cref{lem:relay}), whereas the two-box bound alone would make it diverge. The remaining step is a structure lemma for general minimal arrangements built on these three facts.
   \item Alternatively, the proof of~\eqref{eq:S} can be two-scale: covers, with the band bookkeeping of~\cite{PS26}, up to $d_{\max}=1/p_w$; a block renormalisation beyond, whose decoupling bound~\eqref{eq:decoupling} rests on the no-long-bundle event and on a split of the lines at each block into local and far ones. The local parts decouple exactly. The far parts are stars with far-reaching arms; the box-by-box treatment of these stars loses a factor $K^2$ per scale that the induction cannot afford, and a treatment of the star part of a crossing as a whole is what remains to be done. The subcritical phase remains open.
 \end{enumerate}
 
