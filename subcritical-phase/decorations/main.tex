@@ -245,13 +245,59 @@ Given the bundle and the composition, companion~$i$ enters the bundle's $1$-neig
 \Cref{lem:relay} shows two things. The right-hand side of~\eqref{eq:witness} is of the order $d^{-(j_0-2)}$ on the relay family, one power of~$d$ worse than the bundle, which is the true order of relays and harmless. And the bookkeeping has to charge a line that \emph{leaves} the structure with the exit cost $O(\mu/\sigma^3)$, of which $21\mu/\sigma^2$ already suffices: with the pair bound $\mu/\sigma$ the sum over the positions at which companions are exchanged diverges exponentially, because the pair bound counts a line of span~$\sigma'$ once for every sub-stretch of length~$\sigma$ it contains. A line whose last box on the geodesic is where the \emph{geodesic} turns away, rather than where the line leaves, is charged $\mu/\sigma$ only, and the position of such a turn has to be paid by the lines that start there. The structure lemma has to separate the two cases, and \cref{lem:critical} says that the lines starting there are critical at a box of the geodesic, which is what makes the turn visible in the arrangement.
 
 % =================================================================
+\section{Towards the structure lemma: the event certificate}
+\label{sec:events}
+
+We describe the bookkeeping that, in our judgement, the structure lemma has to use, prove the two halves of it that are straightforward, verify it on the three model families, and state exactly which configurations it does not yet cover.
+
+\paragraph{Events.} Let $\Lambda$ be a minimal witness, $\gamma=(z_0,\dots,z_m)$ a fixed geodesic (the lexicographically first, say), and for $\ell\in\Lambda$ let $a(\ell)\le b(\ell)$ be the indices of its first and last box on~$\gamma$, which exist by \cref{lem:critical}. An index~$t$ is an \emph{event} if $t=a(\ell)$ or $t=b(\ell)$ for some~$\ell$; let $0=e_1<e_2<\dots<e_p\le m$ be the events, $p\le2n$. Between consecutive events the geodesic \emph{rides}: every box $z_t$ with $e_i<t<e_{i+1}$ is met only by lines of the \emph{active set} $A_i\coloneqq\{\ell\colon a(\ell)\le e_i,\ b(\ell)\ge e_{i+1}\}$, and by at least $j_0$ of them. The \emph{certificate} of~$\Lambda$ is the sequence of event boxes $u_i\coloneqq z_{e_i}$ together with the pairs $(a(\ell),b(\ell))$, $\ell\in\Lambda$, as indices into the event sequence. It does not contain the geodesic.
+
+\begin{lemma}[Measure given the certificate]
+\label{lem:measure}
+For a fixed certificate, i.e.\ fixed event boxes $u_1,\dots,u_p$ and fixed assignment of first and last events to the $n$ lines, the $\nu^{\otimes n}$-measure of the $n$-tuples with this certificate is at most
+\begin{equation}
+\label{eq:measurecert}
+  \prod_{\ell\in\Lambda}c(\ell),\qquad c(\ell)\coloneqq\min\Bigl\{\mu_1,\ \frac{6\mu}{1+\lvert u_{b(\ell)}-u_{a(\ell)}\rvert}\Bigr\}\,,
+\end{equation}
+and $c(\ell)$ may be replaced by $21\mu/(1+\lvert u_{b(\ell)}-u_{a(\ell)}\rvert)^2$ for every line that leaves the $1$-neighbourhood of another line of~$\Lambda$ at its last event.
+\end{lemma}
+
+\begin{proof}
+Each line meets its first and last event box, and the two-box bound~\cite[Lemma~3.2]{HJ26b} gives the first form; \cref{lem:exit} gives the second. The tuple is in the product set, so the measure is at most the product.
+\end{proof}
+
+\begin{lemma}[Entropy of the next event]
+\label{lem:entropy}
+Given the lines of~$\Lambda$ and the events $u_1,\dots,u_i$, the next event box $u_{i+1}$ is at distance at most~$2$ from a box~$z$ that is met by at least $j_0$ lines of~$A_i$. If some line of~$A_i$ meets $u_{i+1}$ and an earlier event at distance at least~$r$ from $u_{i+1}$, then $u_{i+1}$ lies in a set of at most $C(1+\lvert u_{i+1}-u_i\rvert/r)$ boxes determined by the earlier events and that line's direction class; if $j_0$ lines of~$A_i$ through~$z$ all have their first event at~$u_i$, then $u_{i+1}$ lies in a set of at most $C\lvert u_{i+1}-u_i\rvert$ boxes.
+\end{lemma}
+
+\begin{proof}
+The first claim is the definition of riding. A line through two unit boxes at distance~$r$ has direction determined up to angle $2\sqrt2/r$, so at distance $s$ from the second box its position is known up to $2\sqrt2s/r+1$, which gives the first bound. $j_0\ge2$ lines through $u_i$ and through~$z$ at distance~$s$ from~$u_i$ lie in the pencil of lines through~$u_i$, and $z$ is one of the at most $Cs$ boxes at distance~$s$ from~$u_i$; the entropy is that of~$z$, since $u_{i+1}$ is within distance~$2$ of~$z$.
+\end{proof}
+
+\paragraph{The payment rule.} Summing~\eqref{eq:measurecert} over certificates, the entropy of $u_{i+1}$ in \cref{lem:entropy} has to be paid by the costs of the lines whose spans are fixed at that step, that is, the lines with $b(\ell)=i+1$, and by the fresh lines with $a(\ell)=i+1$, each of which contributes a factor at most~$\mu_1$. The telescoping identity $\frac1{1+\lvert u_b-u_a\rvert}=\prod_{k=a}^{b-1}\frac{1+\lvert u_k-u_a\rvert}{1+\lvert u_{k+1}-u_a\rvert}$ distributes the cost of a line over the steps it is active, which is what makes the rule local.
+
+\begin{enumerate}
+  \item \emph{Bundle.} $p=2$, all lines have $a=1$, $b=2$; the entropy of $u_2$ at distance~$s$ is $Cs$ and the payment $(6\mu/s)^{j_0}$; $\sum_s Cs(6\mu/s)^{j_0}<\infty$ and the terms with $s\ge d/2$ give $O(d^{-(j_0-2)})$. The bound of \cref{lem:bundleterm} is better by one power because it uses the direction of~$\ell_1$ to locate~$u_2$; the rule is lossy here but sufficient.
+  \item \emph{Star chain.} Every box is an event with $j_0$ fresh lines; entropy~$24$, payment $\mu_1^{j_0}/j_0!$; the product is $(24\mu_1^{j_0}/j_0!)^m$.
+  \item \emph{Relay.} Events at the exchange positions $x_1<\dots<x_{k}$; at each, one companion ends and leaves, paying the exit cost $21\mu/s_i^2$, and one starts, paying~$\mu_1$; the entropy of~$x_i$ given $x_{i-1}$ is $Cs_i$ (the geodesic rides the bundle, whose lines all have their first event at~$0$ and are located by the first bundle line); $\sum_{s}Cs\cdot21\mu/s^2\cdot\mu_1$ diverges logarithmically, so here the rule as stated loses a factor $\log d$ per exchange, which is fatal for $k\sim d/F$ exchanges. \Cref{lem:relay} avoids this because it locates the exchange positions through the exit cost alone, without the factor~$s$: the bundle lines are located by one of them, and the companion's exit position relative to that line is what the exit cost measures. The rule must therefore locate events relative to a \emph{reference line} of the current structure, not relative to the previous event, and \cref{lem:exit} is formulated that way.
+\end{enumerate}
+
+\paragraph{The two uncovered cases.} With events located relative to a reference line of the active structure, the three families balance. Two configurations are not covered by the rule.
+\begin{enumerate}
+  \item \emph{Turns.} The geodesic may leave a structure at an event without any line of the structure leaving the structure: the lines continue, but the geodesic turns onto fresh lines. The lines of the structure then have their last event at the turn, if the geodesic does not return, and pay $6\mu/(1+\text{span})$ each; with $j_0-1$ of them ending at the turn the sum over the position of the turn converges. If only one line of the structure ends at the turn, the sum over the turn's position diverges logarithmically, and the payment has to come from the fresh lines, which the rule as stated does not arrange.
+  \item \emph{Returns.} The geodesic may leave a structure and return to it later. A line of the structure then has a long span with a gap in the middle, its cost $6\mu/(1+\text{span})$ is correct but is claimed only once, while the structure is used twice. Shortcut-freeness does not exclude returns at distances larger than~$2$. The minimality of~$\Lambda$ should imply that a return is itself an event, since the lines used on the return are critical there (\cref{lem:critical}), but we have not written the accounting.
+\end{enumerate}
+We expect both cases to be resolved by locating every event relative to a reference line and by using \cref{lem:critical} to see that a turn or a return is always accompanied by a critical box, at which some line is the $j_0$-th and therefore starts or ends there. We have not completed this, and the structure lemma remains the open step.
+
+% =================================================================
 \section{Summary}
 \label{sec:summary}
 
 \begin{enumerate}
   \item \Cref{prop:decorations} is rigorous: the expected number of thick $2$-connected sets of size $d$ through the origin is at least $c\,d^{-j_0}(1+p_0)^{d/2}$, so no first moment over sub-objects of a cluster, and in particular no Peierls sum over strip or band covers, can prove the single-cluster bound~\eqref{eq:S} for all~$d$. Wider covers reduce the rate of the exponential factor but do not remove it. The bound~\eqref{eq:S} itself, a statement about components, is unaffected, and so is the conditional theorem of~\cite{FM26}.
   \item \Cref{lem:geodesic} and \cref{lem:nobundle} are rigorous: a cluster of diameter~$d$ contains a thick path without shortcuts, and with probability $1-O(d^{-\beta})$ no $j_0/2$ lines pass through two boxes at distance $d^{1/2+\epsilon}$ or more in $[-d,d]^2$, for $j_0$ large.
-  \item \Cref{prop:witness} is rigorous and, we believe, the right first moment: $\P(\diam C(0)\ge d)$ is at most the expected number of \emph{minimal witness sets of lines}, a geometric integral over line arrangements with no sum over boxes, in which decorations are excluded by minimality and bundles are charged jointly. The leading term is of the correct order $d^{-(j_0-1)}$ (\cref{lem:bundleterm}). Every line of a minimal witness is critical at a box of any geodesic (\cref{lem:critical}), lines that leave a structure after span~$\sigma$ cost $O(\mu/\sigma^3)$ rather than $\mu/\sigma$ (\cref{lem:exit}), and with this cost the relay family, in which companions are exchanged along a $(j_0-1)$-bundle, contributes $O(d^{-(j_0-2)})$ (\cref{lem:relay}), whereas the two-box bound alone would make it diverge. The remaining step is a structure lemma for general minimal arrangements built on these three facts.
+  \item \Cref{prop:witness} is rigorous and, we believe, the right first moment: $\P(\diam C(0)\ge d)$ is at most the expected number of \emph{minimal witness sets of lines}, a geometric integral over line arrangements with no sum over boxes, in which decorations are excluded by minimality and bundles are charged jointly. The leading term is of the correct order $d^{-(j_0-1)}$ (\cref{lem:bundleterm}). Every line of a minimal witness is critical at a box of any geodesic (\cref{lem:critical}), lines that leave a structure after span~$\sigma$ cost $O(\mu/\sigma^3)$ rather than $\mu/\sigma$ (\cref{lem:exit}), and with this cost the relay family, in which companions are exchanged along a $(j_0-1)$-bundle, contributes $O(d^{-(j_0-2)})$ (\cref{lem:relay}), whereas the two-box bound alone would make it diverge. \Cref{sec:events} sets out the event certificate that the structure lemma should use, proves its measure and entropy halves, checks the payment rule on the three families, and isolates the two uncovered cases, turns and returns of the geodesic.
   \item Alternatively, the proof of~\eqref{eq:S} can be two-scale: covers, with the band bookkeeping of~\cite{PS26}, up to $d_{\max}=1/p_w$; a block renormalisation beyond, whose decoupling bound~\eqref{eq:decoupling} rests on the no-long-bundle event and on a split of the lines at each block into local and far ones. The local parts decouple exactly. The far parts are stars with far-reaching arms; the box-by-box treatment of these stars loses a factor $K^2$ per scale that the induction cannot afford, and a treatment of the star part of a crossing as a whole is what remains to be done. The subcritical phase remains open.
 \end{enumerate}
 
