@@ -1,0 +1,226 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\dist}{dist}
+
+\runningtitle{Decorations, geodesics and bundles}
+\hypersetup{pdftitle={Decorations, geodesics and bundles: why first moments over covers cannot prove the single-cluster bound, and a two-scale strategy},pdfauthor={Christian Hirsch, Benedikt Jahnel}}
+
+\title{\textbf{Decorations, geodesics and bundles:\\ why first moments over covers cannot prove\\ the single-cluster bound, and a two-scale strategy}\\[0.6em] \large Working note}
+
+\author{%
+  Christian Hirsch\thanks{Institut f\"ur Mathematische Stochastik, Georg-August-Universit\"at G\"ottingen, Goldschmidtstra\ss e~7, 37077 G\"ottingen, Germany. \texttt{christian.hirsch@uni-goettingen.de}. \orcid{0000-0003-4136-3740}.}
+  \and
+  Benedikt Jahnel\thanks{Institut f\"ur Mathematische Stochastik, Technische Universit\"at Braunschweig, Universit\"atsplatz~2, 38106 Braunschweig, Germany, and Weierstrass Institute for Applied Analysis and Stochastics, Mohrenstra\ss e~39, 10117 Berlin, Germany. \texttt{benedikt.jahnel@tu-braunschweig.de}. \orcid{0000-0002-4212-0065}.}%
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{plain}
+
+\begin{abstract}
+The single-cluster bound of the first-moment programme asks that the thick cluster of a box have diameter at least~$d$ with probability $O(d^{-\beta})$, $\beta>4$. The strip-cover scheme and its band refinement bound this probability by a sum over covers of the cluster. We show that no such sum can succeed for all~$d$: along a bundle of $j_0$ lines of length~$d$ there is a Poisson number of thick boxes attached to it, every subset of which yields a different thick cover, so that the expected number of thick covers is at least $c\,d^{-j_0}\e^{\varepsilon_0d/4}$ and exceeds one for $d$ of order $(j_0/\varepsilon_0)\log d$. The single-cluster bound is a statement about components and is presumably true for all~$d$; the obstruction concerns the method, not the statement. We then record what a proof can use: a geodesic reduction, which replaces an arbitrary thick cluster by a thick path without shortcuts, and a rigorous no-long-bundle lemma, which shows that with probability $1-Cn^2L^{2-j_0/2}$ no $j_0/2$ lines pass through two boxes at distance at least~$L$ inside the ball of radius~$n$. We propose a two-scale strategy in which covers are used only below a scale $d_{\max}(\varepsilon_0)$ and a renormalisation on the no-long-bundle event handles larger scales, and we state precisely what it still needs.
+\end{abstract}
+
+% =================================================================
+\section{Setting and the two obstructions}
+\label{sec:setting}
+
+We use the notation of~\cite{FM26,SC26,PS26}: $\cL$ is a Poisson line process with intensity measure $(\mu/\pi)\dd\theta\dd p$, $N(z)$ is the number of lines meeting the box $Q(z)=z+[0,1)^2$, a Poisson variable with mean $\mu_1=4\mu/\pi$, a box is \emph{thick} if $N(z)\ge j_0$, the thick set is $\Theta=\{z\colon N(z)\ge j_0\}$, and $C(z)$ is the $2$-connected component of~$z$ in~$\Theta$, the thick cluster of~$z$. The probability that a given box is thick is
+\begin{equation}
+\label{eq:eps0}
+  p_0\coloneqq\P(N(0)\ge j_0)\in\Bigl[\frac{\e^{-\mu_1}\mu_1^{j_0}}{j_0!},\ \Bigl(\frac{\e\mu_1}{j_0}\Bigr)^{j_0}\Bigr]\,,
+\end{equation}
+and we write $\varepsilon_0$ for the upper bound as in~\cite{FM26}. The single-cluster bound is hypothesis $\mathrm{(S)}_{\beta,A}$ of~\cite[Definition~3.2]{FM26}:
+\begin{equation}
+\label{eq:S}
+  \P\bigl(\diam C(0)\ge d\bigr)\le A\,d^{-\beta}\qquad(d\ge1)\,,
+\end{equation}
+with $\beta>4$, and the conditional theorem~\cite[Theorem~1.2]{FM26} derives a subcritical phase from it through the thick-cluster lemma~$\mathrm{(T)}$.
+
+The proofs attempted so far~\cite{SC26,PS26} bound~\eqref{eq:S} by a Peierls sum: every thick $2$-connected set~$A\ni0$ is assigned a \emph{cover} (a walk cut into strips, or into bands), and $\P(\exists A)$ is bounded by $\sum_{\text{covers }c}\P(c\text{ is thick})$. Two independent obstructions stand in the way. The first, discussed in~\cite{PS26}, is that the probabilities of the pieces of a cover do not multiply: a staircase of parallel strips is served by one bundle per offset, and the scheme has to charge bundles rather than strips. The second is the subject of this note, and it is more fundamental: a Peierls sum over covers is at least the \emph{expected number} of thick covers, and that number grows exponentially in~$d$ because of optional thick boxes attached to a bundle. \Cref{sec:decorations} makes this precise. \Cref{sec:geodesic,sec:bundles} record two rigorous tools that a proof of~\eqref{eq:S} can use, and \cref{sec:strategy} proposes how to combine them.
+
+% =================================================================
+\section{The decoration obstruction}
+\label{sec:decorations}
+
+For a family $\mathcal F$ of finite subsets of~$\Z^2$ and $d\ge1$ let $\mathcal N_d(\mathcal F)$ be the number of sets $A\in\mathcal F$ with $0\in A$, $\lvert A\rvert=d$ and $A\subseteq\Theta$. If $\mathcal F$ contains all $2$-connected sets, then $\{\diam C(0)\ge d\}\subseteq\{\mathcal N_{d'}(\mathcal F)\ge1\}$ for some $d'\le\lvert C(0)\rvert$ with $d'\ge d$, and the union bound over~$\mathcal F$ is $\P(\mathcal N_{d}(\mathcal F)\ge1)\le\E\mathcal N_d(\mathcal F)$. Every Peierls sum over covers is of this form with $\mathcal F$ replaced by the family of covers and $A\subseteq\Theta$ by the event that the cover is thick; the covers of~\cite{SC26} contain the sets they cover, so the inequality $\sum_c\P(c\text{ thick})\ge\E\,\#\{c\text{ thick}\}$ holds for them as well, where a cover is \emph{thick} if the walk it was built from is thick.
+
+\begin{proposition}[Decorations]
+\label{prop:decorations}
+Let $\mathcal F$ be the family of all $2$-connected finite subsets of~$\Z^2$. For all integers $m\ge\max\{\mu,1\}$ and $0\le k\le m$,
+\begin{equation}
+\label{eq:decorations}
+  \E\mathcal N_{m+k}(\mathcal F)\ \ge\ \frac{1}{\e\,j_0!}\Bigl(\frac{\mu}{20m}\Bigr)^{j_0}\binom mkp_0^k\,,
+  \qquad\text{hence}\qquad
+  \sum_{d\ge m}\E\mathcal N_d(\mathcal F)\ \ge\ \frac{1}{\e\,j_0!}\Bigl(\frac{\mu}{20m}\Bigr)^{j_0}(1+p_0)^{m}\,.
+\end{equation}
+In particular the union bound $\P(\diam C(0)\ge m)\le\sum_{d\ge m}\E\mathcal N_{d}(\mathcal F)$ is larger than one as soon as $p_0m/2\ge j_0\log(20m/\mu)+\log(\e\,j_0!)$, that is for $m\ge(2j_0/p_0)\log(20m/\mu)+C_{j_0}$.
+\end{proposition}
+
+\begin{proof}
+Let $R\coloneqq\{(x,0)\colon0\le x<m\}$, a row of $m$ boxes. As in~\cite[Proposition~4.1]{PS26}, let $\Lambda$ be the set of lines $y=a+bx$ with $a\in[0.3,0.72]$ and $\lvert b\rvert\le1/(4m)$; every line of~$\Lambda$ meets every box of~$R$, $\mu/(20m)\le\nu(\Lambda)\le\mu/m\le1$, so that the event $E\coloneqq\{\#(\cL\cap\Lambda)\ge j_0\}$, on which $R\subseteq\Theta$, has probability at least $(\mu/(20m))^{j_0}/(\e\,j_0!)$.
+
+Let $D\coloneqq\{(x,2)\colon0\le x<m\}$ be the row two units above~$R$. Every box of~$D$ is $2$-adjacent to a box of~$R$, so for every $S\subseteq D$ the set $A_S\coloneqq R\cup S$ is $2$-connected and contains~$0$, and $\lvert A_S\rvert=m+\lvert S\rvert$. Hence
+\begin{equation*}
+  \mathcal N_{m+k}(\mathcal F)\ \ge\ \1_E\cdot\#\{S\subseteq D\cap\Theta\colon\lvert S\rvert=k\}=\1_E\sum_{S\subseteq D,\,\lvert S\rvert=k}\1\{S\subseteq\Theta\}\,.
+\end{equation*}
+The event~$E$ depends only on the lines in~$\Lambda$, and a line of~$\Lambda$ has $y\in[0,1)$ over $x\in[0,m]$, so it meets no box of~$D$; the events $\{S\subseteq\Theta\}$ depend only on the lines meeting boxes of~$D$. The two are therefore determined by disjoint sets of lines and are independent. For a fixed~$S$ the events $\{z\in\Theta\}$, $z\in S$, are increasing in~$\cL$, and the Harris inequality for Poisson processes gives $\P(S\subseteq\Theta)\ge\prod_{z\in S}\P(z\in\Theta)=p_0^k$. Consequently $\E\mathcal N_{m+k}(\mathcal F)\ge\P(E)\binom mkp_0^k$, which is the first inequality in~\eqref{eq:decorations}; summing over $k\le m$ gives the second. For the last claim, $(1+p_0)^m\ge\e^{p_0m/2}$ for $p_0\le1$.
+\end{proof}
+
+\begin{remark}[What the proposition says and does not say]
+\label{rem:meaning}
+The bound~\eqref{eq:S} is a statement about the component $C(0)$, which is a canonical object: there is exactly one component containing~$0$, so $\P(\diam C(0)\ge d)=\E\,\#\{\text{components }C\ni0\text{ with }\diam C\ge d\}$ and no overcounting occurs. The dominant way to have $\diam C(0)\ge d$ is a bundle of $j_0$ lines of length~$d$ through~$0$, of probability of order $d^{-(j_0-1)}$, and we expect~\eqref{eq:S} to hold with $\beta=j_0-1-o(1)$. \Cref{prop:decorations} says that this cannot be proved by a first moment over sub-objects of the cluster: along the bundle there are, independently of it, about $p_0d$ thick boxes (stars, or short bundles crossing the row), each of which may or may not be included, and the first moment counts all $2^{p_0d}$ choices. The overcount is harmless for $d\ll1/p_0$, which with $p_0\approx(\e\mu_1/j_0)^{j_0}$ and the parameters of~\cite{SC26} is an astronomically large range, but~\eqref{eq:S} is needed for all~$d$: the thick-cluster lemma~$\mathrm{(T)}$ requires $\Phi_n\to0$ as $n\to\infty$.
+\end{remark}
+
+\begin{remark}[Covers of bounded width do not help]
+\label{rem:width}
+The strip covers of~\cite{SC26} absorb a star at distance at most~$2$ from the axis into the strip, and strips of width~$w$ absorb excursions of depth up to~$w/2$; a thick excursion of depth~$k$ leaving the strip and returning is then recorded as a short piece of the cover, with a position along the strip that is part of the data. Repeating the proof of \cref{prop:decorations} with the row~$D$ replaced by a row at distance $w/2+1$ from the axis and the single star by a thick path of $w/2$ boxes leading to it shows that the Peierls sum over width-$w$ covers is at least $c\,d^{-j_0}(1+p_w)^{d/C}$, where $p_w\ge p_0^{w/2+1}$ is the probability that a given such path is thick. The exponential factor remains; only its rate shrinks. Since $w$ is bounded by $cj_0/4$ in the band scheme of~\cite{PS26}, the rate is at least $p_0^{cj_0/8+1}$, a fixed positive constant.
+\end{remark}
+
+\begin{remark}[The chain bound is not affected]
+\label{rem:chains}
+The skeleton bound of~\cite[Section~2]{FM26} and the hypothesis~$\mathrm{(T)}$ are first moments over \emph{chains of components}, with the weight $\lvert C_i\rvert$ for the exit box of each component. A bundle with its attached stars is one component there and is counted once. The obstruction therefore concerns only the reduction of~$\mathrm{(T)}$ to~\eqref{eq:S} by covers; the conditional theorem of~\cite{FM26} stands, and so does the reduction of~$\mathrm{(T)}$ to~\eqref{eq:S} in~\cite[Section~3.1]{FM26}, which uses only probabilities of component events.
+\end{remark}
+
+% =================================================================
+\section{The geodesic reduction}
+\label{sec:geodesic}
+
+A proof of~\eqref{eq:S} may replace the cluster by a canonical path inside it. We record the version that costs nothing.
+
+\begin{lemma}[Thick geodesics]
+\label{lem:geodesic}
+If $\diam C(0)\ge d$, then there is a self-avoiding $2$-path $\gamma=(\gamma_0,\dots,\gamma_m)$ in~$\Theta$ with $\gamma_0=0$, $\lVert\gamma_m\rVert_\infty\ge d/2$, $m\ge d/4$, and without shortcuts:
+\begin{equation}
+\label{eq:noshortcut}
+  \lVert\gamma_i-\gamma_j\rVert_\infty\ge3\qquad\text{whenever }\lvert i-j\rvert\ge2\,.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Since $\diam C(0)\ge d$, some box $w\in C(0)$ has $\lVert w\rVert_\infty\ge d/2$. Let $\gamma$ be a path of minimal length from~$0$ to~$w$ in the $2$-adjacency graph of~$\Theta$. If $\lVert\gamma_i-\gamma_j\rVert_\infty\le2$ for some $j\ge i+2$, then $(\gamma_0,\dots,\gamma_i,\gamma_j,\dots,\gamma_m)$ is a shorter path, a contradiction; this gives~\eqref{eq:noshortcut}, and $m\ge d/4$ because every step has sup-norm at most~$2$.
+\end{proof}
+
+The lemma removes wasted steps: a geodesic cannot leave a strip to visit a thick box and return to where it was, since the box before and the box after the visit must be at distance at least~$3$. It does not remove the decoration overcount, because a visit that advances by four boxes along the strip is compatible with~\eqref{eq:noshortcut}; \cref{prop:decorations} applies verbatim to shortcut-free paths with stars at positions of mutual distance at least~$4$. Its use is elsewhere: in a Peierls sum restricted to one scale, excursions of a geodesic out of a strip have to make progress, which bounds their number by the progress they make rather than by the number of available positions.
+
+% =================================================================
+\section{No long bundles}
+\label{sec:bundles}
+
+The dependence between distant parts of a thick cluster comes from bundles. The following lemma shows that bundles longer than a power of~$d$ do not occur near the origin, with a polynomial error of arbitrarily large exponent.
+
+\begin{lemma}[No long bundles]
+\label{lem:nobundle}
+For integers $h\ge3$, $L\ge1$ and $n\ge1$, let $\mathcal B(n,L,h)$ be the event that there are boxes $z\in[-n,n]^2\cap\Z^2$ and $z'\in\Z^2$ with $\lVert z-z'\rVert_\infty\ge L$ such that at least $h$ lines of~$\cL$ meet both $Q(z)$ and $Q(z')$. Then
+\begin{equation}
+\label{eq:nobundle}
+  \P\bigl(\mathcal B(n,L,h)\bigr)\le16\,(2n+1)^2\Bigl(\frac{6\e\mu}{h}\Bigr)^hL^{2-h}\,.
+\end{equation}
+In particular, for $h=\lceil j_0/2\rceil$, $n=d$ and $L=d^{1/2+\epsilon}$ with $\epsilon\in(0,1/2)$, the probability is at most $C_{j_0,\mu}\,d^{3+2\epsilon-(1/2+\epsilon)j_0/2}$, which is $O(d^{-\beta})$ as soon as $j_0\ge2(3+2\epsilon+\beta)/(1/2+\epsilon)$.
+\end{lemma}
+
+\begin{proof}
+By the two-box bound~\cite[(1.1)]{SC26}, the lines meeting both $Q(z)$ and $Q(z')$ have $\nu$-measure at most $6\mu/(1+\lvert z-z'\rvert)\le6\mu/(1+\lVert z-z'\rVert_\infty)$, and their number is Poisson, so the probability that there are at least $h$ of them is at most $(6\e\mu/(h(1+r)))^h$ with $r=\lVert z-z'\rVert_\infty$ by the Poisson tail $(\e\nu/h)^h$. There are $8r$ boxes $z'$ with $\lVert z-z'\rVert_\infty=r$. Summing over $z$ and $r\ge L$,
+\begin{equation*}
+  \P\bigl(\mathcal B(n,L,h)\bigr)\le(2n+1)^2\sum_{r\ge L}8r\Bigl(\frac{6\e\mu}{h(1+r)}\Bigr)^h\le8(2n+1)^2\Bigl(\frac{6\e\mu}{h}\Bigr)^h\sum_{r\ge L}r^{1-h}\,,
+\end{equation*}
+and $\sum_{r\ge L}r^{1-h}\le L^{1-h}+\int_L^\infty r^{1-h}\dd r\le L^{2-h}\bigl(1+\tfrac{1}{h-2}\bigr)\le2L^{2-h}$ for $h\ge3$.
+\end{proof}
+
+On the complement of $\mathcal B(d,L,h)$, any two boxes in $[-d,d]^2$ at distance at least~$L$ share fewer than~$h$ lines. With $h=j_0/2$ this means that a thick box cannot owe more than half of its lines to any single box at distance~$L$ or more. It does not mean that distant thick boxes are independent: a box~$z$ may well have $j_0/2$ lines each of which reaches a different distant thick box, a star with far-reaching arms, and lines reaching distant blocks are plentiful in absolute terms. The point is only that such lines cannot \emph{concentrate} twice, at~$z$ and at a distant~$z'$.
+
+% =================================================================
+\section{A two-scale strategy}
+\label{sec:strategy}
+
+\Cref{prop:decorations} splits the problem into two regimes.
+
+\paragraph{Small scales.} For $d\le d_{\max}\coloneqq1/p_w$, with $w$ the width of the widest strips the band scheme admits ($w\le cj_0/4$ by~\cite[Section~5]{PS26}) and $p_w$ the probability of a thick excursion of depth~$w/2$, the overcount of a Peierls sum over width-$w$ covers is at most $(1+p_w)^{d/C}\le\e$, and the scheme is admissible. In this regime the missing input is the band bookkeeping of~\cite[Section~5]{PS26}: strips sharing a supporting bundle are charged jointly, straight bands cost $(C\mu D/E)^{j_0/4}$, and bending bands are the open case. Since $p_w\le p_0^{w/2+1}$ with $p_0\le(\e\mu_1/j_0)^{j_0}$, the range $d\le d_{\max}$ is enormous, but it is finite.
+
+\paragraph{Large scales.} For $d>d_{\max}$ we propose a renormalisation. Partition $\Z^2$ into blocks of side~$K$ and call a block \emph{bad at level~$j$} if it contains a $2$-connected set of boxes with $N\ge j$ that crosses it, i.e. joins its inner box of side~$K/2$ to its boundary. If $\diam C(0)\ge d$, then the blocks crossed by the geodesic of \cref{lem:geodesic} form a block-connected set~$\Gamma$ of at least $d/(2K)$ bad blocks containing the block of the origin, and~$\Gamma$ contains a sub-family $\Gamma'$ of at least $\lvert\Gamma\rvert/9$ blocks that are pairwise non-adjacent, hence pairwise at distance at least~$K$. The number of block-connected sets of size~$q$ through the origin block is at most~$8^q$, so~\eqref{eq:S} at scale~$d$ follows from a \emph{decoupling bound} at scale~$K$:
+\begin{equation}
+\label{eq:decoupling}
+  \P\bigl(\text{all blocks of }\Gamma'\text{ are bad at level }j\bigr)\le\bigl(C\,K^{-\beta'}\bigr)^{\lvert\Gamma'\rvert}+d^{-\beta}\,,
+\end{equation}
+for all families $\Gamma'$ of pairwise $K$-separated blocks in $[-d,d]^2$, with $\beta'$ large enough that $8^{9}C K^{-\beta'}<1$, together with a bound $\P(\text{block bad at level }j)\le CK^{-\beta'}$ at the smaller scale~$K$, which is where the induction over scales enters.
+
+\paragraph{Where the decoupling stands.} Fix $\Gamma'=\{B_1,\dots,B_r\}$. On the complement of $\mathcal B(d,K,j/2)$ of \cref{lem:nobundle}, no $j/2$ lines pass through two boxes in different blocks of~$\Gamma'$. Split the lines meeting~$B_i$ into \emph{local} lines, which meet no other block of~$\Gamma'$, and \emph{far} lines; the local line processes of different blocks are determined by disjoint sets of lines and are independent, and the local process is a thinning of~$\cL$, so the event that~$B_i$ is bad at level~$(1-\eta)j$ for its local process has probability at most $\P(B_i\text{ bad at level }(1-\eta)j)$. For a box~$z$ of a thick crossing of~$B_i$, either $N_{\mathrm{loc}}(z)\ge(1-\eta)j$ or $N_{\mathrm{far}}(z)\ge\eta j$. If no block has a box of the second kind, the blocks are bad at level $(1-\eta)j$ for their local processes, and the product bound holds. The far count $N_{\mathrm{far}}(z)$ is Poisson with mean at most~$\mu_1$, so a given box is of the second kind with probability at most $(\e\mu_1/(\eta j))^{\eta j}$, and the boxes of the second kind in different blocks are nearly independent, since lines through two of them have small measure by the pair bound. What spoils the induction is the union over the $K^2$ boxes of a block: the bound $K^2(\e\mu_1/(\eta j))^{\eta j}$ is small only if $\eta j\log(\eta j/(\e\mu_1))\gtrsim(2+\beta')\log K$, so the level loss~$\eta$ per scale must grow with $\log K$, while the levels $j_k=(1-\eta_1)\cdots(1-\eta_k)j_0$ must stay above a fixed fraction of~$j_0$ over all scales $K_k=d_{\max}^{(5/4)^k}$ up to~$d$, which forces $\sum_k\eta_k<1$. The two requirements are incompatible as $d\to\infty$.
+
+The way out, we believe, is to stop treating far-concentrations box by box. A box with $\eta j$ far lines is a star whose arms reach other blocks of~$\Gamma'$; the stars are a sparse point process of intensity at most $(\e\mu_1/(\eta j))^{\eta j}$, and a thick crossing of a block of side~$K$ that uses stars for a positive fraction of its boxes has to use $cK$ of them, which costs $(\e\mu_1/(\eta j))^{\eta jcK}$ with no $K^2$ in front; the remaining boxes of the crossing are locally thick at level $(1-\eta)j$ and are covered by the local bound. The precise formulation needs the crossing to be split into a local part and a star part without a union over the splitting, which is the same kind of problem as the band bookkeeping at small scales, now at the level of blocks. We have not carried this out.
+
+% =================================================================
+\section{The right first moment: minimal witnesses}
+\label{sec:witness}
+
+The obstruction of \cref{sec:decorations} comes from counting objects made of boxes, which can be enlarged by optional thick boxes. The following reformulation counts objects made of lines, for which minimality is a usable condition.
+
+\begin{definition}[Witnesses]
+\label{def:witness}
+For a finite set~$\Lambda$ of lines let $\Theta(\Lambda)\coloneqq\{z\in\Z^2\colon\#\{\ell\in\Lambda\colon\ell\cap Q(z)\neq\varnothing\}\ge j_0\}$ and let $C(\Lambda)$ be the $2$-connected component of~$0$ in $\Theta(\Lambda)$, empty if $0\notin\Theta(\Lambda)$. The set~$\Lambda$ is a \emph{witness} (for~$d$) if $\diam C(\Lambda)\ge d$, and a \emph{minimal witness} if it is a witness and no proper subset of it is.
+\end{definition}
+
+\begin{proposition}[Minimal witnesses]
+\label{prop:witness}
+For every $d\ge1$,
+\begin{align}
+\label{eq:witness}
+  \P\bigl(\diam C(0)\ge d\bigr)&\le\E\,\#\{\Lambda\subseteq\cL\colon\Lambda\text{ a minimal witness}\}=\sum_{n\ge j_0}\frac{M_n}{n!}\,,\\
+\label{eq:Mn}
+  M_n&\coloneqq\int\1\bigl\{\{\ell_1,\dots,\ell_n\}\text{ is a minimal witness}\bigr\}\dd\nu^{\otimes n}\,.
+\end{align}
+Moreover, if $\Lambda$ is a minimal witness, then every $\ell\in\Lambda$ meets a box $z\in C(\Lambda)$ that is met by exactly $j_0$ lines of~$\Lambda$.
+\end{proposition}
+
+\begin{proof}
+The map $\Lambda\mapsto\Theta(\Lambda)$ is monotone, hence so is $\Lambda\mapsto C(\Lambda)$. On $\{\diam C(0)\ge d\}$ there is a finite $2$-connected set $A\subseteq\Theta$ with $0\in A$ and $\diam A\ge d$, for instance the geodesic of \cref{lem:geodesic}; the set $\Lambda_0$ of lines of~$\cL$ meeting boxes of~$A$ is almost surely finite, and $A\subseteq\Theta(\Lambda_0)$, so $\Lambda_0$ is a witness. A witness contains a minimal witness, because the property is monotone and $\Lambda_0$ is finite. This gives the inequality. The equality is the multivariate Mecke formula~\cite[Theorem~4.4]{LP17}, applicable because the indicator depends on the $n$-tuple only. For the last claim, let $\ell\in\Lambda$ and suppose every box of $C(\Lambda)$ met by~$\ell$ is met by at least $j_0+1$ lines of~$\Lambda$. Then every box of $C(\Lambda)$ is met by at least $j_0$ lines of $\Lambda\setminus\{\ell\}$, so $C(\Lambda)\subseteq\Theta(\Lambda\setminus\{\ell\})$, and since $C(\Lambda)$ is $2$-connected and contains~$0$, $C(\Lambda\setminus\{\ell\})\supseteq C(\Lambda)$ has diameter at least~$d$, contradicting minimality. The same argument with "met by~$\ell$" replaced by "not met by~$\ell$" shows that $\ell$ meets $C(\Lambda)$.
+\end{proof}
+
+\begin{remark}[Why this is the right object]
+\label{rem:right}
+\begin{enumerate}
+  \item \emph{Decorations are excluded.} If $\cL$ contains a bundle of $j_0$ lines of length~$d$ through~$0$ and, attached to it, stars of $j_0$ lines each, then the bundle alone is a witness, and any witness containing a star's lines is not minimal unless the star is needed for the diameter. The bundle with its $k$ attached stars is counted once, not $2^k$ times.
+  \item \emph{Bundles are charged jointly.} The staircase of~\cite[Section~4]{PS26} has one minimal witness, consisting of the two bundles and the lines of the transverse pieces; its contribution to~\eqref{eq:witness} is the measure of that configuration, of order $L^{-2(j_0-1)}$ times the cost of the transverse pieces, which is what the band bookkeeping of~\cite{PS26} tried to arrange by hand.
+  \item \emph{No sum over boxes.} The component $C(\Lambda)$ is a function of~$\Lambda$. The right-hand side of~\eqref{eq:witness} is a geometric integral over arrangements of lines; the entropy of the cluster inside a bundle, which defeated the union bound over paths, has disappeared, and the only entropy is that of the lines, which Mecke's formula integrates against~$\nu$.
+\end{enumerate}
+\end{remark}
+
+\begin{lemma}[The term $n=j_0$]
+\label{lem:bundleterm}
+For $d\ge8$, the term $n=j_0$ of~\eqref{eq:witness} is at most $C\mu_1(12\mu/d)^{j_0-1}/j_0!$ with a universal constant~$C$.
+\end{lemma}
+
+\begin{proof}
+A $j_0$-tuple is a witness only if every box of $C(\Lambda)$ is met by all $j_0$ lines. The component contains~$0$ and, being $2$-connected with diameter at least~$d$, a box~$z^*$ with $\lVert z^*\rVert_\infty\in[d/2-2,d/2]$. Hence all lines meet $Q(0)$ and $Q(z^*)$. Given~$\ell_1$, the box $z^*$ is one of the at most $C$ boxes met by~$\ell_1$ at sup-distance in $[d/2-2,d/2]$ from the origin, and by the two-box bound each further line has $\nu$-measure at most $6\mu/(1+\lvert z^*\rvert)\le12\mu/d$. Integrating $\ell_1$ over the lines meeting $Q(0)$, of measure~$\mu_1$, gives the claim.
+\end{proof}
+
+The lemma shows the correct order $d^{-(j_0-1)}$ for the leading term; the lower bound of~\cite[Proposition~4.1]{PS26} shows that it is attained. A chain of~$m$ stars, each made of $j_0$ fresh lines through one box of a path, contributes at most $(24\mu_1^{j_0}/j_0!)^m$ through the terms with $n=j_0m$, because the boxes of the path are determined up to $24$ choices each and the lines through a given box have measure~$\mu_1$: here the entropy of the path is paid by the fresh lines. The general term interpolates between these two cases, and bounding it is the task that remains.
+
+\paragraph{What a proof of the single-cluster bound now needs.} A \emph{structure lemma} for minimal witnesses: an ordering of the lines of a minimal witness~$\Lambda$ of diameter at least~$d$, determined by~$\Lambda$ up to a factor $C^n$, such that the conditional $\nu$-measure of each line given the previous ones is at most $\mu_1$ for a line that is fresh at a box determined by the previous lines up to a bounded choice, and at most $C\mu/t$ for a line that accompanies an earlier line over Euclidean length~$t$, with the product of these bounds, summed over the admissible structures, at most $C\,d^{-\beta}$. For a bundle the ordering is the one of \cref{lem:bundleterm}; for a chain of stars it is the order along the path; for an arrangement mixing bundles of various lengths, stars and crossings the ordering has to be built from the geodesic of $C(\Lambda)$ and the first and last boxes of each line on it, and the difficulty is to charge the $j_0-1$ companion constraints of a bundle at the moment its last box is reached rather than when its lines are placed. We expect this to be a finite combinatorial argument about line arrangements, with no probabilistic input beyond the two-box bound and the Poisson measure, and we regard it as the remaining step of the programme.
+
+% =================================================================
+\section{Summary}
+\label{sec:summary}
+
+\begin{enumerate}
+  \item \Cref{prop:decorations} is rigorous: the expected number of thick $2$-connected sets of size $d$ through the origin is at least $c\,d^{-j_0}(1+p_0)^{d/2}$, so no first moment over sub-objects of a cluster, and in particular no Peierls sum over strip or band covers, can prove the single-cluster bound~\eqref{eq:S} for all~$d$. Wider covers reduce the rate of the exponential factor but do not remove it. The bound~\eqref{eq:S} itself, a statement about components, is unaffected, and so is the conditional theorem of~\cite{FM26}.
+  \item \Cref{lem:geodesic} and \cref{lem:nobundle} are rigorous: a cluster of diameter~$d$ contains a thick path without shortcuts, and with probability $1-O(d^{-\beta})$ no $j_0/2$ lines pass through two boxes at distance $d^{1/2+\epsilon}$ or more in $[-d,d]^2$, for $j_0$ large.
+  \item \Cref{prop:witness} is rigorous and, we believe, the right first moment: $\P(\diam C(0)\ge d)$ is at most the expected number of \emph{minimal witness sets of lines}, a geometric integral over line arrangements with no sum over boxes, in which decorations are excluded by minimality and bundles are charged jointly. The leading term is of the correct order $d^{-(j_0-1)}$ (\cref{lem:bundleterm}). The remaining step is a structure lemma for minimal arrangements.
+  \item Alternatively, the proof of~\eqref{eq:S} can be two-scale: covers, with the band bookkeeping of~\cite{PS26}, up to $d_{\max}=1/p_w$; a block renormalisation beyond, whose decoupling bound~\eqref{eq:decoupling} rests on the no-long-bundle event and on a split of the lines at each block into local and far ones. The local parts decouple exactly. The far parts are stars with far-reaching arms; the box-by-box treatment of these stars loses a factor $K^2$ per scale that the induction cannot afford, and a treatment of the star part of a crossing as a whole is what remains to be done. The subcritical phase remains open.
+\end{enumerate}
+
+\section*{Acknowledgements}
+
+BJ acknowledges the financial support of the Leibniz Association within the Leibniz Junior Research Group on Probabilistic Methods for Dynamic Communication Networks (DYCOMNET) as part of the Leibniz Competition (grant no.~J105/2020), of the Berlin Mathematics Research Center MATH+ through the project EF-MA-Sys-2 on Information Flow \& Emergent Behavior in Complex Networks, and of the Deutsche Forschungsgemeinschaft (DFG) through Project P27 within the SPP~2265.
+
+\section*{Use of AI tools}
+
+The simulations, proofs, computations, figures and the text of this note were developed with substantial assistance of the AI systems Claude (Anthropic) and ChatGPT Astra~6 (OpenAI), in an interactive process directed by the authors.
+
+\bibliographystyle{amsalpha}
+\bibliography{references}
+
+\end{document}
