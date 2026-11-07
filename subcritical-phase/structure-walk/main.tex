@@ -169,13 +169,63 @@ Suppose~$y$ exists. By \cref{lem:tube} there is a $2$-path inside the tube from~
 \paragraph{The remaining accounting.} Stages served only by old lines, produced by zero-entropy crossings and by re-entries into a \emph{different} tube of an earlier structure, inherit from \cref{lem:monotone} a released product that telescopes exactly over the \emph{super-stage}, the maximal run of consecutive stages served by the same $j_0$-subset. The local balance~\eqref{eq:balance} has to be verified per super-stage rather than per stage: its entropy is at most $\prod_kC(1+s_k/D_k)$ with $D_k\ge\sum_{i<k}s_i$ by the additivity of the running maximum along a straight tube, which is at most $C^{\#\text{stages}}(\sum_ks_k)/s_1$, polynomial in the total length, while the released product is $(1+\sum_ks_k)^{-j_0}$ up to constants. The number of zero-entropy boundaries in a super-stage is at most the number of lines crossing its tube, each of which pays~$\mu_1$ once, so $C^{\#\text{stages}}$ is absorbed for $C\mu_1<1$. We have checked this accounting on the five families and on a bundle crossed by $q$ transversal lines; a full proof of the super-stage balance, in particular of the additivity claim $D_k\ge\sum_{i<k}s_i$ for re-entries into different tubes of the same structure, is what remains for Step~3.
 
 % =================================================================
+\section{Step 3: the summation and the local balance}
+\label{sec:step3}
+
+\paragraph{Free boundaries.} By \cref{sec:step2} a stage ends at $b_k$, the last box of its run met by at least $j_0$ lines of~$S_k$, for one of two reasons: a serving line (present at $a_k$ and $b_k$) is absent from every box within distance~$1$ of the next geodesic box, which for a straight line means that it leaves the $1.5$-neighbourhood of the other serving lines within distance~$4$ of~$b_k$ (an \emph{exit}); or all serving lines continue but every admissible continuation leaves the core (a \emph{turn}). At a turn the next box carries a line not in~$S_k$. If that line is fresh, the turn is \emph{free}; if all lines of $S_{k+1}$ are old, the next box lies on the intersection of the current tube with the tube of an old structure, which is a function of the arrangement, and the turn is \emph{determined}. Exits are free. The entropy of the certificate is carried by the free boundaries only: at a determined boundary the position $b_k$ is a function of the integrated lines.
+
+\paragraph{The per-stage sum.} Let stage~$k$ have $N_k$ lines through~$a_k$, serving lines $\mathcal S_k\subseteq S_k$ (present at $a_k$ and~$b_k$, $\lvert\mathcal S_k\rvert\ge j_0$), of which $f_k$ have no presence before~$a_k$ and $o_k$ are old, with $D_k\coloneqq\min\{M_\ell(a_k)\colon\ell\in\mathcal S_k\text{ old}\}$ the smallest running maximum among the old serving lines, $D_k\coloneqq0$ if there are none. Let $F_{k+1}$ be the number of fresh lines at $a_{k+1}$, and let $x_k=1$ if the boundary is an exit of a line fresh at~$a_k$ and $x_k=0$ otherwise. Define
+\begin{equation}
+\label{eq:phi}
+  \Phi_k\coloneqq\sum_{s\ge0}E_k(s)(1+s)^{-f_k-x_k}\Bigl(\frac{1+D_k}{1+\max\{D_k,s\}}\Bigr)^{o_k}\mu_1^{F_{k+1}},\quad
+  E_k(s)\coloneqq\begin{cases}C_0N_k(1+s),&o_k=0,\\ C_0N_k(1+s/D_k),&o_k\ge1,\end{cases}
+\end{equation}
+where $E_k(s)$ bounds the number of candidates for~$b_k$ at distance~$s$ from~$a_k$ and the step to~$a_{k+1}$: by \cref{lem:core} and its refinement (boxes at distance~$s$ met by $j_0$ lines through~$a_k$ are met by lines within angle $2/s$ of each other, so there are at most $16N_k$ of them per unit distance) when all serving lines are new, and by the direction of an old serving line, known to precision $1/D_k$, when there is one. The factors are the released costs of \cref{lem:monotone}: $1/(1+s)$ for a line with its first presence at~$a_k$, the extra $1/(1+s)$ of the exit cost $21\mu/(1+s)^2$ for a fresh leaver (the version of \cite[Lemma~7.2]{DEC26} with entry at~$a_k$ and exit at~$b_k$), and $(1+D_k)/(1+\max\{D_k,s\})$ for an old serving line, whose running maximum rises to at least~$s$.
+
+\begin{theorem}[Summation]
+\label{thm:sum}
+Suppose that for every minimal witness and every free stage~$k$ of its walk, $\Phi_k\le\rho<1$ if $F_{k+1}\ge1$ or $x_k=1$, and that the number of determined boundaries between two consecutive free ones is at most the number of lines crossing the tube of the stage, each of which has its own cost~$\mu_1$. Then there are $C$ and $\beta\ge j_0-2$ with
+\begin{equation}
+\label{eq:final}
+  \sum_{n}\frac{M_n}{n!}\le C\,d^{-\beta}\qquad(d\ge1)\,.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Integrate the lines stage by stage. At stage~$k$ the fresh lines at~$a_k$ are integrated over the lines meeting $Q(a_k)$, measure $\mu_1$ each, which is the factor $\mu_1^{F_k}$ attributed to the boundary $k-1$; the end $b_k$ and the start $a_{k+1}$ are summed over their candidates, at most $E_k(s)$ for each~$s$, and the released factors of \cref{lem:monotone} are applied to the serving lines, whose product over all stages is at most $\prod_\ell c(\ell)/\mu_1$ by \cref{lem:measure}. Determined boundaries contribute a factor~$1$ in entropy and a released factor at most~$1$. Hence the sum over certificates with $p$ free stages is at most $\prod_k\Phi_k\le\rho^{p}$ times the contribution of the determined boundaries, which is at most $\prod(C\mu_1)^{\#\text{crossing lines}}\le1$ for $C\mu_1\le1$. The diameter constraint $\lVert w\rVert_\infty\ge d/2$ gives $\sum_ks_k\ge d/2-4p$, so either $p\ge d/16$, contributing at most $\sum_{p\ge d/16}\rho^p\le C\rho^{d/16}$, or some stage has $s_k\ge d/(4p)$ with $p<d/16$; for that stage the summand of~\eqref{eq:phi} restricted to $s\ge d/(4p)$ is at most $C(1+s)^{1-j_0}$ summed over $s\ge d/(4p)$, i.e.\ $C(d/4p)^{2-j_0}$, since $f_k+o_k\ge j_0$ and each released factor is at most $(1+D_k)/(1+s)\le(1+s)^{-1}$ once $s\ge d/(4p)\ge D_k$, the running maximum of an old line being bounded by the displacement of the walk so far, which is at most $4\sum_{i<k}s_i+4k\le4d/(4p)\cdot p$; this bound is crude but suffices. Summing $p\,\rho^{p-1}C(d/4p)^{2-j_0}$ over $p<d/16$ gives $O(d^{2-j_0})$.
+\end{proof}
+
+The proof is routine once the hypothesis is granted; the hypothesis is the content.
+
+\begin{lemma}[Local balance, proved cases]
+\label{lem:balance}
+Let $\mu_1\le\mu^*$ with $\mu^*$ small enough. Then $\Phi_k\le\rho<1$ holds in each of the following cases.
+\begin{enumerate}
+  \item $o_k=0$ (all serving lines new) and $F_{k+1}\ge1$ or $x_k=1$: $\Phi_k\le C_0N_k\mu_1^{F_{k+1}}\sum_s(1+s)^{1-j_0-x_k}\le\rho$, since $j_0\ge4$ and $N_k\le F_k+N^{\mathrm{old}}_k$ with the old lines through~$a_k$ determined.
+  \item $o_k\ge1$ and $f_k+x_k\ge2$: splitting the sum at $s=D_k$,
+  \begin{equation*}
+    \sum_{s\le D_k}\bigl(1+\tfrac{s}{D_k}\bigr)(1+s)^{-2}+\sum_{s>D_k}\tfrac{s}{D_k}(1+s)^{-f_k-x_k}\Bigl(\tfrac{1+D_k}{1+s}\Bigr)^{o_k}\le4+C\,D_k^{\,o_k-1}\sum_{s>D_k}s^{1-f_k-x_k-o_k}\le C'\,,
+  \end{equation*}
+  using $f_k+x_k+o_k\ge j_0+1\ge3$; so $\Phi_k\le C_0N_kC'\mu_1^{F_{k+1}}\le\rho$ when $F_{k+1}\ge1$, and when $F_{k+1}=0$ the boundary is an exit of a fresh line ($x_k=1$) and the serving set at the next stage has lost a line, so the next stage has a fresh line or is determined.
+  \item $o_k\ge1$, $f_k+x_k\le1$, and the run exceeds the known span, $s>D_k$: the summand is at most $\frac{s}{D_k}(1+s)^{-f_k-x_k}\bigl(\frac{1+D_k}{1+s}\bigr)^{o_k}$ with $o_k\ge j_0-1$, whose sum over $s>D_k$ is at most $C\,D_k^{\,o_k-1}D_k^{\,2-f_k-x_k-o_k}=C\,D_k^{\,1-f_k-x_k}\le C$.
+\end{enumerate}
+In the relay, case~2 applies at every exchange with $f_k=x_k=1$: the sum over $s\le D_k$ is bounded and the sum over $s>D_k$ is paid by the release of the old bundle lines; this is where the earlier logarithmic loss disappears.
+\end{lemma}
+
+\begin{proof}
+The computations are those displayed; in case~1 the sum $\sum_s(1+s)^{1-j_0-x_k}$ converges for $j_0\ge3$, and in cases 2 and 3 the bounds follow from $\sum_{s>D}s^{-a}\le CD^{1-a}$ for $a\ge2$. The claim about the next stage in case~2 follows from the definition of a stage boundary: the serving set of stage $k+1$ cannot be the serving set of stage~$k$.
+\end{proof}
+
+\paragraph{The remaining case.} Not covered is an all-old stage, $f_k+x_k\le1$ with $o_k\ge j_0-1$, whose run stays within the known span, $s\le D_k$. Its summand is $C_0N_k(1+s/D_k)(1+s)^{-f_k-x_k}$ with no release, and the sum over $s\le D_k$ is of order $D_k^{\,1-f_k-x_k}$, up to $D_k$ when $f_k=x_k=0$. Such a stage is served by at least $j_0-1$ lines each of which has two earlier presences at distance at least~$D_k$, and which now run together in one tube for length~$s\le D_k$. If these lines were jointly present at an earlier anchor, the stage is a re-entry into the core of that anchor's structure along their common tube, excluded by \cref{prop:noreturn}. Otherwise the lines come from different earlier structures and are nearly parallel, within angle $2/s$, which is a constraint of strength about $1/s$ on each of them that the pair bound through their own two anchors does not record: the earlier anchors of such a line, whose entropy was counted as $C(1+D)$ at the time, are confined by the parallelism to a sector of angular width $2/s$, so that the earlier entropy should have been $C(1+D/s)$, a refund of order $1/s$ per line, which pays the present sum. Making this refund rigorous requires integrating the lines in an order in which the parallelism is visible when the earlier anchors are summed, that is, a global rearrangement of the certificate rather than a local balance. We regard this as the last open point of the structure lemma. On the five test families and on their combinations we have not found a configuration of this type with more than a bounded number of such stages, and we conjecture that minimality excludes it: a line with two far presences that later joins a tube of lines from other structures is critical at its two earlier anchors and at the tube, three places, and the geodesic between them could be shortened along the line unless the line is thin in between, which bounds the number of such lines by the number of thin stretches the geodesic avoids.
+
+% =================================================================
 \section{Summary}
 \label{sec:summary}
 
 \begin{enumerate}
   \item The structure walk (\cref{def:walk}) cuts the geodesic of a minimal witness into stages governed by the set of lines through the stage's first box; its anchors are the starts and ends of the runs and the final box. \Cref{lem:core,lem:measure} are rigorous: the core of a structure with $N$ lines has at most $8\binom N{j_0}$ boxes at each distance, and the measure of the arrangements with given anchor data is at most the product of the per-line costs~\eqref{eq:cost}, which distribute over the stages by~\eqref{eq:telescope}.
   \item The local balance~\eqref{eq:balance} is the statement to be proved. It holds on the five test families, bundle, star chain, relay, cross and fan, and the construction makes turns of the geodesic a non-case. The relay requires the exit cost; the fan requires the sum over the number of lines through a box, which is paid by the fresh costs.
-  \item \Cref{sec:step2} (Step~2) removes the return case: with the span defined through a running maximum, all released factors are at most one (\cref{lem:monotone}); with a canonical geodesic that prefers the current widened core, the walk never re-enters a core along a tube it has left (\cref{prop:noreturn}), and lateral switches inside a tube are excluded by the row-independence of distances (\cref{lem:tube}). Stage boundaries are then exits, fresh lines, or zero-entropy crossings by old lines. What remains (Step~3) is the balance over super-stages, for which we state the accounting and the one additivity claim it needs.
+  \item \Cref{sec:step2} (Step~2) removes the return case: with the span defined through a running maximum, all released factors are at most one (\cref{lem:monotone}); with a canonical geodesic that prefers the current widened core, the walk never re-enters a core along a tube it has left (\cref{prop:noreturn}), and lateral switches inside a tube are excluded by the row-independence of distances (\cref{lem:tube}). Stage boundaries are then exits, fresh lines, or zero-entropy crossings by old lines. \Cref{sec:step3} (Step~3) proves the summation over certificates conditionally on a local balance at the free stage boundaries (\cref{thm:sum}) and proves the balance in all cases except one (\cref{lem:balance}): an all-old stage whose run stays within the known span of its lines, with the lines coming from different earlier structures. That case needs a refund of earlier entropy against the parallelism of the lines, a non-local step, or an argument from minimality that such stages are rare; it is the last open point.
 \end{enumerate}
 
 \section*{Acknowledgements}
