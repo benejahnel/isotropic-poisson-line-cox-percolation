@@ -1,0 +1,104 @@
+% jahnel.sty -- preamble in the house style of the Jahnel group,
+% page layout following the house style of the latex-math-writing guide.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{jahnel}[2026/11/01 House style Gruppe Jahnel]
+
+\RequirePackage[british]{babel}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{lmodern}
+\RequirePackage{amsmath,amssymb,amsthm}
+\RequirePackage{mathtools}
+\RequirePackage{mathrsfs}
+\RequirePackage[margin=1.05in]{geometry}
+\RequirePackage{microtype}
+\setlength{\emergencystretch}{1em}
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+\RequirePackage{enumitem}
+\setlist[itemize]{leftmargin=2em,itemsep=0.25em,topsep=0.35em}
+\setlist[enumerate]{leftmargin=2.25em,itemsep=0.25em,topsep=0.35em}
+\setlength{\parindent}{1.25em}
+\setlength{\parskip}{0pt}
+
+% Navigation colour
+\definecolor{paperlink}{RGB}{0,0,114}
+\RequirePackage{hyperref}
+\hypersetup{colorlinks=true,linktoc=all,linkcolor=paperlink,citecolor=paperlink,urlcolor=paperlink,pdfstartview=Fit}
+\RequirePackage[capitalise,noabbrev]{cleveref}
+
+% Header: running title left, page number right
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\thepage}
+\setlength{\headheight}{14pt}
+\newcommand{\runningtitle}[1]{\fancyhead[L]{\small #1}}
+
+% ORCID iD as a link
+\newcommand{\orcid}[1]{ORCID \href{https://orcid.org/#1}{#1}}
+
+% ---------------------------------------------------------------
+% Indicator function: \mathds 1 (dsfont); fallback if dsfont is missing
+\IfFileExists{dsfont.sty}{%
+  \RequirePackage{dsfont}%
+  \newcommand{\1}{\mathds{1}}%
+}{%
+  \PackageWarning{jahnel}{dsfont not found, using a fallback for \string\1}%
+  \newcommand{\1}{\mathbf{1}}%
+}
+
+% ---------------------------------------------------------------
+% Theorem environments: common counter, numbered within sections
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\setcounter{tocdepth}{1}
+
+% ---------------------------------------------------------------
+% Basic macros
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\renewcommand{\P}{\mathbb P}
+\newcommand{\E}{\mathbb E}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\interior}{int}
+\DeclareMathOperator{\sign}{sign}
+\renewcommand{\d}{\mathrm{d}}          % differential inside a measure, mu(\d x)
+\newcommand{\dd}{\,\mathrm{d}}         % differential in an integral
+\newcommand{\e}{\mathrm{e}}            % Euler's number
+\renewcommand{\c}{\mathrm{c}}          % complement of a set, A^\c
+
+% Paper-specific notation
+\newcommand{\cL}{\mathcal L}
+\newcommand{\cH}{\mathcal H}
+\newcommand{\cB}{\mathcal B}
+\newcommand{\cD}{\mathcal D}
+\newcommand{\cP}{\mathcal P}
+\newcommand{\cK}{\mathcal K}
+\newcommand{\cA}{\mathcal A}
+\newcommand{\cF}{\mathcal F}
+\newcommand{\cE}{\mathscr E}
+\newcommand{\logp}{\log^{+}}
+
+% Colours of the figures (paired with line styles for greyscale print)
+\colorlet{retained}{teal!75!black}
+\colorlet{retainedfill}{teal!25}
+\definecolor{deleted}{RGB}{204,112,26}
+
+\endinput

@@ -1,0 +1,144 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\dist}{dist}
+
+\runningtitle{The structure walk}
+\hypersetup{pdftitle={The structure walk: a certificate for minimal witnesses, with five test families},pdfauthor={Christian Hirsch, Benedikt Jahnel}}
+
+\title{\textbf{The structure walk:\\ a certificate for minimal witnesses,\\ with five test families}\\[0.6em] \large Working note (Step~1 of the plan)}
+
+\author{%
+  Christian Hirsch\thanks{Institut f\"ur Mathematische Stochastik, Georg-August-Universit\"at G\"ottingen, Goldschmidtstra\ss e~7, 37077 G\"ottingen, Germany. \texttt{christian.hirsch@uni-goettingen.de}. \orcid{0000-0003-4136-3740}.}
+  \and
+  Benedikt Jahnel\thanks{Institut f\"ur Mathematische Stochastik, Technische Universit\"at Braunschweig, Universit\"atsplatz~2, 38106 Braunschweig, Germany, and Weierstrass Institute for Applied Analysis and Stochastics, Mohrenstra\ss e~39, 10117 Berlin, Germany. \texttt{benedikt.jahnel@tu-braunschweig.de}. \orcid{0000-0002-4212-0065}.}%
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{plain}
+
+\begin{abstract}
+The single-cluster bound of the first-moment programme is at most the expected number of minimal witness sets of lines, a geometric integral over line arrangements. This note defines the certificate by which that integral is to be bounded: the \emph{structure walk}, which cuts the geodesic of a minimal witness into stages, each governed by the set of lines through its first box, and records only the data that is not determined by the lines already integrated. We prove the two lemmas the certificate needs, a bound on the size of the core of a structure and the measure bound with telescoping costs, formulate the local balance that has to hold at every stage, and run the five test families, bundle, star chain, relay, cross and fan, through it; all five balance. Turns of the geodesic are handled by the construction. Returns of the geodesic to an earlier structure are the one configuration for which the local balance has a factor larger than one, and we state the global argument that should absorb them. The structure lemma itself is not proved.
+\end{abstract}
+
+% =================================================================
+\section{Setting}
+\label{sec:setting}
+
+Notation is as in~\cite{DEC26}: $\Lambda$ is a finite set of lines, $\Theta(\Lambda)$ the set of boxes met by at least $j_0$ lines of~$\Lambda$, $C(\Lambda)$ the $2$-connected component of~$0$ in $\Theta(\Lambda)$, and $\Lambda$ is a \emph{minimal witness} for~$d$ if $C(\Lambda)$ contains a box at sup-distance at least $d/2$ from~$0$ and no proper subset of~$\Lambda$ has this property. By~\cite[Proposition~6.2]{DEC26},
+\begin{equation}
+\label{eq:witness}
+  \P\bigl(\diam C(0)\ge d\bigr)\le\sum_{n\ge j_0}\frac1{n!}\int\1\bigl\{\{\ell_1,\dots,\ell_n\}\text{ is a minimal witness}\bigr\}\dd\nu^{\otimes n}\,,
+\end{equation}
+and by~\cite[Lemma~7.1]{DEC26} every line of a minimal witness meets any fixed geodesic $\gamma=(z_0,\dots,z_m)$ of $C(\Lambda)$ from~$0$ to a box~$w$ with $\lVert w\rVert_\infty\ge d/2$ at a box with exactly $j_0$ lines. We fix $\gamma$ to be the lexicographically first such geodesic, a function of~$\Lambda$. For a box~$z$ let $S(z)=S_\Lambda(z)$ be the set of lines of~$\Lambda$ meeting $Q(z)$. We write $N(z)=\lvert S(z)\rvert$ and $\mu_1=4\mu/\pi$.
+
+The goal is a bound on the right-hand side of~\eqref{eq:witness} of order $d^{-\beta}$. The integral is over arrangements; the difficulty is to organise it so that no sum over positions of boxes that are functions of the arrangement is performed.
+
+% =================================================================
+\section{The structure walk}
+\label{sec:walk}
+
+\begin{definition}[Structures, cores, stages]
+\label{def:walk}
+Let $\Lambda$ be a minimal witness with geodesic~$\gamma$. The \emph{structure} at a box~$z$ is $S(z)$, and its \emph{core} is
+\begin{equation*}
+  K(z)\coloneqq\{z'\in\Z^2\colon\text{at least }j_0\text{ lines of }S(z)\text{ meet }Q(z')\}\ni z\,.
+\end{equation*}
+The \emph{stages} of~$\Lambda$ are defined inductively. Stage~$1$ starts at $t_1\coloneqq0$. If stage~$k$ starts at the index~$t_k$, its structure is $S_k\coloneqq S(z_{t_k})$, its \emph{run} is the maximal interval $[t_k,t'_k]$ of indices such that $z_t\in K(z_{t_k})$ for all $t_k\le t\le t'_k$, and it ends at $t'_k$. If $t'_k=m$ the walk stops with $p\coloneqq k$ stages. Otherwise stage $k+1$ starts at $t_{k+1}\coloneqq t'_k+1$. The \emph{anchors} of the walk are the boxes $z_{t_k}$ and $z_{t'_k}$, $k\le p$, and the final box $z_m=w$.
+\end{definition}
+
+By construction $z_{t_{k+1}}\notin K(z_{t_k})$, so fewer than $j_0$ lines of~$S_k$ meet $z_{t_{k+1}}$, and since $N(z_{t_{k+1}})\ge j_0$ there is a line in $S_{k+1}\setminus S_k$. Such a line is \emph{fresh} at stage $k+1$ if it meets no box $z_t$ with $t<t_{k+1}$, and \emph{old} otherwise. A stage is \emph{paid} if it starts with a fresh line and \emph{unpaid} otherwise. A line is \emph{present} at an anchor if it meets that box; the \emph{span} $\sigma(\ell)$ of a line is the Euclidean distance between the first and the last anchor at which it is present (zero if there is only one), and a line \emph{leaves} at its last anchor if it is not within distance~$1$ of any other line of its last structure beyond that anchor.
+
+\begin{lemma}[Size of a core]
+\label{lem:core}
+Let $S=S(z)$ with $\lvert S\rvert=N$. For every $s\ge0$ the number of boxes of $K(z)$ at sup-distance in $[s,s+1)$ from~$z$ is at most $8\binom N{j_0}$, and the boxes of~$K(z)$ at distance in $[s,s+1)$ that are met by a given $j_0$-subset $S'\subseteq S$ number at most~$8$.
+\end{lemma}
+
+\begin{proof}
+All lines of~$S$ meet the unit box $Q(z)$. Two lines of $S'$ at angle $\alpha>0$ have, at distance~$s$ from~$z$, lateral separation at least $s\sin\alpha-\sqrt2$, and a box met by both has side~$1$, so a box at distance~$s$ met by all lines of~$S'$ lies within distance $1+\sqrt2$ of each of them; the set of points at distance in $[s,s+1)$ from~$z$ and within $1+\sqrt2$ of a given line is a union of two segments of length at most~$2(1+\sqrt2)\cdot\sqrt2$, which meet at most $8$ boxes. A box of $K(z)$ is met by all lines of some $j_0$-subset, and there are $\binom N{j_0}$ subsets.
+\end{proof}
+
+Thus the run of a stage with $N$ lines has, at distance~$s$ from its start, at most $8\binom N{j_0}$ candidate boxes, and the \emph{end} $z_{t'_k}$ of the run, together with the next start $z_{t_{k+1}}$ within distance~$2$ of it, is located up to a factor $24\cdot8\binom N{j_0}(1+s)$ by the distance~$s$ alone.
+
+\begin{lemma}[Measure given the anchors]
+\label{lem:measure}
+Fix the anchors of the walk as boxes in the plane and, for every line, the first and the last anchor at which it is present, and whether it leaves there. The $\nu^{\otimes n}$-measure of the $n$-tuples with these data is at most
+\begin{equation}
+\label{eq:cost}
+  \prod_{\ell\in\Lambda}c(\ell),\qquad
+  c(\ell)\coloneqq\begin{cases}\mu_1,&\sigma(\ell)=0,\\[2pt] 6\mu/(1+\sigma(\ell)),&\sigma(\ell)>0,\ \ell\text{ does not leave},\\[2pt] 21\mu/(1+\sigma(\ell))^3,&\sigma(\ell)\ge4,\ \ell\text{ leaves}.\end{cases}
+\end{equation}
+Moreover, for every line and every sequence of anchors $u_a=u_{(0)},u_{(1)},\dots,u_{(r)}=u_b$ at which it is present, with $D_i\coloneqq\lvert u_{(i)}-u_a\rvert$,
+\begin{equation}
+\label{eq:telescope}
+  \frac1{1+\sigma(\ell)}=\prod_{i=0}^{r-1}\frac{1+D_i}{1+D_{i+1}}\,.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The three cases are the measure of lines meeting a box, the two-box bound~\cite[Lemma~3.2]{HJ26b}, and the exit cost~\cite[Lemma~7.2]{DEC26}. The identity~\eqref{eq:telescope} is a telescoping product with $D_0=0$ and $D_r=\sigma(\ell)$.
+\end{proof}
+
+The factor $(1+D_i)/(1+D_{i+1})$ is the part of the cost of~$\ell$ that is \emph{released} at the step from anchor $u_{(i)}$ to $u_{(i+1)}$. It is smaller than one when the walk moves away from the line's first anchor and larger than one when it moves back towards it.
+
+% =================================================================
+\section{The local balance}
+\label{sec:balance}
+
+\paragraph{What carries entropy.} Integrating the lines in the order of the stages at which they are fresh, the data of stage $k+1$ that are not determined by the lines integrated so far are: the distance $s_k=\lvert z_{t'_k}-z_{t_k}\rvert$ of the end of the run from its start, the position of the end among the $8\binom{N_k}{j_0}$ candidates at that distance (\cref{lem:core}), the step to the next start ($24$ choices), and the number of fresh lines there. The identity of an old line that enters at $z_{t_{k+1}}$, and the box at which it crosses the current structure, are functions of the integrated lines and carry no entropy. In particular an unpaid stage whose start is the crossing of the current core by an old line has entropy one, apart from the choice between the finitely many old lines, which is a function of the arrangement as well once the end of the run is fixed to be the first crossing after the start.
+
+\paragraph{The balance at a stage.} Let stage~$k$ have $N_k$ lines and run length $s=s_k$, and let $F_{k+1}$ be the number of fresh lines at stage $k+1$. The entropy released at the step is at most $192\binom{N_k}{j_0}(1+s)$. The payment is the product of the fresh costs $\mu_1^{F_{k+1}}$, of the released factors~\eqref{eq:telescope} of all lines present at $z_{t'_k}$, and of the exit improvements of lines that leave at $z_{t'_k}$. The \emph{local balance} asks that, for a constant $\rho<1$ and after summing over~$s$,
+\begin{equation}
+\label{eq:balance}
+  \sum_{s\ge0}192\binom{N_k}{j_0}(1+s)\cdot\mu_1^{F_{k+1}}\cdot\prod_{\ell\text{ present at }z_{t'_k}}\frac{1+D_\ell(t_k)}{1+D_\ell(t'_k)}\cdot\prod_{\ell\text{ leaves}}\frac{3.5}{(1+s)^2}\ \le\ \rho\,,
+\end{equation}
+whenever the stage is paid, and $\le C$ whenever it is unpaid, with the number of unpaid stages between two paid ones bounded by a function of the structures involved. If~\eqref{eq:balance} holds, the sum over certificates is at most $\sum_p\rho^{p'}C^{p-p'}$ over the numbers of paid and unpaid stages, and the diameter constraint, which forces either many paid stages or a run of length at least $d/(Cp)$, gives $d^{-(j_0-2)}$ up to constants, by the same computation as in~\cite[Section~3]{SC26}.
+
+\paragraph{Why turns are not a separate case.} If the geodesic leaves a structure whose lines continue, the next box is outside the core, so the stage ends, the structure's $j_0$ lines through the end box have the step from $z_{t_k}$ to $z_{t'_k}$ released, and each of them contributes $(1+D(t_k))/(1+D(t'_k))$, which for lines fresh at $z_{t_k}$ is $1/(1+s)$. With $j_0$ such lines the sum over~$s$ in~\eqref{eq:balance} is $\sum_s192(1+s)^{1-j_0}<\infty$, and the fresh line at the next start provides the factor $\mu_1$. The case of~\cite[Section~8]{DEC26}, one line ending while the others continue, does not arise: the stage ends for all lines of the structure at once, and a line that continues with the geodesic is simply present in the next structure and releases its factor there.
+
+% =================================================================
+\section{Five test families}
+\label{sec:tests}
+
+\begin{enumerate}
+  \item \emph{Bundle.} $j_0$ lines through $Q(0)$ within distance~$1$ of each other up to~$w$. One stage, $N_1=j_0$, run length $s\ge d/2$, all lines present at the final anchor~$w$ with span~$s$: cost $(6\mu/(1+s))^{j_0}$, entropy $8(1+s)$. The contribution is $\sum_{s\ge d/2}8(1+s)(6\mu)^{j_0}(1+s)^{-j_0}=O(d^{2-j_0})$, one power worse than the true order because the direction of the first line is not used to locate~$w$; see~\cite[Lemma~6.4]{DEC26}.
+  \item \emph{Star chain.} Boxes $z_0,\dots,z_m$ with $j_0$ fresh lines each. Every stage has run length~$0$, $N_k=j_0$, $F_{k+1}=j_0$; entropy $24\cdot8$, payment $\mu_1^{j_0}$; contribution $(192\mu_1^{j_0})^m$. Balance~\eqref{eq:balance} holds with $\rho=192\mu_1^{j_0}$.
+  \item \emph{Relay.} $j_0-1$ bundle lines through $Q(0)$ and companions $\ell'_1,\ell'_2,\dots$, companion~$i$ present on the bundle over $[x_{i-1},x_i]$ and leaving at $x_i$. Stage~$i$ starts at $x_{i-1}$ with $S_i$ the bundle lines and $\ell'_i$ (and $\ell'_{i-1}$ if it has not yet left), $N_i\le j_0+1$, and ends where $\ell'_i$ leaves, at distance $s_i=x_i-x_{i-1}$; the next stage starts with the fresh $\ell'_{i+1}$. Released at the step: $\ell'_i$ leaves, factor $3.5/(1+s_i)^2$ on top of $1/(1+s_i)$; the bundle lines release $(1+x_{i-1})/(1+x_i)$ each, which telescopes to $(1+x_k)^{-(j_0-1)}$ over the walk; $\ell'_{i+1}$ pays $\mu_1$. Balance: $\sum_s192(j_0+1)(1+s)\cdot3.5(1+s)^{-3}\mu_1\le\rho$ for $\mu_1$ small, and the total is $O(d^{-(j_0-2)})$, in agreement with~\cite[Lemma~7.3]{DEC26}. Without the exit cost the sum over~$s$ would be $\sum_s(1+s)\cdot(1+s)^{-1}$, divergent: the exit cost is what makes relays balance.
+  \item \emph{Cross.} Bundle~$B_1$ through $Q(0)$, bundle~$B_2$ through a box~$x$ of~$B_1$ at an angle, the geodesic riding $B_1$ to~$x$ and $B_2$ to~$w$. Stage~$1$: $S_1=B_1$, run to~$x$ (the next geodesic box lies on $B_2$ off the core of~$B_1$), $s_1=\lvert x\rvert$, released $(1+s_1)^{-j_0}$, entropy $8(1+s_1)$; stage~$2$ starts at the first box of~$B_2$ after~$x$ with $j_0$ fresh lines, $\mu_1^{j_0}$, run to~$w$, released $(1+s_2)^{-j_0}$ at the final anchor, entropy $8(1+s_2)$. Contribution $\sum_{s_1+s_2\ge d/2}64(1+s_1)^{1-j_0}(1+s_2)^{1-j_0}\mu_1^{j_0}(6\mu)^{2j_0}=O(d^{2-j_0})$.
+  \item \emph{Fan.} $N\ge j_0+1$ lines through $Q(0)$ with distinct small angles, the geodesic riding the core, in which a sliding window of $j_0$ lines is present at distance~$s$; all $N$ lines are critical somewhere, so the fan is a minimal witness. One stage, $N_1=N$, fresh cost $\mu_1^N$, entropy $8\binom N{j_0}(1+s)$, released at~$w$: the $j_0$ lines present there have span~$s$, the others have shorter spans $\sigma_\ell$ with $(6\mu/(1+\sigma_\ell))\le\mu_1$. Contribution at most $\sum_s8\binom N{j_0}(1+s)(6\mu)^{j_0}(1+s)^{-j_0}\mu_1^{N-j_0}$, and $\binom N{j_0}\mu_1^{N-j_0}\le(2\mu_1)^{N-j_0}2^{j_0}$ is summable over~$N$ for $\mu_1<1/2$. The fan balances.
+\end{enumerate}
+
+% =================================================================
+\section{Returns}
+\label{sec:returns}
+
+The released factor~\eqref{eq:telescope} is larger than one when the walk moves back towards a line's first anchor. This happens when the geodesic returns to a structure it has left: a line~$\ell$ of that structure is present at an early anchor $u_a$, absent during an excursion, and present again at a later anchor~$u_b$ closer to~$u_a$ than the anchors of the excursion. Globally the product over the steps is still $1/(1+\sigma(\ell))\le1$, so the measure bound is correct; what fails is the local form~\eqref{eq:balance}, which cannot be summed step by step when some steps have factors above one.
+
+The proposed treatment is to group stages into \emph{excursions}: a maximal sequence of stages during which the walk is outside the $2$-neighbourhood of the cores of all earlier structures. Within an excursion all released factors of the lines of earlier structures are at most one, since the walk moves away from the structures it left, up to a bounded factor accounting for the non-monotonicity of Euclidean distance along a $2$-path that stays outside a neighbourhood; the stages of an excursion are balanced by~\eqref{eq:balance}. A return is the first box after an excursion that lies in the core of an earlier structure. The return box is determined by the earlier structure and by the excursion's last line, which crosses that core, so it carries no entropy; and the lines of the earlier structure release at the return the factor $(1+D(\text{exit}))/(1+D(\text{return}))$, which is at most the ratio of the distances of the exit and the return from the structure's start, a factor bounded by the excursion's own displacement, and therefore paid by the excursion if the excursion's balance is strict enough, which requires the fresh lines of the excursion to pay for its displacement. This is where the argument currently stops: an excursion that makes a large displacement with few fresh lines is a chain of long bundles, whose own balance pays only for their lengths, not for an extra factor equal to the displacement. We expect this to be resolved by noting that a return to an earlier structure means that the component $C(\Lambda)$ contains a loop, so that the lines of the excursion, or those of the earlier structure beyond the exit, are not all critical, contradicting minimality; a precise version of this is the statement that the structure walk of a minimal witness has no returns at all, which would remove the case. We have not proved it.
+
+% =================================================================
+\section{Summary}
+\label{sec:summary}
+
+\begin{enumerate}
+  \item The structure walk (\cref{def:walk}) cuts the geodesic of a minimal witness into stages governed by the set of lines through the stage's first box; its anchors are the starts and ends of the runs and the final box. \Cref{lem:core,lem:measure} are rigorous: the core of a structure with $N$ lines has at most $8\binom N{j_0}$ boxes at each distance, and the measure of the arrangements with given anchor data is at most the product of the per-line costs~\eqref{eq:cost}, which distribute over the stages by~\eqref{eq:telescope}.
+  \item The local balance~\eqref{eq:balance} is the statement to be proved. It holds on the five test families, bundle, star chain, relay, cross and fan, and the construction makes turns of the geodesic a non-case. The relay requires the exit cost; the fan requires the sum over the number of lines through a box, which is paid by the fresh costs.
+  \item Returns of the geodesic to an earlier structure are the open case: the released factors exceed one locally. We state the excursion grouping that should absorb them and the conjecture that minimal witnesses have no returns. Proving either is Step~2 of the plan.
+\end{enumerate}
+
+\section*{Acknowledgements}
+
+BJ acknowledges the financial support of the Leibniz Association within the Leibniz Junior Research Group on Probabilistic Methods for Dynamic Communication Networks (DYCOMNET) as part of the Leibniz Competition (grant no.~J105/2020), of the Berlin Mathematics Research Center MATH+ through the project EF-MA-Sys-2 on Information Flow \& Emergent Behavior in Complex Networks, and of the Deutsche Forschungsgemeinschaft (DFG) through Project P27 within the SPP~2265.
+
+\section*{Use of AI tools}
+
+The simulations, proofs, computations, figures and the text of this note were developed with substantial assistance of the AI systems Claude (Anthropic) and ChatGPT Astra~6 (OpenAI), in an interactive process directed by the authors.
+
+\bibliographystyle{amsalpha}
+\bibliography{references}
+
+\end{document}
