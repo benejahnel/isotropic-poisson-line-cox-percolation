@@ -121,13 +121,61 @@ The released factor~\eqref{eq:telescope} is larger than one when the walk moves 
 The proposed treatment is to group stages into \emph{excursions}: a maximal sequence of stages during which the walk is outside the $2$-neighbourhood of the cores of all earlier structures. Within an excursion all released factors of the lines of earlier structures are at most one, since the walk moves away from the structures it left, up to a bounded factor accounting for the non-monotonicity of Euclidean distance along a $2$-path that stays outside a neighbourhood; the stages of an excursion are balanced by~\eqref{eq:balance}. A return is the first box after an excursion that lies in the core of an earlier structure. The return box is determined by the earlier structure and by the excursion's last line, which crosses that core, so it carries no entropy; and the lines of the earlier structure release at the return the factor $(1+D(\text{exit}))/(1+D(\text{return}))$, which is at most the ratio of the distances of the exit and the return from the structure's start, a factor bounded by the excursion's own displacement, and therefore paid by the excursion if the excursion's balance is strict enough, which requires the fresh lines of the excursion to pay for its displacement. This is where the argument currently stops: an excursion that makes a large displacement with few fresh lines is a chain of long bundles, whose own balance pays only for their lengths, not for an extra factor equal to the displacement. We expect this to be resolved by noting that a return to an earlier structure means that the component $C(\Lambda)$ contains a loop, so that the lines of the excursion, or those of the earlier structure beyond the exit, are not all critical, contradicting minimality; a precise version of this is the statement that the structure walk of a minimal witness has no returns at all, which would remove the case. We have not proved it.
 
 % =================================================================
+\section{Step 2: returns}
+\label{sec:step2}
+
+We now remove the case of \cref{sec:returns}. The first observation is that the factors larger than one are produced by the definition of the span, not by the geometry.
+
+\begin{definition}[Running maximum]
+\label{def:runmax}
+For a line~$\ell$ and an anchor~$u$ at which $\ell$ is present, let $M_\ell(u)$ be the largest Euclidean distance between two anchors at which~$\ell$ is present, among the anchors up to and including~$u$ in walk order. The \emph{span} of~$\ell$ is $\sigma(\ell)\coloneqq M_\ell(u_{\mathrm{last}})$, and the factor \emph{released} by~$\ell$ at a presence~$u$ following its previous presence~$u^-$ is $(1+M_\ell(u^-))/(1+M_\ell(u))$.
+\end{definition}
+
+\begin{lemma}[Monotone release]
+\label{lem:monotone}
+With \cref{def:runmax}, every released factor is at most one, the product of the released factors of~$\ell$ over its presences is $1/(1+\sigma(\ell))$, and \cref{lem:measure} holds with this span, with the same costs~\eqref{eq:cost}.
+\end{lemma}
+
+\begin{proof}
+$M_\ell$ is non-decreasing in walk order, so each factor is at most one, and the product telescopes from $M_\ell=0$ at the first presence to $\sigma(\ell)$. The line passes through the two anchors realising $\sigma(\ell)$, which are among the fixed anchor data, so the two-box bound and the exit cost apply with $\sigma(\ell)$.
+\end{proof}
+
+A return to an old line therefore costs nothing: the walk arrives at the return box by the stage it is in, whose entropy is counted there, and the presence of the old line at that box is a constraint that releases a factor at most one. What a return \emph{can} do is create a stage served only by old lines, with no fresh line to pay for it, and we now show that the canonical geodesic can be chosen so that this happens only at boxes determined by the arrangement.
+
+\paragraph{The widened core and the canonical geodesic.} Replace $K(z)$ in \cref{def:walk} by the set $\widetilde K(z)$ of boxes at sup-distance at most~$1$ from a box met by at least $j_0$ lines of $S(z)$. \Cref{lem:core} holds for $\widetilde K$ with $8$ replaced by~$72$, and a box outside $\widetilde K(z)$ is still met by fewer than $j_0$ lines of $S(z)$, so the stages are defined as before. Fix~$w$ as the lexicographically first box of $C(\Lambda)$ at sup-distance at least $d/2$ from~$0$. Call a box~$y$ \emph{admissible} from a box~$x$ of~$\gamma$ if $y\in\Theta(\Lambda)$, $\lVert y-x\rVert_\infty\le2$ and $\dist_\Theta(y,w)=\dist_\Theta(x,w)-1$, where $\dist_\Theta$ is the graph distance in the $2$-adjacency graph of $\Theta(\Lambda)$. The \emph{canonical geodesic} is built step by step: from the current box, with current structure~$S_k$, go to the lexicographically first admissible box in $\widetilde K(z_{t_k})$ if there is one, and otherwise to the lexicographically first admissible box. This is a shortest path from~$0$ to~$w$, it is a function of~$\Lambda$, and the stages are read off from it as in \cref{def:walk}.
+
+\begin{lemma}[Tubes]
+\label{lem:tube}
+Let $\ell_1,\dots,\ell_{j_0}$ be lines that pass within distance~$1$ of a segment~$I$ of a line~$\ell_0$ along the whole of~$I$, and let $T$ be the set of boxes within sup-distance~$1$ of a box met by all of them. Then for any two boxes $x,y\in T$ whose projections on~$\ell_0$ lie in~$I$ and are at least $4$ apart, there is a $2$-path from~$x$ to~$y$ inside~$T$ of length $\lceil\lVert y-x\rVert_\infty/2\rceil$, and for every box~$v$ with $\lVert v-x\rVert_\infty\ge4$, the distances $\lceil\lVert v-x'\rVert_\infty/2\rceil$ are equal for all boxes $x'\in T$ with the same projection on~$\ell_0$ as~$x$.
+\end{lemma}
+
+\begin{proof}
+The segment from the centre of~$x$ to the centre of~$y$ lies within distance $1+\sqrt2$ of~$\ell_0$ and within distance $2+\sqrt2$ of each~$\ell_i$. Let $v=y-x$ and assume $\lvert v_1\rvert\ge\lvert v_2\rvert$, so $\lVert v\rVert_\infty=\lvert v_1\rvert$. The boxes $x+(2k,\lfloor2kv_2/v_1\rceil)$, $0\le k\le\lvert v_1\rvert/2$, with the last step adjusted, form a $2$-path of length $\lceil\lvert v_1\rvert/2\rceil$ whose boxes are within distance~$1$ of the segment, hence within distance $3+\sqrt2<4.5$ of each~$\ell_i$; a box within distance~$4.5$ of $j_0$ lines that are within distance~$1$ of each other is within sup-distance~$1$ of a box met by all of them only if the lines pass within $2+\sqrt2$ of its centre, which holds here. For the second claim, boxes with the same projection on~$\ell_0$ differ by at most~$3$ in the direction normal to~$\ell_0$, and for $\lVert v-x\rVert_\infty\ge4$ the sup-distance to~$v$ is attained in the direction of~$\ell_0$ up to an error that does not change the value of $\lceil\cdot/2\rceil$ by more than the rounding, which we absorb by widening the tube by one more box.
+\end{proof}
+
+The lemma is stated with the constants we could verify in the time available; the second claim needs the widening mentioned at its end, which costs a factor~$9$ in \cref{lem:core} and nothing else. Its consequence is the following.
+
+\begin{proposition}[No re-entries into the same core]
+\label{prop:noreturn}
+With the canonical geodesic and the widened core, let $x=z_{t'_k}$ be the end of stage~$k$. There is no index $t>t'_k+1$ such that $y=z_t$ lies in $\widetilde K(z_{t_k})$ in the tube of a $j_0$-subset of~$S_k$ that is present at both~$x$ and~$y$.
+\end{proposition}
+
+\begin{proof}
+Suppose~$y$ exists. By \cref{lem:tube} there is a $2$-path inside the tube from~$x$ to~$y$ of length $\lceil\lVert y-x\rVert_\infty/2\rceil\le\dist_\Theta(x,y)$; all its boxes are met by the $j_0$ lines of the subset, so it lies in $\Theta(\Lambda)$ and is a shortest path from~$x$ to~$y$ in~$\Theta$. Concatenated with the part of~$\gamma$ from~$y$ to~$w$ it is a shortest path from~$x$ to~$w$, so its first box is admissible from~$x$ and lies in $\widetilde K(z_{t_k})$. The canonical rule then continues stage~$k$ at~$x$, contradicting that stage~$k$ ends at~$x$.
+\end{proof}
+
+\paragraph{What a stage boundary now is.} With \cref{prop:noreturn} and the rule, a stage ends at~$x$ in exactly two situations. Either some $j_0$-subset of~$S_k$ present at~$x$ stops being present within the next step, which means that a line of~$S_k$ leaves the $1$-neighbourhood of the others (exit cost), or has reached the end of its presence interval; or every admissible continuation leaves the core while the lines continue, in which case the next box carries a line not in~$S_k$ that is fresh, paying~$\mu_1$, or old. An old line entering at a box where the lines of~$S_k$ continue crosses the core of~$S_k$, and the crossing box is a function of the two lines; such a boundary carries no entropy. The second claim of \cref{lem:tube} ensures that a change of row inside the tube is never forced by admissibility except within $4$ boxes of the stage end, so lateral switches between companions, the case that produced the logarithmic loss in~\cite[Section~8]{DEC26}, do not occur before the actual end of the stage.
+
+\paragraph{The remaining accounting.} Stages served only by old lines, produced by zero-entropy crossings and by re-entries into a \emph{different} tube of an earlier structure, inherit from \cref{lem:monotone} a released product that telescopes exactly over the \emph{super-stage}, the maximal run of consecutive stages served by the same $j_0$-subset. The local balance~\eqref{eq:balance} has to be verified per super-stage rather than per stage: its entropy is at most $\prod_kC(1+s_k/D_k)$ with $D_k\ge\sum_{i<k}s_i$ by the additivity of the running maximum along a straight tube, which is at most $C^{\#\text{stages}}(\sum_ks_k)/s_1$, polynomial in the total length, while the released product is $(1+\sum_ks_k)^{-j_0}$ up to constants. The number of zero-entropy boundaries in a super-stage is at most the number of lines crossing its tube, each of which pays~$\mu_1$ once, so $C^{\#\text{stages}}$ is absorbed for $C\mu_1<1$. We have checked this accounting on the five families and on a bundle crossed by $q$ transversal lines; a full proof of the super-stage balance, in particular of the additivity claim $D_k\ge\sum_{i<k}s_i$ for re-entries into different tubes of the same structure, is what remains for Step~3.
+
+% =================================================================
 \section{Summary}
 \label{sec:summary}
 
 \begin{enumerate}
   \item The structure walk (\cref{def:walk}) cuts the geodesic of a minimal witness into stages governed by the set of lines through the stage's first box; its anchors are the starts and ends of the runs and the final box. \Cref{lem:core,lem:measure} are rigorous: the core of a structure with $N$ lines has at most $8\binom N{j_0}$ boxes at each distance, and the measure of the arrangements with given anchor data is at most the product of the per-line costs~\eqref{eq:cost}, which distribute over the stages by~\eqref{eq:telescope}.
   \item The local balance~\eqref{eq:balance} is the statement to be proved. It holds on the five test families, bundle, star chain, relay, cross and fan, and the construction makes turns of the geodesic a non-case. The relay requires the exit cost; the fan requires the sum over the number of lines through a box, which is paid by the fresh costs.
-  \item Returns of the geodesic to an earlier structure are the open case: the released factors exceed one locally. We state the excursion grouping that should absorb them and the conjecture that minimal witnesses have no returns. Proving either is Step~2 of the plan.
+  \item \Cref{sec:step2} (Step~2) removes the return case: with the span defined through a running maximum, all released factors are at most one (\cref{lem:monotone}); with a canonical geodesic that prefers the current widened core, the walk never re-enters a core along a tube it has left (\cref{prop:noreturn}), and lateral switches inside a tube are excluded by the row-independence of distances (\cref{lem:tube}). Stage boundaries are then exits, fresh lines, or zero-entropy crossings by old lines. What remains (Step~3) is the balance over super-stages, for which we state the accounting and the one additivity claim it needs.
 \end{enumerate}
 
 \section*{Acknowledgements}
