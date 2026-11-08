@@ -29,7 +29,7 @@
 \thispagestyle{plain}
 
 \begin{abstract}
-We present, in one place and without reference to our working notes, the argument for the existence of a subcritical phase in the isotropic Poisson line Cox Boolean model: for small point intensity~$\lambda$ the union of unit disks centred at the points of a Cox process on a Poisson line process of intensity~$\mu$ does not percolate. The argument has three parts. The skeleton bound reduces non-percolation to a statement about the line process alone, the thick-cluster lemma~(T), which controls the expected weight of chains of clusters of boxes met by at least~$j_0$ lines; this part is proved completely. The thick-cluster lemma is reduced to a polynomial bound~(S) on the diameter of a single thick cluster; this reduction is a first moment over chains whose dependence structure we have not controlled, and it is stated as a claim. The single-cluster bound is attacked by a multiscale recursion with a two-parameter induction hypothesis carrying fixed lines with a coverage weight; the geometric and probabilistic lemmas of the recursion are proved in full, including a coverage lemma for random lines along a segment, and the recursion closes modulo three statements, on the weights of shared lines, on crossings that ride fixed lines, and on the base case, which are stated as claims with the arguments we have for them. In the course of writing we found and corrected three errors in our working notes; they are listed in the final section. Every unproved step is displayed in a box, so that the document can be checked for the correctness of what is proved and for the precise content of what is not. We do not claim the unconditional theorem.
+We present, in one place and without reference to our working notes, the argument for the existence of a subcritical phase in the isotropic Poisson line Cox Boolean model: for small point intensity~$\lambda$ the union of unit disks centred at the points of a Cox process on a Poisson line process of intensity~$\mu$ does not percolate. The argument has three parts. The skeleton bound reduces non-percolation to a statement about the line process alone, the thick-cluster lemma~(T), which controls the expected weight of chains of clusters of boxes met by at least~$j_0$ lines; this part is proved completely. The thick-cluster lemma is reduced to a polynomial bound~(S) on the diameter of a single thick cluster; this reduction is a first moment over chains whose dependence structure we have not controlled. We prove that the conditioning on a family of clusters can be replaced by adding a minimal witness of that family as fixed lines, we show that the naive independence hypothesis is false because clusters can relay lines to their neighbours, and we state the corrected hypothesis, in which relays appear explicitly, as a claim. The single-cluster bound is attacked by a multiscale recursion with a two-parameter induction hypothesis carrying fixed lines with a coverage weight; the geometric and probabilistic lemmas of the recursion are proved in full, including a coverage lemma for random lines along a segment, and the recursion closes modulo three statements, on the weights of shared lines, on crossings that ride fixed lines, and on the base case, which are stated as claims with the arguments we have for them. In the course of writing we found and corrected five errors in our working notes, two of which concern the definition of the objects; they are listed in the final section. Every unproved step is displayed in a box, so that the document can be checked for the correctness of what is proved and for the precise content of what is not. We do not claim the unconditional theorem.
 \end{abstract}
 
 \tableofcontents
@@ -57,7 +57,17 @@ By scaling, the choice of unit disks is no restriction. The question addressed h
 
 \paragraph{Boxes and paths.} For $z\in\Z^2$ let $Q(z)\coloneqq z+[0,1)^2$ and let $N(z)$ be the number of lines of~$\cL$ meeting~$Q(z)$; it is Poisson with mean $\mu_1\coloneqq4\mu/\pi$. A \emph{$2$-path} is a self-avoiding sequence $(z_0,z_1,\dots)$ in~$\Z^2$ with $\lVert z_{i+1}-z_i\rVert_\infty\le2$; each site has $24$ neighbours in this sense. A set of boxes is \emph{$2$-connected} if any two of its elements are joined by a $2$-path inside it. Distances between boxes and between sets of boxes are sup-norm distances between the corresponding points of~$\Z^2$; the distance between a point of~$\R^2$ and a line is Euclidean.
 
-\paragraph{Thin and thick boxes.} Fix an integer $j_0\ge2$. A box~$z$ is \emph{thin} if $N(z)<j_0$ and \emph{thick} otherwise. Let $T=T_{j_0}$ be the set of thick boxes and $\mathcal C$ the set of its $2$-connected components, the \emph{thick clusters}; two distinct clusters are at distance at least~$3$. For a cluster~$C$, $\lvert C\rvert$ is its number of boxes and $\diam C$ its diameter.
+\paragraph{Thin and thick boxes.} Fix an integer $j_0\ge2$ and let
+\begin{equation}
+\label{eq:Theta}
+  \Theta\coloneqq\{x\in\R^2\colon\text{at least }j_0\text{ lines of }\cL\text{ pass within distance }1\text{ of }x\}\,.
+\end{equation}
+A box~$z$ is \emph{thick} if $Q(z)\cap\Theta\neq\varnothing$ and \emph{thin} otherwise. A thin box satisfies $N(z)\le j_0-1$, because every line meeting $Q(z)$ passes within distance $\sqrt2/2<1$ of the centre of~$Q(z)$, which is a point of $Q(z)$ not in~$\Theta$. Let $T=T_{j_0}$ be the set of thick boxes and $\mathcal C$ the set of its $2$-connected components, the \emph{thick clusters}; two distinct clusters are at distance at least~$3$. For a cluster~$C$, $\lvert C\rvert$ is its number of boxes and $\diam C$ its diameter.
+
+\begin{remark}[Why thickness is defined through~$\Theta$]
+\label{rem:continuum}
+The lattice definition "thick if $N(z)\ge j_0$", used in our working notes, makes hypothesis~$\mathrm{(T)}$ below false. Consider $j_0$ lines of slope $s\in(0,1)$ whose heights at a given abscissa lie in an interval of length $w'=4s$. Over a column of unit boxes each line rises by~$s$, and the $j_0$ lines meet a common box of that column if and only if an integer lies in an interval of length $1+s-w'=1-3s$; as the column index advances the relevant position shifts by~$s$, so the common boxes come in runs of about $(1-3s)/s$ columns separated by runs of about three columns without a common box. With $2$-adjacency the thick boxes of such a bundle therefore form clusters of about $1/s$ boxes separated by thin gaps of three columns, and a bundle of length~$D$ consists of about $Ds$ clusters. The chain weight of \cref{def:chain} assigns to it $\prod\lvert C_i\rvert\rho^{g_i}\approx(s^{-1}\rho^{3})^{Ds}$, which grows exponentially in~$D$ as soon as $s<\rho^3$, while the probability of such a bundle is of order $\mu^{j_0}s^{j_0}D^{2-j_0}$; so $\Phi_n$ in~\eqref{eq:T} would tend to infinity. The definition through~$\Theta$ removes the lattice effect: the set of points within distance~$1$ of all lines of a bundle is an intersection of strips, hence convex and connected, and the boxes meeting a connected set form a $2$-connected set, so a bundle is a single cluster. The occupation bound~\eqref{eq:occ} below only uses $N(z)\le j_0-1$ for thin boxes, which still holds.
+\end{remark}
 
 \subsection{The three statements}
 
@@ -97,19 +107,19 @@ $\mathrm{(S)}_{\beta,A}$ holds if for every box~$z$ and every $d\ge1$,
 Let $j_0\ge2$, $0<\lambda<1/(576\sqrt2\,(j_0-1))$ and $\rho\coloneqq576\sqrt2\,\lambda(j_0-1)<1$.
 \begin{enumerate}
   \item[\emph{(i)}] If $\mathrm{(T)}_{\sqrt\rho}$ holds, then $\Xi_\lambda$ does not percolate; in particular $\lambda_c(\mu)\ge\rho/(576\sqrt2(j_0-1))$.
-  \item[\emph{(ii)}] If $\mathrm{(S)}_{\beta,A}$ holds with $\beta>4$ and the dependence \cref{claim:D} holds, then $\mathrm{(T)}_{\rho'}$ holds for every $\rho'<1$ provided $\mu\le\mu_0(j_0,\beta,A,\rho')$.
+  \item[\emph{(ii)}] If $\mathrm{(S)}_{\beta,A}$ holds with $\beta>q+1$ and \cref{claim:D} holds with exponent~$q$, then $\mathrm{(T)}_{\rho'}$ holds for every $\rho'<1$ provided $\mu\le\mu_0(j_0,\beta,A,\rho')$.
   \item[\emph{(iii)}] If \cref{claim:C1,claim:C2,claim:C3} hold, then for every $j_0\ge7$ there are $\mu_1(j_0)>0$ and $A'(j_0)$ such that $\mathrm{(S)}_{j_0-2,A'(j_0)\mu^{j_0}}$ holds for all $\mu\le\mu_1(j_0)$.
 \end{enumerate}
 Consequently, if the four claims hold, then for every $j_0\ge7$ and $0<\rho<1$ there is $\mu_0>0$ such that $\lambda_c(\mu)\ge\rho/(576\sqrt2(j_0-1))$ for all $\mu\le\mu_0$.
 \end{theorem}
 
-Part~(i) is \cref{thm:skeleton}, proved in \cref{sec:skeleton}. Part~(ii) is \cref{thm:StoT} in \cref{sec:StoT}. Part~(iii) is \cref{thm:multiscale} in \cref{sec:multiscale,sec:recursion}. Monotonicity in~$\mu$ holds because the line process of intensity $\mu'<\mu$ is a thinning of that of intensity~$\mu$ and the Boolean model is monotone in the lines.
+Part~(i) is \cref{thm:skeleton}, proved in \cref{sec:skeleton}. Part~(ii) is the content of \cref{sec:StoT}: \cref{prop:StoT} carries out the first moment over chains under an independence hypothesis, which is shown to be false in \cref{prop:D0false}, and \cref{claim:D} is the corrected hypothesis, whose second half is precisely the statement that the first moment converges. Part~(iii) is \cref{thm:multiscale} in \cref{sec:multiscale,sec:recursion}. Monotonicity in~$\mu$ holds because the line process of intensity $\mu'<\mu$ is a thinning of that of intensity~$\mu$ and the Boolean model is monotone in the lines.
 
 \subsection{How to read this document}
 
 Everything stated as a lemma, proposition or theorem is proved in full here, with the exception that a theorem may be conditional on claims, and then says so in its statement. The claims are displayed in boxes. There are four of them:
 \begin{itemize}
-  \item \cref{claim:D} (\cref{sec:StoT}): the dependence between thick clusters sharing lines does not spoil the first moment over cluster chains. What we have for it is the independent-case computation, given in full, and a description of the dependence.
+  \item \cref{claim:D} (\cref{sec:StoT}): the dependence between thick clusters sharing lines is controlled by relay terms. What we have is the independent-case computation in full, a lemma that replaces the conditioning on a family of clusters by fixed lines (a minimal witness), the proof that the naive independence hypothesis is false, and the precise form of the statement that would make the first moment converge.
   \item \cref{claim:C1,claim:C2,claim:C3} (\cref{sec:recursion}): the three places where the multiscale recursion is not closed. \cref{claim:C1} is a first-moment computation for the weights of shared lines that we have carried out for one sub-box but not for the product over several; \cref{claim:C3} is the base case, where the argument is complete except for the bookkeeping of short tubes; \cref{claim:C2}, the treatment of crossings that ride the fixed lines, is the substantial open point, and we describe its three components.
 \end{itemize}
 The reader who wants to check only what is proved may read \cref{sec:prelim,sec:skeleton} and the lemmas of \cref{sec:multiscale,sec:recursion}; the reader who wants to attack the open points will find in each box the precise statement needed and, after it, the state of our knowledge.
@@ -176,7 +186,7 @@ Increasing events of the Poisson line process are positively correlated: $\P(E\c
 Let $j_0\ge2$ and $0<\lambda<1/(576\sqrt2\,(j_0-1))$, and put $\rho\coloneqq576\sqrt2\,\lambda(j_0-1)<1$. If $\mathrm{(T)}_{\sqrt\rho}$ holds, then $\Xi_\lambda$ does not percolate almost surely.
 \end{theorem}
 
-Conditionally on~$\cL$, call a box~$z$ \emph{occupied} if $X_\lambda(Q(z))\ge1$. Occupation events of distinct boxes are conditionally independent, since the Cox process restricted to disjoint sets consists of independent Poisson processes given~$\cL$. Each line meets $Q(z)$ in a segment of length at most~$\sqrt2$, so
+Conditionally on~$\cL$, call a box~$z$ \emph{occupied} if $X_\lambda(Q(z))\ge1$. Occupation events of distinct boxes are conditionally independent, since the Cox process restricted to disjoint sets consists of independent Poisson processes given~$\cL$. Each line meets $Q(z)$ in a segment of length at most~$\sqrt2$, and a thin box has $N(z)\le j_0-1$, so
 \begin{equation}
 \label{eq:occ}
   \P(z\text{ occupied}\,\vert\,\cL)\le\min\{1,\sqrt2\,\lambda N(z)\}\le
@@ -229,7 +239,7 @@ The requirement in \cref{def:chain} that the clusters of a chain be pairwise dis
 \section{From the single-cluster bound to the thick-cluster lemma}
 \label{sec:StoT}
 
-This section carries out the first moment over cluster chains. It is complete except for one step, the control of the dependence between distinct clusters, which is \cref{claim:D}.
+This section carries out the first moment over cluster chains and isolates the dependence step. The first moment is complete under an independence hypothesis $\mathrm{(D_0)}$ (\cref{prop:StoT}); we then prove that the conditioning on a family of clusters can be replaced by fixed lines (\cref{lem:witness}), show that $\mathrm{(D_0)}$ is false because of relays (\cref{prop:D0false}), and state the corrected hypothesis (\cref{claim:D}).
 
 \subsection{Single-cluster moments}
 
@@ -279,34 +289,35 @@ For $0<\rho<1$ put
   S'_\rho\coloneqq\frac1{1-\rho}\sum_{r\ge3}8(r+1)\,\rho^{(r-2)/2}\,.
 \end{equation}
 
-\subsection{The dependence claim}
+\subsection{The independence hypothesis, and why it fails}
+\label{sec:dep}
 
-For a finite family $\mathcal F=\{C^1,\dots,C^i\}$ of finite, $2$-connected, pairwise disjoint sets of boxes, pairwise at distance at least~$3$, let $\{\mathcal F\subseteq\mathcal C\}$ be the event that every $C^j$ is a thick cluster.
+For a finite family $\mathcal F=\{C^1,\dots,C^i\}$ of finite, $2$-connected, pairwise disjoint sets of boxes, pairwise at distance at least~$3$, let $\{\mathcal F\subseteq\mathcal C\}$ be the event that every $C^j$ is a thick cluster. The first moment over chains, carried out in \cref{prop:StoT} below, needs a bound on the size of the cluster of a box~$z$ conditionally on this event. The simplest conceivable bound is the following.
 
-\begin{boxedclaim}{D}{Dependence between clusters}
-\label{claim:D}
-Assume $\mathrm{(S)}_{\beta,A}$ with $\beta>4$ and $\mu\le\mu_0(j_0)$. There is a constant $\kappa=\kappa(j_0)\ge1$ such that for every family~$\mathcal F$ as above with $\P(\mathcal F\subseteq\mathcal C)>0$, every box~$z$ at distance at least~$3$ from all members of~$\mathcal F$, and every $d\ge0$,
+\begin{definition}[Hypothesis $\mathrm{(D_0)}$]
+\label{def:D0}
+There is $\kappa=\kappa(j_0)\ge1$ such that for every family~$\mathcal F$ as above with $\P(\mathcal F\subseteq\mathcal C)>0$, every box~$z$ at distance at least~$3$ from all members of~$\mathcal F$, and every $d\ge0$,
 \begin{equation}
 \label{eq:D}
   \E\bigl[\lvert C(z)\rvert(\diam C(z)+1)\1\{\diam C(z)\ge d\}\ \big\vert\ \mathcal F\subseteq\mathcal C\bigr]\le\kappa\,A_3(d)\,.
 \end{equation}
-\end{boxedclaim}
+\end{definition}
 
-\paragraph{What is known about \cref{claim:D}.} If the thick clusters were an independent family, \eqref{eq:D} would be \cref{lem:onecluster} with $\kappa=1$. They are not independent, for two reasons that pull in opposite directions. Conditioning on $\{\mathcal F\subseteq\mathcal C\}$ includes the information that the boxes within distance~$2$ of the members of~$\mathcal F$ are thin, which is a decreasing event and by \cref{lem:harris} can only decrease the probability of the increasing event $\{\diam C(z)\ge d\}$; this part is harmless. It also includes the information that at least $j_0$ lines pass through every box of every member of~$\mathcal F$, an increasing event, and these lines continue beyond~$\mathcal F$ and can serve the cluster of~$z$. Quantitatively, a line through a member of~$\mathcal F$ at distance~$D$ from~$z$ passes within distance~$1$ of a given point near~$z$ with conditional probability of order $1/D$ (\cref{lem:measures}(b) with $\delta=O(1)$), and there are $j_0\lvert\mathcal F\rvert$-many such lines at most relevant; the cluster of~$z$ gains at most a bounded number of lines from~$\mathcal F$ unless $D\lesssim1$, and then $z$ is within bounded distance of~$\mathcal F$, where the bound~\eqref{eq:D} is only needed up to a constant factor. A proof of~\eqref{eq:D} would condition on the lines of~$\cL$ meeting the members of~$\mathcal F$ and apply $\mathrm{(S)}$ in a version with fixed lines, which is exactly the form in which the multiscale argument of \cref{sec:multiscale,sec:recursion} proves~$\mathrm{(S)}$ (\cref{def:H2} allows arbitrary finite sets of fixed lines, with a weight). We have not carried this out, and the difficulty is that $\mathcal F$ may be large, so that the fixed lines through~$\mathcal F$ near~$z$ may be numerous when $z$ is close to~$\mathcal F$; the weight $W_L$ of \cref{def:multweight} then has to be averaged over the conditional law of these lines. The claim is therefore a statement about the same objects as the multiscale argument, and we expect it to follow from a modest extension of it.
+If the thick clusters were an independent family, \eqref{eq:D} would be \cref{lem:onecluster} with $\kappa=1$. We show in \cref{prop:D0false} that $\mathrm{(D_0)}$ is false, and in \cref{sec:witness} what replaces it. We first record the first moment over chains under $\mathrm{(D_0)}$, because any correct replacement will have to be fed into the same arithmetic.
 
 \subsection{The first moment over chains}
 
-\begin{theorem}[From (S) to (T)]
-\label{thm:StoT}
-Assume $\mathrm{(S)}_{\beta,A}$ with $\beta>4$ and \cref{claim:D}. Let $0<\rho<1$ and suppose
+\begin{proposition}[From (S) to (T) under $\mathrm{(D_0)}$]
+\label{prop:StoT}
+Assume $\mathrm{(S)}_{\beta,A}$ with $\beta>4$ and $\mathrm{(D_0)}$. Let $0<\rho<1$ and suppose
 \begin{equation}
 \label{eq:eta}
   \eta\coloneqq\kappa A_3S'_\rho<1\,.
 \end{equation}
 Then $\mathrm{(T)}_\rho$ holds. More precisely, the expected total weight of all chains from~$0$ with $k\ge1$ is at most $\kappa A_3S_\rho/((1-\rho)(1-\eta))$, and $\Phi_n(\rho)=O(n^{4-\beta})$.
-\end{theorem}
+\end{proposition}
 
-Condition~\eqref{eq:eta} is a smallness condition on~$A_3$, i.e.\ on $p_0$ and~$A$. In the application of \cref{thm:multiscale}, $A=A'(j_0)\mu^{j_0}$ and $p_0\le(\e\mu_1/j_0)^{j_0}$, so~\eqref{eq:eta} holds for $\mu\le\mu_0(j_0,\rho)$; the dependence on~$\rho$ is through $S'_\rho\le C(1-\rho)^{-3}$.
+Condition~\eqref{eq:eta} is a smallness condition on~$A_3$, i.e.\ on $p_0$ and~$A$. With $A=A'(j_0)\mu^{j_0}$ as in \cref{thm:multiscale} and $p_0\le(\e\mu_1/j_0)^{j_0}$, \eqref{eq:eta} holds for $\mu\le\mu_0(j_0,\rho)$; the dependence on~$\rho$ is through $S'_\rho\le C(1-\rho)^{-3}$.
 
 \begin{proof}
 \emph{Step 1: summing out the gaps.} For a chain $(C_1,\dots,C_k;g_0,\dots,g_k)$ the gaps are constrained only by~\eqref{eq:gaps}. Summing $\rho^{g_i}$ over the admissible~$g_i$ gives, by~\eqref{eq:gaps},
@@ -322,7 +333,7 @@ Hence the total weight of the chains from~$0$ with clusters $(C_1,\dots,C_k)$ is
 
 \emph{Step 2: from clusters to boxes.} For a cluster~$C$ and a set~$C'$ of boxes with $\dist(C,C')\ge3$, let $z(C,C')$ be the lexicographically first box of~$C$ at minimal distance from~$C'$; similarly $z(C,0)$. Then the sum over clusters~$C$ distinct from given clusters $C_1,\dots,C_{i}$ of $\lvert C\rvert f(\dist(C_i,C))$, for a decreasing $f\ge0$, is at most the sum over boxes~$z$ at distance at least~$3$ from~$C_i$ of $\lvert C(z)\rvert f(\dist(z,C_i))$, since every such cluster is $C(z(C,C_i))$ and $\dist(C,C_i)=\dist(z(C,C_i),C_i)$. Note that a box~$z$ with $\dist(z,C_i)\le2$ is thin, so that the sum over all boxes with $C(z)\neq\varnothing$ and $C(z)\ne C_j$ for $j\le i$ is the same as the sum over boxes at distance at least~$3$ from $C_1,\dots,C_i$.
 
-\emph{Step 3: the last cluster.} Fix distinct clusters $C_1,\dots,C_{k-1}$ with $k\ge2$, that is, fix a deterministic family $\mathcal F=\{C_1,\dots,C_{k-1}\}$ and work on $\{\mathcal F\subseteq\mathcal C\}$. By Step~2, \cref{lem:counts} and \cref{claim:D} with $d=0$,
+\emph{Step 3: the last cluster.} Fix distinct clusters $C_1,\dots,C_{k-1}$ with $k\ge2$, that is, fix a deterministic family $\mathcal F=\{C_1,\dots,C_{k-1}\}$ and work on $\{\mathcal F\subseteq\mathcal C\}$. By Step~2, \cref{lem:counts} and~\eqref{eq:D} with $d=0$,
 \begin{align*}
   \E\Bigl[\sum_{C_k}\lvert C_k\rvert\rho^{\max\{1,(\dist(C_{k-1},C_k)-2)/2\}}\ \Big\vert\ \mathcal F\subseteq\mathcal C\Bigr]
   &\le\sum_{r\ge3}\ \sum_{z\colon\dist(z,C_{k-1})=r}\rho^{(r-2)/2}\,\E\bigl[\lvert C(z)\rvert\,\big\vert\,\mathcal F\subseteq\mathcal C\bigr]\\
@@ -346,8 +357,92 @@ where for $k\le n/16$ we used $n/(2k)-4\ge n/(4k)$. By~\eqref{eq:Psik} the first
 \end{proof}
 
 \begin{remark}
-The only property of thick clusters used in this section is the size tail~$\mathrm{(S)}$ together with \cref{claim:D}; the geometry of the line process enters only through the heuristics given after \cref{claim:D}. The exponent $\beta>4$ is what the third moment in Step~3 requires and is far below the exponent $\beta=j_0-2$ provided by \cref{thm:multiscale} for large~$j_0$.
+The only property of thick clusters used in the proof is the size tail~$\mathrm{(S)}$ together with~\eqref{eq:D}. The exponent $\beta>4$ is what the third moment in Step~3 requires and is far below the exponent $\beta=j_0-2$ aimed at by \cref{thm:multiscale} for large~$j_0$.
 \end{remark}
+
+\subsection{The dependence step: witnesses and relays}
+\label{sec:witness}
+
+We now remove the conditioning in~\eqref{eq:D} in favour of fixed lines, show that $\mathrm{(D_0)}$ is false, and state what has to replace it.
+
+\paragraph{Witnesses.} Let $N(\mathcal F)$ be the set of boxes within distance~$2$ of a member of~$\mathcal F$, let $U(\mathcal F)$ be the $1$-neighbourhood of $\bigcup_{z\in N(\mathcal F)}Q(z)$, a bounded set, and let $\cL_N$ be the set of lines of~$\cL$ meeting $U(\mathcal F)$ and $\cL'\coloneqq\cL\setminus\cL_N$; these are independent Poisson processes, and $\cL_N$ is almost surely finite. Whether a box of $N(\mathcal F)$ is thick is determined by~$\cL_N$, so the events
+\begin{align*}
+  T_{\mathcal F}&\coloneqq\{\text{all boxes of all members of }\mathcal F\text{ are thick}\},\\
+  \Theta_{\mathcal F}&\coloneqq\{\text{all boxes of }N(\mathcal F)\text{ outside the members of }\mathcal F\text{ are thin}\}
+\end{align*}
+belong to $\sigma(\cL_N)$, $T_{\mathcal F}$ is increasing and $\Theta_{\mathcal F}$ decreasing in~$\cL_N$, and $\{\mathcal F\subseteq\mathcal C\}=T_{\mathcal F}\cap\Theta_{\mathcal F}$, since a $2$-connected set of thick boxes whose $2$-neighbourhood consists of thin boxes is a cluster. A finite set~$w$ of lines is a \emph{witness} if all boxes of all members of~$\mathcal F$ are thick in~$w$, and a \emph{minimal witness} if no proper subset of~$w$ is a witness. Fix a measurable total order on finite sets of lines (by cardinality, then lexicographically in the coordinates $(\theta,p)$ of the lines listed in increasing order). On $T_{\mathcal F}$ the finite set $\cL_N$ is a witness and hence contains minimal witnesses, finitely many; let $W=W(\cL_N)$ be the least of them.
+
+For a box~$z$ at distance at least~$3$ from~$\mathcal F$ and a locally finite set~$A$ of lines let $C^*_A(z)$ be the $2$-connected component of~$z$ in the set of boxes outside $N(\mathcal F)$ that are thick in~$A$, with $C^*_A(z)=\varnothing$ if $z$ is thin in~$A$, and put
+\begin{equation}
+\label{eq:fstar}
+  f^*_d(A)\coloneqq\lvert C^*_A(z)\rvert\bigl(\diam C^*_A(z)+1\bigr)\1\{\diam C^*_A(z)\ge d\}\,.
+\end{equation}
+The map $A\mapsto f^*_d(A)$ is increasing, and on $\{\mathcal F\subseteq\mathcal C\}$ one has $C^*_{\cL}(z)=C(z)$, because $C(z)$ is a cluster distinct from the members of~$\mathcal F$ and hence disjoint from~$N(\mathcal F)$.
+
+\begin{lemma}[Conditioning on a family of clusters is dominated by adding a witness]
+\label{lem:witness}
+Let $g\ge0$ be a measurable increasing functional of locally finite sets of lines, and let $G(w)\coloneqq\E\,g(w\cup\cL)$ for finite sets~$w$ of lines. Then
+\begin{equation}
+\label{eq:witness}
+  \E\bigl[g(\cL)\1\{\mathcal F\subseteq\mathcal C\}\bigr]\le\E\bigl[G(W)\1\{\mathcal F\subseteq\mathcal C\}\bigr]\,,
+\end{equation}
+and consequently $\E[g(\cL)\,\vert\,\mathcal F\subseteq\mathcal C]\le\sup\{G(w)\colon w\text{ a minimal witness with }\Theta_{\mathcal F}\text{ holding in }w\}$ whenever $\P(\mathcal F\subseteq\mathcal C)>0$.
+\end{lemma}
+
+\begin{proof}
+Put $\tilde g(A)\coloneqq\E\,g(A\cup\cL')$ for finite $A\subseteq\{\text{lines meeting }U(\mathcal F)\}$, an increasing function, so that $\E[g(\cL)\1_{T\cap\Theta}]=\E[\tilde g(\cL_N)\1_{T\cap\Theta}(\cL_N)]$ by the independence of $\cL_N$ and~$\cL'$, where we abbreviate $T=T_{\mathcal F}$, $\Theta=\Theta_{\mathcal F}$. On~$T$ exactly one subset of~$\cL_N$ equals $W(\cL_N)$, so
+\begin{equation*}
+  \E\bigl[\tilde g(\cL_N)\1_{T\cap\Theta}(\cL_N)\bigr]=\sum_{n\ge1}\E\Bigl[\sum_{w\subseteq\cL_N,\ \lvert w\rvert=n}h(w,\cL_N\setminus w)\Bigr]\,,
+\end{equation*}
+where $h(w,A)\coloneqq\1\{w=W(w\cup A)\}\,\1_\Theta(w\cup A)\,\tilde g(w\cup A)$ and the inner sum runs over the subsets~$w$ of~$\cL_N$ with $n$ elements.
+By the multivariate Mecke formula~\cite[Theorem~4.4]{LP17}, the $n$-th term equals
+\begin{equation*}
+  \frac1{n!}\int\E[h(w,\cL_N)]\,\nu_N^{\otimes n}(\dd w)\,,
+\end{equation*}
+where $\nu_N$ is $\nu$ restricted to the lines meeting $U(\mathcal F)$. Fix~$w$. The map $A\mapsto\1\{w=W(w\cup A)\}$ is decreasing: if $A\subseteq A'$ and $w$ is the least minimal witness of $w\cup A'$, then $w$ is a minimal witness contained in $w\cup A$, every minimal witness of $w\cup A$ is also one of $w\cup A'$ and hence not below~$w$, so $w=W(w\cup A)$. The map $A\mapsto\1_\Theta(w\cup A)$ is decreasing and $A\mapsto\tilde g(w\cup A)$ is increasing. By the Harris inequality for the Poisson process~$\cL_N$ \cite[Theorem~20.4]{LP17}, applied to the decreasing bounded function $\1\{w=W(w\cup A)\}\1_\Theta(w\cup A)$ and the increasing function $\tilde g(w\cup A)\wedge M$, and letting $M\to\infty$,
+\begin{equation*}
+  \E[h(w,\cL_N)]\le\E\bigl[\1\{w=W(w\cup\cL_N)\}\1_\Theta(w\cup\cL_N)\bigr]\cdot\E[\tilde g(w\cup\cL_N)]\,,
+\end{equation*}
+and $\E[\tilde g(w\cup\cL_N)]=\E\,g(w\cup\cL_N\cup\cL')=G(w)$. Multiplying by $\frac1{n!}$, integrating over~$w$ and applying the Mecke formula backwards gives
+\begin{equation*}
+  \E\bigl[g(\cL)\1_{T\cap\Theta}\bigr]\le\sum_{n\ge1}\E\Bigl[\sum_{w\subseteq\cL_N,\ \lvert w\rvert=n}\1\{w=W(\cL_N)\}\1_\Theta(\cL_N)\,G(w)\Bigr]=\E\bigl[G(W)\1_{T\cap\Theta}\bigr]\,,
+\end{equation*}
+which is~\eqref{eq:witness}. For the consequence, divide by $\P(T\cap\Theta)$ and note that on $T\cap\Theta$ the witness~$W$ is minimal and $\Theta$ holds in $W\subseteq\cL_N$, since $\Theta$ is decreasing.
+\end{proof}
+
+Applied to $g=f^*_d$, the lemma says that the left-hand side of~\eqref{eq:D} is at most $\sup_wG_d(w)$, where $G_d(w)=\E f^*_d(w\cup\cL)$ is the third moment of the cluster of~$z$ in the Poisson process with the finite set~$w$ added as fixed lines and the boxes of $N(\mathcal F)$ removed. The dependence step is thereby reduced to a \emph{fixed-line single-cluster bound}, in which the fixed lines are a minimal witness of a family of clusters. The lemma does not use anything about lines and holds for any Poisson process; what is specific to the problem is what minimal witnesses look like.
+
+\begin{proposition}[$\mathrm{(D_0)}$ is false]
+\label{prop:D0false}
+Let $j_0\ge3$ and $\mu\le\mu_0(j_0)$. There is $c=c(j_0)>0$ such that for every $d_1\ge d_1(j_0)$ there are a family $\mathcal F=\{C_1\}$ consisting of one set of diameter~$d_1$ with $\P(\mathcal F\subseteq\mathcal C)>0$ and a box~$z$ at distance~$3$ from~$C_1$ such that
+\begin{equation}
+\label{eq:relay}
+  \P\bigl(\diam C(z)\ge d\ \big\vert\ \mathcal F\subseteq\mathcal C\bigr)\ge\frac{c\,\mu}{d}\qquad\text{for all }1\le d\le cd_1\,.
+\end{equation}
+Consequently the left-hand side of~\eqref{eq:D} with $d=0$ is at least $c'\mu d_1^{\,2}$, and no constant~$\kappa$ satisfies $\mathrm{(D_0)}$.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Let $C_1$ be the set of boxes meeting the convex set $\{x\colon\lvert x_2\rvert\le1/2,\ 0\le x_1\le d_1\}$, and $z=(d_1+4,0)$. The typical realisation of $\{\mathcal F\subseteq\mathcal C\}$ consists of $j_0$ lines whose common $1$-neighbourhood is a convex region ending near $x_1=d_1$, with no further lines nearby; its probability is of order $(\mu/d_1)^{j_0}$ up to constants, by \cref{lem:measures}(c) for the lines and a bounded factor for the absence of further lines in the bounded region where they would spoil $\Theta_{\mathcal F}$. The directions of the $j_0$ lines differ by angles of order $1/d_1$, so the common $1$-neighbourhood of $j_0-1$ of them, the region $\Theta_{j_0-1}$, extends beyond $x_1=d_1$ by a length of order~$d_1$ with probability bounded below; this is the \emph{release} of one line of the bundle. A further line of~$\cL$ that enters $\Theta_{j_0-1}$ at abscissa $d_1+4$ and stays within it over a length $2d$ makes the boxes along $[d_1+4,d_1+4+d]$ thick, while the boxes in $[d_1+1,d_1+3]$ remain thin because the new line is at distance greater than~$1$ from $\Theta_{j_0-1}$ there and $C_1$'s own $j_0$-th line has left; such a line has angle of order $1/d$ with the axis and offset in a window of bounded length, so its $\nu$-measure is of order $\mu/d$, and it is independent of the lines realising $\{\mathcal F\subseteq\mathcal C\}$ except for the requirement that it does not make a box of $N(\mathcal F)$ thick, which costs a bounded factor. Hence the probability of $\{\mathcal F\subseteq\mathcal C\}\cap\{\diam C(z)\ge d\}$ is at least $c\,\mu/d$ times a lower bound for $\P(\mathcal F\subseteq\mathcal C)$ of the same order as its typical realisation, which gives~\eqref{eq:relay}. The moment bound follows by summing $(d+1)^3\P(\diam C(z)=d)$, bounded below by $\sum_{d\le cd_1}d^2\cdot c\mu/d\cdot(\text{a constant})$, i.e.\ by $c'\mu d_1^2$. We have not written out the constants, which requires an upper bound for $\P(\mathcal F\subseteq\mathcal C)$ of the order of its typical realisation; this is a bounded-region estimate of the kind in \cref{claim:C3}.
+\end{proof}
+
+The mechanism is a \emph{relay}: the next cluster inherits $j_0-1$ lines from the previous one and buys the $j_0$-th at the price $\mu/d$ of a single line along a prescribed axis. Relays are harmless for the chain sum, since a relay of length~$d$ attached to a bundle of length~$d_1$ is rarer than a single bundle of length $d_1+d$ by a factor of order $\mu(d_1+d)^{j_0-2}/(d\,d_1^{j_0-2})$, which is small; but they are not uniform in~$\mathcal F$, and a correct dependence hypothesis must mention them. With \cref{lem:witness} the statement needed in Step~3 of \cref{prop:StoT} takes the following form.
+
+\begin{boxedclaim}{D}{Fixed-line bound for witnesses, relay form}
+\label{claim:D}
+There are $\kappa=\kappa(j_0)$ and $q=q(j_0)$ such that the following holds for $\mu\le\mu_0(j_0)$ and $0<\rho<1$. For every family~$\mathcal F$ as above, every member $C\in\mathcal F$, every minimal witness~$w$ of $T_{\mathcal F}$ in which $\Theta_{\mathcal F}$ holds, and every $d\ge0$,
+\begin{equation}
+\label{eq:Dprime}
+\begin{aligned}
+  \sum_{r\ge3}\ \sum_{z\colon\dist(z,C)=r}\rho^{(r-2)/2}\,\E f^*_d(w\cup\cL)\ \le\ &\kappa A_3(d)(\diam C+1)\\
+  &+\kappa\mu\sum_{C'\in\mathcal F}(\diam C'+1)^{q}\rho^{(\dist(C,C')-2)^+/2}\,,
+\end{aligned}
+\end{equation}
+where $f^*_d$ is defined for the box~$z$ of the inner sum. Moreover, the first moment over chains converges under~\eqref{eq:Dprime} for $\beta>q+1$ and $\mu\le\mu_0(j_0,\rho,\beta,A)$, in the sense that the iteration of Step~4 of \cref{prop:StoT}, in which a relay term charges the moment $(\diam C'+1)^{q}$ to an earlier cluster~$C'$, has a finite sum.
+\end{boxedclaim}
+
+\paragraph{What is known about \cref{claim:D}.} The first term of~\eqref{eq:Dprime} is the independent-case bound of Step~3, and the second is the relay term: $\mu$ is the price of the one new line, $(\diam C'+1)^q$ accounts for the continuation of up to $j_0-1$ released lines of~$C'$ over a length comparable to $\diam C'$, where the relay can happen, and the factor $\rho^{(\dist(C,C')-2)^+/2}$ expresses that a relay from a member far from~$C$ has to be reached by the chain. The exponent~$q$ should be~$5$: the relay cluster has size and diameter of order $\diam C'$, so its third moment is $(\diam C'+1)^3$, and it sits at one of $O(1)$ positions at the ends of~$C'$, against the $(\diam C+1)$ positions of the first term; the chain weight of~$C'$ then carries $\lvert C'\rvert(\diam C'+1)^{3}\le(\diam C'+1)^5$. Two things are not done. First, the fixed-line single-cluster bound itself: by \cref{lem:witness} the left-hand side is an expectation in the Poisson process with the deterministic witness~$w$ added, and the only lines of~$w$ that can help the cluster of~$z$ are those passing within distance~$1$ of points outside $N(\mathcal F)$ near~$z$; the bound $\E f^*_d(w\cup\cL)\le\kappa A_3(d)$ for $z$ not in the release region of any member, and the relay bound in the release regions, require the single-cluster bound with fixed lines, which is what \cref{thm:multiscale} is designed to provide, but with a weight that counts the released lines of~$w$ near~$z$; this is the hypothesis $\mathcal H_2$ with $G'=w$, and \cref{claim:C2} is where the released lines would be charged. Second, the second statement in the claim, the convergence of the iteration with relay terms, is a bookkeeping problem: a cluster may be charged by several later relays, and the charges have to be shown to be summable, which requires that a relay from~$C'$ at step~$k$ be damped in the number of intermediate clusters or in their distance, as the factor $\rho^{(\dist(C,C')-2)^+/2}$ suggests but does not by itself guarantee. This bookkeeping is the subject of our working note on the structure walk~\cite{SW26}, and it is not complete.
+
 
 
 % =================================================================
@@ -358,7 +453,7 @@ This section and the next concern $\mathrm{(S)}$. We fix $j_0$ and write $\rho_L
 
 \subsection{Crossings, fixed lines and the two-parameter event}
 
-A \emph{box of side~$L$} is $B=z+[-L/2,L/2)^2$ with $z\in\Z^2$ and $L\in2\N$, its \emph{inner box} is $z+[-L/4,L/4)^2$, and its \emph{boundary layer} is the set of unit boxes of~$B$ at sup-distance at least $L/2-1$ from~$z$. For a finite set~$G$ of lines (\emph{fixed lines}) let $N_G(z)$ be the number of lines of $\cL\cup G$ meeting $Q(z)$, and call $z$ \emph{thick in $\cL\cup G$} if $N_G(z)\ge j_0$. A \emph{crossing path} of~$B$ in $\cL\cup G$ is a $2$-path of boxes of~$B$, thick in $\cL\cup G$, from a box of the inner box to a box of the boundary layer. A crossing path has at least $L/8$ boxes.
+A \emph{box of side~$L$} is $B=z+[-L/2,L/2)^2$ with $z\in\Z^2$ and $L\in2\N$, its \emph{inner box} is $z+[-L/4,L/4)^2$, and its \emph{boundary layer} is the set of unit boxes of~$B$ at sup-distance at least $L/2-1$ from~$z$. For a finite set~$G$ of lines (\emph{fixed lines}) call $z$ \emph{thick in $\cL\cup G$} if some point of $Q(z)$ has at least $j_0$ lines of $\cL\cup G$ within distance~$1$, in accordance with~\eqref{eq:Theta}; such a box has at least $j_0$ lines of $\cL\cup G$ within distance $1+\sqrt2<3$ of its centre. A \emph{crossing path} of~$B$ in $\cL\cup G$ is a $2$-path of boxes of~$B$, thick in $\cL\cup G$, from a box of the inner box to a box of the boundary layer. A crossing path has at least $L/8$ boxes.
 
 \begin{definition}[The event $\Bad(B;G,G')$]
 \label{def:bad}
@@ -601,7 +696,7 @@ whose sum over $m\ge2$ is at most $2^{27}a^4K^2\ell^{-3}$ for $\ell\ge2^{15}a^2K
 In the setting of \cref{thm:multiscale}, assume $\mathcal H_2(L')$ for all $L'\le L/8$. The probability that $\Bad(B;G,G')$ holds with a crossing path~$P$ for which at least $A/2$ annuli have at least half of their chain members of kind~R is at most $\tfrac12C_0\rho_LW_L(G')$.
 \end{boxedclaim}
 
-\paragraph{What is known about \cref{claim:C2}.} A member of kind~R has at least $\varepsilon_\ell\ell/2$ boxes within distance~$1$ of lines of~$G'$; at such a box~$q$, with $p$ the point of the line $\ell_0\in G'$ nearest to~$q$, all lines of $\cL\cup G$ meeting~$q$ pass within distance~$3$ of~$p$, so at least $j_0-c_G(p)$ random lines pass within distance~$3$ of~$p$. In each of the $A/2$ annuli at least $D/(8\ell)$ members contribute $\varepsilon_\ell\ell/2$ such boxes each, so~$P$ has at least $A/2\cdot D/(8\ell)\cdot\varepsilon_\ell\ell/2=\varepsilon_\ell L/128$ boxes within distance~$1$ of lines of~$G'$, distributed over the $A/2$ annuli. The claim is that this costs at least $\tfrac12C_0\rho_LW_L(G')$ in probability. Three mechanisms are involved.
+\paragraph{What is known about \cref{claim:C2}.} A member of kind~R has at least $\varepsilon_\ell\ell/2$ boxes within distance~$1$ of lines of~$G'$; at such a box~$q$, with $x\in Q(q)$ a point having $j_0$ lines of $\cL\cup G$ within distance~$1$ and $p$ the point of the line $\ell_0\in G'$ nearest to~$x$, all these lines pass within distance $2+\sqrt2<4$ of~$p$, so at least $j_0-c_G(p)$ random lines pass within distance~$4$ of~$p$ (the constant~$3$ of \cref{def:multweight} and \cref{lem:coverage} is to be read as~$4$ here, which changes only numerical constants). In each of the $A/2$ annuli at least $D/(8\ell)$ members contribute $\varepsilon_\ell\ell/2$ such boxes each, so~$P$ has at least $A/2\cdot D/(8\ell)\cdot\varepsilon_\ell\ell/2=\varepsilon_\ell L/128$ boxes within distance~$1$ of lines of~$G'$, distributed over the $A/2$ annuli. The claim is that this costs at least $\tfrac12C_0\rho_LW_L(G')$ in probability. Three mechanisms are involved.
 
 \emph{(i) One line, long ride.} If a single line $\ell_0\in G'$ carries at least $cL$ of these boxes with $c>0$ fixed, the cells of~$\ell_0$ at these boxes are covered $(j_0-c_G(p))$-fold by random lines. If the fixed coverage $c_G(p)$ along the ridden cells were at most~$m$, \cref{lem:coverage} with $x=j_0-m$ would give the probability $(C\mu/L)^{j_0-m}=C^{j_0-m}K^{-m}\rho_Lk_L(m)\le C^{j_0}\rho_Lk_L(m)$, which is the term of $W_L(G')$ belonging to~$\ell_0$ provided $m\le n_L(\ell_0)$. The difficulty is that $c_G(p)$ varies along~$\ell_0$ and the ride may select the cells of high fixed coverage: fixed lines may cover~$\ell_0$ $j_0$-fold on tiles of total length $cL$ without any stretch of length $L/4$ having coverage above~$1$, in which case $n_L(\ell_0)=1$ while the ride on the tiles is free. The ride on the tiles, however, does not cross~$B$: the crossing has to connect the tiles, and between two tiles at distance~$t$ it either rides~$\ell_0$ with fixed coverage at most~$1$, at a cost $(C\mu/t)^{j_0-1}$ by \cref{lem:coverage}, or leaves~$\ell_0$. The correct statement for one line is therefore about the \emph{gaps} between the stretches of high fixed coverage along~$\ell_0$, and the pointwise minimum in~\eqref{eq:cov} over stretches of length $L/4$ is designed so that the sum over the gaps of their costs is dominated by $k_L(n_L(\ell_0))\rho_L$; we have not written this out. Note also that the fixed lines of~$H$ may contribute to~$c_G(p)$, but on fewer than $\varepsilon_LL$ boxes of~$P$, which is less than $\varepsilon_\ell L/256$ for $L\ge L_1$, so that they can be discarded at the cost of halving the count.
 
@@ -616,7 +711,7 @@ In the setting of \cref{thm:multiscale}, assume $\mathcal H_2(L')$ for all $L'\l
 For every $L_1$ there is $\mu_1(L_1,j_0)>0$ such that $\mathcal H_2(L)$ holds for all $8\le L\le L_1$ and $\mu\le\mu_1$, with a constant $C_0=C_0(j_0)$ not depending on~$L_1$.
 \end{boxedclaim}
 
-\paragraph{What is known about \cref{claim:C3}.} By \cref{lem:mecke} applied to the increasing event $\Bad(B;G,G')$ (increasing in~$\cL$ for fixed $G,G'$), its probability is at most $\sum_nM_n/n!$ with $M_n$ the measure of $n$-tuples of lines meeting~$B$ that form a minimal set producing the event. Each line meeting~$B$ has measure at most $2\sqrt2\mu L\le3\mu L$ (\cref{lem:measures}(a)), so the terms with $n>2j_0$ sum to at most $(3\e\mu L/(2j_0))^{2j_0}\le\rho_L$ for $\mu\le cL_1^{-5}$, say. For $n\le2j_0$ the thick boxes of $\Lambda\cup G$, $\lvert\Lambda\rvert=n$, are the boxes met by at least $j_0$ of its lines, hence lie in the union over $j_0$-subsets of the common $1$-neighbourhoods of their lines, each of which is contained in a tube of width~$2$ around any one of its lines. The lines of~$H$ are within distance~$1$ of fewer than $\varepsilon_LL\le L/64$ boxes of the crossing path, so a part of the crossing of diameter at least $L/8-L/64$ is covered by tubes around lines of $\Lambda\cup G'$, and with $r\coloneqq\binom{2j_0+\lvert G'\rvert}{j_0}$ tubes at most, one tube covers a connected part of diameter at least $L/(16r)$: $j_0$ lines of $\Lambda\cup G'$ pass within distance~$2$ of two boxes at distance $t\ge L/(16r)$. If $s$ of them are fixed, the $j_0-s$ random ones pass within distance~$2$ of a stretch of length~$t$ along a fixed line at one of at most $16r$ positions, of measure at most $(16r)(16\mu/t)^{j_0-s}$ by \cref{lem:measures}(c), while if none is fixed the first random line has measure at most $3\mu L$ and the others $(16\mu/t)^{j_0-1}$ each; the remaining $n-j_0$ lines contribute at most $(3\mu L)^{n-j_0}\le1$ for $\mu\le1/(6L_1)$. The $s$ fixed lines in a common tube of length $t\ge L/(16r)$ are within distance~$4$ of each other along that stretch, so the coverage multiplicity of each of them is at least~$s$ when $t\ge L/4$; for $t<L/4$ the weight does not record them, and this is the point that remains: the bound then is $(16r)^{j_0}(16\mu\cdot16r/L)^{j_0-s}$, which exceeds $C_0\rho_Lk_L(n_L)$ if $n_L<s$. The resolution must use that a crossing of~$B$ has diameter at least $L/8$, so that a tube of length $t<L/4$ carries only part of it and the rest is carried by other tubes, whose costs multiply; the resulting bound is a sum over partitions of the crossing into at most~$r$ tubes, each costing $(C\mu/t_i)^{j_0-s_i}$ with $\sum t_i\ge L/8$, and it is dominated by the single-tube terms. We have not written this out, and the dependence of~$r$ on~$\lvert G'\rvert$ has to be removed by using that only the lines of~$G'$ within distance~$4$ of the tube matter. The constant~$C_0$ obtained is $C(j_0)$ times $r^{j_0}$; the restriction to $L\le L_1$ enters only through~$\mu_1$.
+\paragraph{What is known about \cref{claim:C3}.} By \cref{lem:mecke} applied to the increasing event $\Bad(B;G,G')$ (increasing in~$\cL$ for fixed $G,G'$), its probability is at most $\sum_nM_n/n!$ with $M_n$ the measure of $n$-tuples of lines meeting~$B$ that form a minimal set producing the event. Each line meeting~$B$ has measure at most $2\sqrt2\mu L\le3\mu L$ (\cref{lem:measures}(a)), so the terms with $n>2j_0$ sum to at most $(3\e\mu L/(2j_0))^{2j_0}\le\rho_L$ for $\mu\le cL_1^{-5}$, say. For $n\le2j_0$ the thick boxes of $\Lambda\cup G$, $\lvert\Lambda\rvert=n$, meet the union over $j_0$-subsets of the common $1$-neighbourhoods of their lines, each of which is contained in a tube of width~$2$ around any one of its lines; the boxes themselves lie in the tube of width $2+2\sqrt2<5$. The lines of~$H$ are within distance~$1$ of fewer than $\varepsilon_LL\le L/64$ boxes of the crossing path, so a part of the crossing of diameter at least $L/8-L/64$ is covered by tubes around lines of $\Lambda\cup G'$, and with $r\coloneqq\binom{2j_0+\lvert G'\rvert}{j_0}$ tubes at most, one tube covers a connected part of diameter at least $L/(16r)$: $j_0$ lines of $\Lambda\cup G'$ pass within distance~$3$ of two boxes at distance $t\ge L/(16r)$. If $s$ of them are fixed, the $j_0-s$ random ones pass within distance~$3$ of a stretch of length~$t$ along a fixed line at one of at most $16r$ positions, of measure at most $(16r)(16\mu/t)^{j_0-s}$ by \cref{lem:measures}(c), while if none is fixed the first random line has measure at most $3\mu L$ and the others $(16\mu/t)^{j_0-1}$ each; the remaining $n-j_0$ lines contribute at most $(3\mu L)^{n-j_0}\le1$ for $\mu\le1/(6L_1)$. The $s$ fixed lines in a common tube of length $t\ge L/(16r)$ are within distance~$5$ of each other along that stretch, so the coverage multiplicity of each of them is at least~$s$ when $t\ge L/4$; for $t<L/4$ the weight does not record them, and this is the point that remains: the bound then is $(16r)^{j_0}(16\mu\cdot16r/L)^{j_0-s}$, which exceeds $C_0\rho_Lk_L(n_L)$ if $n_L<s$. The resolution must use that a crossing of~$B$ has diameter at least $L/8$, so that a tube of length $t<L/4$ carries only part of it and the rest is carried by other tubes, whose costs multiply; the resulting bound is a sum over partitions of the crossing into at most~$r$ tubes, each costing $(C\mu/t_i)^{j_0-s_i}$ with $\sum t_i\ge L/8$, and it is dominated by the single-tube terms. We have not written this out, and the dependence of~$r$ on~$\lvert G'\rvert$ has to be removed by using that only the lines of~$G'$ within distance~$4$ of the tube matter. The constant~$C_0$ obtained is $C(j_0)$ times $r^{j_0}$; the restriction to $L\le L_1$ enters only through~$\mu_1$.
 
 \begin{remark}[The role of the base case]
 The base case is where the power $L^{-(j_0-2)}$ originates: a crossing of a box of bounded side with few lines forces $j_0$ lines of $\cL\cup G'$ to run together along a stretch of length comparable to~$L$, and this costs $(\mu/L)^{j_0-s}$. A bound of the form $C(L_1)\mu^{j_0}$ with an uncontrolled constant would not suffice, because the recursion raises constants to the power~$a$ and only the slack $\ell^{-\delta}$ of \cref{lem:basic}, a power of~$L_1^{1/3}$, can absorb them; this is why~$C_0$ must not depend on~$L_1$.
@@ -636,8 +731,10 @@ The base case is where the power $L^{-(j_0-2)}$ originates: a crossing of a box 
 Step & Status & Where \\
 \midrule
 Model, boxes, chains; $\mathrm{(T)}\Rightarrow$ no percolation & proved & \cref{thm:skeleton}, \cref{sec:skeleton} \\
-$\mathrm{(S)}_{\beta>4}+\text{\cref{claim:D}}\Rightarrow\mathrm{(T)}$ & proved modulo \cref{claim:D} & \cref{thm:StoT}, \cref{sec:StoT} \\
-Dependence between clusters & \textbf{claim} & \cref{claim:D} \\
+First moment over chains under independence $\mathrm{(D_0)}$ & proved & \cref{prop:StoT} \\
+Conditioning on clusters $\Rightarrow$ fixed witness lines & proved & \cref{lem:witness} \\
+$\mathrm{(D_0)}$ is false (relays) & shown (sketch) & \cref{prop:D0false} \\
+Dependence step in relay form & \textbf{claim} & \cref{claim:D} \\
 Clusters give crossings & proved & \cref{lem:clustercrossing} \\
 Chains of sub-crossings, annuli, separation & proved & \cref{lem:chain,lem:separated} \\
 Conditional independence given shared lines & proved & \cref{lem:condind} \\
@@ -655,16 +752,18 @@ Base case & \textbf{claim} & \cref{claim:C3} \\
 
 \subsection{Corrections to the working notes}
 
-Three statements in our working notes are corrected here, and a referee comparing the documents should be aware of them.
+Five statements in our working notes are corrected here, and a referee comparing the documents should be aware of them.
 \begin{enumerate}
   \item In~\cite{FM26}, cluster chains allowed repeated clusters; with that definition hypothesis~$\mathrm{(T)}$ is false (\cref{rem:distinct}). The present \cref{def:chain} requires distinct clusters, and \cref{lem:occpath} supplies the path for which this is possible.
+  \item In~\cite{FM26}, a box was thick if at least $j_0$ lines meet it. With that definition a nearly axis-parallel bundle fragments into many clusters for lattice reasons, and the chain weights make~$\mathrm{(T)}$ false (\cref{rem:continuum}). Thickness is now defined through the continuum set~$\Theta$ of~\eqref{eq:Theta}.
+  \item In~\cite{FM26} and in the first version of this document, the step from~$\mathrm{(S)}$ to~$\mathrm{(T)}$ was expected to follow from a uniform bound on cluster sizes conditionally on other clusters. This bound, $\mathrm{(D_0)}$, is false because of relays (\cref{prop:D0false}); \cref{lem:witness} and \cref{claim:D} give the corrected form.
   \item In~\cite{MS26}, separated sub-boxes were chosen as every $\lceil L/(4a\ell)\rceil$-th member of the chain of sub-crossings, which does not ensure spatial separation. The annuli of \cref{sec:multiscale} replace this.
   \item In~\cite{MS26}, the induction hypothesis used a weight based on the maximal number of fixed lines near a single point of a fixed line, and the closure of this weight under shared lines was asserted through a second-moment lemma. The weight is not closed under shared lines (\cref{rem:tiling}(b)), and the second moment of the weight is not bounded; the exponent in that lemma's proof is wrong. The coverage weight of \cref{def:multweight} replaces the former, and \cref{claim:C1} states what replaces the latter.
 \end{enumerate}
 
 \subsection{What a referee should check}
 
-The proved parts that carry the most weight are \cref{thm:skeleton}, in particular \cref{lem:occpath} and the counting in~\eqref{eq:quenched}; the iteration in the proof of \cref{thm:StoT}, in particular the attachment of the factor $(\diam C_{k-1}+1)$ to the previous cluster in Step~3; and the coverage lemma, \cref{lem:coverage}, in particular the choice of weights in Step~3 and the use of the integer decomposition property in Step~1. Among the claims, \cref{claim:D} and \cref{claim:C2} are the ones on which the programme stands or falls; \cref{claim:C1,claim:C3} are computations that we expect to go through as indicated. We do not claim the unconditional theorem, and the present document should be read as a precise statement of what has been proved and what has not.
+The proved parts that carry the most weight are \cref{thm:skeleton}, in particular \cref{rem:continuum}, \cref{lem:occpath} and the counting in~\eqref{eq:quenched}; the iteration in the proof of \cref{prop:StoT}, in particular the attachment of the factor $(\diam C_{k-1}+1)$ to the previous cluster in Step~3; the witness lemma, \cref{lem:witness}, in particular the monotonicity of the indicator that~$w$ is the chosen witness; and the coverage lemma, \cref{lem:coverage}, in particular the choice of weights in Step~3 and the use of the integer decomposition property in Step~1. Among the claims, \cref{claim:D} and \cref{claim:C2} are the ones on which the programme stands or falls, and they are two faces of the same problem, the control of clusters that ride lines released by other clusters; \cref{claim:C1,claim:C3} are computations that we expect to go through as indicated. We do not claim the unconditional theorem, and the present document should be read as a precise statement of what has been proved and what has not.
 
 
 \section*{Acknowledgements}
