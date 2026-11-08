@@ -204,12 +204,116 @@ Everything above is conditional on a correct formulation of the class of fixed-l
 \paragraph{Why the scheme is nevertheless the right one.} The recursion never counts sub-configurations of a cluster: the entropy at each scale is the fixed factor $(4L/\ell)^{2a}$, and the probability of a bad box is controlled by the induction, not by a first moment. The decoration obstruction of~\cite{DEC26}, which rules out every Peierls argument over covers for $d\gg1/p_0$, therefore does not arise, and the bundle structure of the model, which defeated the product bounds of~\cite{PS26}, appears here only in the weights of fixed lines, where it is a one-dimensional bookkeeping along an axis rather than a two-dimensional one along a cluster. The remaining difficulty, the formulation of the class of fixed configurations, is a single, explicit, combinatorial problem.
 
 % =================================================================
+\section{The multiplicity weight}
+\label{sec:multiplicity}
+
+The counterexample of \cref{sec:class} is removed, and most of the requirements on the class are met, by replacing the group weights by a weight that measures what the fixed lines can do along any one of them.
+
+\begin{definition}[Multiplicity weight]
+\label{def:multweight}
+For a finite set~$G$ of lines meeting~$B$, a line $\ell_0\in G$ and a point~$p$ of $\ell_0\cap B$, let $n_G(\ell_0,p)$ be the number of lines of~$G$, including~$\ell_0$, that pass within distance~$3$ of~$p$, and let $m_G(\ell_0)\coloneqq\max_pn_G(\ell_0,p)$. The \emph{multiplicity weight} is
+\begin{equation}
+\label{eq:multweight}
+  W_L(G)\coloneqq1+\sum_{\ell_0\in G}k_L\bigl(m_G(\ell_0)\bigr),\qquad k_L(m)\coloneqq K^m\mu^{-m}L^{m-2}\,.
+\end{equation}
+\end{definition}
+
+A box within distance~$1$ of~$\ell_0$ at~$p$ is met by at most $n_G(\ell_0,p)\le m_G(\ell_0)$ fixed lines, so it needs at least $j_0-m_G(\ell_0)$ random lines to be thick; this is the only property of the weight that the arguments use. For a tight group of $s$ lines, $m=s$ for each of its lines and the weight is $s\,k_L(s)$, as before up to the factor~$s$. For the tiling configuration of \cref{sec:class}, $m=j_0$ along the axis, $k_L(j_0)\rho_L=K^{j_0}\ge1$, and the bound is true. For fixed lines in general position, $m\le2$ and the weight is bounded. The weight is inherited: for a sub-box~$B_i$, $m_{G\cap B_i}(\ell_0)\le m_G(\ell_0)$, since the maximum runs over fewer points and fewer lines, and the shared lines through~$B_i$ raise the multiplicity of a fixed line by the number of them that pass within distance~$3$ of it at a common point, whose cost against the gain $K\ell/\mu$ is the $\ell^2/D$ of \cref{lem:sharedmoments}. Note that no assumption on~$G$ remains: $\mathcal H(L)$ is asserted for every finite~$G$.
+
+\begin{lemma}[Many fixed lines through a sub-box force multiplicity]
+\label{lem:transversal}
+Let $G'$ be a set of lines meeting a box of side~$\ell$, and let $M\coloneqq\max_{\ell'\in G'}m_{G'}(\ell')$. Then $\lvert G'\rvert\le\ell M$, and consequently $\sum_{\ell'\in G'}k_\ell(m_{G'}(\ell'))\le\ell Mk_\ell(M)\le k_\ell(M+1)$ for $K\ge\mu M$.
+\end{lemma}
+
+\begin{proof}
+The lines of~$G'$ cross one of the two diagonals of the box, say in at least $\lvert G'\rvert/2$ points on a segment of length $\ell\sqrt2$; some sub-segment of length~$6$ contains at least $\lvert G'\rvert\cdot6/(2\ell\sqrt2)\ge2\lvert G'\rvert/\ell$ of them, and the corresponding lines are within distance~$3$ of a common point on one of them, so $M\ge2\lvert G'\rvert/\ell$. The second claim follows from $k_\ell(M+1)=k_\ell(M)K\ell/\mu$.
+\end{proof}
+
+\paragraph{Light and heavy sub-boxes.} Call a sub-box $B_i$ of the chain of \cref{lem:separated} \emph{light} if $M_i\coloneqq\max_{\ell'\in G\cap B_i}m_{G\cap B_i}(\ell')\le j_0-6$ (or $G\cap B_i=\varnothing$) and \emph{heavy} otherwise. By \cref{lem:transversal} and $\mathcal H(\ell)$, a light sub-box is bad with probability at most $C_0\rho_\ell\bigl(1+k_\ell(j_0-5)\bigr)\cdot(\text{shared-line factor})\le4C_0K^{j_0-5}\mu^5\ell^{-5}$.
+
+\emph{Case~L: at least $L/(8\ell)$ light sub-boxes in the chain.} Choose $a$ of them pairwise at distance at least $D=L/(8a)$; by \cref{lem:condind} and the above, the probability is at most $(4L/\ell)^{2a}(4C_0K^{j_0-5}\mu^5\ell^{-5})^a=C^a\ell^{4a-5a}=C^a\ell^{-a}$, which is at most $C_0\rho_L$ once $a\ge3(j_0-2)+\delta$ and $\ell\ge\ell_0$. The weights of the heavy lines are not used at all.
+
+\emph{Case~H: at least $L/(8\ell)$ heavy sub-boxes in the chain.} A heavy sub-box lies within distance $3+\ell\sqrt2$ of a point where at least $j_0-5$ fixed lines pass within distance~$3$ of a common point on a fixed line~$\ell'$; call such $\ell'$ \emph{heavy}, and let $R(\ell')$ be the set of sub-boxes met by~$\ell'$. The heavy sub-boxes of the chain are covered by the rows $R(\ell')$ of heavy lines. Consecutive chain sub-boxes in the same row form \emph{runs}.
+\begin{itemize}
+  \item If some run has at least $a\ell^{3/2}$ sub-boxes, choose $a$ of them pairwise at distance at least $D'\coloneqq\ell^{5/2}$ along the row. Shared lines between two of them that pass within distance~$3$ of~$\ell'$ have measure at most $C\mu\ell/D'$ by \cref{lem:sharedcount}, against a gain of $K\ell/\mu$ in the weight, product $CK\ell^2/D'=CK\ell^{-1/2}$; so the shared-line factor is at most~$2$, and the bound is $(4L/\ell)^a\bigl(4C_0\rho_\ell k_\ell(m)\bigr)^a$ with $m=m_G(\ell')$, which is Case~2 of \cref{sec:recursion} and closes for $x=j_0-m\ge3$ by~\eqref{eq:case2}; for $x\le2$, \cref{lem:NC} applies to~$\ell'$. The sum over the heavy line~$\ell'$ matches the sum in~\eqref{eq:multweight}.
+  \item Otherwise all runs have fewer than $a\ell^{3/2}$ sub-boxes, so the chain changes rows at least $L/(8a\ell^{5/2})=L^{1/6}/(8a)$ times. A change from $R(\ell')$ to $R(\ell'')$ either passes through a light sub-box, or happens within distance $2\ell$ of the crossing point of $\ell'$ and~$\ell''$; in the first case, if this happens $a$ times, Case~L applies. There remains the case of a crossing that hops at least $L^{1/6}/(8a)-a$ times between heavy lines at their crossing points, riding each for fewer than $a\ell^{5/2}=aL^{5/6}$ boxes.
+\end{itemize}
+
+\paragraph{The hopping case.} The crossing follows a path $\ell'_1,\ell'_2,\dots,\ell'_q$ in the \emph{crossing graph} of the heavy lines, switching from $\ell'_i$ to $\ell'_{i+1}$ at their crossing point, and on the stretch of~$\ell'_i$ between two switches, of length~$t_i$, every box within distance~$1$ of~$\ell'_i$ needs at least $x_i=j_0-m(\ell'_i)\ge1$ random lines. The switch points are determined by~$G$; at a switch point the number of heavy lines to continue on is at most $n_G(\ell'_i,p)\le m(\ell'_i)\le j_0$, since $m\ge j_0$ makes the bound trivial. Start the path at the point where the crossing leaves the inner box. The expected number of such configurations is, by the Mecke formula, at most
+\begin{equation*}
+  \sum_{\text{start}}\ \sum_{q\ge1}\ j_0^{\,q}\sum_{(t_1,\dots,t_q)}\ \prod_{i=1}^q\Bigl(\frac{C\mu}{t_i}\Bigr)^{x_i}\,,
+\end{equation*}
+where the inner sum runs over the realisable stretch lengths, with $\sum_it_i\ge L/4$, and where lines serving two stretches are ignored (see below). Some stretch has $t_i\ge L/(4q)$; bounding it by $(4C\mu q/L)^{x_{\min}}$ and the others by $\sum_{t\ge1}(C\mu/t)^{x_{\min}}=(C\mu)^{x_{\min}}\zeta(x_{\min})$ each gives
+\begin{equation*}
+  \sum_{\text{start}}\Bigl(\frac{4C\mu}{L}\Bigr)^{x_{\min}}\sum_qq^{1+x_{\min}}\bigl(j_0(C\mu)^{x_{\min}}\zeta(x_{\min})\bigr)^{q-1}\le C''\sum_{\text{start}}\Bigl(\frac{\mu}{L}\Bigr)^{x_{\min}}
+\end{equation*}
+for $j_0(C\mu)^{x_{\min}}\zeta(x_{\min})\le1/2$, which holds for $\mu\le\mu_1(j_0)$. The sum over the starting heavy line matches the sum in~\eqref{eq:multweight}, and $(\mu/L)^{x_{\min}}$ is $\rho_Lk_L(m)$ up to constants for the heaviest line used. No restriction on the number of heavy lines or on their crossings is needed: the entropy of the path is paid stretch by stretch by the factor $(C\mu)^{x}\zeta(x)<1/(2j_0)$, and the length is paid once by the longest stretch. Two points remain in this computation. A random line may serve the end of one stretch and the beginning of the next, near their crossing point; this reduces the number of random lines by one per switch, by a factor at most $(t/(C\mu))^{x}$ for the shorter of the two stretches only if the two heavy lines make an angle below $1/t$, in which case they are within distance~$3$ of each other along the stretch and the multiplicity, hence $x$, already accounts for it; we have not written this out. And the hopping case was isolated under the assumption that the chain has fewer than $L/(8\ell)$ light sub-boxes, while a crossing may alternate between heavy stretches and light sub-boxes adjacent to them; the light sub-boxes are then not separated from the stretches, so the decoupling by shared lines does not apply to them, and their cost has to be charged differently, for instance by treating the random lines of the adjacent stretch as fixed lines for the light sub-box, which the multiplicity weight allows.
+
+\paragraph{Status.} With the multiplicity weight the induction hypothesis is asserted for all finite~$G$, the weight is inherited and closed under shared lines (\cref{lem:sharedmoments} applies with groups replaced by multiplicity classes), the tiling counterexample is absorbed, the recursion closes in Case~L and in Case~H with a long run, and the hopping case is bounded by a first moment over paths in the crossing graph that gives the right order without any restriction on the heavy lines. What is not complete is the bookkeeping at the interface: light sub-boxes adjacent to heavy stretches, and random lines shared between consecutive stretches. We regard both as technical, and we regard the multiplicity weight as the correct induction hypothesis for the scheme.
+
+% =================================================================
+\section{The two-parameter hypothesis and the proof architecture}
+\label{sec:architecture}
+
+The interface problems of \cref{sec:multiplicity} come from asking the hypothesis a single question, "is the box bad", when the recursion needs to distinguish crossings that use the fixed lines from crossings that avoid them. We make the hypothesis answer both.
+
+\begin{definition}[Avoiding crossings]
+\label{def:avoid}
+Let $\varepsilon_L\coloneqq c_\varepsilon/(\log L)^3$ with $c_\varepsilon\le1/2$ fixed. For fixed sets $G'\subseteq G$ of lines meeting~$B$, let $\Bad(B;G,G')$ be the event that $B$ contains a crossing $2$-path~$P$ at level~$j_0$ in $\cL\cup G$, from the inner box to the boundary layer, such that fewer than $\varepsilon_LL$ boxes of~$P$ lie within distance~$1$ of a line of $G\setminus G'$.
+\end{definition}
+
+Thus $\Bad(B;G,G)=\Bad(B,G)$, since every crossing contains a crossing $2$-path, and $\Bad(B;G,\varnothing)$ is the event of a crossing that essentially ignores the fixed lines: a crossing path has at least $L/4$ boxes and $\varepsilon_LL\le L/4$.
+
+\begin{definition}[Two-parameter hypothesis]
+\label{def:H2}
+$\mathcal H_2(L)$ holds if for every box~$B$ of side~$L$ and all finite $G'\subseteq G$ of lines meeting~$B$,
+\begin{equation}
+\label{eq:H2}
+  \P\bigl(\Bad(B;G,G')\bigr)\le C_0\,\rho_L\,W_L(G')\,,
+\end{equation}
+with the multiplicity weight~\eqref{eq:multweight} computed for~$G'$ inside~$B$.
+\end{definition}
+
+The content of the refinement is that lines of $G\setminus G'$ cost nothing: a crossing that is within distance~$1$ of them on a vanishing fraction of its boxes needs $j_0$ random lines on the rest, and the rest is a positive fraction of a crossing.
+
+\begin{lemma}[Avoidance is inherited]
+\label{lem:avoidinherit}
+Let $P$ be a crossing path of~$B$ with fewer than $\varepsilon_LL$ boxes within distance~$1$ of $G\setminus G'$. Then among the sub-boxes of its chain, at least $L/(8\ell)$ are such that the sub-path $P_i$, the part of~$P$ from its first box in the inner box of~$B_i$ to its first exit from~$B_i$, has fewer than $\varepsilon_\ell\ell$ boxes within distance~$1$ of $G\setminus G'$.
+\end{lemma}
+
+\begin{proof}
+Each $P_i$ is a crossing path of~$B_i$ with at least $\ell/4$ boxes, and a box of~$P$ lies in at most four sub-boxes, so $\sum_i\lvert P_i\cap\mathcal N\rvert\le4\lvert P\cap\mathcal N\rvert<4\varepsilon_LL$, where $\mathcal N$ is the set of boxes within distance~$1$ of $G\setminus G'$. If $N_{\mathrm{bad}}$ sub-paths have at least $\varepsilon_\ell\ell$ boxes in~$\mathcal N$, then $N_{\mathrm{bad}}\varepsilon_\ell\ell<4\varepsilon_LL$, i.e.\ $N_{\mathrm{bad}}<(4\varepsilon_L/\varepsilon_\ell)(L/\ell)=(4/27)(L/\ell)$, using $\varepsilon_\ell=\varepsilon_L(\log L/\log\ell)^3=27\varepsilon_L$. The chain has at least $L/(4\ell)$ members, and $L/(4\ell)-(4/27)(L/\ell)>L/(8\ell)$.
+\end{proof}
+
+\paragraph{The recursion for $\mathcal H_2$.} Let $S$ be a crossing realising $\Bad(B;G,G')$. By \cref{lem:avoidinherit}, at least $L/(8\ell)$ chain sub-boxes have sub-paths avoiding $G\setminus G'$ at level~$\varepsilon_\ell$. For each such sub-box~$B_i$, let $G'_i\coloneqq G'\cap B_i$ and let $\mathcal S_i$ be the shared lines through~$B_i$. The sub-crossing either avoids $G'_i$ as well, or uses it. In the first case $\Bad(B_i;G_i\cup\mathcal S_i,\mathcal S_i)$ holds, and $\mathcal H_2(\ell)$ gives the bound $C_0\rho_\ell W_\ell(\mathcal S_i)$, whose expectation over the shared lines is at most $2C_0\rho_\ell$ by \cref{lem:sharedmoments}: the inherited fixed lines cost nothing, which is exactly what the one-parameter hypothesis could not provide. In the second case $\Bad(B_i;G_i\cup\mathcal S_i,G'_i\cup\mathcal S_i)$ holds, with the bound $C_0\rho_\ell W_\ell(G'_i\cup\mathcal S_i)$, and the sub-crossing has at least $\varepsilon_\ell\ell/4$ boxes within distance~$1$ of a line of $G'_i$: it rides a line of~$G'$ for a stretch. The classification of \cref{sec:multiplicity} now applies to~$G'$ in place of~$G$:
+\begin{enumerate}
+  \item If at least $L/(16\ell)$ of these sub-boxes are of the first kind, $a$ separated ones give $(4L/\ell)^{2a}(2C_0\rho_\ell)^a\le C_0\rho_L\ell^{-\delta}$ by~\eqref{eq:basic}. This is Case~L, now without any condition on the fixed lines through the sub-boxes.
+  \item Otherwise at least $L/(16\ell)$ sub-paths ride lines of~$G'$. A ride along $\ell'\in G'$ inside~$B_i$ covers at least $\varepsilon_\ell\ell/4$ boxes within distance~$1$ of~$\ell'$, each needing $j_0-m_{G'}(\ell')$ random lines, and consecutive rides along the same line form runs. A run of at least $a\ell^{3/2}$ sub-boxes is Case~2 for~$\ell'$ (or \cref{lem:NC} when $x\le2$); the entropy of the run's sub-boxes is one position each along the row, and the weight term $k_L(m_{G'}(\ell'))$ in~\eqref{eq:multweight} is the target. Otherwise the crossing changes the line it rides at least $L^{1/6}/(8a)$ times, and the hopping computation of \cref{sec:multiplicity} applies: the stretches of rides are joined either at crossing points of lines of~$G'$, with at most $j_0$ choices each, or by excursions of the crossing away from~$G'$.
+  \item An excursion of length $t$ between two rides is a connected set of $t$ boxes none of which is within distance~$1$ of~$G'$, hence a crossing of a box of side~$t/2$ avoiding~$G'$, with fixed lines the inherited $G\setminus G'$ that it also avoids, and the random lines of the adjacent rides, at most $2j_0$ of them, which may enter the excursion's box. For $t\ge L_1$, $\mathcal H_2(t/2)$ with the latter as~$G'$ bounds its probability by $C_0\rho_{t/2}W_{t/2}(\text{ride lines})\le C_0\rho_{t/2}k_{t/2}(2j_0)$ when the ride lines form a single aligned group, and otherwise by less; this is at most $C_0K^{2j_0}\mu^{-j_0}t^{\,j_0-2}\cdot\mu^{j_0}(t/2)^{2-j_0}\le C_0(2K)^{2j_0}$, a constant, which is useless for short excursions but enters the hopping sum only as a bounded factor per switch, while the excursion's own length is a stretch with $x=j_0$ in the sum. The position of the excursion is determined by the rides it joins up to $O(1)$ choices. For $t<L_1$ the excursion is a constant-size set of boxes each needing $j_0$ random lines outside the ride lines, and a direct bound $(C\mu)^{j_0}$ per box applies after removing the at most $2j_0$ ride lines, which make a box thick only if $j_0\le2j_0$ of them pass through it, i.e.\ at the switch point itself.
+\end{enumerate}
+
+\begin{theorem}[Recursion for the two-parameter hypothesis]
+\label{thm:final}
+Let $\gamma=3$, $j_0\ge j_1$, $a\ge a_1(j_0)$, $K\ge K_1(j_0)$ and $\mu\le\mu_1(j_0,a,K)$. If $\mathcal H_2(L')$ holds for all $L'\le L/8$ with a constant $C_0\ge C_1$, if $L\ge L_1$, and if the claims listed below hold at scale~$L$, then $\mathcal H_2(L)$ holds with the same~$C_0$. Together with the base case, this gives~\eqref{eq:goal} with $\beta=j_0-2$.
+\end{theorem}
+
+\paragraph{The claims.} The proof of \cref{thm:final} is the case analysis above together with the computations of \cref{sec:recursion,sec:multiplicity}. The following statements are used and are not proved in this note.
+\begin{enumerate}
+  \item[(C1)] \emph{Nearly complete lines.} For $\ell'\in G'$ with $m_{G'}(\ell')\ge j_0-2$, the direct coverage bound of \cref{lem:NC} holds in the two-parameter setting: the probability that a crossing rides~$\ell'$ on at least $L/32$ boxes is at most $C_2K^{m}\mu^{x}L^{-x}$ with $x=j_0-m\le2$, where the fixed lines of $G\setminus G'$ contribute to the coverage of at most $\varepsilon_LL\le L/64$ boxes by the avoidance assumption, so that the random lines must cover at least $L/64$ boxes $x$-fold.
+  \item[(C2)] \emph{Shared service.} In the hopping sum, a random line within distance~$1$ of two consecutive rides near their switch point reduces the number of required random lines by one; this is compensated by the multiplicity of the two lines of~$G'$ near the switch point when their angle is below the reciprocal of the shorter stretch, and otherwise affects only a bounded number of boxes.
+  \item[(C3)] \emph{Base case.} \Cref{lem:base} in the two-parameter form: for $L\le L_1$ and $\mu\le\mu_1(L_1)$, $\P(\Bad(B;G,G'))\le C_0\rho_LW_L(G')$ with $C_0=C_0(j_0)$; the longest-tube argument applies verbatim, the tube being along a line of $\cL\cup G'$, since tubes along lines of $G\setminus G'$ are excluded by the avoidance assumption for the part of the crossing they would have to carry.
+  \item[(C4)] \emph{Counting constants.} The constants in \cref{lem:avoidinherit} and in the choice of separated sub-boxes along runs are compatible: a run of $a\ell^{3/2}$ sub-boxes contains $a$ sub-boxes pairwise at distance $\ell^{5/2}$, and the shared lines between two of them that pass within distance~$3$ of the ridden line have measure at most $C\mu\ell/\ell^{5/2}$, as used in \cref{sec:multiplicity}.
+\end{enumerate}
+
+\paragraph{Assessment.} (C1) and (C3) are the single-scale lemmas of \cref{sec:single} restated for the two-parameter hypothesis, and we see no new difficulty in them. (C4) is arithmetic. (C2) is the one claim that needs a genuine argument, and it is local: it concerns the neighbourhood of a switch point and two fixed lines. With the two-parameter hypothesis the interface problems of \cref{sec:multiplicity} are gone: a sub-box in which the crossing avoids the inherited fixed lines is charged $\rho_\ell$ times the weight of its shared lines only, excursions between rides are crossings of smaller boxes with the ride lines as fixed lines, and the counting of avoiding sub-boxes is inherited through the absolute threshold $\varepsilon_LL$ with $\varepsilon_L=c_\varepsilon/(\log L)^3$, for which $\varepsilon_\ell=27\varepsilon_L$ gives the factor the counting needs. We regard \cref{thm:final} with (C1)--(C4) as the final form of the argument for the single-cluster bound. The dependence step from the single-cluster bound to the thick-cluster lemma, \cite[Section~3.1]{FM26}, is not addressed by this note.
+
+% =================================================================
 \section{Summary}
 \label{sec:summary}
 
 \begin{enumerate}
   \item The multiscale scheme replaces the standard "two bad sub-boxes" recursion by "$a$ well-separated bad sub-boxes" with geometric scales $L\mapsto L^3$, which is what a polynomial target requires (\eqref{eq:acond}), handles the dependence between far sub-boxes by conditioning on the shared lines, which are few and automatically aligned (\cref{lem:condind,lem:sharedcount}), and carries fixed lines in the induction hypothesis with additive weights~\eqref{eq:weight}. The recursion closes for groups missing at least three lines (\eqref{eq:case2}) and for sub-boxes outside all rows; nearly complete groups (\cref{lem:NC}) and the base case (\cref{lem:base}) are single-scale statements with proofs we regard as complete up to the bookkeeping indicated.
-  \item The induction hypothesis is not yet correctly formulated. Tight groups and singletons in general position are the right objects, and the weights are the right amounts, but the class of fixed configurations must be closed under the recursion, and partially aligned singletons produce a counterexample to the bound for every scale-dependent alignment threshold (\cref{sec:class}). The way out, we believe, is a weight that sums over axes and stretches the help that the fixed lines give along each. This is the open point of the scheme.
+  \item The induction hypothesis with group weights is not correctly formulated: partially aligned singletons produce a counterexample for every scale-dependent alignment threshold (\cref{sec:class}). The multiplicity weight of \cref{sec:multiplicity}, which charges each fixed line by the maximal number of fixed lines near it, removes the counterexample, needs no restriction on~$G$, is inherited, and closes the recursion in all cases but one: a crossing hopping between many heavy fixed lines at their crossing points with short runs on each. That case is bounded by a first moment over paths in the crossing graph of the heavy lines, which gives the right order with no restriction on~$G$. The interface between rides along fixed lines and the rest of a crossing is handled by the two-parameter hypothesis of \cref{sec:architecture}, which distinguishes the fixed lines a crossing uses from those it avoids and charges only the former; avoidance is inherited through the choice $\varepsilon_L=c_\varepsilon/(\log L)^3$. The final form of the argument is \cref{thm:final}, which rests on the four claims (C1)--(C4) listed there, of which only (C2), a local statement about random lines serving two consecutive rides near a switch point, requires a new argument.
   \item Two further points remain as before: the technical restriction to second moments in \cref{lem:sharedmoments}, and the dependence step from the single-cluster bound to the thick-cluster lemma in~\cite{FM26}.
 \end{enumerate}
 
