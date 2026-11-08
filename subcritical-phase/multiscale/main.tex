@@ -1,0 +1,229 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\dist}{dist}
+\newcommand{\Bad}{\mathrm{Bad}}
+
+\runningtitle{A multiscale scheme for the single-cluster bound}
+\hypersetup{pdftitle={A multiscale scheme for the single-cluster bound},pdfauthor={Christian Hirsch, Benedikt Jahnel}}
+
+\title{\textbf{A multiscale scheme for the single-cluster bound}\\[0.6em] \large Working note}
+
+\author{%
+  Christian Hirsch\thanks{Institut f\"ur Mathematische Stochastik, Georg-August-Universit\"at G\"ottingen, Goldschmidtstra\ss e~7, 37077 G\"ottingen, Germany. \texttt{christian.hirsch@uni-goettingen.de}. \orcid{0000-0003-4136-3740}.}
+  \and
+  Benedikt Jahnel\thanks{Institut f\"ur Mathematische Stochastik, Technische Universit\"at Braunschweig, Universit\"atsplatz~2, 38106 Braunschweig, Germany, and Weierstrass Institute for Applied Analysis and Stochastics, Mohrenstra\ss e~39, 10117 Berlin, Germany. \texttt{benedikt.jahnel@tu-braunschweig.de}. \orcid{0000-0002-4212-0065}.}%
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{plain}
+
+\begin{abstract}
+We set up a multiscale renormalisation, in the spirit of Sznitman's and of Gracar and Stauffer's schemes as presented in Stauffer's lecture notes, for the single-cluster bound of the first-moment programme: the probability that a box of side~$L$ contains a thick crossing should be $O(\mu^{j_0}L^{-(j_0-2)})$. The scheme differs from the standard one in three respects forced by the model: the target is polynomial, so a box is declared bad when it contains $a$ well-separated bad sub-boxes, with $a$ a large constant and geometric scales $L\mapsto L^{\gamma}$; the dependence between far sub-boxes is through lines rather than through mixing particles, and is handled by conditioning on the lines shared between the sub-boxes, which are few and automatically aligned; and the induction hypothesis carries a finite set of fixed lines, organised into aligned groups, with a weight $1+K^s\mu^{-s}L^{s-2}$ for a group of $s$ lines, which is the amount by which $s$ fixed aligned lines can help a crossing. We prove the recursion under this hypothesis, with explicit constraints on the parameters, for configurations of tight groups and singletons in general position, and we give proofs, complete up to bookkeeping, of the two single-scale statements it needs, for nearly complete groups and for the base scale. The scheme is not complete: the class of fixed-line configurations on which the hypothesis is asserted must be closed under the recursion, and we exhibit partially aligned configurations that are inherited by sub-boxes but on which the bound is false, so that the class and its weights have to be refined; we describe the refinement we expect to work. Unlike every first-moment argument over covers, the scheme never counts sub-configurations of a cluster, so the decoration obstruction does not arise. The dependence step from the single-cluster bound to the thick-cluster lemma remains open.
+\end{abstract}
+
+% =================================================================
+\section{Setting and result}
+\label{sec:setting}
+
+$\cL$ is a Poisson line process with intensity measure $\nu=(\mu/\pi)\dd\theta\dd p$, $N(z)$ the number of lines meeting $Q(z)=z+[0,1)^2$, $\mu_1=4\mu/\pi$, and a box is thick at level~$j$ if at least $j$ lines meet it. For a finite set~$G$ of lines (\emph{fixed lines}) we write $N_G(z)$ for the number of lines of $\cL\cup G$ meeting $Q(z)$ and $\Theta_G(j)$ for the set of boxes with $N_G(z)\ge j$. A \emph{box of side~$L$} is $B=z+[-L/2,L/2)^2$ with $z\in\Z^2$, its \emph{inner box} is $z+[-L/4,L/4)^2$, and a \emph{crossing} of~$B$ at level~$j$ is a $2$-connected set of boxes of $\Theta_G(j)$ that meets the inner box and a box at sup-distance at least $L/2-1$ from~$z$. Let
+\begin{equation*}
+  \Bad(B,G)\coloneqq\{B\text{ contains a crossing at level }j_0\text{ in }\cL\cup G\}\,.
+\end{equation*}
+If the thick cluster of~$0$ has diameter at least~$d$, then the box of side~$d$ centred at~$0$ satisfies $\Bad(B,\varnothing)$. The single-cluster bound of~\cite{FM26} therefore follows from
+\begin{equation}
+\label{eq:goal}
+  \P\bigl(\Bad(B,\varnothing)\bigr)\le C\,\mu^{j_0}L^{-(j_0-2)}\qquad\text{for all boxes of side }L\ge1\,.
+\end{equation}
+The right-hand side is the probability that $j_0$ lines of~$\cL$ run within distance~$1$ of each other across~$B$: there are of order $L^2$ such bundle positions and each costs $(\mu/L)^{j_0}$; it is the true order.
+
+\paragraph{Aligned groups.} A set $g$ of lines is an \emph{aligned group at scale~$L$ in~$B$} if all its lines lie within distance~$1$ of one line (its \emph{axis}) throughout~$B$. A finite set~$G$ of lines meeting~$B$ is \emph{organised at scale~$L$} if it is partitioned into aligned groups $g_1,\dots,g_m$, lines belonging to no group counting as groups of size one; we write $s_i=\lvert g_i\rvert$ and
+\begin{equation}
+\label{eq:weight}
+  W_L(G)\coloneqq\prod_{i=1}^m w_L(s_i),\qquad w_L(s)\coloneqq1+K^s\mu^{-s}L^{s-2}\,,
+\end{equation}
+with a constant $K\ge1$ fixed below. The weight is what fixed lines are worth: $s$ fixed aligned lines reduce the cost of a bundle along their axis from $(\mu/L)^{j_0}L^2$ to $(\mu/L)^{j_0-s}$, a factor $\mu^{-s}L^{s-2}$. A single fixed line is worth only $1+K/(\mu L)$, because the bundle it could complete has lost its freedom of direction.
+
+\begin{definition}[Induction hypothesis]
+\label{def:H}
+$\mathcal H(L)$ holds if for every box~$B$ of side~$L$ and every set~$G$ of at most $L^{1/2}$ fixed lines organised at scale~$L$ in~$B$,
+\begin{equation}
+\label{eq:H}
+  \P\bigl(\Bad(B,G)\bigr)\le C_0\,\mu^{j_0}L^{-(j_0-2)}\,W_L(G)\,.
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Multiscale recursion]
+\label{thm:main}
+Let $\gamma=3$ and $j_0\ge j_1$, let $a\ge a_1(j_0)$ and $K\ge K_1(j_0)$, and let $\mu\le\mu_1(j_0,a,K)$. There is $L_1=L_1(j_0,a,K,\mu)$ such that the following holds. Let $\mathcal G$ be a class of fixed configurations that is inherited by sub-boxes in the sense of \cref{sec:class}. If $\mathcal H(L')$ holds on~$\mathcal G$ for all $L'\le L/8$ with a constant $C_0\ge C_1(j_0,a,K)$, if $L\ge L_1$, and if the nearly-complete-group estimate of \cref{lem:NC} holds at scale~$L$, then $\mathcal H(L)$ holds on~$\mathcal G$ with the same constant~$C_0$. Together with the base case of \cref{lem:base}, this gives~\eqref{eq:goal} with $C=C_0$. The class of configurations consisting of tight groups and finitely many singletons satisfies all requirements except that it is not known to be inherited; see \cref{sec:class}.
+\end{theorem}
+
+The recursion is carried out in \cref{sec:recursion}. \Cref{lem:NC,lem:base} are stated in \cref{sec:single} with proofs that we regard as complete up to the bookkeeping indicated there; they are single-scale statements and contain no induction. \Cref{sec:class} discusses the class~$\mathcal G$, which is where the scheme is not yet complete.
+
+% =================================================================
+\section{Crossings and separated sub-boxes}
+\label{sec:subboxes}
+
+Fix $L$, $\ell\coloneqq\lceil L^{1/\gamma}\rceil$ and an integer $a\ge2$. Cover~$B$ by the boxes of side~$\ell$ centred at the points of $z+(\ell/2)\Z^2$ (the \emph{sub-boxes}; each point of~$B$ lies in the inner box of one of them), and put $D\coloneqq L/(8a)$.
+
+\begin{lemma}[A crossing gives separated bad sub-boxes]
+\label{lem:separated}
+On $\Bad(B,G)$ there are sub-boxes $B_1,\dots,B_a$, pairwise at distance at least~$D$, such that $\Bad(B_i,G\cap B_i)$ holds for every~$i$, where $G\cap B_i$ denotes the lines of~$G$ meeting~$B_i$. The number of such $a$-tuples is at most $(4L/\ell)^{2a}$.
+\end{lemma}
+
+\begin{proof}
+Let $S$ be a crossing of~$B$. Since $S$ is $2$-connected, the sub-boxes whose inner boxes meet~$S$ form a chain $B'_1,B'_2,\dots$ in which consecutive members are at distance at most~$\ell$, from a sub-box meeting the inner box of~$B$ to one meeting its boundary layer, so the chain has length at least $L/(4\ell)$. For each member $B'$ of the chain, $S$ meets the inner box of~$B'$ and, since $\diam S\ge L/4>\ell$, leaves~$B'$; the component of $S\cap B'$ containing a box of the inner box is $2$-connected and reaches the boundary layer of~$B'$, so it is a crossing of~$B'$ in $\cL\cup G$, and only the lines of $\cL\cup G$ meeting~$B'$ are relevant for it. Taking every $\lceil L/(4a\ell)\rceil$-th member of the chain gives $a$ sub-boxes pairwise at distance at least $L/(4a)-2\ell\ge D$ for $L\ge L_1$. The count is the number of ways to choose $a$ sub-boxes among $(2L/\ell+1)^2$.
+\end{proof}
+
+% =================================================================
+\section{Shared and private lines}
+\label{sec:shared}
+
+Let $B_1,\dots,B_a$ be sub-boxes pairwise at distance at least~$D$. A line of~$\cL$ is \emph{shared} if it meets at least two of them and \emph{private to~$B_i$} if it meets $B_i$ and no other~$B_j$. Let $\mathcal S$ be the set of shared lines and $\mathcal P_i$ the set of private lines of~$B_i$.
+
+\begin{lemma}[Conditional independence]
+\label{lem:condind}
+Given~$\mathcal S$, the processes $\mathcal P_1,\dots,\mathcal P_a$ are independent Poisson processes, and
+\begin{equation}
+\label{eq:condind}
+  \P\Bigl(\bigcap_{i\le a}\Bad(B_i,G\cap B_i)\Bigr)\le\E\Bigl[\prod_{i\le a}\P\bigl(\Bad(B_i,(G\cap B_i)\cup(\mathcal S\cap B_i))\ \big\vert\ \mathcal S\bigr)\Bigr]\,,
+\end{equation}
+where inside the conditional probability the lines of $\mathcal S\cap B_i$ are treated as fixed and the randomness is that of~$\mathcal P_i$.
+\end{lemma}
+
+\begin{proof}
+The sets of lines meeting exactly one, and at least two, of the $B_i$ are disjoint, and a Poisson process restricted to disjoint sets gives independent processes. A crossing of~$B_i$ uses only lines meeting~$B_i$, which are private, shared or fixed.
+\end{proof}
+
+\begin{lemma}[Shared lines are few and aligned]
+\label{lem:sharedcount}
+Let $B_i,B_j$ be sub-boxes at distance $D'\ge D$. The lines meeting both have $\nu$-measure at most $4\mu\ell^2/D'$. Any two of them make an angle at most $2\ell/D'$. For a line~$\ell_0$ meeting~$B_i$, the lines meeting~$B_j$ that lie within distance~$1$ of~$\ell_0$ throughout~$B_i$ have measure at most $8\mu\ell/D'$.
+\end{lemma}
+
+\begin{proof}
+A line meeting two sets of diameter $\sqrt2\ell$ at distance~$D'$ has direction within angle $\sqrt2\ell/D'$ of the direction joining their centres and, for each direction, offset in an interval of length $\sqrt2\ell$; the measure is at most $(\mu/\pi)\cdot2\sqrt2\ell/D'\cdot\sqrt2\ell\le4\mu\ell^2/D'$. The angle bound is the same computation. For the last claim the offset interval has length~$2$ instead of~$\sqrt2\ell$, and the direction must be within $\sqrt2\ell/D'$ of a fixed direction, giving $(\mu/\pi)\cdot2\sqrt2\ell/D'\cdot2\le8\mu\ell/D'$.
+\end{proof}
+
+With $D=L/(8a)=\ell^\gamma/(8a)$ and $\gamma=3$, the expected number of shared lines through a given sub-box is at most $a\cdot4\mu\ell^2/D=32a^2\mu/\ell$, and the measure of shared lines aligned with a given fixed line is at most $64a^2\mu/\ell^2$. Shared lines meeting a sub-box~$B_i$ and a far sub-box~$B_j$ have directions within $2\ell/D\le1/\ell$ of each other, so two of them that are within lateral distance~$1$ in~$B_i$ form an aligned group at scale~$\ell$ in~$B_i$ automatically.
+
+% =================================================================
+\section{The recursion}
+\label{sec:recursion}
+
+Throughout, $\gamma=3$, $\ell=L^{1/3}$, $D=L/(8a)$, and $\rho_L\coloneqq\mu^{j_0}L^{-(j_0-2)}$, so that $\rho_\ell^{\,a}=\mu^{aj_0}\ell^{-a(j_0-2)}$ and $\rho_L=\mu^{j_0}\ell^{-3(j_0-2)}$. We first record the arithmetic that the scheme rests on, then the three ways in which sub-boxes can be bad.
+
+\paragraph{The basic inequality.} For the bound~\eqref{eq:H} to propagate from scale~$\ell$ to scale~$L$ through \cref{lem:separated,lem:condind}, we need
+\begin{equation}
+\label{eq:basic}
+  (4L/\ell)^{2a}\,(2C_0\rho_\ell)^a\le C_0\rho_L\cdot\ell^{-\delta}\quad\text{for some }\delta>0\,,
+\end{equation}
+the factor $\ell^{-\delta}$ being the slack that absorbs constants and the error terms below. In terms of exponents of~$\ell$ this is $2a(\gamma-1)-a(j_0-2)\le-\gamma(j_0-2)-\delta$, i.e.
+\begin{equation}
+\label{eq:acond}
+  a\bigl(j_0-2-2(\gamma-1)\bigr)\ \ge\ \gamma(j_0-2)+\delta\,,
+\end{equation}
+which holds for $j_0>2\gamma=6$ and $a$ large; the $\mu$-powers satisfy $\mu^{aj_0}\le\mu^{j_0}$, and $(8C_0)^a4^{2a}$ is absorbed by $\ell^{-\delta/2}$ for $\ell\ge\ell_0(C_0,a)$. With two sub-boxes ($a=2$) and super-exponential scales the left side of~\eqref{eq:acond} is negative: this is why the standard scheme cannot give a polynomial bound, and why we use $a$ well-separated sub-boxes and geometric scales.
+
+\paragraph{Rows.} For a group $g$ of~$G$ with axis~$A_g$, its \emph{row} $R_g$ is the set of sub-boxes met by a line of~$g$; these are within distance $\ell\sqrt2+1$ of~$A_g$, and $g$ is an aligned group at scale~$\ell$ in each of them. A sub-box outside all rows carries no fixed line.
+
+\paragraph{Case 1: $a$ separated sub-boxes outside all rows.} Each is bad with fixed set consisting of shared lines only. By \cref{lem:condind} and $\mathcal H(\ell)$, the probability is at most $(4L/\ell)^{2a}\E\prod_i\bigl(C_0\rho_\ell W_\ell(\mathcal S\cap B_i)\bigr)$, and by \cref{lem:sharedmoments} below the expectation is at most $(2C_0\rho_\ell)^a$. By~\eqref{eq:basic} this is at most $C_0\rho_L\ell^{-\delta}\le C_0\rho_LW_L(G)/4$.
+
+\paragraph{Case 2: $a$ separated sub-boxes on the row of one group~$g$, $x\coloneqq j_0-\lvert g\rvert\ge3$.} Each sub-box sees~$g$ as a group of size $s=\lvert g\rvert$ at scale~$\ell$, and by $\mathcal H(\ell)$ is bad with probability at most $C_0\rho_\ell(1+k_\ell(s))\cdot(\text{shared-line factor})$, where $k_\ell(s)=K^s\mu^{-s}\ell^{s-2}$ and $\rho_\ell k_\ell(s)=K^s\mu^{x}\ell^{-x}$. The sub-boxes lie on a row, so there are at most $(4L/\ell)^a$ choices, not $(4L/\ell)^{2a}$. The bound is
+\begin{equation*}
+  (4L/\ell)^a\bigl(4C_0K^s\mu^x\ell^{-x}\bigr)^a=(16C_0K^s)^a\mu^{xa}\ell^{a(\gamma-1)-ax}\,,
+\end{equation*}
+to be compared with the term $C_0\rho_Lk_L(s)=C_0K^s\mu^xL^{-x}=C_0K^s\mu^x\ell^{-\gamma x}$ of the target. The ratio is at most $(16C_0K^s)^{a-1}\mu^{x(a-1)}\ell^{\gamma x-a(x-\gamma+1)}$, whose exponent is negative iff
+\begin{equation}
+\label{eq:case2}
+  a\ \ge\ \frac{\gamma x}{x-\gamma+1}=\frac{3x}{x-2}\,,
+\end{equation}
+which for $x\ge3$ holds with $a\ge9$, with slack $\ell^{-\delta'}$ absorbing the constants for $\ell\ge\ell_0$. For $x\le2$ the exponent is non-negative and the recursion does not close; these are the nearly complete groups of \cref{lem:NC}.
+
+\paragraph{Case 3: mixed.} The $a$ sub-boxes may lie on several rows, and some on none. Order the groups so that the sub-boxes on the row of~$g_1$ are the most numerous; since $W_L$ is additive over groups, the target contains the term $C_0\rho_Lk_L(\lvert g_1\rvert)$, and the product over sub-boxes is bounded by the product of their individual bounds, each of which is at most $C_0\rho_\ell(1+\sum_gk_\ell(\lvert g\rvert))\le C_0\rho_\ell(m+1)\max_gk_\ell(\lvert g\rvert)$. Writing $x^*$ for the smallest $x$ among the groups whose rows contain chosen sub-boxes, each sub-box costs at most $(m+1)C_0K^{j_0}\mu^{x^*}\ell^{-x^*}$, and the combinatorial factor is at most $(4L/\ell)^{2a}$ for the sub-boxes off rows and $(4L/\ell)^{a}$ along rows; the worst case is covered by \eqref{eq:case2} with $x^*$ and the slack. The factor $(m+1)^a$, with $m$ the number of groups, is the one place where the number of fixed groups enters; it is absorbed if $m\le\ell^{\delta/(4a)}$, see the discussion in \cref{sec:class}.
+
+\begin{lemma}[Shared lines change the weights little]
+\label{lem:sharedmoments}
+Let $B_i$ be one of the separated sub-boxes with inherited fixed set $G_i=G\cap B_i$, organised at scale~$\ell$ by the groups of~$G$. Organise $G_i\cup(\mathcal S\cap B_i)$ at scale~$\ell$ by adding each shared line that lies within distance~$1$ of the axis of a group of~$G_i$ throughout~$B_i$ to that group, grouping shared lines that lie within distance~$1$ of a common line throughout~$B_i$, and leaving the remaining shared lines as singletons. Then
+\begin{equation*}
+  \E\bigl[W_\ell(G_i\cup(\mathcal S\cap B_i))^2\bigr]^{1/2}\le2\,W_\ell(G_i)\qquad(\ell\ge\ell_0(a,K,\mu))\,.
+\end{equation*}
+\end{lemma}
+
+\begin{proof}
+By \cref{lem:sharedcount} the shared lines through $B_i$ form a Poisson process of mean at most $\lambda=32a^2\mu/\ell$, and those within distance~$1$ of a given line throughout~$B_i$ have mean at most $\lambda'=64a^2\mu/\ell^2$. A group of~$G_i$ of size~$s$ gains $s'$ shared lines with probability at most $\lambda'^{s'}/s'!$, and $k_\ell(s+s')=k_\ell(s)(K\ell/\mu)^{s'}$, so the second moment of its weight is at most $k_\ell(s)^2\sum_{s'}(\lambda'K\ell/\mu)^{2s'}/s'!\le k_\ell(s)^2\exp\{(64a^2K/\ell)^2\}$. A new group of $s'\ge2$ shared lines around a common axis has, for each of at most $\ell$ axis positions at unit resolution and a single direction class, probability at most $(\lambda/\ell)^{s'}$, and weight $k_\ell(s')=K^{s'}\mu^{-s'}\ell^{s'-2}$; the expected sum of squared weights is at most $\ell\sum_{s'\ge2}(\lambda/\ell)^{s'}k_\ell(s')^2=\ell^{-3}\sum_{s'\ge2}(32a^2K^2\mu^{-1})^{s'}\le\ell^{-3}C(a,K,\mu)$. Singleton shared lines contribute $1+K/(\mu\ell)$ each, with second moment at most $\exp\{3\lambda K/(\mu\ell)\}=\exp\{96a^2K/\ell^2\}$. Collecting the three contributions and using $W_\ell\ge1$ gives the claim for $\ell\ge\ell_0$.
+\end{proof}
+
+The lemma is stated for the second moment because the weight of a new group of $s'$ shared lines grows like $\ell^{s'-2}$ while its probability decays like $\ell^{-2s'}$, so that higher moments are not uniformly controlled. In Case~1 the product over the $a$ sub-boxes is accordingly bounded by pairing the factors and applying Cauchy--Schwarz $\lceil\log_2a\rceil$ times, which replaces the constant~$2$ by~$2a$ and is absorbed by the slack.
+
+% =================================================================
+\section{The two single-scale statements}
+\label{sec:single}
+
+\begin{lemma}[Nearly complete groups]
+\label{lem:NC}
+Let $G$ be organised at scale~$L$ and let $g\in G$ have $x=j_0-\lvert g\rvert\le2$. Assume $\mathcal H(L')$ for all $L'\le L/16$. Then
+\begin{equation*}
+  \P\bigl(\Bad(B,G)\bigr)\le\P(E_g)+C_2K^{\lvert g\rvert}\mu^xL^{-x}\,,
+\end{equation*}
+where $E_g$ is the event that a crossing exists that visits fewer than $L/32$ boxes met by all lines of~$g$,
+and the first term is bounded by Cases~1--3 of \cref{sec:recursion} applied to the sub-boxes that the crossing visits outside the row of~$g$, of which there are at least $L/(8\ell)$.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+Call a box \emph{on~$g$} if it is met by all lines of~$g$; on-boxes lie within distance~$2$ of the axis~$A_g$ and need $x$ further lines of $\cL\cup(G\setminus g)$ to be thick. If a crossing~$S$ has fewer than $L/32$ on-boxes, then since $S$ has at least $L/8$ boxes, at least $3L/32$ of its boxes are off~$g$, and its chain of sub-boxes has at least $L/(8\ell)$ members outside the row of~$g$, which are bad with the fixed set $G\setminus g$; this is the first term. If $S$ has at least $L/32$ on-boxes, each of them is met by $x$ lines of $\cL\cup(G\setminus g)$. A line meeting two on-boxes at distance~$t$ lies within distance~$2$ of~$A_g$ between them, so each line covers an interval of on-boxes, and the on-boxes are covered $x$-fold by these intervals. For a random line the interval has length~$t$ with $\nu$-measure at most $C\mu L/t^2$ summed over positions, so the expected number of random lines with interval length in $[t,2t]$ is at most $C\mu L/t^2$; an $x$-fold cover of a set of at least $L/32$ on-boxes by intervals of length at most~$2t$ needs at least $xL/(64t)$ of them, of probability at most $(C'\mu t/L)^{xL/(64t)}$ by the Poisson tail, which summed over dyadic $t\le L/128$ is $O((\mu/L)^{2x})$, while $t\ge L/128$ gives the $x$ lines of length comparable to~$L$ within distance~$2$ of~$A_g$, of probability at most $(C\mu/L)^x$ with the constant absorbing the at most $128$ positions. The fixed lines of $G\setminus g$ cover on-boxes as well: a line not in~$g$ lies within distance~$2$ of~$A_g$ along a stretch of length at most $4/\sin\alpha$, $\alpha$ its angle with~$A_g$, and if $G$ is organised so that lines outside~$g$ make an angle at least $L^{-1/2}$ with~$A_g$, these stretches have length at most $4L^{1/2}$, so the fixed lines cover at most $4L^{1/2}\lvert G\rvert$ on-boxes, which is less than $L/64$ when $\lvert G\rvert\le L^{1/2}/256$; the random lines must then cover at least $L/64$ on-boxes $x$-fold, and the argument applies with $L/32$ replaced by $L/64$.
+\end{proof}
+
+\begin{lemma}[Base case]
+\label{lem:base}
+There are $L_1=L_1(j_0)$ and $\mu_1=\mu_1(L_1)$ such that $\mathcal H(L)$ holds for all $L\le L_1$ and $\mu\le\mu_1$ with a constant $C_0=C_0(j_0)$ that does not depend on~$L_1$.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+By \cite[Proposition~6.2]{DEC26}, applied to the crossing event in place of the diameter event, $\P(\Bad(B,G))$ is at most the expected number of minimal sets $\Lambda\subseteq\cL$ such that $\Lambda\cup G$ produces a crossing, which is $\sum_n M_n/n!$ with $M_n$ a $\nu^{\otimes n}$-integral over $n$-tuples of lines meeting~$B$. Each line meeting~$B$ has measure at most $4\mu L$, so $M_n/n!\le(4\mu L)^n/n!$, and the terms with $n>2j_0$ sum to at most $(4e\mu L/(2j_0))^{2j_0}$, which is at most $\rho_L$ for $\mu\le cL^{-5}$. For $n\le2j_0$ the thick set of $\Lambda\cup G$ is the union over subsets of $j_0$ lines of their common boxes, and the common boxes of a subset lie within the $1$-neighbourhood of any one of its lines, a straight tube. A crossing has diameter at least $L/4$ and is covered by at most $r\coloneqq\binom{2j_0+\lvert G\rvert}{j_0}$ such tubes, so one tube covers a part of it of diameter at least $L/(4r)$: $j_0$ lines of $\Lambda\cup G$ pass within distance~$1$ of two boxes at distance $t\ge L/(4r)$. If $s$ of them are fixed and belong to one group~$g$, the remaining $j_0-s$ random lines pass within distance~$1$ of the axis of~$g$ along a stretch of length~$t$ at one of at most $4r$ positions, of measure $(C\mu/t)^{j_0-s}\le C'r^{j_0}(\mu/L)^{j_0-s}$, which is $C''\rho_Lk_L(s)L^{-2}$, below the target; if none is fixed, the first random line has measure at most $4\mu L$ and the others $(C\mu/t)^{j_0-1}$, giving $C'r^{j_0}\mu^{j_0}L^{2-j_0}=C'r^{j_0}\rho_L$. The remaining $n-j_0$ lines of~$\Lambda$ contribute at most $(4\mu L)^{n-j_0}$, and the sum over $n\le2j_0$ is at most $2C'r^{j_0}\rho_L W_L(G)$ for $4\mu L\le1/2$. Fixed lines from different groups passing within distance~$1$ of two boxes at distance~$t$ are excluded by the organisation of~$G$ when $t\ge L^{1/2}$ and $L\ge L_1$. This gives $C_0=2C'r^{j_0}$, which depends on $j_0$ and on $\lvert G\rvert$ but not on~$L$.
+\end{proof}
+
+The base case shows where the $L$-dependence of the bound comes from: a crossing of a box of constant side~$L_1$ with few lines forces $j_0$ lines to run together over a length comparable to~$L_1$, and that costs $(\mu/L_1)^{j_0-1}$ per bundle. A bound of the form $C(L_1)\mu^{j_0}$ with the right power of~$\mu$ but an uncontrolled constant would not do: the first recursion step multiplies constants by the power~$a$, and only the slack $\ell^{-\delta}$ of~\eqref{eq:basic}, which is a power of~$L_1$, can absorb them.
+
+% =================================================================
+\section{The class of fixed configurations, and what is not proved}
+\label{sec:class}
+
+Everything above is conditional on a correct formulation of the class of fixed-line sets~$G$ for which $\mathcal H(L)$ is asserted. The class must satisfy three requirements: it must be \emph{inherited}, in that $G\cap B_i$ together with the shared lines is in the class at scale~$\ell$, up to events of probability at most $\rho_L$; it must be \emph{closed} under the organisation of \cref{lem:sharedmoments}; and $\mathcal H(L)$ must be \emph{true} on it. We record what we know.
+
+\begin{enumerate}
+  \item \emph{Groups.} A tight group, lines within distance~$1$ of a common axis throughout~$B$, is inherited as a tight group in every sub-box of its row. Shared lines join a group at cost $\mu\ell^2/D$ against a gain $K\ell/\mu$, product $\ell^2/D=8a/\ell$ (\cref{lem:sharedmoments}). The additive weight~\eqref{eq:weight} is the right form: a crossing uses one group over most of its length, and two groups in sequence cost the product of two bundle probabilities, which is far below the sum of the two weights.
+  \item \emph{Singletons.} A fixed line belonging to no group is worth $1+K/(\mu L)$ at most if it is in \emph{general position}, and in the recursion its row is handled by Case~2 with $x=j_0-1$, where the multiplicative factor plays no role. The hypothesis must therefore allow any finite number of singletons, and a cardinality bound $\lvert G\rvert\le L^{1/2}$ is not inherited: the lines of~$G$ meeting a sub-box number up to~$\lvert G\rvert$, while the sub-box's own allowance is only $\ell^{1/2}=L^{1/6}$. A density condition, $\lvert G\cap B'\rvert\le L'^{1/2}$ for every box $B'\subseteq B$ of side $L'\ge L_1$, \emph{is} inherited, and the shared lines respect it except on an event of probability at most $\ell^2(C\mu/\ell)^{L_1^{1/2}}\le\rho_L$ for $L_1\ge(4j_0)^2$.
+  \item \emph{Partial alignment, and a counterexample.} Let $g$ be a group of $j_0-1$ lines and let $G$ contain in addition $L^{1/2}$ single lines, each within distance~$1$ of the axis of~$g$ along a stretch of length $L^{1/2}-1$, the stretches tiling the axis. Then every box on~$g$ is met by $j_0$ fixed lines, $\Bad(B,G)$ holds with probability one, and $G$ satisfies the density condition. Any definition of "aligned" with a threshold stretch length $\tau(L)$ admits this counterexample with tiles of length $\tau(L)-1$, provided $L/\tau(L)$ tiles are allowed by the density condition; and the threshold cannot be a constant, because then a shared line joins a group at cost $\mu\ell^2/(t_0D)$ against the gain $K\ell/\mu$, product $8aK/t_0$, which is not small.
+  \item \emph{What is needed.} A class of configurations closed under the recursion in which such tilings are either forbidden or correctly weighted. The natural candidate is to weight \emph{every} set of fixed lines by the amount it can shorten a crossing: for a line~$\ell_0$ and a group~$g$, the length along the axis of~$g$ over which $\ell_0$ lies within distance~$1$ of it, and more generally for each stretch~$I$ of a potential axis the number of fixed lines within distance~$1$ along~$I$; the weight of~$G$ would then be a sum over axes and stretches of $k_{\lvert I\rvert}(\text{number of lines})$ times the cost of a bundle completing the crossing outside~$I$. We expect this to be the right object, and that with it the three requirements can be met, but we have not carried out the verification, and we do not claim \cref{thm:main} beyond the class of configurations consisting of tight groups and singletons in general position with respect to all axes at all scales, for which the counterexample does not arise but which is not known to be inherited.
+\end{enumerate}
+
+\paragraph{Why the scheme is nevertheless the right one.} The recursion never counts sub-configurations of a cluster: the entropy at each scale is the fixed factor $(4L/\ell)^{2a}$, and the probability of a bad box is controlled by the induction, not by a first moment. The decoration obstruction of~\cite{DEC26}, which rules out every Peierls argument over covers for $d\gg1/p_0$, therefore does not arise, and the bundle structure of the model, which defeated the product bounds of~\cite{PS26}, appears here only in the weights of fixed lines, where it is a one-dimensional bookkeeping along an axis rather than a two-dimensional one along a cluster. The remaining difficulty, the formulation of the class of fixed configurations, is a single, explicit, combinatorial problem.
+
+% =================================================================
+\section{Summary}
+\label{sec:summary}
+
+\begin{enumerate}
+  \item The multiscale scheme replaces the standard "two bad sub-boxes" recursion by "$a$ well-separated bad sub-boxes" with geometric scales $L\mapsto L^3$, which is what a polynomial target requires (\eqref{eq:acond}), handles the dependence between far sub-boxes by conditioning on the shared lines, which are few and automatically aligned (\cref{lem:condind,lem:sharedcount}), and carries fixed lines in the induction hypothesis with additive weights~\eqref{eq:weight}. The recursion closes for groups missing at least three lines (\eqref{eq:case2}) and for sub-boxes outside all rows; nearly complete groups (\cref{lem:NC}) and the base case (\cref{lem:base}) are single-scale statements with proofs we regard as complete up to the bookkeeping indicated.
+  \item The induction hypothesis is not yet correctly formulated. Tight groups and singletons in general position are the right objects, and the weights are the right amounts, but the class of fixed configurations must be closed under the recursion, and partially aligned singletons produce a counterexample to the bound for every scale-dependent alignment threshold (\cref{sec:class}). The way out, we believe, is a weight that sums over axes and stretches the help that the fixed lines give along each. This is the open point of the scheme.
+  \item Two further points remain as before: the technical restriction to second moments in \cref{lem:sharedmoments}, and the dependence step from the single-cluster bound to the thick-cluster lemma in~\cite{FM26}.
+\end{enumerate}
+
+
+
+\section*{Acknowledgements}
+
+BJ acknowledges the financial support of the Leibniz Association within the Leibniz Junior Research Group on Probabilistic Methods for Dynamic Communication Networks (DYCOMNET) as part of the Leibniz Competition (grant no.~J105/2020), of the Berlin Mathematics Research Center MATH+ through the project EF-MA-Sys-2 on Information Flow \& Emergent Behavior in Complex Networks, and of the Deutsche Forschungsgemeinschaft (DFG) through Project P27 within the SPP~2265.
+
+\section*{Use of AI tools}
+
+The simulations, proofs, computations, figures and the text of this note were developed with substantial assistance of the AI systems Claude (Anthropic) and ChatGPT Astra~6 (OpenAI), in an interactive process directed by the authors.
+
+\bibliographystyle{amsalpha}
+\bibliography{references}
+
+\end{document}
