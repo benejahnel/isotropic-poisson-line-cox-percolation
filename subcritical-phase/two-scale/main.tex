@@ -30,7 +30,7 @@
 \thispagestyle{plain}
 
 \begin{abstract}
-We adapt Gou\'er\'e's two-scale argument for the subcritical phase of the Poisson Boolean model to the Boolean model driven by a Cox process on a Poisson line process. The argument is run directly on occupied crossings of annuli, so that neither thick clusters, nor the skeleton bound, nor the first moment over cluster chains of our earlier notes is needed. Two things change relative to the Poisson Boolean model. The inner and outer regions of the original argument are replaced by two bounded regions of the same size, because every line through a bounded region reaches its complement; and the dependence between the two regions, which in the original argument is carried by rare large balls, is carried here by the lines meeting both regions, a constant fraction of all lines through either, and is handled by conditioning on them and treating them as fixed lines. The induction hypothesis therefore carries fixed lines with a weight, and we show that the recursion then becomes a deterministic inequality for the pair (target function, weight) in which randomness enters only through the law of the shared lines. Defining the weight recursively makes the crossing bound unconditional and reduces the existence of a subcritical phase to a single statement, that the recursively defined target function tends to zero. We prove the inclusion lemma, the decoupling, the bounds on shared lines, the recursion theorem, and the closure of one recursion step under a group-weight hypothesis on the shared lines, and we identify what the hypothesis must look like for it to propagate. We also correct a claim of our multiscale note: a polynomial or faster target does not force many sub-boxes at polynomially separated scales; two regions at a fixed ratio suffice, because the quadratic term of the recursion is far below the target.
+We adapt Gou\'er\'e's two-scale argument for the subcritical phase of the Poisson Boolean model to the Boolean model driven by a Cox process on a Poisson line process. The argument is run directly on occupied crossings of annuli, so that neither thick clusters, nor the skeleton bound, nor the first moment over cluster chains of our earlier notes is needed. Two things change relative to the Poisson Boolean model. The inner and outer regions of the original argument are replaced by two bounded regions of the same size, because every line through a bounded region reaches its complement; and the dependence between the two regions, which in the original argument is carried by rare large balls, is carried here by the lines meeting both regions, a constant fraction of all lines through either, and is handled by conditioning on them and treating them as fixed lines. The induction hypothesis therefore carries fixed lines with a weight, and we show that the recursion then becomes a deterministic inequality for the pair (target function, weight) in which randomness enters only through the law of the shared lines. Defining the weight recursively makes the crossing bound unconditional and reduces the existence of a subcritical phase to a single statement, that the recursively defined target function tends to zero. We prove the inclusion lemma for any constant number $a$ of regions, the decoupling, the bounds on shared lines, the recursion theorem, and the closure of one recursion step under a group-weight hypothesis on the shared lines; we show that the pointwise group-weight hypothesis cannot propagate because of configurations that make a sub-region free, that for $a\ge3$ such configurations are rare enough to be discarded in expectation, and we formulate the inductive statement, a group-weight bound in expectation, whose propagation is equivalent to the success of the scheme. We also correct a claim of our multiscale note: a polynomial or faster target does not force many sub-boxes at polynomially separated scales; a constant number of regions at a fixed ratio suffices, because the product term of the recursion is far below the target.
 \end{abstract}
 
 % =================================================================
@@ -64,60 +64,67 @@ Let $D_1,D_2,\dots$ be a chain of pairwise consecutively intersecting disks of~$
 \end{proof}
 
 % =================================================================
-\section{The two-scale inclusion}
+\section{The multi-region inclusion}
 \label{sec:inclusion}
 
-Fix finite sets $K\subseteq S_{10}$ and $L\subseteq S_{80}$ of points on the circles of radii $10$ and $80$ around the origin such that $S_{10}\subseteq K+B(0,1)$ and $S_{80}\subseteq L+B(0,1)$; one can take $\lvert K\rvert\le70$ and $\lvert L\rvert\le510$. For $x\in\R^2$, $\alpha\ge1$, $k\in K$ and $l\in L$ write
+Fix an integer $a\ge2$ and put
+\begin{equation}
+\label{eq:M}
+  M\coloneqq10(a-1),\qquad r_i\coloneqq M+70(i-1)\quad(i=1,\dots,a)\,,
+\end{equation}
+so that $r_1=M$ and $r_a=8M$; for $a=2$ this is Gou\'er\'e's choice $M=10$, $r_1=10$, $r_2=80$. The number~$M$ is the ratio between consecutive scales of the recursion. For each~$i$ fix a finite set $K_i\subseteq S_{r_i}$ of points on the circle of radius~$r_i$ around the origin with $S_{r_i}\subseteq K_i+B(0,1)$; one can take $\lvert K_i\rvert\le7r_i+1$. Put $\mathcal K\coloneqq K_1\times\dots\times K_a$ and $N_{\mathcal K}\coloneqq\prod_i\lvert K_i\rvert$. For $x\in\R^2$, $\alpha\ge1$ and $k=(k_1,\dots,k_a)\in\mathcal K$ write
 \begin{equation*}
-  x_k\coloneqq x+\alpha k,\qquad x_l\coloneqq x+\alpha l,\qquad R_k\coloneqq B(x_k,10\alpha),\qquad R_l\coloneqq B(x_l,10\alpha)\,.
+  x_i\coloneqq x+\alpha k_i,\qquad R_i\coloneqq B(x_i,10\alpha)\qquad(i=1,\dots,a)\,.
 \end{equation*}
-Then $R_k\subseteq B(x,20\alpha)$, $R_l\subseteq B(x,70\alpha)^c$, and $\lvert x_k-x_l\rvert\ge70\alpha$.
+Two points on circles of radii $r_i\alpha$ and $r_j\alpha$ are at distance at least $\lvert r_i-r_j\rvert\alpha$, so $\lvert x_i-x_j\rvert\ge70\alpha$ for $i\neq j$, the regions $R_i$ are pairwise at distance at least $50\alpha$, and all of them lie in $B(x,10M\alpha)$ since $8M+10\le10M$.
 
 \begin{lemma}[Inclusion, after {\cite[Lemma~3.3]{Gou08}}]
 \label{lem:inclusion}
 For every finite set~$G$ of lines, every $x\in\R^2$ and $\alpha\ge1$,
 \begin{equation}
 \label{eq:inclusion}
-  \cE(x,10\alpha)\subseteq\bigcup_{k\in K}\bigcup_{l\in L}\bigl(\cE(x_k,\alpha)\cap\cE(x_l,\alpha)\bigr)\,.
+  \cE(x,M\alpha)\subseteq\bigcup_{k\in\mathcal K}\ \bigcap_{i=1}^{a}\cE(x_i,\alpha)\,.
 \end{equation}
 \end{lemma}
 
 In~\cite{Gou08} the inclusion holds only outside the event that a ball of radius at least~$\alpha$ is present, and that event supplies the error term of the recursion. Here all disks have radius $1\le\alpha$ and the inclusion holds outright.
 
 \begin{proof}
-Assume $\cE(x,10\alpha)$ and take $x=0$ without loss of generality. The component of $\Xi(B(0,100\alpha))\cup B(0,10\alpha)$ containing~$0$ is not contained in $B(0,80\alpha)$; since $X\cap B(0,100\alpha)$ is finite almost surely, there is a chain $D_1,\dots,D_n$ of unit disks with centres in $B(0,100\alpha)$, consecutive disks intersecting, with $D_1\cap B(0,10\alpha)\neq\varnothing$ and $D_n\not\subseteq B(0,80\alpha)$. The union $U\coloneqq D_1\cup\dots\cup D_n$ is connected and contains a point of $B(0,10\alpha)$ and a point outside $B(0,80\alpha)$, so it contains points $y\in S_{10\alpha}$ and $y'\in S_{80\alpha}$; say $y\in D_i$ and $y'\in D_m$. Choose $k\in K$ with $\lvert y-\alpha k\rvert<\alpha$ and $l\in L$ with $\lvert y'-\alpha l\rvert<\alpha$, so that $D_i$ meets $B(x_k,\alpha)$ and $D_m$ meets $B(x_l,\alpha)$.
+Assume $\cE(x,M\alpha)$ and take $x=0$. The component of $\Xi(B(0,10M\alpha))\cup B(0,M\alpha)$ containing~$0$ is not contained in $B(0,8M\alpha)$; since $X\cap B(0,10M\alpha)$ is finite almost surely, there is a chain $D_1,\dots,D_n$ of unit disks with centres in $B(0,10M\alpha)$, consecutive disks intersecting, with $D_1\cap B(0,M\alpha)\neq\varnothing$ and $D_n\not\subseteq B(0,8M\alpha)$. The union $U\coloneqq D_1\cup\dots\cup D_n$ is connected and contains a point of $B(0,M\alpha)$ and a point outside $B(0,8M\alpha)$, so for every~$i$ it contains a point $y_i\in S_{r_i\alpha}$, say $y_i\in D_{n_i}$. Choose $k_i\in K_i$ with $\lvert y_i-\alpha k_i\rvert<\alpha$, so that $D_{n_i}$ meets $B(x_i,\alpha)$.
 
-\emph{The event at~$k$.} The union $D_i\cup\dots\cup D_n$ is connected, meets $B(x_k,\alpha)$ and contains a point outside $B(0,80\alpha)\supseteq B(x_k,8\alpha)$. Let $D_{i'}$, $i'\ge i$, be the first of these disks not contained in $B(x_k,8\alpha)$. The centres of $D_i,\dots,D_{i'-1}$ lie in $B(x_k,8\alpha)$, and the centre of $D_{i'}$ is within distance~$1$ of a point of $B(x_k,8\alpha)$, because $D_{i'}$ meets $D_{i'-1}$ if $i'>i$ and meets $B(x_k,\alpha)$ if $i'=i$; so all these centres lie in $R_k=B(x_k,10\alpha)$. Hence $B(x_k,\alpha)\cup D_i\cup\dots\cup D_{i'}$ is a connected subset of $\Xi(R_k)\cup B(x_k,\alpha)$ containing~$x_k$ and not contained in $B(x_k,8\alpha)$: this is $\cE(x_k,\alpha)$.
+\emph{The events at $i<a$.} The union $D_{n_i}\cup\dots\cup D_n$ is connected, meets $B(x_i,\alpha)$ and contains a point outside $B(0,8M\alpha)$, which contains $B(x_i,8\alpha)$ because $r_i+8\le8M$ for $i<a$. Let $D_{i'}$, $i'\ge n_i$, be the first of these disks not contained in $B(x_i,8\alpha)$. The centres of $D_{n_i},\dots,D_{i'-1}$ lie in $B(x_i,8\alpha)$, and the centre of $D_{i'}$ is within distance~$1$ of a point of $B(x_i,8\alpha)$, because $D_{i'}$ meets $D_{i'-1}$ if $i'>n_i$ and meets $B(x_i,\alpha)$ if $i'=n_i$; so all these centres lie in $R_i$. Hence $B(x_i,\alpha)\cup D_{n_i}\cup\dots\cup D_{i'}$ is a connected subset of $\Xi(R_i)\cup B(x_i,\alpha)$ containing~$x_i$ and not contained in $B(x_i,8\alpha)$: this is $\cE(x_i,\alpha)$.
 
-\emph{The event at~$l$.} The union $D_1\cup\dots\cup D_m$ is connected, meets $B(x_l,\alpha)$ and contains a point of $B(0,10\alpha)$, which lies outside $B(x_l,8\alpha)$ since $\lvert x_l\rvert=80\alpha$. Running the chain backwards from~$D_m$, the same argument gives $\cE(x_l,\alpha)$.
+\emph{The event at $i=a$.} The union $D_1\cup\dots\cup D_{n_a}$ is connected, meets $B(x_a,\alpha)$ and contains a point of $B(0,M\alpha)$, which lies outside $B(x_a,8\alpha)$ since $\lvert x_a\rvert=8M\alpha$ and $7M>8$. Running the chain backwards from $D_{n_a}$, the same argument gives $\cE(x_a,\alpha)$.
 \end{proof}
+
+For $a\ge3$ the intermediate circles could be used in either direction; we have used the forward direction for all $i<a$.
 
 % =================================================================
 \section{Decoupling through the shared lines}
 \label{sec:decoupling}
 
-For disjoint bounded Borel sets $A_1,A_2$ let $\cS=\cS(A_1,A_2)$ be the set of lines of~$\cL$ meeting both, and $\mathcal P_i$ the set of lines of~$\cL$ meeting $A_i$ but not the other set (the \emph{private} lines of~$A_i$). For a finite set~$H$ of lines write $H\cap A\coloneqq\{\ell\in H\colon\ell\cap A\neq\varnothing\}$.
+For pairwise disjoint bounded Borel sets $A_1,\dots,A_a$ let $\cS=\cS(A_1,\dots,A_a)$ be the set of lines of~$\cL$ meeting at least two of them, and $\mathcal P_i$ the set of lines of~$\cL$ meeting $A_i$ and no other~$A_j$ (the \emph{private} lines of~$A_i$). For a finite set~$H$ of lines write $H\cap A\coloneqq\{\ell\in H\colon\ell\cap A\neq\varnothing\}$.
 
 \begin{lemma}[Two levels of independence]
 \label{lem:decoupling}
-Let $A_1,A_2$ be disjoint bounded Borel sets, $G$ a finite set of lines, and let $F_i$ be an event determined by the lines of $\cL\cup G$ meeting~$A_i$ and the points of~$X$ in~$A_i$, $i=1,2$. Then
+Let $A_1,\dots,A_a$ be pairwise disjoint bounded Borel sets, $G$ a finite set of lines, and let $F_i$ be an event determined by the lines of $\cL\cup G$ meeting~$A_i$ and the points of~$X$ in~$A_i$. Then
 \begin{equation}
 \label{eq:decoupling}
-  \P_G(F_1\cap F_2)=\E\Bigl[\P_{G\cup\cS}(F_1)\,\P_{G\cup\cS}(F_2)\Bigr]\,,
+  \P_G\Bigl(\bigcap_{i=1}^aF_i\Bigr)=\E\Bigl[\prod_{i=1}^a\P_{G\cup\cS}(F_i)\Bigr]\,,
 \end{equation}
-where inside the expectation $\cS$ is treated as a deterministic set of fixed lines and $\P_{G\cup\cS}(F_i)$ is the probability of~$F_i$ in the model whose random lines are the Poisson process of lines meeting $A_i$ but not $A_{3-i}$ and whose fixed lines are $(G\cup\cS)\cap A_i$.
+where inside the expectation $\cS$ is treated as a deterministic set of fixed lines and $\P_{G\cup\cS}(F_i)$ is the probability of~$F_i$ in the model whose random lines are the Poisson process~$\mathcal P_i$ and whose fixed lines are $(G\cup\cS)\cap A_i$.
 \end{lemma}
 
 \begin{proof}
-The sets of lines meeting $A_1$ only, meeting $A_2$ only, and meeting both are disjoint, so $\mathcal P_1,\mathcal P_2,\cS$ are independent Poisson processes. Conditionally on all lines, the points of~$X$ in $A_1$ and in $A_2$ are independent Poisson processes on the lines, since $A_1\cap A_2=\varnothing$. Hence, conditionally on~$\cS$, the pairs $(\mathcal P_1,X\cap A_1)$ and $(\mathcal P_2,X\cap A_2)$ are independent, and $F_i$ is determined by $(\mathcal P_i,X\cap A_i)$ together with the fixed lines $(G\cup\cS)\cap A_i$. Taking the conditional expectation given~$\cS$ gives~\eqref{eq:decoupling}.
+The sets of lines meeting exactly one of the $A_i$, for each~$i$, and the set of lines meeting at least two, are disjoint measurable sets of lines, so $\mathcal P_1,\dots,\mathcal P_a,\cS$ are independent Poisson processes. Conditionally on all lines, the points of~$X$ in the disjoint sets $A_1,\dots,A_a$ are independent Poisson processes on the lines. Hence, conditionally on~$\cS$, the pairs $(\mathcal P_i,X\cap A_i)$, $i\le a$, are independent, and $F_i$ is determined by $(\mathcal P_i,X\cap A_i)$ together with the fixed lines $(G\cup\cS)\cap A_i$. Taking the conditional expectation given~$\cS$ gives~\eqref{eq:decoupling}.
 \end{proof}
 
-Applied to the inclusion~\eqref{eq:inclusion} with $A_1=R_k$, $A_2=R_l$,
+Applied to the inclusion~\eqref{eq:inclusion} with $A_i=R_i$,
 \begin{equation}
 \label{eq:step}
-  \pi_{10\alpha}(x;G)\le\sum_{k\in K}\sum_{l\in L}\E\Bigl[\pi_\alpha\bigl(x_k;G\cup\cS_{kl}\bigr)\,\pi_\alpha\bigl(x_l;G\cup\cS_{kl}\bigr)\Bigr],\qquad\cS_{kl}\coloneqq\cS(R_k,R_l)\,,
+  \pi_{M\alpha}(x;G)\le\sum_{k\in\mathcal K}\E\Bigl[\prod_{i=1}^a\pi_\alpha\bigl(x_i;G\cup\cS_k\bigr)\Bigr],\qquad\cS_k\coloneqq\cS(R_1,\dots,R_a)\,,
 \end{equation}
-where only the lines of $G\cup\cS_{kl}$ meeting the respective region matter in each factor. This is the two-scale step. Its content is that the two sub-crossings are independent given the shared lines, and that the shared lines enter as fixed lines of the sub-problems. In the Poisson Boolean model of~\cite{Gou08} the analogue of the shared lines is the set of balls of radius at least~$\alpha$, which is empty with high probability; here $\cS_{kl}$ is never empty, and its law is the object the recursion has to control.
+where only the lines of $G\cup\cS_k$ meeting the respective region matter in each factor. This is the multi-region step. Its content is that the sub-crossings are independent given the shared lines, and that the shared lines enter as fixed lines of the sub-problems. In the Poisson Boolean model of~\cite{Gou08} the analogue of the shared lines is the set of balls of radius at least~$\alpha$, which is empty with high probability; here $\cS_k$ is never empty, and its law is the object the recursion has to control.
 
 \begin{lemma}[Shared lines and aligned lines]
 \label{lem:shared}
@@ -133,7 +140,7 @@ Let $R=B(y,10\alpha)$ and $R'=B(y',10\alpha)$ with $\lvert y-y'\rvert\ge70\alpha
 (a) is the perimeter formula. (b) Let $\ell$ be such a line and $\varphi$ its angle with~$\ell_0$. The points $p,q$ are within distance~$1$ of both lines and at distance at least~$\alpha$, so $\alpha\sin\varphi\le4$ and $\varphi\le(\pi/2)\sin\varphi\le2\pi/\alpha$; the normal direction of~$\ell$ lies in a set of measure at most $4\pi/\alpha$. Given the direction, $\ell$ passes within distance~$2$ of a point of the segment $\ell_0\cap B(y,11\alpha)$, whose length is at most $22\alpha$, and along this segment the distance between $\ell$ and~$\ell_0$ varies by at most $22\alpha\sin\varphi\le88$; so the offset of~$\ell$ lies in an interval of length at most $4+88=92$. The measure is at most $(\mu/\pi)(4\pi/\alpha)\cdot92=368\mu/\alpha$. (c) Now $\lvert p-p'\rvert\ge50\alpha$, so $50\alpha\sin\varphi\le4$ and $\varphi\le\pi/(25\alpha)$, the direction set has measure at most $2\pi/(25\alpha)$, the offset variation along $\ell_0\cap B(y,11\alpha)$ is at most $22\alpha\cdot4/(50\alpha)<2$, the offset interval has length at most~$6$, and the measure is at most $(\mu/\pi)(2\pi/(25\alpha))\cdot6<\mu/(2\alpha)$.
 \end{proof}
 
-The ratio $C_2/C_1=1/736$ measures how much rarer alignment across the gap between the two regions is than alignment within one region; it plays the role that the radius of a ball serving both regions plays in~\cite{Gou08}.
+Any two of the regions $R_1,\dots,R_a$ have centres at distance at least $70\alpha$, so the lemma applies to every pair. The ratio $C_2/C_1=1/736$ measures how much rarer alignment across the gap between two regions is than alignment within one region; it plays the role that the radius of a ball serving both regions plays in~\cite{Gou08}.
 
 % =================================================================
 \section{The recursion}
@@ -147,26 +154,25 @@ Let $\alpha_1\ge1$. A \emph{target} is a function $f\colon[\alpha_1,\infty)\to(0
 \label{thm:recursion}
 Let $(f,W)$ be a target and a weight such that
 \begin{enumerate}
-  \item[\emph{(B)}] \emph{(base case)} $\pi_\alpha(x;G)\le f(\alpha)W_\alpha(x;G)$ for all $\alpha\in[\alpha_1,10\alpha_1)$, $x\in\R^2$ and finite~$G$;
+  \item[\emph{(B)}] \emph{(base case)} $\pi_\alpha(x;G)\le f(\alpha)W_\alpha(x;G)$ for all $\alpha\in[\alpha_1,M\alpha_1)$, $x\in\R^2$ and finite~$G$;
   \item[\emph{(R)}] \emph{(recursion)} for all $\alpha\ge\alpha_1$, $x\in\R^2$ and finite~$G$,
   \begin{equation}
   \label{eq:R}
-    \sum_{k\in K}\sum_{l\in L}\E\Bigl[\min\bigl\{1,f(\alpha)W_\alpha(x_k;G\cup\cS_{kl})\bigr\}\,\min\bigl\{1,f(\alpha)W_\alpha(x_l;G\cup\cS_{kl})\bigr\}\Bigr]\le f(10\alpha)\,W_{10\alpha}(x;G)\,.
+    \sum_{k\in\mathcal K}\E\Bigl[\prod_{i=1}^a\min\bigl\{1,f(\alpha)W_\alpha(x_i;G\cup\cS_k)\bigr\}\Bigr]\le f(M\alpha)\,W_{M\alpha}(x;G)\,.
   \end{equation}
 \end{enumerate}
 Then $\pi_\alpha(x;G)\le f(\alpha)W_\alpha(x;G)$ for all $\alpha\ge\alpha_1$, $x\in\R^2$ and finite~$G$. In particular, if $W_\alpha(x;\varnothing)\le C_W$ for all $\alpha,x$ and $f(\alpha)\to0$, then $\Xi$ has no unbounded component almost surely.
 \end{theorem}
 
 \begin{proof}
-Induction on~$n$ for $\alpha\in[10^n\alpha_1,10^{n+1}\alpha_1)$. The case $n=0$ is~(B). For $n\ge1$ write $\alpha=10\alpha'$ with $\alpha'\in[10^{n-1}\alpha_1,10^n\alpha_1)$. By~\eqref{eq:step}, the induction hypothesis applied inside the expectation with the fixed set $G\cup\cS_{kl}$, the trivial bound $\pi\le1$, and~(R),
-\begin{align*}
-  \pi_{10\alpha'}(x;G)&\le\sum_{k,l}\E\Bigl[\min\{1,f(\alpha')W_{\alpha'}(x_k;G\cup\cS_{kl})\}\min\{1,f(\alpha')W_{\alpha'}(x_l;G\cup\cS_{kl})\}\Bigr]\\
-  &\le f(10\alpha')W_{10\alpha'}(x;G)\,.
-\end{align*}
+Induction on~$n$ for $\alpha\in[M^n\alpha_1,M^{n+1}\alpha_1)$. The case $n=0$ is~(B). For $n\ge1$ write $\alpha=M\alpha'$ with $\alpha'\in[M^{n-1}\alpha_1,M^n\alpha_1)$. By~\eqref{eq:step}, the induction hypothesis applied inside the expectation with the fixed set $G\cup\cS_k$, the trivial bound $\pi\le1$, and~(R),
+\begin{equation*}
+  \pi_{M\alpha'}(x;G)\le\sum_{k\in\mathcal K}\E\Bigl[\prod_{i=1}^a\min\{1,f(\alpha')W_{\alpha'}(x_i;G\cup\cS_k)\}\Bigr]\le f(M\alpha')W_{M\alpha'}(x;G)\,.
+\end{equation*}
 The last assertion follows from \cref{lem:perc}.
 \end{proof}
 
-The theorem separates the probabilistic input from the arithmetic: (B) is a statement about bounded regions, and (R) is an inequality between deterministic functions in which the only random object is the Poisson process $\cS_{kl}$ of shared lines, whose law is explicit. In the Poisson Boolean model the analogue of~(R) is $C\pi(\alpha)^2+\lambda C\int_\alpha^\infty r^d\nu(\dd r)\le\pi(10\alpha)$, with no weight because the dependence is carried by an event of small probability.
+The theorem separates the probabilistic input from the arithmetic: (B) is a statement about bounded regions, and (R) is an inequality between deterministic functions in which the only random object is the Poisson process $\cS_k$ of shared lines, whose law is explicit. In the Poisson Boolean model the analogue of~(R) is $C\pi(\alpha)^2+\lambda C\int_\alpha^\infty r^d\nu(\dd r)\le\pi(10\alpha)$, with no weight because the dependence is carried by an event of small probability.
 
 \subsection{The recursive weight, and the single remaining question}
 
@@ -174,14 +180,14 @@ Nothing prevents us from \emph{defining} $f$ and~$W$ by~(B) and~(R).
 
 \begin{definition}[Recursive target and weight]
 \label{def:recursive}
-Fix $\alpha_1\ge1$. For $\alpha\in[\alpha_1,10\alpha_1)$ put $f(\alpha)\coloneqq\pi_\alpha$ and $W_\alpha(x;G)\coloneqq\max\{1,\pi_\alpha(x;G)/f(\alpha)\}$. For $\alpha\in[10^n\alpha_1,10^{n+1}\alpha_1)$, $n\ge1$, with $\alpha'=\alpha/10$, put
+Fix $\alpha_1\ge1$. For $\alpha\in[\alpha_1,M\alpha_1)$ put $f(\alpha)\coloneqq\pi_\alpha$ and $W_\alpha(x;G)\coloneqq\max\{1,\pi_\alpha(x;G)/f(\alpha)\}$. For $\alpha\in[M^n\alpha_1,M^{n+1}\alpha_1)$, $n\ge1$, with $\alpha'=\alpha/M$, put
 \begin{align}
 \label{eq:frec}
-  f(\alpha)&\coloneqq\sum_{k,l}\E\Bigl[\min\{1,f(\alpha')W_{\alpha'}(\alpha'k;\cS_{kl})\}\min\{1,f(\alpha')W_{\alpha'}(\alpha'l;\cS_{kl})\}\Bigr]\wedge1\,,\\
+  f(\alpha)&\coloneqq\sum_{k\in\mathcal K}\E\Bigl[\prod_{i=1}^a\min\{1,f(\alpha')W_{\alpha'}(\alpha'k_i;\cS_k)\}\Bigr]\wedge1\,,\\
 \label{eq:Wrec}
-  W_\alpha(x;G)&\coloneqq\max\Bigl\{1,\ \frac1{f(\alpha)}\sum_{k,l}\E\Bigl[\min\{1,f(\alpha')W_{\alpha'}(x_k;G\cup\cS_{kl})\}\min\{1,f(\alpha')W_{\alpha'}(x_l;G\cup\cS_{kl})\}\Bigr]\Bigr\}\,,
+  W_\alpha(x;G)&\coloneqq\max\Bigl\{1,\ \frac1{f(\alpha)}\sum_{k\in\mathcal K}\E\Bigl[\prod_{i=1}^a\min\{1,f(\alpha')W_{\alpha'}(x_i;G\cup\cS_k)\}\Bigr]\Bigr\}\,,
 \end{align}
-where in~\eqref{eq:frec} the shared lines are those of the regions around $\alpha'k$ and $\alpha'l$ for $x=0$; by stationarity the value does not depend on~$x$.
+where in~\eqref{eq:frec} the regions are those of $x=0$ at scale~$\alpha'$; by stationarity the value does not depend on~$x$.
 \end{definition}
 
 \begin{proposition}[Unconditional crossing bound]
@@ -197,26 +203,26 @@ Everything is now in one place.
 
 \begin{boxedclaim}{T}{The recursive target tends to zero}
 \label{claim:T}
-There are $\mu_0>0$ and $\lambda_0>0$ such that for $\mu\le\mu_0$, $\lambda\le\lambda_0$ and a suitable $\alpha_1$, the function~$f$ of \cref{def:recursive} satisfies $f(\alpha)\to0$ as $\alpha\to\infty$.
+There are $\mu_0>0$ and $\lambda_0>0$ such that for $\mu\le\mu_0$, $\lambda\le\lambda_0$, some $a\ge2$ and a suitable $\alpha_1$, the function~$f$ of \cref{def:recursive} satisfies $f(\alpha)\to0$ as $\alpha\to\infty$.
 \end{boxedclaim}
 
-\Cref{claim:T} is equivalent to the success of the scheme, and by \cref{prop:unconditional} it implies $\lambda_c(\mu)\ge\lambda_0$. It is a statement about an explicit sequence of expectations over Poisson processes of lines: unrolling~\eqref{eq:frec} and~\eqref{eq:Wrec}, $f(10^n\alpha_1)$ is an expectation over a tree of nested pairs of regions, the shared lines of each pair being passed to the sub-regions as fixed lines, and at the leaves of the tree the base-scale probabilities $\pi_{\alpha}(x;G)$ with $\alpha\in[\alpha_1,10\alpha_1)$ and $G$ the accumulated shared lines. We do not prove the claim. The rest of this note shows that one step of the recursion closes under a hypothesis on the weights of the shared lines (\cref{sec:onestep}), and what the hypothesis must look like to propagate (\cref{sec:discussion}).
+\Cref{claim:T} is equivalent to the success of the scheme, and by \cref{prop:unconditional} it implies $\lambda_c(\mu)\ge\lambda_0$. It is a statement about an explicit sequence of expectations over Poisson processes of lines: unrolling~\eqref{eq:frec} and~\eqref{eq:Wrec}, $f(M^n\alpha_1)$ is an expectation over a tree of nested $a$-tuples of regions, the shared lines of each tuple being passed to the sub-regions as fixed lines, and at the leaves of the tree the base-scale probabilities $\pi_{\alpha}(x;G)$ with $\alpha\in[\alpha_1,M\alpha_1)$ and $G$ the accumulated shared lines. We do not prove the claim. The rest of this note shows that one step of the recursion closes under a hypothesis on the weights of the shared lines (\cref{sec:onestep}), and formulates the inductive statement that would prove the claim (\cref{sec:discussion}).
 
 \begin{remark}[The order of the target]
 \label{rem:order}
-Since $f(\alpha)\ge\pi_\alpha$, the target cannot decay faster than the crossing probability, and the following computation shows how fast that is. A crossing of the annulus from $B(0,\alpha)$ to $\partial B(0,8\alpha)$ by unit disks whose centres lie on lines requires, if all centres lie on $m$ lines running together within distance~$1$ across the annulus, a sequence of points with consecutive gaps at most~$2$ along a length of order~$\alpha$ in a Poisson process of intensity $m\lambda$, which has probability of order $\exp\{-c\alpha\,m\lambda\e^{-2m\lambda}\}$; the $m$ lines themselves cost $(\mu/\alpha)^{m}\alpha^2$ up to constants. Optimising over~$m$ gives $2m\lambda\approx\log\alpha$ and $\pi_\alpha\approx\exp\{-(\log\alpha)^2/(2\lambda)\}$ up to lower-order terms: faster than any power of~$\alpha$, and with no fixed number $j_0$ of lines. The recursion will produce a target of this type: the error term of one step is dominated by bundles of shared lines, so that $f(10\alpha)\approx10^{2-m^*(\alpha)}f(\alpha)$ with $m^*(\alpha)$ of order $\log\alpha$ (\cref{sec:onestep}), which integrates to $\exp\{-c(\log\alpha)^2\}$.
+Since $f(\alpha)\ge\pi_\alpha$, the target cannot decay faster than the crossing probability, and the following computation shows how fast that is. A crossing of the annulus from $B(0,\alpha)$ to $\partial B(0,8\alpha)$ by unit disks whose centres lie on lines requires, if all centres lie on $m$ lines running together within distance~$1$ across the annulus, a sequence of points with consecutive gaps at most~$2$ along a length of order~$\alpha$ in a Poisson process of intensity $m\lambda$, which has probability of order $\exp\{-c\alpha\,m\lambda\e^{-2m\lambda}\}$; the $m$ lines themselves cost $(\mu/\alpha)^{m}\alpha^2$ up to constants. Optimising over~$m$ gives $2m\lambda\approx\log\alpha$ and $\pi_\alpha\approx\exp\{-(\log\alpha)^2/(2\lambda)\}$ up to lower-order terms: faster than any power of~$\alpha$, and with no fixed number $j_0$ of lines. The recursion will produce a target of this type: the error term of one step is dominated by bundles of shared lines, so that $f(M\alpha)$ is of the order of $M^{2-m^*(\alpha)}f(\alpha)$ with $m^*(\alpha)$ of order $\log\alpha$ (\cref{sec:onestep}), which integrates to $\exp\{-c(\log\alpha)^2\}$.
 \end{remark}
 
-\begin{remark}[Two regions suffice: a correction]
+\begin{remark}[A constant number of regions suffices: a correction]
 \label{rem:correction}
-Our multiscale note asserted that a polynomial target forces a recursion with many well-separated sub-boxes at scales $L\mapsto L^3$, because with two sub-boxes the exponent in the basic inequality is negative. That assertion is wrong. The exponent computed there contained the positional entropy $(L/\ell)^{2a}$ of the sub-boxes, which is polynomial in~$\ell$ when $L=\ell^3$ but is the constant $\lvert K\rvert\lvert L\rvert$ at a fixed ratio; at a fixed ratio the quadratic term $f(\alpha)^2$ is below any polynomial or quasi-polynomial target $f(10\alpha)$ by a factor tending to zero, and the recursion is driven by the error term, exactly as in~\cite{Gou08}. The large number of sub-boxes was also what made the nearly complete groups of that note hard: along a row of fixed lines the sub-boxes have positional entropy $(L/\ell)^a$, which the gain of a group with few missing lines could not pay. With two regions the corresponding term is $f(\alpha)^2k_\alpha(m)^2$ against $f(10\alpha)k_{10\alpha}(m)$, and it closes for every group size (\cref{sec:discussion}).
+Our multiscale note asserted that a polynomial target forces a recursion with many well-separated sub-boxes at scales $L\mapsto L^3$, because with two sub-boxes the exponent in the basic inequality is negative. That assertion is wrong. The exponent computed there contained the positional entropy $(L/\ell)^{2a}$ of the sub-boxes, which is polynomial in~$\ell$ when $L=\ell^3$ but is the constant $N_{\mathcal K}$ at a fixed ratio; at a fixed ratio the product term $f(\alpha)^a$ is below any polynomial or quasi-polynomial target $f(M\alpha)$ by a factor tending to zero, and the recursion is driven by the error term, exactly as in~\cite{Gou08}. The large number of sub-boxes was also what made the nearly complete groups of that note hard: along a row of fixed lines the sub-boxes have positional entropy $(L/\ell)^a$, which the gain of a group with few missing lines could not pay. With a constant number of regions the corresponding term is $f(\alpha)^2k_\alpha(m)^2$ against $f(M\alpha)k_{M\alpha}(m)$, and it closes for every group size (\cref{sec:discussion}).
 \end{remark}
 
 % =================================================================
 \section{One recursion step under a group-weight hypothesis}
 \label{sec:onestep}
 
-In this section $\alpha\ge\alpha_1$ is fixed, $x=0$, and $f=f(\alpha)$. We show that the step from~$\alpha$ to $10\alpha$ for the target, i.e.\ the sum in~\eqref{eq:frec}, is at most $f/2$ plus an explicit \emph{across-alignment term}, provided the weights of the shared-line configurations at scale~$\alpha$ have the form one expects: groups of aligned lines are charged by their gain, with the cap~$1$.
+In this section $\alpha\ge\alpha_1$ is fixed, $x=0$, and $f=f(\alpha)$. We show that the step from~$\alpha$ to $M\alpha$ for the target, i.e.\ the sum in~\eqref{eq:frec}, is at most $f/2$ plus an explicit \emph{across-alignment term}, provided the weights of the shared-line configurations at scale~$\alpha$ have the form one expects: groups of aligned lines are charged by their gain, with the cap~$1$. Since a product of $a$ factors in $[0,1]$ is at most the product of any two of them, we bound each summand of~\eqref{eq:frec} by the product of the factors for the regions $R_1$ and $R_a$; the other $a-2$ factors are only used in \cref{sec:discussion}.
 
 \paragraph{Bundles and group weights.} For a region $R=B(y,10\alpha)$ and a finite set~$H$ of lines, an \emph{$m$-bundle of~$H$ in~$R$} is a set of $m$ lines of~$H$ that all pass within distance~$1$ of two points $p,q\in R$ with $\lvert p-q\rvert\ge\alpha$. Let $N_m(y;H)$ be the number of $m$-bundles of~$H$ in~$R$; $N_1(y;H)$ is the number of lines of~$H$ meeting~$R$. For $A>0$ put
 \begin{equation}
@@ -242,7 +248,7 @@ The hypothesis says that the weight of a configuration is at most the group weig
 
 \begin{lemma}[Bundle counts]
 \label{lem:counts}
-Let $\cS=\cS(R_k,R_l)$, $N_m\coloneqq N_m(\alpha k;\cS)$ and $N'_{m'}\coloneqq N_{m'}(\alpha l;\cS)$. Then $\E N_m\le p_m$, and
+Let $k\in\mathcal K$, $\cS=\cS_k$, $N_m\coloneqq N_m(\alpha k_1;\cS)$ and $N'_{m'}\coloneqq N_{m'}(\alpha k_a;\cS)$, the bundle counts in $R_1$ and $R_a$. Then $\E N_m\le p_m$, and
 \begin{equation}
 \label{eq:pairs}
   \E[N_mN'_{m'}]\le p_mp_{m'}+\sum_{j=1}^{m\wedge m'}q_{m,m',j}\,.
@@ -250,7 +256,7 @@ Let $\cS=\cS(R_k,R_l)$, $N_m\coloneqq N_m(\alpha k;\cS)$ and $N'_{m'}\coloneqq N
 \end{lemma}
 
 \begin{proof}
-An $m$-bundle is an $m$-subset of~$\cS$. Ordering it, the first line meets~$R_k$, measure at most $20\mu\alpha$, and each further line passes within distance~$1$ of two points of~$R_k$ at distance at least~$\alpha$ of which the first line also passes within distance~$1$, measure at most~$\beta_1$ by \cref{lem:shared}(b); the multivariate Mecke formula~\cite[Theorem~4.4]{LP17} gives $\E N_m\le20\mu\alpha\beta_1^{m-1}/m!$. For the pairs $(T,T')$, split according to $j=\lvert T\cap T'\rvert$. The pairs with $j=0$ are pairs of disjoint subsets, and the Mecke formula for disjoint tuples gives exactly the product of the two integrals, at most $p_mp_{m'}$. For $j\ge1$, order the configuration so that a common line comes first, measure at most $20\mu\alpha$; each of the other $j-1$ common lines passes within distance~$1$ of a point of~$R_k$ and of a point of~$R_l$ of which the first line also passes within distance~$1$, because both belong to bundles in both regions, measure at most~$\beta_2$ by \cref{lem:shared}(c); and each of the $m-j$ remaining lines of~$T$ and $m'-j$ remaining lines of~$T'$ has measure at most~$\beta_1$. The number of pairs is at most the number of such ordered configurations.
+An $m$-bundle in~$R_1$ is an $m$-subset of~$\cS$ whose lines meet~$R_1$. Ordering it, the first line meets~$R_1$, measure at most $20\mu\alpha$, and each further line passes within distance~$1$ of two points of~$R_1$ at distance at least~$\alpha$ of which the first line also passes within distance~$1$, measure at most~$\beta_1$ by \cref{lem:shared}(b); the multivariate Mecke formula~\cite[Theorem~4.4]{LP17} gives $\E N_m\le20\mu\alpha\beta_1^{m-1}/m!$. For the pairs $(T,T')$, split according to $j=\lvert T\cap T'\rvert$. The pairs with $j=0$ are pairs of disjoint subsets, and the Mecke formula for disjoint tuples gives exactly the product of the two integrals, at most $p_mp_{m'}$. For $j\ge1$, order the configuration so that a common line comes first, measure at most $20\mu\alpha$; each of the other $j-1$ common lines passes within distance~$1$ of a point of~$R_1$ and of a point of~$R_a$ of which the first line also passes within distance~$1$, because both belong to bundles in both regions, measure at most~$\beta_2$ by \cref{lem:shared}(c); and each of the $m-j$ remaining lines of~$T$ and $m'-j$ remaining lines of~$T'$ has measure at most~$\beta_1$. The number of pairs is at most the number of such ordered configurations.
 \end{proof}
 
 \begin{proposition}[One step]
@@ -258,7 +264,10 @@ An $m$-bundle is an $m$-subset of~$\cS$. Ordering it, the first line meets~$R_k$
 Assume $\mathrm{(GW)}_\alpha$ with parameters $m^*$ and~$A$. Then
 \begin{equation}
 \label{eq:onestep}
-  \sum_{k\in K}\sum_{l\in L}\E\Bigl[\min\{1,fW_\alpha(\alpha k;\cS_{kl})\}\min\{1,fW_\alpha(\alpha l;\cS_{kl})\}\Bigr]\le\lvert K\rvert\lvert L\rvert\Bigl[\bigl(f+\Pi\bigr)^2+Q_1+\Lambda\Bigr]\,,
+\begin{aligned}
+  \sum_{k\in\mathcal K}\E\Bigl[\prod_{i=1}^a\min\{1,fW_\alpha(\alpha k_i;\cS_k)\}\Bigr]&\le\sum_{k\in\mathcal K}\E\Bigl[\min\{1,fW_\alpha(\alpha k_1;\cS_k)\}\min\{1,fW_\alpha(\alpha k_a;\cS_k)\}\Bigr]\\
+  &\le N_{\mathcal K}\Bigl[\bigl(f+\Pi\bigr)^2+Q_1+\Lambda\Bigr]\,,
+\end{aligned}
 \end{equation}
 where, with $\sigma_j\coloneqq\sum_{m=j}^{m^*}\kappa_m\beta_1^{\,m-j}$,
 \begin{equation}
@@ -268,12 +277,12 @@ where, with $\sigma_j\coloneqq\sum_{m=j}^{m^*}\kappa_m\beta_1^{\,m-j}$,
 \end{proposition}
 
 \begin{proof}
-Fix $k,l$ and use the notation of \cref{lem:counts}. By~\eqref{eq:GW} and $\E N_m\le p_m$,
+Fix $k\in\mathcal K$ and use the notation of \cref{lem:counts}. By~\eqref{eq:GW} and $\E N_m\le p_m$,
 \begin{align*}
   \E\Bigl[\Bigl(f+\sum_m\kappa_mN_m\Bigr)\Bigl(f+\sum_{m'}\kappa_{m'}N'_{m'}\Bigr)\Bigr]&\le f^2+2f\Pi+\sum_{m,m'}\kappa_m\kappa_{m'}\E[N_mN'_{m'}]\\
   &\le(f+\Pi)^2+\sum_{m,m'}\kappa_m\kappa_{m'}\sum_{j\ge1}q_{m,m',j}
 \end{align*}
-by~\eqref{eq:pairs}. For fixed~$j$, $\sum_{m,m'\ge j}\kappa_m\kappa_{m'}q_{m,m',j}=20\mu\alpha\beta_2^{j-1}\bigl(\sum_{m\ge j}\kappa_m\beta_1^{m-j}\bigr)^2=20\mu\alpha\beta_2^{j-1}\sigma_j^2$, which is $Q_1$ for $j=1$ and the $j$-th term of~$\Lambda$ for $j\ge2$. Sum over $k,l$.
+by~\eqref{eq:pairs}. For fixed~$j$, $\sum_{m,m'\ge j}\kappa_m\kappa_{m'}q_{m,m',j}=20\mu\alpha\beta_2^{j-1}\bigl(\sum_{m\ge j}\kappa_m\beta_1^{m-j}\bigr)^2=20\mu\alpha\beta_2^{j-1}\sigma_j^2$, which is $Q_1$ for $j=1$ and the $j$-th term of~$\Lambda$ for $j\ge2$. Sum over $k\in\mathcal K$.
 \end{proof}
 
 \begin{lemma}[Size of the terms]
@@ -299,49 +308,70 @@ $\kappa_mp_m\le fk_\alpha(m)p_m=f\cdot20A^mC_1^{m-1}/m!$ for $m<m^*$, and $\kapp
 Assume $\mathrm{(GW)}_\alpha$, $\beta_1\le1/2$, and
 \begin{equation}
 \label{eq:halvingconds}
-  p_{m^*}\le f,\qquad f\le\frac{1}{16\lvert K\rvert\lvert L\rvert(2+C_A)^2},\qquad Q_1\le\frac{f}{8\lvert K\rvert\lvert L\rvert},\qquad\Lambda\le\frac{f}{8\lvert K\rvert\lvert L\rvert}\,.
+  p_{m^*}\le f,\qquad f\le\frac{1}{16N_{\mathcal K}(2+C_A)^2},\qquad Q_1\le\frac{f}{8N_{\mathcal K}},\qquad\Lambda\le\frac{f}{8N_{\mathcal K}}\,.
 \end{equation}
-Then the sum in~\eqref{eq:onestep} is at most $f/2$, so that $f(10\alpha)\le f(\alpha)/2$ in \cref{def:recursive}.
+Then the sum in~\eqref{eq:onestep} is at most $f/2$, so that $f(M\alpha)\le f(\alpha)/2$ in \cref{def:recursive}.
 \end{corollary}
 
 \begin{proof}
-$(f+\Pi)^2\le(f(1+C_A)+p_{m^*})^2\le f^2(2+C_A)^2\le f/(16\lvert K\rvert\lvert L\rvert)$; add the bounds on $Q_1$ and~$\Lambda$ and multiply by $\lvert K\rvert\lvert L\rvert$.
+$(f+\Pi)^2\le(f(1+C_A)+p_{m^*})^2\le f^2(2+C_A)^2\le f/(16N_{\mathcal K})$; add the bounds on $Q_1$ and~$\Lambda$ and multiply by $N_{\mathcal K}$.
 \end{proof}
 
-\paragraph{Reading the conditions.} The first condition in~\eqref{eq:halvingconds} says that bundles large enough to be treated as free are rarer than the target; it defines the natural choice $m^*\coloneqq\min\{m\colon p_m\le f\}$, for which $p_{m^*}\le f<p_{m^*-1}$ and $m^*\approx\log(1/f)/\log(\alpha/\mu)$. The second is smallness of the target. The third holds for $\alpha\ge\alpha_0(\mu,A)$ once $p_{m^*}\le f$, because by~\eqref{eq:termbounds} $Q_1\le f\cdot[40\e^{2AC_1}f/(C_1^2\mu\alpha)+(m^*!)^2f/(10\mu\alpha)]$ and $f<p_{m^*-1}\le20\mu\alpha\beta_1^{m^*-2}=20C_1^{m^*-2}\mu^{m^*-1}\alpha^{3-m^*}$ makes the bracket at most $C^{m^*}\alpha^{2-m^*}$, small for $m^*\ge3$ and $\alpha$ large. The fourth condition is the substantial one. The dominant contributions to~$\Lambda$ come from the indices $j\ge m_0$, where the common lines are charged with $\kappa=1$: by \cref{lem:terms}, $\sum_{j\ge m_0}20\mu\alpha\beta_2^{j-1}\sigma_j^2\le160\mu\alpha\beta_2^{m_0-1}$, which is the probability that $m_0$ shared lines are aligned across both regions, up to the factor~$8$. The condition $\Lambda\le f/(8\lvert K\rvert\lvert L\rvert)$ therefore requires
+\paragraph{Reading the conditions.} The first condition in~\eqref{eq:halvingconds} says that bundles large enough to be treated as free are rarer than the target; it defines the natural choice
+\begin{equation}
+\label{eq:mstar}
+  m^*\coloneqq\min\{m\ge2\colon p_m\le f\},\qquad\text{for which }p_{m^*}\le f<p_{m^*-1}\text{ and }m^*\approx\frac{\log(1/f)}{\log(\alpha/\mu)}\,.
+\end{equation} The second is smallness of the target. The third holds for $\alpha\ge\alpha_0(\mu,A)$ once $p_{m^*}\le f$, because by~\eqref{eq:termbounds} $Q_1\le f\cdot[40\e^{2AC_1}f/(C_1^2\mu\alpha)+(m^*!)^2f/(10\mu\alpha)]$ and $f<p_{m^*-1}\le20\mu\alpha\beta_1^{m^*-2}=20C_1^{m^*-2}\mu^{m^*-1}\alpha^{3-m^*}$ makes the bracket at most $C^{m^*}\alpha^{2-m^*}$, small for $m^*\ge3$ and $\alpha$ large. The fourth condition is the substantial one. The dominant contributions to~$\Lambda$ come from the indices $j\ge m_0$, where the common lines are charged with $\kappa=1$: by \cref{lem:terms}, $\sum_{j\ge m_0}20\mu\alpha\beta_2^{j-1}\sigma_j^2\le160\mu\alpha\beta_2^{m_0-1}$, which is the probability that $m_0$ shared lines are aligned across both regions, up to the factor~$8$. The condition $\Lambda\le f/(8N_{\mathcal K})$ therefore requires
 \begin{equation}
 \label{eq:across}
-  160\,\mu\alpha\Bigl(\frac{C_2\mu}{\alpha}\Bigr)^{m_0-1}\le\frac{f}{16\lvert K\rvert\lvert L\rvert}\,,
+  160\,\mu\alpha\Bigl(\frac{C_2\mu}{\alpha}\Bigr)^{m_0-1}\le\frac{f}{16N_{\mathcal K}}\,,
 \end{equation}
-while $m_0$ is defined by $fk_\alpha(m_0)\ge1$, i.e.\ $f\ge\alpha^2(\mu/(A\alpha))^{m_0}$. Both hold together if $\alpha^2(\mu/(A\alpha))^{m_0}\ge2560\lvert K\rvert\lvert L\rvert\mu\alpha(C_2\mu/\alpha)^{m_0-1}$, that is, if $(AC_2)^{-m_0}\ge2560\lvert K\rvert\lvert L\rvert/C_2$, which is true for all $m_0\ge m_1(A)$ provided $AC_2<1$. With $A$ of the order of $1/C_1$ this is comfortably the case, and the terms $j<m_0$ of~$\Lambda$ are handled by the first bound of \cref{lem:terms} in the same way as~$Q_1$. In words: a configuration of $m_0$ shared lines aligned across both regions makes both sub-crossings free and has probability $20\mu\alpha\beta_2^{m_0-1}$; the scheme can only work if the target at scale~$\alpha$ is already at least this large, which it is once the gain constant~$A$ is below $1/C_2$, because then the same $m_0$ lines aligned within a single region, which cost $\beta_1$ per line instead of~$\beta_2$, are a configuration the target must already account for. We have not verified $\mathrm{(GW)}_\alpha$ itself; see the next section.
+while $m_0$ is defined by $fk_\alpha(m_0)\ge1$, i.e.\ $f\ge\alpha^2(\mu/(A\alpha))^{m_0}$. Both hold together if $\alpha^2(\mu/(A\alpha))^{m_0}\ge2560N_{\mathcal K}\mu\alpha(C_2\mu/\alpha)^{m_0-1}$, that is, if $(AC_2)^{-m_0}\ge2560N_{\mathcal K}/C_2$, which is true for all $m_0\ge m_1(A)$ provided $AC_2<1$. With $A$ of the order of $1/C_1$ this is comfortably the case, and the terms $j<m_0$ of~$\Lambda$ are handled by the first bound of \cref{lem:terms} in the same way as~$Q_1$. In words: a configuration of $m_0$ shared lines aligned across both regions makes both sub-crossings free and has probability $20\mu\alpha\beta_2^{m_0-1}$; the scheme can only work if the target at scale~$\alpha$ is already at least this large, which it is once the gain constant~$A$ is below $1/C_2$, because then the same $m_0$ lines aligned within a single region, which cost $\beta_1$ per line instead of~$\beta_2$, are a configuration the target must already account for. We have not verified $\mathrm{(GW)}_\alpha$ itself; see the next section.
 
 % =================================================================
-\section{What the hypothesis must look like to propagate}
+\section{What has to propagate}
 \label{sec:discussion}
 
-\Cref{prop:onestep} concerns one step and assumes~$\mathrm{(GW)}_\alpha$ for the recursively defined weights of the configurations $\cS_{kl}$. The scheme succeeds if some hypothesis of this kind propagates: if $\mathrm{(GW)}_{\alpha}$ for all configurations implies $\mathrm{(GW)}_{10\alpha}$ for all configurations, with parameters that the recursion can tolerate. We record what the recursion~\eqref{eq:Wrec} does to the three kinds of fixed-line configurations, using $f(10\alpha)\approx10^{2-m^*}f(\alpha)$ from \cref{sec:onestep} as the order of the target at the next scale.
+\Cref{prop:onestep} concerns one step and assumes~$\mathrm{(GW)}_\alpha$ for the recursively defined weights of the configurations $\cS_k$. The scheme succeeds if a hypothesis of this kind propagates from scale~$\alpha$ to scale $M\alpha$. We first record what the recursion~\eqref{eq:Wrec} assigns to the basic kinds of fixed-line configurations, writing $f=f(\alpha)$ and using $f(M\alpha)\approx M^{2-m^*}f$ from \cref{sec:onestep} as the order of the target at the next scale, and $f<p_{m^*-1}\le20C_1^{m^*-2}\mu^{m^*-1}\alpha^{3-m^*}$ from~\eqref{eq:mstar}. We then formulate the inductive statement.
 
-\paragraph{A group serving one region.} Let $G$ be an $m$-bundle in $R_k$ but not in $R_l$, $m<m^*$. The pair $(k,l)$ contributes to~\eqref{eq:Wrec} at most $f(\alpha)k_\alpha(m)\cdot f(\alpha)(1+C_A)$ up to the shared-line corrections, which is to be compared with the target's $f(10\alpha)k_{10\alpha}(m)$. The ratio is $f(\alpha)10^{m^*-2}k_\alpha(m)/k_{10\alpha}(m)\cdot(1+C_A)=f(\alpha)10^{m^*-m}(1+C_A)$, which is small since $f(\alpha)\le p_{m^*-1}\le20C_1^{m^*-2}\mu^{m^*-1}\alpha^{3-m^*}$. The group weight propagates with room to spare.
+\paragraph{A group serving one region.} Let $G$ be an $m$-bundle in $R_1$ and in no other region, $m<m^*$. Under $\mathrm{(GW)}_\alpha$ the tuple contributes to~\eqref{eq:Wrec} at most $fk_\alpha(m)\cdot(f(1+C_A))^{a-1}$ up to the shared-line corrections of \cref{sec:onestep}, against the target's $f(M\alpha)k_{M\alpha}(m)$. The ratio is $f^{a-1}(1+C_A)^{a-1}M^{m^*-2}k_\alpha(m)/k_{M\alpha}(m)=f^{a-1}(1+C_A)^{a-1}M^{m^*-m}$, which is small already for $a=2$.
 
-\paragraph{A group serving both regions.} Let $G$ be an $m$-bundle in both $R_k$ and~$R_l$, i.e.\ aligned across the whole scale $10\alpha$. The contribution is $f(\alpha)^2k_\alpha(m)^2$ against $f(10\alpha)k_{10\alpha}(m)$, ratio $f(\alpha)10^{m^*-2}k_\alpha(m)^2/k_{10\alpha}(m)=f(\alpha)10^{m^*-m}(A\alpha/\mu)^m\alpha^{-2}$, which with the bound on $f(\alpha)$ is at most $20C_1^{m^*-2}A^m10^{m^*-m}\mu^{m^*-1-m}\alpha^{1+m-m^*}$, small for $m\le m^*-2$ and bounded for $m=m^*-1$. This is the case that in our multiscale note required $a\ge3x/(x-2)$ sub-boxes and a separate lemma for nearly complete groups; here it closes because the positional entropy of the two regions is a constant, see \cref{rem:correction}. The case $m=m^*-1$ needs the constant~$A$ in~\eqref{eq:k} to be matched to~$C_1$, which is a matter of choosing~$A$.
+\paragraph{A group serving all regions.} Let $G$ be an $m$-bundle in every $R_i$, i.e.\ aligned across the whole span $7M\alpha$. The contribution is $(fk_\alpha(m))^a$ against $f(M\alpha)k_{M\alpha}(m)$, ratio
+\begin{align*}
+  f^{a-1}M^{m^*-2}\frac{k_\alpha(m)^a}{k_{M\alpha}(m)}&=f^{a-1}M^{m^*-m}\Bigl(\frac{A\alpha}{\mu}\Bigr)^{(a-1)m}\alpha^{-2(a-1)}\\
+  &\le\Bigl[20C_1^{m^*-2}A^mM^{\frac{m^*-m}{a-1}}\mu^{m^*-1-m}\alpha^{1+m-m^*}\Bigr]^{a-1}\,,
+\end{align*}
+small for $m\le m^*-2$ and bounded for $m=m^*-1$. This is the case that in our multiscale note required many sub-boxes and a separate lemma for nearly complete groups; here it closes because the positional entropy is a constant (\cref{rem:correction}).
 
-\paragraph{A group making one region free.} Let $G$ be an $m^*(\alpha)$-bundle in $R_k$ of length between $\alpha$ and $10\alpha$, so that it is not an $m^*(10\alpha)$-bundle at scale $10\alpha$ and, if shorter than $10\alpha$, not a bundle at scale $10\alpha$ at all. The contribution is $1\cdot f(\alpha)(1+C_A)$, against a target $f(10\alpha)W_{10\alpha}(x;G)\approx10^{2-m^*}f(\alpha)W_{10\alpha}(x;G)$: the recursion forces $W_{10\alpha}(x;G)\ge10^{m^*-2}(1+C_A)$. The true gain of such a configuration is much smaller: a free stretch of length~$t$ in a crossing of length $70\alpha$ carried by bundles reduces the cost from $(\mu/70\alpha)^{m}$ to $(\mu/(70\alpha-t))^{m}$, a factor $\e^{mt/(70\alpha)}$, which for $t=\alpha$ and $m=m^*$ is $\e^{m^*/70}\ll10^{m^*}$. So the group weight with the bundle definition of \cref{sec:onestep} does not propagate: the two-region product bound loses the factor $f(\alpha)/f(10\alpha)\approx10^{m^*-2}$ whenever one region is free, and the weight at the larger scale has to absorb this loss although the configuration does not deserve it. Exactly the same phenomenon appeared in our multiscale note as the problem of sub-boxes made bad by tiles of fixed lines.
+\paragraph{A group making $r$ regions free.} Let $G$ contain $m^*$-bundles at scale~$\alpha$ in $r$ of the regions and nothing else of note. The contribution is at most $(f(1+C_A))^{a-r}$. If $r\le a-2$, this is at most $f^2(1+C_A)^2$, and the ratio to $f(M\alpha)$ is at most $f(1+C_A)^2M^{m^*-2}\le20(1+C_A)^2C_1^{m^*-2}M^{m^*-2}\mu^{m^*-1}\alpha^{3-m^*}$, small for $\alpha\ge\alpha_0(M)$: \emph{no weight is needed}, the recursive weight of such~$G$ is~$1$. If $r\ge a-1$, the contribution is at least $f(1+C_A)$ or~$1$, and the recursion assigns $W_{M\alpha}(x;G)\ge M^{m^*-2}(1+C_A)/N_{\mathcal K}$. This is far more than the true gain of such a configuration, which is only of order $(7M/(7M-2r))^{m^*}$, because the free stretches have length of order~$\alpha$ out of a span $7M\alpha$; and it is also more than the group weight at scale $M\alpha$, since an $m^*$-bundle at scale~$\alpha$ is not a bundle at scale $M\alpha$ at all, its alignment length being too short. So $\mathrm{(GW)}_{M\alpha}$ fails for these configurations: the pointwise group-weight hypothesis does not propagate.
 
-\paragraph{The remedy: more regions in the inclusion.} The loss comes from using only two sub-regions. If the inclusion lemma is strengthened to produce $a\ge3$ pairwise well-separated sub-regions along the crossing, which Gou\'er\'e's argument does with nets on $a$ concentric circles of radii $10,80,\dots$ scaled appropriately, then a configuration making one sub-region free still leaves $a-1\ge2$ paid sub-regions, whose product $f(\alpha)^{a-1}$ is far below $f(10\alpha)$, and the recursion does not need any weight for it. Only configurations making at least $a-1$ of the $a$ sub-regions free need to be charged, and these are bundles of $m^*$ lines covering a fraction at least $(a-1)/a$ of the crossing; their true gain is of order $(70\alpha/(\text{uncovered length}))^{m^*}\ge a^{m^*}$, which for $a\ge10$ matches or exceeds the loss $10^{m^*-2}$ of the product bound. In other words, with enough sub-regions the weight needed by the recursion for nearly complete tilings is one that the configurations actually have, and the natural candidate for the weight is the \emph{exact cost ratio}: the probability that the fixed lines, together with the cheapest random bundles filling the gaps between their aligned stretches, carry a crossing, divided by~$f$. With a fixed ratio between scales the number of sub-regions is a constant, so this costs only constants in \cref{prop:onestep}; it does not reintroduce the polynomial entropy of the multiscale note.
+\paragraph{Why this is harmless for $a\ge3$.} The recursion does not need~$\mathrm{(GW)}$ for every configuration, only in expectation over the shared lines of the level above. At scale $M\alpha$ the fixed set of a sub-region is $G\cup\cS_{k'}$ with $\cS_{k'}$ the shared lines of a tuple of regions of radius $10M\alpha$. For $\cS_{k'}$ to make $a-1$ of the $a$ sub-regions of radius $10\alpha$ inside one of its regions free, it must contain $m^*(\alpha)$-bundles at scale~$\alpha$ in $a-1$ of them; by \cref{lem:counts} applied at scale~$\alpha$ and the Mecke formula for disjoint tuples, the probability of this is at most $(N_{\mathcal K}p_{m^*})^{a-1}\le(N_{\mathcal K}f)^{a-1}$ up to the overlap terms of \cref{sec:onestep}. Since $\min\{1,\cdot\}\le1$, such configurations contribute at most their probability to the expectation at scale $M^2\alpha$, which is at most $(N_{\mathcal K}f(\alpha))^{a-1}$, to be compared with the target $f(M^2\alpha)\approx M^{4-m^*(\alpha)-m^*(M\alpha)}f(\alpha)$: for $a\ge3$ the ratio is at most $N_{\mathcal K}^{a-1}f(\alpha)M^{m^*(\alpha)+m^*(M\alpha)}$, which is small by the bound on~$f$. For $a=2$ the ratio is of order $M^{m^*}$, and the tile configurations cannot be discarded. This is the reason for the multi-region inclusion of \cref{sec:inclusion}.
+
+\paragraph{The inductive statement.} The hypothesis that should propagate is therefore the group-weight bound in expectation, with an exceptional set. For a finite set~$G$ of lines, a tuple $k\in\mathcal K$ of regions at scale~$\alpha$ with centres $x_i$, and the shared lines $\cS_k$ of the tuple, say that $\mathrm{(GW)}^{\mathrm E}_\alpha(G,k)$ holds if
+\begin{equation}
+\label{eq:GWE}
+  \E\Bigl[\prod_{i=1}^a\min\{1,fW_\alpha(x_i;G\cup\cS_k)\}\Bigr]\le\E\Bigl[\prod_{i=1}^a\Bigl(f+\sum_{m=1}^{m^*}\kappa_mN_m(x_i;G\cup\cS_k)\Bigr)\Bigr]+\varepsilon_\alpha(G)\,,
+\end{equation}
+with an error $\varepsilon_\alpha(G)$ that is at most $f(M\alpha)/(4N_{\mathcal K})$ for $G=\varnothing$ and, for general~$G$, at most a quarter of what the right-hand side of~\eqref{eq:Wrec} has to produce for~$G$. For $G=\varnothing$, \eqref{eq:GWE} is exactly what the proof of \cref{prop:onestep} uses, so that $\mathrm{(GW)}^{\mathrm E}_\alpha(\varnothing,k)$ for all~$k$ and the conditions of \cref{cor:halving} give $f(M\alpha)\le f(\alpha)/2+\dots$ as there. \Cref{claim:T} would follow from the propagation
+\begin{equation}
+\label{eq:propagate}
+  \bigl[\mathrm{(GW)}^{\mathrm E}_\alpha(G,k)\ \ \forall G\in\mathcal G_\alpha,\ \forall k\bigr]\ \Longrightarrow\ \bigl[\mathrm{(GW)}^{\mathrm E}_{M\alpha}(G',k')\ \ \forall G'\in\mathcal G_{M\alpha},\ \forall k'\bigr]\,,
+\end{equation}
+together with its validity at the base scale, where the class~$\mathcal G_\alpha$ has to contain the empty set and the sets $G'\cup\cS_{k'}$ that occur as fixed sets of sub-regions, up to events of probability absorbed in~$\varepsilon$. The computations above are the three cases of this implication for the simplest configurations; what is missing is the general case, in which $G'$ is an arbitrary finite set and the bundles of $G'\cup\cS_{k'}$ in the sub-regions have to be related to the bundles of~$G'$ in the big region and to the shared lines. The structure of the argument is the one of \cref{prop:onestep}: expand the product, use the Mecke formula on ordered tuples of lines, and separate the lines of~$G'$, which are deterministic, from those of~$\cS_{k'}$, which are Poisson with the explicit intensity of \cref{lem:shared}. This is the next task.
 
 \paragraph{The points.} The Cox points enter only through the base case and through the caps $\min\{1,\cdot\}$: the recursion never asks how likely it is that a bundle of lines actually carries occupied disks, and a bundle of $m^*(\alpha)$ lines is treated as free. This is a loss when $m^*\lambda$ is small, since then the Cox process on the bundle has gaps larger than~$2$ at rate $m^*\lambda\e^{-2m^*\lambda}$ per unit length and the crossing of length~$7\alpha$ along the bundle is unlikely. The loss is affordable, because the recursion only needs $f\to0$ and the bundle probabilities $p_{m^*}$ already decay like $(\mu/\alpha)^{m^*}$ with $m^*\to\infty$; the parameter~$\lambda$ then enters only through the base case at scale~$\alpha_1$, where it must make $\pi_{\alpha_1}$ small. A sharper scheme would carry the point intensity on a bundle in the weight, at the price of a two-parameter weight.
 
-\paragraph{Relation to the referee document.} The present scheme supersedes the skeleton bound, the first moment over cluster chains and the dependence step of the referee document: there is no thick cluster and no relay, since a bundle of lines released by one region is just a set of fixed lines for the next, charged by its weight. The multiscale lemmas of that document survive in simplified form, with two regions at ratio~$10$ in place of $a$ sub-boxes at ratio $L^{2/3}$, and the coverage lemma and the base case remain the tools for the two statements still open here: the base case~(B) at scale $\alpha_1$, and the propagation of a weight hypothesis, which is \cref{claim:T}.
+\paragraph{Relation to the referee document.} The present scheme supersedes the skeleton bound, the first moment over cluster chains and the dependence step of the referee document: there is no thick cluster and no relay, since a bundle of lines released by one region is just a set of fixed lines for the next, charged by its weight. The multiscale lemmas of that document survive in simplified form, with a constant number of regions at a fixed ratio in place of $a$ sub-boxes at ratio $L^{2/3}$, and the coverage lemma and the base case remain the tools for the two statements still open here: the base case~(B) at scale $\alpha_1$, and the propagation~\eqref{eq:propagate}, which is \cref{claim:T}.
 
 % =================================================================
 \section{Summary}
 \label{sec:summary}
 
 \begin{enumerate}
-  \item Gou\'er\'e's two-scale inclusion holds for the Cox Boolean model without an error event (\cref{lem:inclusion}), with two bounded regions of radius $10\alpha$ at distance $70\alpha$ in place of the inner ball and the outer complement, and the two sub-crossings are independent given the lines meeting both regions, which become fixed lines of the sub-problems (\cref{lem:decoupling}).
+  \item Gou\'er\'e's inclusion holds for the Cox Boolean model without an error event and with any constant number $a\ge2$ of bounded regions of radius $10\alpha$ on circles $70\alpha$ apart, at scale ratio $M=10(a-1)$ (\cref{lem:inclusion}); the sub-crossings are independent given the lines meeting at least two regions, which become fixed lines of the sub-problems (\cref{lem:decoupling}).
   \item The recursion is a deterministic inequality~(R) for a target~$f$ and a weight~$W$, in which randomness enters only through the Poisson process of shared lines (\cref{thm:recursion}). Defining $f$ and~$W$ recursively from the base case makes the bound $\pi_\alpha\le f(\alpha)$ unconditional (\cref{prop:unconditional}), and the subcritical phase follows from the single statement $f(\alpha)\to0$ (\cref{claim:T}).
-  \item One step of the recursion closes, $f(10\alpha)\le f(\alpha)/2$, if the weights of shared-line configurations at scale~$\alpha$ are bounded by group weights with bundles of size $m^*(\alpha)$ treated as free (\cref{prop:onestep}); the configurations aligned across both regions are controlled by the factor $C_2/C_1$ between alignment across the gap and alignment within a region.
-  \item Group weights propagate for groups serving one or both regions, which removes the nearly complete groups and the many sub-boxes of the multiscale note (\cref{rem:correction}), but not for groups making one region free. The remedy is an inclusion with a constant number $a\ge3$ of sub-regions and an exact-cost weight for nearly complete tilings; carrying this out, together with the base case, is what remains.
+  \item One step of the recursion closes, $f(M\alpha)\le f(\alpha)/2$, if the weights of shared-line configurations at scale~$\alpha$ are bounded by group weights with bundles of size $m^*(\alpha)$ treated as free (\cref{prop:onestep}, \cref{cor:halving}); the configurations aligned across two regions are controlled by the factor $C_2/C_1$ between alignment across the gap and alignment within a region, and the substantial condition is $AC_2<1$ for the gain constant.
+  \item Group weights propagate for groups serving one or all regions, which removes the nearly complete groups and the many sub-boxes of the multiscale note (\cref{rem:correction}), and configurations making at most $a-2$ regions free need no weight at all. Configurations making $a-1$ regions free violate the pointwise group-weight bound at the next scale, but for $a\ge3$ they occur among shared lines with probability of order $f(\alpha)^{a-1}$, far below the target, so that the group-weight bound in expectation, \eqref{eq:GWE}, can propagate. Proving the propagation~\eqref{eq:propagate} and the base case is what remains.
 \end{enumerate}
 
 \section*{Acknowledgements}
