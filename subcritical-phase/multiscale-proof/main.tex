@@ -232,9 +232,10 @@ where the sum is over tuples of pairwise distinct lines and $N^*$ is the number 
   \E\bigl[(N^*)^v g(\cL)\bigr]\le t^v\,\Theta(s_i+b)+\E\bigl[(N^*)^v\1\{N^*>t\}\bigr]\,.
 \end{equation*}
 If $v\le t/2$, then $n^v\le2^v\,n(n-1)\cdots(n-v+1)$ for $n>t$, and
-\begin{equation*}
-  \E\bigl[(N^*)^v\1\{N^*>t\}\bigr]\le2^v(m^*)^v\,\P(N^*>t-v)\le2^v(m^*)^v(m^*)^{t/2}\le t^v\Bigl(\frac{2(a-1)m}{t}\Bigr)^v2^{-t/2}\le t^v\,2^{-t/2}\,,
-\end{equation*}
+\begin{align*}
+  \E\bigl[(N^*)^v\1\{N^*>t\}\bigr]&\le2^v(m^*)^v\,\P(N^*>t-v)\le2^v(m^*)^v(m^*)^{t/2}\\
+  &\le t^v\Bigl(\frac{2(a-1)m}{t}\Bigr)^v2^{-t/2}\le t^v\,2^{-t/2}\,,
+\end{align*}
 which gives~\eqref{eq:mecke}. If $v>t/2$, then~\eqref{eq:mecke} holds because its left side is at most~$1$ and $(t/m)^v2^{-t/2}=(t/m)^{v-t/2}\,(t/(2m))^{t/2}\ge1$, as $2m\le1\le t$.
 \end{proof}
 
