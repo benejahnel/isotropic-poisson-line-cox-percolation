@@ -59,7 +59,7 @@ We therefore estimate crossing probabilities uniformly over the angular restrict
 
 The subcritical phase requires a different argument, because deleting lines decreases occupied crossings. We dominate the occupied boxes of a unit lattice by the boxes close to at least~$j$ lines together with an independent Bernoulli field, for a large level~$j$ and a small point intensity. A crossing of this dominating set at a large scale forces a fixed number of crossings in windows that are far apart on a much smaller scale. Given the lines that meet at least two of these windows, the crossings are independent. Such a shared line is rare, and its positions in the first two windows it meets are approximately independent and uniform. The multivariate Mecke equation then allows us to compare it with the lines of the process of nearly the same direction, at the cost of a logarithmic factor. In the remaining windows we make no use of its position. Instead, the induction hypothesis bounds crossing probabilities uniformly over a number of additional lines and loses a small power of the scale for each of them. This yields a recursion in which the level is the same at all scales.
 
-Section~\ref{sec:setting} introduces the model and states Theorems~\ref{thm:main} and~\ref{sub:thm:main}. Section~\ref{sec:strategy} explains why deleting a short interval of directions decouples two distant crossings, states the initial estimate, the crossing recursion, and the deterministic boundary lemma, and proves Theorem~\ref{thm:main} by bounding closed boundaries with crossing events. Section~\ref{sec:recursion} proves the crossing recursion by deleting directions. Section~\ref{sec:initial} then proves the initial estimate by constructing a polygon of four lines around the inner square. Finally, Section~\ref{sec:geometry} proves the geometric lemma for the initial polygon and the deterministic boundary lemma. Section~\ref{sec:subcritical} proves Theorem~\ref{sub:thm:main} on the subcritical phase. Section~\ref{sec:extensions} discusses extensions to random radii and to higher dimensions together with open questions.
+Section~\ref{sec:setting} introduces the model and states Theorems~\ref{thm:main} and~\ref{sub:thm:main}. Section~\ref{sec:strategy} is devoted to the supercritical phase. It explains why deleting a short interval of directions decouples two distant crossings, states the initial estimate, the crossing recursion, and the deterministic boundary lemma, and proves Theorem~\ref{thm:main} by bounding closed boundaries with crossing events in Sections~\ref{sec:lattice-events} and~\ref{sec:proof-main}. Section~\ref{sec:recursion} proves the crossing recursion by deleting directions. Section~\ref{sec:initial} then proves the initial estimate by constructing a polygon of four lines around the inner square, and Section~\ref{sec:geometry} proves the geometric lemma for the initial polygon and the deterministic boundary lemma. Section~\ref{sec:subcritical} is devoted to the subcritical phase and proves Theorem~\ref{sub:thm:main}. Section~\ref{sec:extensions} discusses extensions to random radii and to higher dimensions together with open questions.
 
 % =================================================================
 \section{Setting and main results}
@@ -127,7 +127,7 @@ More precisely, there is a function $\lambda_0\colon(0,\infty)\to(0,\infty)$ suc
 Theorems~\ref{thm:main} and~\ref{sub:thm:main} together give $0<\lambda_c(\mu,r)<\infty$ for all $\mu,r>0$, so the phase transition is nontrivial at every line intensity and disk radius. In contrast to Theorem~\ref{thm:main}, Theorem~\ref{sub:thm:main} is qualitative: the function~$\lambda_0$ is not explicit. Its proof gives more than the absence of unbounded components. For small~$\lambda$, the probability that the occupied set connects a disk to the complement of the concentric disk of eight times its radius decays polynomially along a sequence of scales; see Proposition~\ref{sub:prop:chains}. Remark~\ref{rem:monotonicity} explains why the argument for Theorem~\ref{thm:main} does not give Theorem~\ref{sub:thm:main}, which is proved by a separate multiscale argument in Section~\ref{sec:subcritical}. Random radii and higher dimensions are discussed in Section~\ref{sec:extensions}.
 
 % =================================================================
-\section{The supercritical phase: strategy and proof of \texorpdfstring{Theorem~\ref{thm:main}}{the first main theorem}}
+\section{The supercritical phase: proof of \texorpdfstring{Theorem~\ref{thm:main}}{the first main theorem}}
 \label{sec:strategy}
 
 This section turns the construction outlined in the introduction into a proof of Theorem~\ref{thm:main}. We define the lattice events and state the initial estimate, the crossing recursion, and the deterministic boundary lemma. The proof of the theorem first uses that lemma and a covering by closed crossings to reduce percolation to bounds on the initial event and the crossing probabilities. We then choose the initial scale and point intensity, apply the two propositions, and use ergodicity to obtain percolation with probability one.
@@ -142,6 +142,8 @@ The reduction of one large crossing to two separated smaller crossings follows t
 \end{figure}
 
 The angular restriction changes the law of the lines. We therefore formulate all crossing estimates uniformly over the sets of directions that can remain after deletion. The permitted total loss of directions will be small enough for the initial polygon construction to apply throughout the comparison.
+
+\paragraph{Plan.} Section~\ref{sec:lattice-events} defines the lattice events and states the initial estimate, the crossing recursion, and the deterministic boundary lemma. Section~\ref{sec:proof-main} proves Theorem~\ref{thm:main} from these statements. Section~\ref{sec:recursion} proves the crossing recursion, Section~\ref{sec:initial} the initial estimate, and Section~\ref{sec:geometry} the two geometric lemmas.
 
 \subsection{Lattice events and probability estimates}
 \label{sec:lattice-events}
@@ -260,7 +262,8 @@ Consequently, $\cL$ is ergodic under translations. The map from $\cL$ to the lin
   \P(\Xi_\lambda\text{ percolates})\in\{0,1\}\,.
 \end{equation}
 
-\subsection{Proof of \texorpdfstring{Theorem~\ref{thm:main}}{the main theorem}}
+\subsection{Proof of \texorpdfstring{Theorem~\ref{thm:main}}{the first main theorem}}
+\label{sec:proof-main}
 
 We first apply Lemma~\ref{lem:boundary-reduction} to compare the percolation probability with the probabilities of $G(4L_0)$ and~$\cD(4L_0)$. We then cover~$\cD(4L_0)$ by closed crossings and count their possible centres at each scale. This reduces the proof to making $G(4L_0)$ likely and the weighted sum of crossing probabilities small with the same choices of parameters. The recursion turns an initial bound $q_0\le\varepsilon$ into the doubly exponential decay $q_n\le\exp(-t2^n)$ provided that $\varepsilon$ is small enough to absorb the growing prefactors $2401\,a_n^4$. Proposition~\ref{prop:initial} supplies such a small~$\varepsilon$ once the initial scale~$L_0$ and the intensity~$\lambda$ are large, and the logarithm in Theorem~\ref{thm:main} is the price of choosing $L_0$ of order $1/\mu$ when the lines are sparse.
 
@@ -299,7 +302,7 @@ and the lattice comparison following \eqref{eq:site-states} now gives positive p
 \end{proof}
 
 % =================================================================
-\section{Proof of \texorpdfstring{Proposition~\ref{prop:recursion}}{the recursion}: deleting directions}
+\subsection{Proof of \texorpdfstring{Proposition~\ref{prop:recursion}}{the recursion}: deleting directions}
 \label{sec:recursion}
 
 We begin with the coupling and independence argument that gives the recursion. Two geometric facts suffice: a large closed crossing produces two separated smaller crossings from a controlled finite family, and the directions of lines meeting both smaller windows occupy an angular set of measure at most $64/a_n$. We state these facts precisely and derive the probability bound before verifying either construction. The extraction of the smaller crossings follows the geometric argument in Gou\'er\'e~\cite[Lemma~3.3]{Gou08}, applied here to closed lattice paths; see Figure~\ref{fig:recursion}. We then construct the angular set, show that it removes every line shared by the windows, and verify its measure bound.
@@ -345,7 +348,7 @@ The last inequality holds for $a\ge100$. This verifies the second geometric fact
 \end{proof}
 
 % =================================================================
-\section{Proof of \texorpdfstring{Proposition~\ref{prop:initial}}{the initial estimate}: the initial estimate}
+\subsection{Proof of \texorpdfstring{Proposition~\ref{prop:initial}}{the initial estimate}: the initial estimate}
 \label{sec:initial}
 
 We prove the initial estimate by constructing one event $\cH$ that gives both conclusions: a closed crossing is impossible, and a sufficiently large connected open set exists. The event requires four lines forming a polygon around the inner square and sufficiently dense points on those lines. After defining the construction, we state its two geometric consequences in an auxiliary lemma and prove the proposition by estimating the line counts and point gaps. The proof of the geometric lemma is deferred to Section~\ref{sec:geometry}, where it appears with the exterior-boundary argument.
@@ -409,10 +412,10 @@ Conditional on the line environment, an interval is empty of points on its selec
 \end{proof}
 
 % =================================================================
-\section{Proofs of \texorpdfstring{Lemmas~\ref{lem:initial-geometry} and~\ref{lem:boundary-reduction}}{the geometric lemmas}: lattice geometry}
+\subsection{Proofs of \texorpdfstring{Lemmas~\ref{lem:initial-geometry} and~\ref{lem:boundary-reduction}}{the geometric lemmas}: lattice geometry}
 \label{sec:geometry}
 
-This section proves the two geometric lemmas used in the probabilistic argument. We first show that the polygon construction excludes closed crossings and supplies a connected open set with the required convex hull. We then construct the closed exterior boundary of a finite open cluster and verify the properties used in the percolation reduction. Both convex-hull comparisons use the same elementary support-function criterion, which we state first.
+This subsection proves the two geometric lemmas used in the probabilistic argument. We first show that the polygon construction excludes closed crossings and supplies a connected open set with the required convex hull. We then construct the closed exterior boundary of a finite open cluster and verify the properties used in the percolation reduction. Both convex-hull comparisons use the same elementary support-function criterion, which we state first.
 
 The proof of Lemma~\ref{lem:initial-geometry} uses interpolation to exclude a closed crossing and the tiles meeting~$\Gamma$ to construct the open set. The convex-hull comparisons for those tile centres and for the exterior boundary use the following elementary criterion. For nonempty compact sets $K_1,K_2\subseteq\R^2$, the quantities $\max_{w\in K_1}v\cdot w$ and $\max_{z\in K_2}v\cdot z$ are defined for every $v\in\R^2$.
 
@@ -484,7 +487,7 @@ Let first $r=1$ and $\lambda\le\lambda_0(\mu)$. An unbounded component of~$\Xi_\
 
 The rest of this section contains the proof of \cref{sub:prop:chains}, and from now on $r=1$.
 
-The proof is a multiscale argument for occupied crossings, with scale ratio $M=\alpha^{4}$ and $25$ well-separated sub-crossings in each step. It is independent of Sections~\ref{sec:strategy}--\ref{sec:geometry}, and several letters are used with a new meaning; all notation is introduced below. The occupied boxes of the unit lattice are dominated by the boxes close to at least $j$ lines together with an independent Bernoulli field. Given the lines meeting at least two of the regions of the sub-crossings, the sub-crossings are independent. Such a shared line is seen by the first two regions it meets as a line of fixed direction with independent uniform offsets, and the multivariate Mecke equation compares it with the lines of~$\cL$ of nearly the same direction at the cost of a logarithmic factor. In the remaining regions no use is made of its position; instead, the induction hypothesis bounds crossing probabilities uniformly over $s$ additional lines, with a bound that deteriorates only by a small power of the scale per line.
+The proof is a multiscale argument for occupied crossings, with scale ratio $M=\alpha^{4}$ and $25$ well-separated sub-crossings in each step. It is independent of Section~\ref{sec:strategy}, and several letters are used with a new meaning; all notation is introduced below. The occupied boxes of the unit lattice are dominated by the boxes close to at least $j$ lines together with an independent Bernoulli field. Given the lines meeting at least two of the regions of the sub-crossings, the sub-crossings are independent. Such a shared line is seen by the first two regions it meets as a line of fixed direction with independent uniform offsets, and the multivariate Mecke equation compares it with the lines of~$\cL$ of nearly the same direction at the cost of a logarithmic factor. In the remaining regions no use is made of its position; instead, the induction hypothesis bounds crossing probabilities uniformly over $s$ additional lines, with a bound that deteriorates only by a small power of the scale per line.
 
 \paragraph{Parameters.} Throughout,
 \begin{equation}
