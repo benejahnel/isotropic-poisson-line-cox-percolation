@@ -25,7 +25,7 @@
 \thispagestyle{plain}
 
 \begin{abstract}
-We consider the Boolean model with unit disks centred at the points of a Cox process of intensity~$\lambda$ per unit length on an isotropic Poisson line process of intensity~$\mu$ in the plane. We prove, without any unproved hypothesis, that for small~$\lambda$ the model has no crossings of annuli on all scales up to a doubly exponential function of $1/\lambda$: there are constants $j_0,\alpha_0$ depending only on~$\mu$ such that, with $\alpha_n=\alpha_0^{(3/2)^n}$, the probability of a crossing of the annulus at scale~$\alpha_n$ is at most $1/\alpha_n$ whenever $\lambda\le1/(68(j_0+10n))$. The proof is a two-scale recursion in the manner of Gou\'er\'e with three ingredients: the occupied boxes are dominated by the union of the boxes met by at least $j$ lines and an independent Bernoulli field; two regions of size~$\alpha$ at distance $M\alpha$ can only share lines whose direction lies in a window of width of order $1/M$, and the remaining lines are independent between the regions; and the lines of the window are so sparse that their effect is absorbed by lowering the level~$j$ by a bounded amount. The price of the last step is a drift of the level by ten per scale, which is why the result stops at doubly exponential scales and does not yet give a subcritical phase. We state exactly what would remove the drift.
+We consider the Boolean model with unit disks centred at the points of a Cox process of intensity~$\lambda$ per unit length on an isotropic Poisson line process of intensity~$\mu$ in the plane. We prove, without any unproved hypothesis, that for small~$\lambda$ the model has no crossings of annuli on all scales up to a doubly exponential function of $1/\lambda$: there are constants $j_0,\alpha_0$ depending only on~$\mu$ such that, with $\alpha_n=\alpha_0^{(3/2)^n}$, the probability of a crossing of the annulus at scale~$\alpha_n$ is at most $1/\alpha_n$ whenever $\lambda\le1/(68(j_0+10n))$. The proof is a two-scale recursion in the manner of Gou\'er\'e with three ingredients: the occupied boxes are dominated by the union of the boxes met by at least $j$ lines and an independent Bernoulli field; two regions of size~$\alpha$ at distance $M\alpha$ can only share lines whose direction lies in a window of width of order $1/M$, and the remaining lines are independent between the regions; and the lines of the window are so sparse that their effect is absorbed by lowering the level~$j$ by a bounded amount. The price of the last step is a drift of the level by ten per scale, which is why the result stops at doubly exponential scales and does not yet give a subcritical phase. We state exactly what would remove the drift, show that one deterministic line costs no level in the recursion, and reduce the drift-free recursion to a two-replica estimate for one added line, which remains open.
 \end{abstract}
 
 % =================================================================
@@ -225,6 +225,82 @@ with $c>0$ and an error $\varepsilon(\alpha)$ below the target at scale $M\alpha
 \paragraph{What a proof of~\eqref{eq:needed} needs.} Two things, neither of which we have. First, a one-arm estimate: the probability that a given site is joined to distance~$r$ in $\cO_j$ should be smaller than the crossing probability at scale~$r$ by a factor of order $1/r$, and the induction hypothesis would have to carry it. Second, a way to use that the two arms from a needed site belong to different clusters once the site is removed; this is a disjoint-occurrence statement for clusters that share lines near the site, and it is the same difficulty, in its smallest instance, as the relay problem of our earlier notes. The present note shows that this is the only obstacle: everything else in the two-scale scheme is proved.
 
 % =================================================================
+\section{One added line}
+\label{sec:oneline}
+
+This section treats the smallest instance of the missing estimate: the effect of one deterministic line on the crossing probability. \Cref{prop:oneline} shows that, at the level of the bounds produced by the recursion, this effect is contracted by a factor of order $M^{-1/2}$ per scale and hence decays like $\alpha^{-1/2}$, with no change of level. \Cref{prop:poincare} reduces the drift-free recursion to a second-moment version of the one-line estimate. \Cref{prop:oneline} is a statement about bounds, not about the ratio of the true probabilities, and it does not remove the drift.
+
+For a line~$\ell$ let $S_\ell$ be the set of sites~$z$ with $\ell\cap Q(z)\neq\varnothing$, let $N^\ell\coloneqq N+\1_{S_\ell}$, and let $G^\ell_j(x,\rho)$ be the event of \cref{def:G} with $N$ replaced by~$N^\ell$. Put $F_j(\rho)\coloneqq\sup_{x\in\R^2}\sup_\ell\P(G^\ell_j(x,\rho))\ge f_j(\rho)$. Trivially $F_j\le f_{j-1}$; the point is to do without this loss of one level. In this section $K$ and $L$ are equally spaced on their circles with arc spacing in $[0.48,0.5]$, so that $\lvert K\rvert\le13M$ and $\lvert L\rvert\le101M$.
+
+\begin{lemma}[Regions met by a line]
+\label{lem:chord}
+Let $M\ge100$, $\alpha\ge4$, $x\in\R^2$ and let $\ell$ be a line. At most $28\sqrt M$ points $k\in K$ and at most $80\sqrt M$ points $l\in L$ satisfy $\ell\cap B(x+\alpha k,9\alpha)\neq\varnothing$, respectively $\ell\cap B(x+\alpha l,9\alpha)\neq\varnothing$.
+\end{lemma}
+
+\begin{proof}
+After translation and scaling by $1/\alpha$ we count the points of an equally spaced set on the circle of radius $R\in\{M,8M\}$ around the origin within distance~$9$ of a line. Let $t\ge0$ be the distance of the line from the origin and measure the angle~$\varphi$ of a point of the circle from the normal direction of the line. The point is within distance~$9$ of the line if and only if $\cos\varphi\in[(t-9)/R,(t+9)/R]$. The set of $\varphi\in[0,\pi]$ whose cosine lies in a given interval of length $\delta\coloneqq18/R\le0.18$ has measure at most $\arccos(1-\delta)=2\arcsin\sqrt{\delta/2}\le2.2\sqrt{\delta/2}=6.6/\sqrt R$, since the density $1/\sqrt{1-u^2}$ of the angle is largest at the ends of $[-1,1]$ and $\arcsin s\le1.1s$ for $s\le0.3$. By the symmetry $\varphi\mapsto-\varphi$ the points in question lie on at most two arcs of total length at most $13.2\sqrt R$, which contain at most $13.2\sqrt R/0.48+2\le28\sqrt R$ points of the set. For $R=8M$ this is at most $80\sqrt M$.
+\end{proof}
+
+\begin{proposition}[One-line stability of the recursion]
+\label{prop:oneline}
+Let $\alpha_0\ge6$, $M_n\ge100$ and $\alpha_{n+1}=M_n\alpha_n$ for $n\ge0$. Let $\theta_n\colon\Z\to(0,1]$, $n\ge0$, satisfy $f_j(\alpha_0)\le\theta_0(j)$ and
+\begin{equation}
+\label{eq:closure}
+  \theta_{n+1}(j)\ge5300\,M_n^2\Bigl[\theta_n(j)^2+600\,\alpha_n^2\sum_{m\ge1}\frac{(5\mu/M_n)^m}{m!}\,\theta_n(j-m)^2\Bigr]\qquad(j\in\Z,\ n\ge0)\,,
+\end{equation}
+so that $f_j(\alpha_n)\le\theta_n(j)$ for all $n$ and~$j$ by \cref{prop:recursion}. Let $a_0\ge0$ be such that $F_j(\alpha_0)\le(1+a_0)\theta_0(j)$ for all~$j$, and define
+\begin{equation}
+\label{eq:an}
+  a_{n+1}\coloneqq\frac{a_n}{\sqrt{M_n}}+\frac{2a_n+a_n^2}{M_n}\,.
+\end{equation}
+Then $F_j(\alpha_n)\le(1+a_n)\,\theta_n(j)$ for all $n\ge0$ and $j\in\Z$. If $a_0\le1$, then $a_n\le2^n\prod_{i<n}M_i^{-1/2}$; for $M_i=\alpha_i^{1/2}$ this is $a_n\le2^n(\alpha_0/\alpha_n)^{1/2}$.
+\end{proposition}
+
+\begin{proof}
+Assume the claim for~$n$ and write $\alpha=\alpha_n$, $M=M_n$, $a=a_n$, $\theta=\theta_n$. Fix $x$ and~$\ell$. The proof of \cref{lem:inclusion} uses only the path, so~\eqref{eq:inclusion} holds with $G^\ell_j$ in place of~$G_j$ on both sides. Fix $k\in K$, $l\in L$ and write $x_1=x+\alpha k$, $x_2=x+\alpha l$; let $h_i\coloneqq1$ if $\ell$ meets $B(x_i,9\alpha)$ and $h_i\coloneqq0$ otherwise. If $h_i=0$, then $\ell$ meets no box of a site of~$A_i$ and $G^\ell_j(x_i,\alpha)=G_j(x_i,\alpha)$. We repeat the proof of \cref{lem:decoupling} with the deterministic line~$\ell$ present. With $E$, $\Lp$, $N'$, $N_E$ and~$H$ as there, on $\{H=m\}$ every site $z\in A_1\cup A_2$ with $N^\ell(z)\ge j$ has $N'(z)+\1_{S_\ell}(z)\ge j-m$. Since $\ell$ is deterministic, the independence statements are unchanged, and $N'\le N$ gives
+\begin{equation*}
+  \P\bigl(G^\ell_j(x_1,\alpha)\cap G^\ell_j(x_2,\alpha)\bigr)\le\sum_{m\ge0}\P(H=m)\,\P\bigl(G^\ell_{j-m}(x_1,\alpha)\bigr)\,\P\bigl(G^\ell_{j-m}(x_2,\alpha)\bigr)\,.
+\end{equation*}
+Here $\P(G^\ell_{i}(x_i,\alpha))\le(1+a)^{h_i}\theta(i)$ by the induction hypothesis if $h_i=1$ and by $f_i(\alpha)\le\theta(i)$ if $h_i=0$. Hence the left side is at most $(1+a)^{h_1+h_2}\beta$, where $\beta$ denotes the bracket in~\eqref{eq:closure}. By \cref{lem:chord}, the number of pairs $(k,l)$ with $h_1+h_2=2$ is at most $28\sqrt M\cdot80\sqrt M=2240M$, and the number of pairs with $h_1+h_2\ge1$ is at most $28\sqrt M\cdot101M+80\sqrt M\cdot13M\le3900M^{3/2}$. Since there are at most $1313M^2\le5300M^2$ pairs in total,
+\begin{equation*}
+  \P\bigl(G^\ell_j(x,M\alpha)\bigr)\le\beta\bigl[5300M^2+3900M^{3/2}a+2240M(2a+a^2)\bigr]\le5300M^2\beta\Bigl[1+\frac{a}{\sqrt M}+\frac{2a+a^2}{M}\Bigr]\,,
+\end{equation*}
+which is at most $(1+a_{n+1})\theta_{n+1}(j)$ by~\eqref{eq:closure}. If $a\le1$, then $(2a+a^2)/M\le3a/M\le0.3a/\sqrt M$, so $a_{n+1}\le2a/\sqrt M\le1$, and the bound on~$a_n$ follows by induction. For $M_i=\alpha_i^{1/2}$ we have $\prod_{i<n}\alpha_i^{-1/4}=\alpha_0^{-\frac14\sum_{i<n}(3/2)^i}=(\alpha_0/\alpha_n)^{1/2}$.
+\end{proof}
+
+\paragraph{What the proposition says and what it does not.} A line meets only of the order of $\sqrt M$ of the $M$ regions on a circle, and of the order of~$M$ of the $M^2$ pairs in both regions; this is the whole mechanism. The proposition shows that whatever bounds the recursion~\eqref{eq:recursion} propagates for~$f_j$, it propagates for~$F_j$ at the \emph{same} levels, up to a factor $1+a_n$ with $a_n$ of order $\alpha_n^{-1/2}$ up to the factor~$2^n$, which is a power of $\log\alpha_n$. A simulation of the lattice model ($\mu=1.4$, $j=4$, line through the centre, $4\le\alpha\le24$) gave a relative excess $(\P(G^\ell_j)-\P(G_j))/\P(G_j)$ decreasing from $0.17$ to $0.06$, with fitted exponent about $-0.4$, in agreement with this order. The limitations are these. The statement compares $F_j$ with the bound~$\theta_n$, not with $f_j$ itself. In \cref{thm:induction} the base bound is $\theta_0(j)=\alpha_0^{-7}$ for $j\ge j_0$, which does not distinguish levels, so there the proposition gives nothing beyond $F_j\le f_{j-1}$ with $j_0$ increased by one. The recursion~\eqref{eq:an} contracts only once $a_n$ is below~$\sqrt{M_n}$. And the proposition concerns one deterministic line, whereas a region carries of the order of $\mu\alpha/M$ window lines.
+
+\paragraph{Why the supremum over several lines does not close.} The natural extension is a hypothesis $\P(G^{\Lambda}_j(x,\alpha))\le(1+a_\alpha m)\theta(\alpha)$ uniformly in sets~$\Lambda$ of $m$ lines, each raising the count by one on its boxes. The same counting gives $a_{M\alpha}$ of order $a_\alpha/\sqrt M$, so the hypothesis at scale $M\alpha$ is non-trivial for $m$ up to $\sqrt M/a_\alpha$, while at scale~$\alpha$ it is non-trivial only for $m\le1/a_\alpha$. Since all $m$ lines may pass through one sub-region, the sub-regions met by more than $1/a_\alpha$ lines can only be bounded by~$1$, and there may be of the order of $\sqrt M\,a_\alpha m$ of them; this loses a factor $1/\theta(\alpha)$. The obstruction reflects a real effect: a dense family of nearly parallel lines lowers the level by one on a whole strip, and the excess is then not expected to be linear in~$m$. A uniform bound over line sets is therefore the wrong object, as in our earlier notes; the window lines are Poisson, and fans are improbable.
+
+\paragraph{A reduction that keeps the randomness.} Let $x_1,x_2$, $R_i$ be as in \cref{lem:decoupling}, let $\cS$ be the set of lines of~$\cL$ meeting both $R_1$ and~$R_2$, a Poisson process whose intensity measure~$\nu_\cS$ has total mass at most $(\mu/\pi)\cdot2\varphi_0\cdot18\alpha\le47\mu\alpha/M$, and let $\pi_i(\cS)\coloneqq\P(G_j(x_i,\alpha)\,\vert\,\cS)$ as in \cref{sec:drift}. For a line~$\ell$ put $D_\ell\pi_i(\cS)\coloneqq\pi_i(\cS\cup\{\ell\})-\pi_i(\cS)\ge0$, the conditional probability given~$\cS$ that the crossing at~$x_i$ exists with the additional line~$\ell$ but not without it.
+
+\begin{proposition}[Second-moment reduction]
+\label{prop:poincare}
+In this situation,
+\begin{equation}
+\label{eq:poincare}
+  \P\bigl(G_j(x_1,\alpha)\cap G_j(x_2,\alpha)\bigr)\le\P\bigl(G_j(x_1,\alpha)\bigr)\P\bigl(G_j(x_2,\alpha)\bigr)+\prod_{i=1,2}\Bigl(\int\E\bigl[(D_\ell\pi_i(\cS))^2\bigr]\,\nu_\cS(\dd\ell)\Bigr)^{1/2}\,.
+\end{equation}
+Consequently, if $\E[(D_\ell\pi_i(\cS))^2]\le\delta^2f_j(\alpha)^2$ for $i=1,2$ and $\nu_\cS$-almost every~$\ell$, then the left side is at most $(1+47\mu\alpha\delta^2/M)\,f_j(\alpha)^2$, and
+\begin{equation}
+\label{eq:driftfree}
+  f_j(M\alpha)\le5300\,M^2\,\bigl(1+47\mu\alpha\delta^2/M\bigr)\,f_j(\alpha)^2
+\end{equation}
+if this holds for all pairs of \cref{lem:inclusion}.
+\end{proposition}
+
+\begin{proof}
+Given~$\cS$, the events $G_j(x_1,\alpha)$ and $G_j(x_2,\alpha)$ are independent, because the lines of $\cL\setminus\cS$ meeting~$R_1$ and those meeting~$R_2$ are independent of each other and of~$\cS$, and so are the families $(U_z)_{z\in A_i}$. Hence the left side of~\eqref{eq:poincare} equals $\E[\pi_1(\cS)\pi_2(\cS)]=\E\pi_1\,\E\pi_2+\mathrm{Cov}(\pi_1,\pi_2)$, and $\mathrm{Cov}(\pi_1,\pi_2)\le(\mathrm{Var}\,\pi_1\,\mathrm{Var}\,\pi_2)^{1/2}$. The Poincar\'e inequality for functionals of a Poisson process gives $\mathrm{Var}\,\pi_i(\cS)\le\int\E[(D_\ell\pi_i(\cS))^2]\,\nu_\cS(\dd\ell)$. The consequences follow from the bound on the mass of~$\nu_\cS$ and from \cref{lem:inclusion}.
+\end{proof}
+
+The recursion~\eqref{eq:driftfree} has no change of level. With $M=\alpha^{\kappa}$ it requires $\delta^2\le\alpha^{\kappa-1}$ up to constants, i.e.\ a relative one-line effect below $\alpha^{-(1-\kappa)/2}$ in $L^2(\cS)$; for $\kappa=1/2$ this is $\alpha^{-1/4}$, weaker than the order $\alpha^{-1/2}$ of \cref{prop:oneline} and of the simulation. What is missing is the passage from the first moment to the second: $\E[D_\ell\pi_i(\cS)]=\P(G^\ell_j(x_i,\alpha))-\P(G_j(x_i,\alpha))$ is the one-line excess, but $\E[(D_\ell\pi_i(\cS))^2]$ is the probability that two realisations of the model in~$R_i$ which share the lines of~$\cS$ and are otherwise independent both have a crossing that needs~$\ell$. The bound $D_\ell\pi_i\le1$ only gives $\E[(D_\ell\pi_i)^2]\le F_j(\alpha)-\P(G_j(x_i,\alpha))$, which is of first order in~$f_j$ and insufficient. A subcritical phase would follow from
+\begin{equation}
+\label{eq:tworeplica}
+  \E\bigl[(D_\ell\pi_i(\cS))^2\bigr]\le\alpha^{-c}\,\frac{M}{\mu\alpha}\,f_j(\alpha)^2\qquad\text{for some }c>0\,,
+\end{equation}
+a two-replica one-line estimate. We have no proof of~\eqref{eq:tworeplica}.
+
+% =================================================================
 \section{Summary}
 \label{sec:summary}
 
@@ -232,6 +308,7 @@ with $c>0$ and an error $\varepsilon(\alpha)$ below the target at scale $M\alpha
   \item \Cref{thm:main} is unconditional: for $\lambda\le1/(68(j_0+10n))$ the Cox Boolean model on Poisson lines has annulus-crossing probability at most $1/\alpha_n$ at the scale $\alpha_n=\alpha_0^{(3/2)^n}$, i.e.\ the model is subcritical on all scales up to $\exp\{\exp(c/\lambda)\}$.
   \item The proof uses the domination of the occupied boxes by $\cT_j\cup\omega_p$ (\cref{lem:domination}), Gou\'er\'e's inclusion for box paths (\cref{lem:inclusion}), the independence of the lines outside a direction window of width $O(1/M)$ between two regions at distance $M\alpha$, and a level drop for the window lines (\cref{lem:decoupling}), which give the recursion~\eqref{eq:recursion} and, with $M=\alpha^{1/2}$, the induction of \cref{thm:induction}.
   \item The level drop costs ten levels per scale. A subcritical phase would follow from the bound~\eqref{eq:needed} on the covariance term~\eqref{eq:cov} at a fixed level, which requires a one-arm estimate and a disjointness statement for the two arms at a site that needs a shared line.
+  \item One deterministic line does not cost a level in the recursion: its effect on the bounds is contracted by a factor of order $M^{-1/2}$ per scale (\cref{prop:oneline}). A uniform bound over several lines does not close. By the Poincar\'e inequality, the drift-free recursion~\eqref{eq:driftfree} follows from the two-replica one-line estimate~\eqref{eq:tworeplica}, which is open.
 \end{enumerate}
 
 \section*{Acknowledgements}
@@ -240,7 +317,7 @@ BJ acknowledges the financial support of the Leibniz Association within the Leib
 
 \section*{Use of AI tools}
 
-The proofs, computations and the text of this note were developed with substantial assistance of the AI systems Claude (Anthropic) and ChatGPT Astra~6 (OpenAI), in an interactive process directed by the authors.
+The simulations, proofs, computations and the text of this note were developed with substantial assistance of the AI systems Claude (Anthropic) and ChatGPT Astra~6 (OpenAI), in an interactive process directed by the authors.
 
 \bibliographystyle{amsalpha}
 \bibliography{references}
