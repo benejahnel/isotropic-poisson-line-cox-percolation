@@ -364,6 +364,129 @@ together with its validity at the base scale, where the class~$\mathcal G_\alpha
 \paragraph{Relation to the referee document.} The present scheme supersedes the skeleton bound, the first moment over cluster chains and the dependence step of the referee document: there is no thick cluster and no relay, since a bundle of lines released by one region is just a set of fixed lines for the next, charged by its weight. The multiscale lemmas of that document survive in simplified form, with a constant number of regions at a fixed ratio in place of $a$ sub-boxes at ratio $L^{2/3}$, and the coverage lemma and the base case remain the tools for the two statements still open here: the base case~(B) at scale $\alpha_1$, and the propagation~\eqref{eq:propagate}, which is \cref{claim:T}.
 
 % =================================================================
+\section{Towards Claim T: the tree bound}
+\label{sec:tree}
+
+This section records what we can prove about \cref{claim:T}. The recursion of \cref{def:recursive} can be simplified to a monotone form, and it is dominated by the union bound over trees of nested tuples that one obtains by iterating \cref{lem:inclusion}. We then show that this union bound \emph{diverges}, because of trees whose leaves are collinear and can be served by a single bundle of lines, so that the minima in the recursion, which the tree bound discards, are essential: any proof of \cref{claim:T} must use that regions in which the bound is capped are rare. This is a negative result, but it locates the difficulty precisely.
+
+\subsection{The recursion in monotone form}
+
+Write $\alpha_n\coloneqq M^n\alpha_1$ and $f_n\coloneqq f(\alpha_n)$. For $y\in\R^2$ and finite~$G$ define $g_n(y;G)$ by
+\begin{equation}
+\label{eq:g}
+  g_0(y;G)\coloneqq\pi_{\alpha_1}(y;G),\qquad g_{n+1}(x;G)\coloneqq\sum_{k\in\mathcal K}\E\Bigl[\prod_{i=1}^a\min\bigl\{1,g_n(x_i;G\cup\cS_k)\bigr\}\Bigr]\,,
+\end{equation}
+with the regions of~$x$ at scale~$\alpha_n$ inside the expectation.
+
+\begin{lemma}[Monotone form]
+\label{lem:gform}
+For every~$n$, $g_n(y;G)$ is increasing in~$G$, $g_n(y;G)\ge\pi_{\alpha_n}(y;G)$, and $f(\alpha_n)W_{\alpha_n}(y;G)=g_n(y;G)$ for the target and weight of \cref{def:recursive} restricted to the scales~$\alpha_n$. In particular $f_n=g_n(0;\varnothing)$ and \cref{claim:T} is the statement $g_n(0;\varnothing)\to0$.
+\end{lemma}
+
+\begin{proof}
+Adding a fixed line adds points to~$X$ and the event $\cE(y,\alpha)$ is increasing in the point configuration, so $\pi_\alpha(y;G)$ is increasing in~$G$; the recursion~\eqref{eq:g} preserves monotonicity. The inequality $g_n\ge\pi_{\alpha_n}$ is \cref{thm:recursion} for the pair $(f,W)$ of \cref{def:recursive}, once the identification with $fW$ is shown. At $n=0$, $f(\alpha_1)W_{\alpha_1}(y;G)=\max\{\pi_{\alpha_1},\pi_{\alpha_1}(y;G)\}=\pi_{\alpha_1}(y;G)$ by monotonicity and stationarity. Inductively, \eqref{eq:Wrec} gives $f(\alpha_{n+1})W_{\alpha_{n+1}}(x;G)=\max\{f(\alpha_{n+1}),\sum_k\E\prod_i\min\{1,g_n(x_i;G\cup\cS_k)\}\}$, and the sum is increasing in~$G$ with value $f(\alpha_{n+1})$ at $G=\varnothing$ by~\eqref{eq:frec}, so the maximum is the sum.
+\end{proof}
+
+\subsection{Tuple-trees}
+
+A \emph{tuple-tree of depth~$n$ rooted at~$x$} is a rooted tree in which every internal node~$v$ at depth $d<n$ has $a$ children labelled by a tuple $k(v)\in\mathcal K$; the position of the root is~$x$, and the children of a node at position~$y$ and depth~$d$ have positions $y+\alpha_{n-1-d}k_i(v)$, $i=1,\dots,a$. Let $\mathcal T_n(x)$ be the set of such trees, $\lvert\mathcal T_n(x)\rvert=N_{\mathcal K}^{(a^n-1)/(a-1)}$, and for $T\in\mathcal T_n(x)$ let $\Lambda(T)$ be its set of leaves, $\lvert\Lambda(T)\rvert=a^n$, with positions $x_\ell$. The leaves of a tree lie in $B(x,10\alpha_n)$, since a child region $B(y+\alpha k_i,10\alpha)$ is contained in $B(y,(8M+10)\alpha)\subseteq B(y,10M\alpha)$.
+
+\begin{theorem}[Tree bound]
+\label{thm:tree}
+For every $n\ge0$, $x\in\R^2$ and finite~$G$,
+\begin{equation}
+\label{eq:tree}
+  \pi_{\alpha_n}(x;G)\le g_n(x;G)\le\sum_{T\in\mathcal T_n(x)}\P_G\Bigl(\bigcap_{\ell\in\Lambda(T)}\cE(x_\ell,\alpha_1)\Bigr)\,.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The first inequality is \cref{lem:gform}. For the second, induct on~$n$; the case $n=0$ is the definition of~$g_0$. For the step, drop the minima in~\eqref{eq:g} and apply the induction hypothesis inside the expectation:
+\begin{equation*}
+  g_{n+1}(x;G)\le\sum_{k\in\mathcal K}\E\Bigl[\prod_{i=1}^a\ \sum_{T_i\in\mathcal T_n(x_i)}\P_{G\cup\cS_k}\Bigl(\bigcap_{\ell\in\Lambda(T_i)}\cE_\ell\Bigr)\Bigr]=\sum_{k}\sum_{(T_i)_i}\E\Bigl[\prod_{i=1}^a\P_{G\cup\cS_k}\Bigl(\bigcap_{\ell\in\Lambda(T_i)}\cE_\ell\Bigr)\Bigr]\,,
+\end{equation*}
+where $\cE_\ell\coloneqq\cE(x_\ell,\alpha_1)$. The leaves of~$T_i$ lie in $R_i=B(x_i,10\alpha_n)$, so the event $\bigcap_{\ell\in\Lambda(T_i)}\cE_\ell$ is determined by the lines meeting~$R_i$ and the points in~$R_i$, and \cref{lem:decoupling}, which is an equality, gives $\E[\prod_i\P_{G\cup\cS_k}(\cdot)]=\P_G(\bigcap_i\bigcap_{\ell\in\Lambda(T_i)}\cE_\ell)$. The pair $(k,(T_i)_i)$ is a tree of depth $n+1$ rooted at~$x$, and every such tree arises exactly once.
+\end{proof}
+
+Iterating~\eqref{eq:inclusion} directly gives $\cE(x,\alpha_n)\subseteq\bigcup_{T\in\mathcal T_n(x)}\bigcap_{\ell\in\Lambda(T)}\cE_\ell$, which is the outer inequality of~\eqref{eq:tree}; the theorem adds that the recursion sits between the crossing probability and this union bound. The minima in~\eqref{eq:g}, which the proof discards, are what distinguishes $g_n$ from the tree sum, and \cref{prop:collinear} below shows that they cannot be discarded.
+
+\subsection{The leaf events}
+
+\begin{lemma}[Leaves need points]
+\label{lem:leaf}
+Let $\alpha_1\ge2$ and $q\coloneqq\lceil3\alpha_1\rceil$. For a leaf at~$y$ let $N_y$ be the number of lines of $\cL\cup G$ meeting $B(y,10\alpha_1)$. Then, conditionally on the lines,
+\begin{equation}
+\label{eq:leaf}
+  \P_G\bigl(\cE(y,\alpha_1)\ \big\vert\ \cL\bigr)\le\min\bigl\{1,(c_0\lambda N_y)^{q}\bigr\},\qquad c_0\coloneqq\frac{20\e}{3}\,,
+\end{equation}
+and for a finite set of leaves whose regions $B(y,10\alpha_1)$ are pairwise disjoint,
+\begin{equation}
+\label{eq:leaves}
+  \P_G\Bigl(\bigcap_y\cE(y,\alpha_1)\Bigr)\le\E\Bigl[\prod_y\min\bigl\{1,(c_0\lambda N_y)^{q}\bigr\}\Bigr]\,.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+On $\cE(y,\alpha_1)$ there is a chain of unit disks with centres $c_1,\dots,c_r$ in $B(y,10\alpha_1)$, consecutive centres at distance less than~$2$, with $\lvert c_1-y\rvert\le\alpha_1+1$ and $\lvert c_r-y\rvert\ge8\alpha_1-1$; hence $2(r-1)>7\alpha_1-2$ and $r\ge3\alpha_1$ for $\alpha_1\ge2$. So $X$ has at least $q$ points in $B(y,10\alpha_1)$. Given the lines, the number of points of~$X$ in $B(y,10\alpha_1)$ is Poisson with mean $\lambda$ times the total length of the chords of the $N_y$ lines in the disk, which is at most $20\alpha_1\lambda N_y$, and the Poisson tail bound $\P(\mathrm{Poi}(m)\ge q)\le(\e m/q)^q$ for $q\ge m$ gives~\eqref{eq:leaf}; for $q<m$ the bound~$1$ is used, and $(c_0\lambda N_y)^q\ge1$ in that case since $c_0\lambda N_y\ge\e m/q\ge1$. For~\eqref{eq:leaves}, the leaf events are conditionally independent given the lines because the regions are disjoint, and the points in disjoint regions are independent given the lines.
+\end{proof}
+
+The leaves of a tuple-tree have pairwise disjoint regions, because siblings are at distance at least $70\alpha_1$ and leaves in different subtrees are at least as far apart. Hence \cref{thm:tree,lem:leaf} give
+\begin{equation}
+\label{eq:master}
+  f_n\le\sum_{T\in\mathcal T_n(0)}\E\Bigl[\prod_{\ell\in\Lambda(T)}\min\bigl\{1,(c_0\lambda N_{x_\ell})^{q}\bigr\}\Bigr]\,,
+\end{equation}
+a bound in which the Cox points no longer appear: \cref{claim:T} follows from the statement that the right-hand side of~\eqref{eq:master} tends to zero, which concerns only the numbers of Poisson lines through $a^n$ small disks placed at the leaves of a tree.
+
+\subsection{Two terms of the sum}
+
+The right-hand side of~\eqref{eq:master} is a sum over trees of an expectation of a product over leaves; expanding $N_{x_\ell}$ as a sum over lines, the expectation is a sum over the ways the lines can be distributed over the leaves, and each line meeting several leaves couples the corresponding factors. We record the two extreme contributions.
+
+\begin{proposition}[Private lines only]
+\label{prop:private}
+Let $Y_\ell$ be the number of lines of~$\cL$ meeting $B(x_\ell,10\alpha_1)$ and no other leaf region of~$T$. Then $Y_\ell$, $\ell\in\Lambda(T)$, are independent Poisson variables with means at most $20\mu\alpha_1$, and
+\begin{equation}
+\label{eq:private}
+  \sum_{T\in\mathcal T_n(0)}\E\Bigl[\prod_{\ell}\min\{1,(c_0\lambda Y_\ell)^q\}\Bigr]\le\Bigl(N_{\mathcal K}^{1/(a-1)}\,\theta\Bigr)^{a^n},\qquad\theta\coloneqq\E\min\{1,(c_0\lambda\,\mathrm{Poi}(20\mu\alpha_1))^q\}\,,
+\end{equation}
+which tends to zero as $n\to\infty$ as soon as $N_{\mathcal K}^{1/(a-1)}\theta<1$; and $\theta\le20\mu\alpha_1(c_0\lambda)^q\,\E[(1+\mathrm{Poi}(20\mu\alpha_1))^{q}]$, which is small for $\lambda\le\lambda_0(\alpha_1)$ and $\mu\alpha_1\le1$.
+\end{proposition}
+
+\begin{proof}
+The sets of lines meeting exactly one leaf region are disjoint, so the $Y_\ell$ are independent Poisson variables, with mean at most the measure $20\mu\alpha_1$ of the lines meeting one region. The expectation factorises, each factor is~$\theta$ by monotonicity in the mean, and $\lvert\mathcal T_n\rvert=N_{\mathcal K}^{(a^n-1)/(a-1)}\le N_{\mathcal K}^{a^n/(a-1)}$. For the bound on~$\theta$, $\min\{1,(c_0\lambda Y)^q\}\le(c_0\lambda)^qY^q\1\{Y\ge1\}$ and $\E[Y^q\1\{Y\ge1\}]\le\P(Y\ge1)\E[(1+Y)^q]\le20\mu\alpha_1\E[(1+Y)^q]$ by the Mecke formula applied to the first line.
+\end{proof}
+
+If every line met at most one leaf, \eqref{eq:private} would be the whole story and \cref{claim:T} would follow from the smallness of the base scale alone. The lines meeting several leaves are the dependence.
+
+\begin{proposition}[The tree sum diverges]
+\label{prop:collinear}
+For every $a\ge2$, $\mu>0$, $\lambda>0$ and $\alpha_1\ge2$,
+\begin{equation}
+\label{eq:diverge}
+  \sum_{T\in\mathcal T_n(0)}\P\Bigl(\bigcap_{\ell\in\Lambda(T)}\cE(x_\ell,\alpha_1)\Bigr)\xrightarrow[n\to\infty]{}\infty\,.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Fix a line $\ell_0$ through~$0$ and call a tree $T\in\mathcal T_n(0)$ \emph{collinear} if every node of~$T$ at depth $d\ge1$ lies within distance $\alpha_{n-d}$ of~$\ell_0$; its leaves then lie within distance $\alpha_1$ of~$\ell_0$.
+
+\emph{There are at least $2^{a^n-1}$ collinear trees.} Let $v$ be a node at depth~$d<n$ at distance $\delta\le\alpha_{n-d}$ from~$\ell_0$ (for the root, $\delta=0$), and let $\alpha=\alpha_{n-1-d}$ be the scale of its children, so that $\alpha_{n-d}=M\alpha$. The circle of radius $r_i\alpha\ge M\alpha\ge\delta$ around~$v$ meets~$\ell_0$; for $i\ge2$, $r_i\alpha\ge(M+70)\alpha\ge\delta+70\alpha$, so the two intersection points are at distance $2\sqrt{(r_i\alpha)^2-\delta^2}\ge2\sqrt{140\alpha\cdot r_i\alpha}>2\alpha$ from each other. Since $\alpha S_{r_i}\subseteq\alpha K_i+B(0,\alpha)$, each intersection point has a net point $\alpha k_i$ within distance~$\alpha$, hence within distance~$\alpha$ of~$\ell_0$, and for $i\ge2$ the two net points so obtained are distinct. Choosing them gives at least $2^{a-1}$ admissible tuples at~$v$ all of whose children lie within distance $\alpha=\alpha_{n-1-d}$ of~$\ell_0$. There are $(a^n-1)/(a-1)$ internal nodes, so the number of collinear trees is at least $2^{(a-1)(a^n-1)/(a-1)}=2^{a^n-1}$.
+
+\emph{A bundle serves every leaf of a collinear tree.} Let $J\coloneqq\ell_0\cap B(0,10\alpha_n)$, a segment of length $20\alpha_n$, and for $m\ge1$ let $\mathcal B_m$ be the event that at least $m$ lines of~$\cL$ pass within distance $1/2$ of both endpoints of~$J$; such lines stay within distance $1/2$ of~$\ell_0$ along~$J$. Their $\nu$-measure is at least $(\mu/\pi)\cdot(1/(20\alpha_n))\cdot1\ge\mu/(63\alpha_n)$, so $\P(\mathcal B_m)\ge\e^{-1}(\mu/(63\alpha_n))^m/m!$. On $\mathcal B_m$, conditionally on the lines, the orthogonal projections to~$\ell_0$ of the points of~$X$ on $m$ of these lines form a Poisson process on~$J$ of intensity at least $m\lambda$, since projection shortens lengths. Two points on lines within distance~$1/2$ of~$\ell_0$ whose projections are at distance at most~$\sqrt3$ are at distance at most~$2$, and the unit disk around a point within distance $1/2$ of~$\ell_0$ covers the points of~$\ell_0$ within distance $\sqrt3/2$ of its projection; so if the projected process has no gap larger than~$\sqrt3$ in~$J$ and has a point within $\sqrt3/2$ of each endpoint of~$J$, the unit disks around the points form a connected set containing~$J$. The probability that a Poisson process of intensity $\theta\ge m\lambda$ on an interval of length $20\alpha_n$ violates this is at most $(20\alpha_n\theta+2)\e^{-\sqrt3\theta/2}$, which is at most $1/2$ once $m\ge m_n\coloneqq\lceil(4/\sqrt3)\lambda^{-1}\log(80\alpha_n\lambda^{-1}+80)\rceil$, say. On this event every leaf~$\ell$ of a collinear tree satisfies $\cE(x_\ell,\alpha_1)$: the line~$\ell_0$ passes within distance~$\alpha_1$ of~$x_\ell$, so the part of~$J$ inside $B(x_\ell,10\alpha_1-1)$ contains the point of~$\ell_0$ nearest to~$x_\ell$ and extends to distance at least $\sqrt{(10\alpha_1-1)^2-\alpha_1^2}\ge8\alpha_1$ from~$x_\ell$ for $\alpha_1\ge2$; the disks around the points of~$X$ projecting into this part have centres in $B(x_\ell,10\alpha_1)$, form a connected set meeting $B(x_\ell,\alpha_1)$, and reach outside $B(x_\ell,8\alpha_1)$. Hence for every collinear tree~$T$,
+\begin{equation*}
+  \P\Bigl(\bigcap_{\ell\in\Lambda(T)}\cE_\ell\Bigr)\ge\frac12\,\P(\mathcal B_{m_n})\ge\frac{1}{2\e\,m_n!}\Bigl(\frac{\mu}{63\alpha_n}\Bigr)^{m_n}\ge\exp\bigl\{-C\lambda^{-1}(\log\alpha_n)^2\bigr\}
+\end{equation*}
+for a constant $C=C(\mu,\lambda,\alpha_1)$ and $n\ge n_0$, since $m_n\le C'\lambda^{-1}\log\alpha_n$.
+
+\emph{Conclusion.} The sum in~\eqref{eq:diverge} is at least $2^{a^n-1}\exp\{-C\lambda^{-1}(n\log M+\log\alpha_1)^2\}$, which tends to infinity.
+\end{proof}
+
+The divergence is not an artefact of the crude leaf bound: it comes from the union bound over tuples being repeated at every level of the tree, so that one bundle of $m_n$ lines, of probability $\exp\{-C(\log\alpha_n)^2\}$, is counted once for each of the $2^{a^n-1}$ collinear trees it serves. The recursion~\eqref{eq:g} avoids this because the factor of a region through which the bundle passes is capped at~$1$ before the sum over tuples at the next level is taken, so that the bundle is charged once per level and not once per tree. Any proof of \cref{claim:T} must therefore use the caps, which means it must show that the regions in which the recursive bound reaches the cap, or comes close to it, are rare under the law of the shared lines, and that the sum over tuples at each level is controlled by the caps. In the language of \cref{sec:discussion}, this is the propagation of the group-weight bound in expectation, \eqref{eq:propagate}, and we have not proved it.
+
+\subsection{Two corrections to the heuristics of \cref{sec:onestep,sec:discussion}}
+
+Two points in the earlier sections were stated with the threshold $m^*$ of~\eqref{eq:mstar}, which is the bundle size whose probability drops below the target, and should be stated with the size at which a bundle actually carries a crossing. By the computation in the proof of \cref{prop:collinear}, a bundle of $m$ lines within distance $1/2$ of an axis carries an occupied crossing of a region at scale~$\alpha$ with probability at least $1/2$ once $m\ge m_{\mathrm{free}}(\alpha)\coloneqq\lceil(4/\sqrt3)\lambda^{-1}\log(80\alpha\lambda^{-1}+80)\rceil$, and by \cref{lem:gform} the recursive bound then satisfies $g_n(y;G)\ge1/2$ for such~$G$. Below $m_{\mathrm{free}}$ a bundle does not make a region free, and its recursive weight is determined by the dynamics of~\eqref{eq:g}, not by the cap. Second, the group weight~\eqref{eq:k} must be consistent with this: for an $m_{\mathrm{free}}(\alpha)$-bundle spanning a region at scale $M\alpha$ the weight $f(M\alpha)k_{M\alpha}(m)$ must be at least the true crossing probability, which is bounded below by a constant depending on~$M$; with $f(M\alpha)$ of the order of the across-bundle probability $20\mu\alpha\beta_2^{m-1}$ this forces $A\ge c/(MC_2)$ for an absolute $c>0$, so that the gain constant~$A$ lies in a window $[c/(MC_2),1/C_2)$ rather than being of order $1/C_1$ as suggested after~\eqref{eq:k}. Both corrections change constants, not the structure of \cref{prop:onestep,cor:halving}.
+
+% =================================================================
 \section{Summary}
 \label{sec:summary}
 
@@ -371,6 +494,7 @@ together with its validity at the base scale, where the class~$\mathcal G_\alpha
   \item Gou\'er\'e's inclusion holds for the Cox Boolean model without an error event and with any constant number $a\ge2$ of bounded regions of radius $10\alpha$ on circles $70\alpha$ apart, at scale ratio $M=10(a-1)$ (\cref{lem:inclusion}); the sub-crossings are independent given the lines meeting at least two regions, which become fixed lines of the sub-problems (\cref{lem:decoupling}).
   \item The recursion is a deterministic inequality~(R) for a target~$f$ and a weight~$W$, in which randomness enters only through the Poisson process of shared lines (\cref{thm:recursion}). Defining $f$ and~$W$ recursively from the base case makes the bound $\pi_\alpha\le f(\alpha)$ unconditional (\cref{prop:unconditional}), and the subcritical phase follows from the single statement $f(\alpha)\to0$ (\cref{claim:T}).
   \item One step of the recursion closes, $f(M\alpha)\le f(\alpha)/2$, if the weights of shared-line configurations at scale~$\alpha$ are bounded by group weights with bundles of size $m^*(\alpha)$ treated as free (\cref{prop:onestep}, \cref{cor:halving}); the configurations aligned across two regions are controlled by the factor $C_2/C_1$ between alignment across the gap and alignment within a region, and the substantial condition is $AC_2<1$ for the gain constant.
+  \item The recursion is dominated by the union bound over trees of nested tuples, but that union bound diverges because one bundle serves all $2^{a^n-1}$ collinear trees (\cref{thm:tree}, \cref{prop:collinear}); the caps in the recursion are essential, and a proof of \cref{claim:T} must show that capped regions are rare.
   \item Group weights propagate for groups serving one or all regions, which removes the nearly complete groups and the many sub-boxes of the multiscale note (\cref{rem:correction}), and configurations making at most $a-2$ regions free need no weight at all. Configurations making $a-1$ regions free violate the pointwise group-weight bound at the next scale, but for $a\ge3$ they occur among shared lines with probability of order $f(\alpha)^{a-1}$, far below the target, so that the group-weight bound in expectation, \eqref{eq:GWE}, can propagate. Proving the propagation~\eqref{eq:propagate} and the base case is what remains.
 \end{enumerate}
 

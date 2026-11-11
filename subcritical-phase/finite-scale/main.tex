@@ -1,0 +1,248 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+\DeclareMathOperator{\dist}{dist}
+\newcommand{\cO}{\mathcal O}
+\newcommand{\cT}{\mathcal T}
+\newcommand{\Lp}{\cL'}
+\newcommand{\cS}{\mathcal S}
+
+\runningtitle{Absence of crossings up to doubly exponential scales}
+\hypersetup{pdftitle={Absence of crossings up to doubly exponential scales in the Cox Boolean model on Poisson lines},pdfauthor={Christian Hirsch, Benedikt Jahnel}}
+
+\title{\textbf{Absence of crossings up to doubly exponential scales\\ in the Cox Boolean model on Poisson lines}\\[0.6em] \large Working note}
+
+\author{%
+  Christian Hirsch\thanks{Institut f\"ur Mathematische Stochastik, Georg-August-Universit\"at G\"ottingen, Goldschmidtstra\ss e~7, 37077 G\"ottingen, Germany. \texttt{christian.hirsch@uni-goettingen.de}. \orcid{0000-0003-4136-3740}.}
+  \and
+  Benedikt Jahnel\thanks{Institut f\"ur Mathematische Stochastik, Technische Universit\"at Braunschweig, Universit\"atsplatz~2, 38106 Braunschweig, Germany, and Weierstrass Institute for Applied Analysis and Stochastics, Mohrenstra\ss e~39, 10117 Berlin, Germany. \texttt{benedikt.jahnel@tu-braunschweig.de}. \orcid{0000-0002-4212-0065}.}%
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{plain}
+
+\begin{abstract}
+We consider the Boolean model with unit disks centred at the points of a Cox process of intensity~$\lambda$ per unit length on an isotropic Poisson line process of intensity~$\mu$ in the plane. We prove, without any unproved hypothesis, that for small~$\lambda$ the model has no crossings of annuli on all scales up to a doubly exponential function of $1/\lambda$: there are constants $j_0,\alpha_0$ depending only on~$\mu$ such that, with $\alpha_n=\alpha_0^{(3/2)^n}$, the probability of a crossing of the annulus at scale~$\alpha_n$ is at most $1/\alpha_n$ whenever $\lambda\le1/(68(j_0+10n))$. The proof is a two-scale recursion in the manner of Gou\'er\'e with three ingredients: the occupied boxes are dominated by the union of the boxes met by at least $j$ lines and an independent Bernoulli field; two regions of size~$\alpha$ at distance $M\alpha$ can only share lines whose direction lies in a window of width of order $1/M$, and the remaining lines are independent between the regions; and the lines of the window are so sparse that their effect is absorbed by lowering the level~$j$ by a bounded amount. The price of the last step is a drift of the level by ten per scale, which is why the result stops at doubly exponential scales and does not yet give a subcritical phase. We state exactly what would remove the drift.
+\end{abstract}
+
+% =================================================================
+\section{Result}
+\label{sec:result}
+
+Let $\cL$ be a Poisson line process in~$\R^2$ with intensity measure $\nu(\dd\theta\,\dd p)=(\mu/\pi)\,\dd\theta\,\dd p$, where a line is parametrised by its normal direction $\theta\in[0,\pi)$ and its signed distance $p\in\R$ from the origin; the lines meeting a convex set of perimeter~$P$ form a Poisson variable with mean $\mu P/\pi$. Conditionally on~$\cL$, let $X$ be a Poisson process of intensity~$\lambda$ per unit length on every line of~$\cL$, and let $\Xi\coloneqq\bigcup_{c\in X}B(c,1)$. A \emph{chain} is a finite sequence of points of~$X$ with consecutive points at distance less than~$2$; the disks of a chain form a connected subset of~$\Xi$, and every connected component of~$\Xi$ is a union of chains.
+
+\begin{theorem}[No crossings up to doubly exponential scales]
+\label{thm:main}
+For every $\mu>0$ there are $\alpha_0=\alpha_0(\mu)\ge40$ and $j_0=j_0(\mu)\in\N$ such that the following holds. Let $\alpha_n\coloneqq\alpha_0^{(3/2)^n}$ for $n\ge0$. If
+\begin{equation}
+\label{eq:lambda}
+  \lambda\le\frac{1}{68\,(j_0+10n)}\,,
+\end{equation}
+then for every $x\in\R^2$ the probability that there is a chain from a point of $B(x,\alpha_n-1)$ to a point outside $B(x,8\alpha_n+1)$ is at most $1/\alpha_n$. In particular, under~\eqref{eq:lambda}, the probability that the connected component of~$\Xi$ containing a given point reaches distance $8\alpha_n+3$ from it is at most $1/\alpha_n$.
+\end{theorem}
+
+For fixed~$\lambda$ the theorem applies to the scales $n\le n(\lambda)\coloneqq\lfloor(1/(68\lambda)-j_0)/10\rfloor$, and $\alpha_{n(\lambda)}\ge\exp\{\exp(c/\lambda)\}$ for a constant $c=c(\mu)>0$ and small~$\lambda$. The theorem does not show that $\lambda_c(\mu)>0$: a subcritical phase requires the bound at all scales for one fixed~$\lambda$. \Cref{sec:drift} explains where the restriction comes from and what would remove it.
+
+The proof occupies \cref{sec:domination,sec:inclusion,sec:decoupling,sec:induction}. All statements are proved in full.
+
+% =================================================================
+\section{Domination by thick boxes and a Bernoulli field}
+\label{sec:domination}
+
+For $z\in\Z^2$ let $Q(z)\coloneqq z+[-1/2,1/2)^2$, the unit box centred at~$z$, and let $N(z)$ be the number of lines of~$\cL$ meeting $Q(z)$, a Poisson variable with mean $4\mu/\pi$. Let $U=(U_z)_{z\in\Z^2}$ be independent random variables, uniform on $[0,1]$, independent of~$\cL$. For $j\in\Z$ and $p\in[0,1]$ put
+\begin{equation}
+\label{eq:O}
+  \cT_j\coloneqq\{z\in\Z^2\colon N(z)\ge j\},\qquad\omega_p\coloneqq\{z\in\Z^2\colon U_z\le p\},\qquad\cO_{j,p}\coloneqq\cT_j\cup\omega_p\,,
+\end{equation}
+so that $\cT_j=\Z^2$ for $j\le0$. A \emph{path} is a finite sequence of sites of~$\Z^2$ with consecutive sites at sup-distance at most~$2$. Distances between a site and a point of~$\R^2$ are Euclidean.
+
+\begin{definition}[Crossing events]
+\label{def:G}
+For $x\in\R^2$, $\rho\ge4$, $j\in\Z$ and $p\in[0,1]$ let $G_{j,p}(x,\rho)$ be the event that there is a path $z_1,\dots,z_r$ of sites of $\cO_{j,p}$ with $\lvert z_1-x\rvert\le\rho$, $\lvert z_r-x\rvert>8\rho$ and $\lvert z_i-x\rvert\le8\rho$ for $i<r$. Put $f_{j,p}(\rho)\coloneqq\sup_{x\in\R^2}\P(G_{j,p}(x,\rho))$.
+\end{definition}
+
+All sites of such a path satisfy $\lvert z_i-x\rvert\le8\rho+3$, since a step has Euclidean length at most $2\sqrt2<3$. Hence $G_{j,p}(x,\rho)$ is determined by the variables $U_z$ with $\lvert z-x\rvert\le8\rho+3$ and by the lines meeting the boxes of these sites, all of which meet $B(x,9\rho)$. The events are decreasing in~$j$ and increasing in~$p$, and $f_{j,p}\equiv1$ for $j\le0$.
+
+\begin{lemma}[Domination]
+\label{lem:domination}
+On a suitable probability space, $U$ can be chosen such that for all $j\ge1$ and $p\ge\sqrt2\,\lambda(j-1)$, every site~$z$ with $X\cap Q(z)\neq\varnothing$ belongs to $\cO_{j,p}$. Consequently, the probability that there is a chain from a point of $B(x,\rho-1)$ to a point outside $B(x,8\rho+1)$ is at most $f_{j,p}(\rho)$.
+\end{lemma}
+
+\begin{proof}
+Conditionally on~$\cL$, the numbers of points of~$X$ in the boxes $Q(z)$ are independent Poisson variables with means $\lambda$ times the total length of the chords of the lines in $Q(z)$, which is at most $\sqrt2\,\lambda N(z)$. Let $q_z\coloneqq\P(X\cap Q(z)\neq\varnothing\,\vert\,\cL)\le\min\{1,\sqrt2\lambda N(z)\}$ and let $(V_z)$ be independent uniform variables independent of $(\cL,X)$. Put $U_z\coloneqq q_zV_z$ if $X\cap Q(z)\neq\varnothing$ and $U_z\coloneqq q_z+(1-q_z)V_z$ otherwise. Conditionally on~$\cL$ the $U_z$ are independent and uniform on~$[0,1]$, so $U$ is independent of~$\cL$ and has the required law, and $X\cap Q(z)\neq\varnothing$ implies $U_z\le q_z$. If moreover $z\notin\cT_j$, then $N(z)\le j-1$ and $U_z\le\sqrt2\lambda(j-1)\le p$, so $z\in\omega_p$. For the consequence, let $c_1,\dots,c_m$ be a chain with $\lvert c_1-x\rvert\le\rho-1$ and $\lvert c_m-x\rvert>8\rho+1$, and let $z_i$ be the site with $c_i\in Q(z_i)$. Then $\lvert z_i-c_i\rvert\le\sqrt2/2<1$, the sites $z_i$ are in $\cO_{j,p}$, consecutive ones are at sup-distance less than $2+1$, hence at most~$2$, $\lvert z_1-x\rvert\le\rho$ and $\lvert z_m-x\rvert>8\rho$. Stopping the sequence at the first site at distance more than $8\rho$ from~$x$ gives a path as in \cref{def:G}.
+\end{proof}
+
+From now on $p\coloneqq1/48$ is fixed and we write $\cO_j$, $G_j$ and $f_j$.
+
+% =================================================================
+\section{The two-scale inclusion}
+\label{sec:inclusion}
+
+For $M\ge2$ fix finite sets $K\subseteq S_M$ and $L\subseteq S_{8M}$ on the circles of radii $M$ and $8M$ around the origin such that every point of $S_M$ is within distance $1/4$ of~$K$ and every point of $S_{8M}$ within distance $1/4$ of~$L$; one can take $\lvert K\rvert\le26M$ and $\lvert L\rvert\le202M$.
+
+\begin{lemma}[Inclusion, after {\cite[Lemma~3.3]{Gou08}}]
+\label{lem:inclusion}
+Let $M\ge2$, $\alpha\ge4$ and $x\in\R^2$. Then
+\begin{equation}
+\label{eq:inclusion}
+  G_j(x,M\alpha)\subseteq\bigcup_{k\in K}\bigcup_{l\in L}\bigl(G_j(x+\alpha k,\alpha)\cap G_j(x+\alpha l,\alpha)\bigr)\,,
+\end{equation}
+and $\lvert(x+\alpha k)-(x+\alpha l)\rvert\ge7M\alpha$ for all $k\in K$, $l\in L$.
+\end{lemma}
+
+\begin{proof}
+Let $z_1,\dots,z_r$ be a path as in the definition of $G_j(x,M\alpha)$. Let $i_0$ be the largest index with $\lvert z_{i_0}-x\rvert\le M\alpha$; then $i_0<r$, and since $\lvert z_{i_0+1}-x\rvert>M\alpha$ and a step has length less than~$3$, $\lvert z_{i_0}-x\rvert>M\alpha-3$. So $z_{i_0}$ is within distance~$3$ of the circle of radius $M\alpha$ around~$x$, and there is $k\in K$ with $\lvert z_{i_0}-x_k\rvert\le3+\alpha/4\le\alpha$, where $x_k\coloneqq x+\alpha k$. Since $\lvert z_r-x_k\rvert>8M\alpha-M\alpha\ge8\alpha$, there is a first index $r'\ge i_0$ with $\lvert z_{r'}-x_k\rvert>8\alpha$, and $z_{i_0},\dots,z_{r'}$ is a path realising $G_j(x_k,\alpha)$. Similarly $8M\alpha<\lvert z_r-x\rvert\le8M\alpha+3$, so there is $l\in L$ with $\lvert z_r-x_l\rvert\le\alpha$, $x_l\coloneqq x+\alpha l$; the reversed sequence $z_r,z_{r-1},\dots,z_1$ is a path, it starts within distance~$\alpha$ of~$x_l$, and $\lvert z_1-x_l\rvert\ge8M\alpha-M\alpha>8\alpha$, so stopping it at its first site at distance more than $8\alpha$ from~$x_l$ realises $G_j(x_l,\alpha)$. The last assertion is the difference of the radii.
+\end{proof}
+
+% =================================================================
+\section{Decoupling through a direction window}
+\label{sec:decoupling}
+
+\begin{lemma}[Decoupling with a level drop]
+\label{lem:decoupling}
+Let $M\ge4$, $\alpha\ge6$ and $x_1,x_2\in\R^2$ with $\lvert x_1-x_2\rvert\ge7M\alpha$. Then for every $j\in\Z$,
+\begin{equation}
+\label{eq:decoupling}
+  \P\bigl(G_j(x_1,\alpha)\cap G_j(x_2,\alpha)\bigr)\le f_j(\alpha)^2+\sum_{n\ge1}600\,\alpha^2\,\frac{(5\mu/M)^n}{n!}\,f_{j-n}(\alpha)^2\,.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $A_i$ be the set of sites~$z$ with $\lvert z-x_i\rvert\le8\alpha+3$, and $R_i\coloneqq B(x_i,9\alpha)$, which contains the boxes of the sites of~$A_i$. Let $e$ be the direction of $x_2-x_1$ and $D\coloneqq\lvert x_1-x_2\rvert$. A line meeting both $R_1$ and $R_2$ passes within distance $9\alpha$ of both centres, so its angle~$\varphi$ with~$e$ satisfies $D\sin\varphi\le18\alpha$, whence $\varphi\le\varphi_0\coloneqq(\pi/2)\cdot18\alpha/D\le4.04/M$.
+
+\emph{The window.} Let $E$ be the set of lines of~$\cL$ whose direction makes an angle at most~$\varphi_0$ with~$e$, and $\Lp\coloneqq\cL\setminus E$. No line of~$\Lp$ meets both $R_1$ and~$R_2$. Therefore the three sets of lines
+\begin{equation*}
+  \{\ell\in\Lp\colon\ell\cap R_1\neq\varnothing\},\qquad\{\ell\in\Lp\colon\ell\cap R_2\neq\varnothing\},\qquad E
+\end{equation*}
+are restrictions of the Poisson process~$\cL$ to pairwise disjoint measurable sets of lines, hence independent. The families $(U_z)_{z\in A_1}$ and $(U_z)_{z\in A_2}$ are independent of each other and of the lines, since $A_1\cap A_2=\varnothing$.
+
+\emph{The level drop.} For a site~$z$ write $N(z)=N'(z)+N_E(z)$ with $N'$ the number of lines of~$\Lp$ and $N_E$ the number of lines of~$E$ meeting $Q(z)$. The lines with direction in the window that meet $Q(z)$ have measure at most $(\mu/\pi)\cdot2\varphi_0\cdot\sqrt2\le5\mu/M$, because the projection of a unit square on any direction has length at most~$\sqrt2$; so $N_E(z)$ is Poisson with mean at most $5\mu/M$ and $\P(N_E(z)\ge n)\le(5\mu/M)^n/n!$. Let $H\coloneqq\max\{N_E(z)\colon z\in A_1\cup A_2\}$. Each $A_i$ has at most $\pi(8\alpha+4)^2\le300\alpha^2$ sites for $\alpha\ge6$, so $\P(H\ge n)\le600\alpha^2(5\mu/M)^n/n!$ for $n\ge1$. Let $G'_{i}(x,\alpha)$ be the event of \cref{def:G} at level~$i$ with $N$ replaced by~$N'$. On $\{H=n\}$ every site $z\in A_1\cup A_2$ with $N(z)\ge j$ has $N'(z)\ge j-n$, so $G_j(x_i,\alpha)\cap\{H=n\}\subseteq G'_{j-n}(x_i,\alpha)$. The event $G'_{j-n}(x_i,\alpha)$ is determined by the lines of~$\Lp$ meeting~$R_i$ and by $(U_z)_{z\in A_i}$, and $H$ by~$E$; by the independence established above,
+\begin{align*}
+  \P\bigl(G_j(x_1,\alpha)\cap G_j(x_2,\alpha)\bigr)
+  &\le\sum_{n\ge0}\P\bigl(G'_{j-n}(x_1,\alpha)\cap G'_{j-n}(x_2,\alpha)\cap\{H=n\}\bigr)\\
+  &=\sum_{n\ge0}\P(H=n)\,\P\bigl(G'_{j-n}(x_1,\alpha)\bigr)\,\P\bigl(G'_{j-n}(x_2,\alpha)\bigr)\,.
+\end{align*}
+Since $N'\le N$, $\P(G'_{i}(x,\alpha))\le\P(G_i(x,\alpha))\le f_i(\alpha)$. Bounding $\P(H=0)\le1$ and $\P(H=n)\le\P(H\ge n)$ for $n\ge1$ gives~\eqref{eq:decoupling}.
+\end{proof}
+
+\begin{proposition}[Recursion]
+\label{prop:recursion}
+For $M\ge4$, $\alpha\ge6$ and $j\in\Z$,
+\begin{equation}
+\label{eq:recursion}
+  f_j(M\alpha)\le5300\,M^2\Bigl[f_j(\alpha)^2+600\,\alpha^2\sum_{n\ge1}\frac{(5\mu/M)^n}{n!}\,f_{j-n}(\alpha)^2\Bigr]\,.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Union bound in~\eqref{eq:inclusion} over the at most $26M\cdot202M\le5300M^2$ pairs $(k,l)$, and \cref{lem:decoupling} for each pair.
+\end{proof}
+
+The recursion contains no fixed lines and no weights. The dependence between the two regions is carried by the window lines~$E$ alone, and it is absorbed by comparing level~$j$ at the large scale with the lower levels $j-n$ at the small scale, the comparison being cheap because $n$ window lines through one box are rare.
+
+% =================================================================
+\section{The induction}
+\label{sec:induction}
+
+Let $g(i)\coloneqq1+\min\{i,24\}/4$ for integers $i\ge0$, so that $1\le g\le7$, and put
+\begin{equation}
+\label{eq:Amu}
+  A_\mu\coloneqq5300\,\bigl(1+1200\,\e^{5\mu}\bigr)\,.
+\end{equation}
+
+\begin{lemma}[Arithmetic]
+\label{lem:arithmetic}
+For all integers $j'\ge0$, with $d\coloneqq10$,
+\begin{align}
+\label{eq:e0}
+  1-2g(j'+d)+\tfrac32g(j')&\le-1\,,\\
+\label{eq:em}
+  3-\tfrac m2-2g(j'+d-m)+\tfrac32g(j')&\le-1\qquad(1\le m\le j'+d)\,,\\
+\label{eq:et}
+  3-\tfrac{j'+d+1}{2}+\tfrac32g(j')&\le-1\,.
+\end{align}
+\end{lemma}
+
+\begin{proof}
+\eqref{eq:et}: $\frac32g(j')\le\frac32+\frac38j'$, so the left side is at most $4-\frac d2-\frac{j'}{8}\le-1$. \eqref{eq:e0}: if $j'\ge24$ the left side is $1-\frac12\cdot7=-\frac52$; if $j'<24$ and $j'+d\le24$ it is $\frac12-\frac{j'}8-\frac d2\le-\frac92$; if $j'<24<j'+d$ it is $\frac12+\frac38j'-12\le\frac12+\frac{69}{8}-12<-2$. \eqref{eq:em}: write $i\coloneqq j'+d-m\ge0$. If $j'\ge24$ and $i\ge24$ the left side is $\frac52-3-\frac m2\le-1$; if $j'\ge24$ and $i<24$ it is $\frac52+9-\frac m2-\frac i2=\frac{23}{2}-\frac{j'+d}{2}\le\frac{23}{2}-17$; if $j'<24$ and $i\le24$ it is $\frac52+\frac38j'-\frac{j'+d}{2}\le\frac52-5$; if $j'<24<i$ it is $\frac52+\frac38j'-\frac m2-12\le\frac52+\frac{69}{8}-\frac12-12<-1$.
+\end{proof}
+
+\begin{theorem}[Induction over scales]
+\label{thm:induction}
+Let $\alpha_0\ge\max\{A_\mu,40\}$ and $j_0\in\N$ be such that $f_{j_0}(\alpha_0)\le\alpha_0^{-7}$, and let $\alpha_n\coloneqq\alpha_0^{(3/2)^n}$. Then for all $n\ge0$ and all $j\ge j_0+10n$,
+\begin{equation}
+\label{eq:hyp}
+  f_j(\alpha_n)\le\alpha_n^{-g(j-j_0-10n)}\le\alpha_n^{-1}\,.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For $n=0$, $f_j(\alpha_0)\le f_{j_0}(\alpha_0)\le\alpha_0^{-7}\le\alpha_0^{-g(j-j_0)}$ for $j\ge j_0$, since $f_j$ is decreasing in~$j$ and $g\le7$. Assume~\eqref{eq:hyp} for~$n$, write $a\coloneqq\alpha_n$, $J\coloneqq j_0+10n$, and apply \cref{prop:recursion} with $\alpha=a$ and $M=a^{1/2}\ge4$, so that $M\alpha=\alpha_{n+1}$. Let $j=J+10+j'$ with $j'\ge0$. For $0\le m\le j'+10$ the level $j-m$ is at least~$J$ and $f_{j-m}(a)\le a^{-g(j'+10-m)}$; for $m>j'+10$ we use $f_{j-m}\le1$. The right-hand side of~\eqref{eq:recursion} is therefore at most
+\begin{equation*}
+  5300\,a^{1-2g(j'+10)}+5300\cdot600\sum_{m=1}^{j'+10}\frac{(5\mu)^m}{m!}\,a^{3-\frac m2-2g(j'+10-m)}+5300\cdot600\sum_{m>j'+10}\frac{(5\mu)^m}{m!}\,a^{3-\frac m2}\,.
+\end{equation*}
+By \cref{lem:arithmetic}, each power of~$a$ in the first two terms is at most $a^{-1}\cdot a^{-\frac32g(j')}$, and in the third term $a^{3-m/2}\le a^{3-(j'+11)/2}\le a^{-1}\cdot a^{-\frac32g(j')}$. Since $\sum_{m\ge1}(5\mu)^m/m!\le\e^{5\mu}$, the total is at most
+\begin{equation*}
+  a^{-\frac32g(j')}\cdot\frac{5300\,(1+1200\,\e^{5\mu})}{a}=\alpha_{n+1}^{-g(j')}\cdot\frac{A_\mu}{a}\le\alpha_{n+1}^{-g(j-j_0-10(n+1))}\,,
+\end{equation*}
+because $a\ge\alpha_0\ge A_\mu$.
+\end{proof}
+
+\begin{lemma}[Base case]
+\label{lem:base}
+For every $\mu>0$ and every $\alpha_0\ge40$ there is $j_0=j_0(\mu,\alpha_0)$ with $f_{j_0}(\alpha_0)\le\alpha_0^{-7}$, for $p=1/48$.
+\end{lemma}
+
+\begin{proof}
+Fix~$x$. On $G_{j_0}(x,\alpha_0)$, either some site within distance $8\alpha_0+3$ of~$x$ belongs to $\cT_{j_0}$, or there is a path as in \cref{def:G} all of whose sites belong to~$\omega_p$. Removing loops, the path may be taken self-avoiding; it starts at one of at most $\pi(\alpha_0+1)^2\le4\alpha_0^2$ sites, and since it covers a distance of more than $7\alpha_0$ in steps of length at most $2\sqrt2$, it has at least $r_0\coloneqq\lceil2.4\alpha_0\rceil$ sites. There are at most $24^{r-1}$ self-avoiding paths with $r$ sites from a given start, so the probability of the second alternative is at most $4\alpha_0^2\sum_{r\ge r_0}24^{r-1}p^r\le4\alpha_0^2\,2^{-2.4\alpha_0}$ for $p=1/48$, which is at most $\alpha_0^{-7}/2$ for $\alpha_0\ge40$. The probability of the first alternative is at most $300\alpha_0^2\,\P(\mathrm{Poi}(4\mu/\pi)\ge j_0)$, which is at most $\alpha_0^{-7}/2$ for $j_0$ large enough.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}]
+Let $\alpha_0\coloneqq\max\{A_\mu,40\}$ and $j_0\coloneqq j_0(\mu,\alpha_0)$ from \cref{lem:base}. Given~$n$ and $\lambda$ satisfying~\eqref{eq:lambda}, let $j\coloneqq j_0+10n+1$. Then $\sqrt2\lambda(j-1)\le\sqrt2/68<1/48=p$, so by \cref{lem:domination} the probability in the theorem is at most $f_j(\alpha_n)$, and $f_j(\alpha_n)\le\alpha_n^{-1}$ by \cref{thm:induction}. For the last assertion, if the component of a point~$y$ reaches distance $8\alpha_n+3$ from~$y$, it contains a chain from a point within distance~$1$ of~$y$ to a point at distance more than $8\alpha_n+1$ from~$y$, and $1\le\alpha_n-1$.
+\end{proof}
+
+% =================================================================
+\section{The drift, and what would remove it}
+\label{sec:drift}
+
+\paragraph{Where the restriction comes from.} In~\eqref{eq:recursion} the bound at level~$j$ and scale $M\alpha$ uses the levels $j-n$ at scale~$\alpha$, weighted by $\alpha^2(5\mu/M)^n/n!$. With $M=\alpha^{1/2}$ these weights are $\alpha^{2-n/2}$ up to constants, and they exceed~$1$ for $n\le3$: it is likely that \emph{some} box of a region is met by a window line, because there are of the order of $\mu\alpha^{1/2}$ window lines through a region and each meets of the order of~$\alpha$ boxes. The level drop is applied to the whole region although only the boxes on the window lines are affected. As a consequence the hypothesis~\eqref{eq:hyp} at scale~$\alpha_{n+1}$ is available only for levels that are higher by $d=10$ than at scale~$\alpha_n$, and since the Bernoulli parameter in \cref{lem:domination} is $\sqrt2\lambda(j-1)$, a fixed~$\lambda$ can only afford finitely many scales. Other choices of the scale ratio change the constants $d$ and the exponents but not the drift: the quadratic term of the recursion requires $M\le\alpha^{\kappa}$ with $\kappa<1$, and then window lines through a region are numerous.
+
+\paragraph{An exact identity for the dependence.} Let $\cS$ be the set of lines of~$\cL$ meeting both $R_1$ and~$R_2$, let $\pi_i(\cS)\coloneqq\P(G_j(x_i,\alpha)\,\vert\,\cS)$, and let $\rho_i(\cS)\coloneqq\pi_i(\cS)-\pi_i(\varnothing)\ge0$, the conditional probability that the crossing at~$x_i$ exists but would not exist without the shared lines. The events are conditionally independent given~$\cS$, so
+\begin{equation}
+\label{eq:cov}
+  \P\bigl(G_j(x_1,\alpha)\cap G_j(x_2,\alpha)\bigr)-\P\bigl(G_j(x_1,\alpha)\bigr)\P\bigl(G_j(x_2,\alpha)\bigr)=\mathrm{Cov}\bigl(\rho_1(\cS),\rho_2(\cS)\bigr)\le\E\bigl[\rho_1(\cS)\rho_2(\cS)\bigr]\,.
+\end{equation}
+The drift would disappear if one could show, at the same level~$j$, that
+\begin{equation}
+\label{eq:needed}
+  \E\bigl[\rho_1(\cS)\rho_2(\cS)\bigr]\le\alpha^{-c}\,f_j(\alpha)^{2}+\varepsilon(\alpha)
+\end{equation}
+with $c>0$ and an error $\varepsilon(\alpha)$ below the target at scale $M\alpha$ divided by $M^2$; the recursion would then read $f_j(M\alpha)\le5300M^2[(1+\alpha^{-c})f_j(\alpha)^2+\varepsilon(\alpha)]$ with no change of level, and \cref{lem:domination,lem:base} would give a subcritical phase. The quantity $\rho_i(\cS)$ is the probability that a crossing \emph{needs} a shared line: its path contains a site on a shared line at which, without that line, the level~$j$ is not reached. Heuristically such a site has exactly $j-1$ other lines, which has a small constant probability, and it must be joined to both boundaries of the annulus by two arms carried by different bundles, which costs the product of two one-arm probabilities; summing over the sites of the shared lines one expects $\E\rho_i$ to be of order $\alpha^{-1/2}f_j(\alpha)$ and~\eqref{eq:needed} to hold with room to spare. The level drop of \cref{lem:decoupling} is the crude bound $\rho_i(\cS)\le\P(G'_{j-H}\,\vert\,\cS)$, which ignores both the rarity of sites with exactly $j-1$ lines on a shared line and the two arms.
+
+\paragraph{What a proof of~\eqref{eq:needed} needs.} Two things, neither of which we have. First, a one-arm estimate: the probability that a given site is joined to distance~$r$ in $\cO_j$ should be smaller than the crossing probability at scale~$r$ by a factor of order $1/r$, and the induction hypothesis would have to carry it. Second, a way to use that the two arms from a needed site belong to different clusters once the site is removed; this is a disjoint-occurrence statement for clusters that share lines near the site, and it is the same difficulty, in its smallest instance, as the relay problem of our earlier notes. The present note shows that this is the only obstacle: everything else in the two-scale scheme is proved.
+
+% =================================================================
+\section{Summary}
+\label{sec:summary}
+
+\begin{enumerate}
+  \item \Cref{thm:main} is unconditional: for $\lambda\le1/(68(j_0+10n))$ the Cox Boolean model on Poisson lines has annulus-crossing probability at most $1/\alpha_n$ at the scale $\alpha_n=\alpha_0^{(3/2)^n}$, i.e.\ the model is subcritical on all scales up to $\exp\{\exp(c/\lambda)\}$.
+  \item The proof uses the domination of the occupied boxes by $\cT_j\cup\omega_p$ (\cref{lem:domination}), Gou\'er\'e's inclusion for box paths (\cref{lem:inclusion}), the independence of the lines outside a direction window of width $O(1/M)$ between two regions at distance $M\alpha$, and a level drop for the window lines (\cref{lem:decoupling}), which give the recursion~\eqref{eq:recursion} and, with $M=\alpha^{1/2}$, the induction of \cref{thm:induction}.
+  \item The level drop costs ten levels per scale. A subcritical phase would follow from the bound~\eqref{eq:needed} on the covariance term~\eqref{eq:cov} at a fixed level, which requires a one-arm estimate and a disjointness statement for the two arms at a site that needs a shared line.
+\end{enumerate}
+
+\section*{Acknowledgements}
+
+BJ acknowledges the financial support of the Leibniz Association within the Leibniz Junior Research Group on Probabilistic Methods for Dynamic Communication Networks (DYCOMNET) as part of the Leibniz Competition (grant no.~J105/2020), of the Berlin Mathematics Research Center MATH+ through the project EF-MA-Sys-2 on Information Flow \& Emergent Behavior in Complex Networks, and of the Deutsche Forschungsgemeinschaft (DFG) through Project P27 within the SPP~2265.
+
+\section*{Use of AI tools}
+
+The proofs, computations and the text of this note were developed with substantial assistance of the AI systems Claude (Anthropic) and ChatGPT Astra~6 (OpenAI), in an interactive process directed by the authors.
+
+\bibliographystyle{amsalpha}
+\bibliography{references}
+
+\end{document}
