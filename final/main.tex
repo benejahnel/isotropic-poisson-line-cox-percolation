@@ -59,10 +59,10 @@ We therefore estimate crossing probabilities uniformly over the angular restrict
 
 The subcritical phase requires a different argument, because deleting lines decreases occupied crossings. We dominate the occupied boxes of a unit lattice by the boxes close to at least~$j$ lines together with an independent Bernoulli field, for a large level~$j$ and a small point intensity. A crossing of this dominating set at a large scale forces a fixed number of crossings in windows that are far apart on a much smaller scale. Given the lines that meet at least two of these windows, the crossings are independent. Such a shared line is rare, and its positions in the first two windows it meets are approximately independent and uniform. The multivariate Mecke equation then allows us to compare it with the lines of the process of nearly the same direction, at the cost of a logarithmic factor. In the remaining windows we make no use of its position. Instead, the induction hypothesis bounds crossing probabilities uniformly over a number of additional lines and loses a small power of the scale for each of them. This yields a recursion in which the level is the same at all scales.
 
-Section~\ref{sec:setting} introduces the model and states Theorem~\ref{thm:main}. Section~\ref{sec:strategy} explains why deleting a short interval of directions decouples two distant crossings, states the initial estimate, the crossing recursion, and the deterministic boundary lemma, and proves Theorem~\ref{thm:main} by bounding closed boundaries with crossing events. Section~\ref{sec:recursion} proves the crossing recursion by deleting directions. Section~\ref{sec:initial} then proves the initial estimate by constructing a polygon of four lines around the inner square. Finally, Section~\ref{sec:geometry} proves the geometric lemma for the initial polygon and the deterministic boundary lemma. Section~\ref{sec:subcritical} states and proves Theorem~\ref{sub:thm:main} on the subcritical phase. Section~\ref{sec:extensions} discusses extensions to random radii and to higher dimensions together with open questions.
+Section~\ref{sec:setting} introduces the model and states Theorems~\ref{thm:main} and~\ref{sub:thm:main}. Section~\ref{sec:strategy} explains why deleting a short interval of directions decouples two distant crossings, states the initial estimate, the crossing recursion, and the deterministic boundary lemma, and proves Theorem~\ref{thm:main} by bounding closed boundaries with crossing events. Section~\ref{sec:recursion} proves the crossing recursion by deleting directions. Section~\ref{sec:initial} then proves the initial estimate by constructing a polygon of four lines around the inner square. Finally, Section~\ref{sec:geometry} proves the geometric lemma for the initial polygon and the deterministic boundary lemma. Section~\ref{sec:subcritical} proves Theorem~\ref{sub:thm:main} on the subcritical phase. Section~\ref{sec:extensions} discusses extensions to random radii and to higher dimensions together with open questions.
 
 % =================================================================
-\section{Setting and main result}
+\section{Setting and main results}
 \label{sec:setting}
 
 The model has three parameters: the line intensity $\mu>0$, the point intensity $\lambda>0$ along each line, and the disk radius $r>0$. We first specify the random lines, then place points on them, and finally take the union of disks around those points. The normalisation of the line intensity will make $\mu$ equal to the expected total line length per unit area.
@@ -100,7 +100,7 @@ with $\inf\varnothing=\infty$. The theorem gives a finite upper bound for this t
   \label{fig:model}
 \end{figure}
 
-Throughout, universal constants are positive and finite and do not depend on the model parameters, the scales, or the angular restrictions considered below. We use $C$ for the constant in the main bound, $c,C_0$ for those in the initial estimate, and subscripted constants for intermediate bounds. Their admissible choices are supplied in the proofs. Our main result quantifies the intensity sufficient for percolation.
+Throughout, universal constants are positive and finite and do not depend on the model parameters, the scales, or the angular restrictions considered below. We use $C$ for the constant in the main bound, $c,C_0$ for those in the initial estimate, and subscripted constants for intermediate bounds. Their admissible choices are supplied in the proofs. Our first main result quantifies the intensity sufficient for percolation.
 
 \begin{theorem}[Supercritical phase]
 \label{thm:main}
@@ -111,10 +111,23 @@ There is a universal finite constant~$C$ such that, for every $\mu,r>0$,
 Moreover, $\Xi_\lambda$ percolates almost surely whenever $\lambda\ge Cr^{-1}[1+\logp(1/(\mu r))]$.
 \end{theorem}
 
-Theorem~\ref{thm:main} applies at every positive line density, including arbitrarily sparse line environments. Rescaling space by $x\mapsto x/r$ gives $\lambda_c(\mu,r)=r^{-1}\lambda_c(\mu r,1)$, so the product~$\mu r$ is the dimensionless line density. For fixed~$r$, the theorem supplies a sufficient point intensity that grows at most logarithmically as $\mu$ tends to zero. The optimality of this upper bound is a separate question. Positivity of the critical intensity is proved in Theorem~\ref{sub:thm:main}; Remark~\ref{rem:monotonicity} explains why the argument for Theorem~\ref{thm:main} does not give it. Random radii and higher dimensions are discussed in Section~\ref{sec:extensions}.
+Theorem~\ref{thm:main} applies at every positive line density, including arbitrarily sparse line environments. Rescaling space by $x\mapsto x/r$ gives $\lambda_c(\mu,r)=r^{-1}\lambda_c(\mu r,1)$, so the product~$\mu r$ is the dimensionless line density. For fixed~$r$, the theorem supplies a sufficient point intensity that grows at most logarithmically as $\mu$ tends to zero. The optimality of this upper bound is a separate question.
+
+Our second main result shows that the critical intensity is positive.
+
+\begin{theorem}[Subcritical phase]
+\label{sub:thm:main}
+For every $\mu,r>0$,
+\begin{equation*}
+  \lambda_c(\mu,r)>0\,.
+\end{equation*}
+More precisely, there is a function $\lambda_0\colon(0,\infty)\to(0,\infty)$ such that, for all $\mu,r>0$ and all $\lambda\le\lambda_0(\mu r)/r$, almost surely all connected components of~$\Xi_\lambda$ are bounded.
+\end{theorem}
+
+Theorems~\ref{thm:main} and~\ref{sub:thm:main} together give $0<\lambda_c(\mu,r)<\infty$ for all $\mu,r>0$, so the phase transition is nontrivial at every line intensity and disk radius. In contrast to Theorem~\ref{thm:main}, Theorem~\ref{sub:thm:main} is qualitative: the function~$\lambda_0$ is not explicit. Its proof gives more than the absence of unbounded components. For small~$\lambda$, the probability that the occupied set connects a disk to the complement of the concentric disk of eight times its radius decays polynomially along a sequence of scales; see Proposition~\ref{sub:prop:chains}. Remark~\ref{rem:monotonicity} explains why the argument for Theorem~\ref{thm:main} does not give Theorem~\ref{sub:thm:main}, which is proved by a separate multiscale argument in Section~\ref{sec:subcritical}. Random radii and higher dimensions are discussed in Section~\ref{sec:extensions}.
 
 % =================================================================
-\section{Strategy and proof of the main theorem}
+\section{The supercritical phase: strategy and proof of \texorpdfstring{Theorem~\ref{thm:main}}{the first main theorem}}
 \label{sec:strategy}
 
 This section turns the construction outlined in the introduction into a proof of Theorem~\ref{thm:main}. We define the lattice events and state the initial estimate, the crossing recursion, and the deterministic boundary lemma. The proof of the theorem first uses that lemma and a covering by closed crossings to reduce percolation to bounds on the initial event and the crossing probabilities. We then choose the initial scale and point intensity, apply the two propositions, and use ergodicity to obtain percolation with probability one.
@@ -455,21 +468,21 @@ The constructed set~$T$ is finite, closed, and star-connected, and $Q_{4L_0}\sub
 
 
 % =================================================================
-\section{The subcritical phase}
+\section{The subcritical phase: proof of \texorpdfstring{Theorem~\ref{sub:thm:main}}{the second main theorem}}
 \label{sec:subcritical}
 
-In this section we prove that the critical intensity is positive. We write $\bar B(x,t)$ for the closed Euclidean disk of radius~$t$ centred at~$x$. For $r=1$, a \emph{chain} is a finite sequence of points of~$X_\lambda$ with consecutive points at distance less than~$2$. Two disks of~$\Xi_\lambda$ overlap if and only if their centres are at distance less than~$2$, so the centres of the disks of a connected component of~$\Xi_\lambda$ are pairwise joined by chains.
+In this section we prove Theorem~\ref{sub:thm:main}. We write $\bar B(x,t)$ for the closed Euclidean disk of radius~$t$ centred at~$x$. For $r=1$, a \emph{chain} is a finite sequence of points of~$X_\lambda$ with consecutive points at distance less than~$2$. Two disks of~$\Xi_\lambda$ overlap if and only if their centres are at distance less than~$2$, so the centres of the disks of a connected component of~$\Xi_\lambda$ are pairwise joined by chains. Theorem~\ref{sub:thm:main} is a consequence of the following bound.
 
-\begin{theorem}[Subcritical phase]
-\label{sub:thm:main}
-For all $\mu,r>0$,
-\begin{equation*}
-  \lambda_c(\mu,r)>0\,.
-\end{equation*}
-More precisely, for every $\mu>0$ there are $\lambda_0=\lambda_0(\mu)>0$ and $\alpha_0=\alpha_0(\mu)$ such that for $r=1$, all $\lambda\le\lambda_0$, all $n\ge0$ and all $x\in\R^2$, with $\alpha_n\coloneqq\alpha_0^{5^n}$, the probability that there is a chain from a point of $\bar B(x,\alpha_n-1)$ to a point outside $\bar B(x,8\alpha_n+1)$ is at most $\alpha_n^{-7}$. In particular, for $r=1$ and $\lambda\le\lambda_0$, almost surely all connected components of~$\Xi_\lambda$ are bounded, and $\lambda_c(\mu,r)\ge\lambda_0(\mu r)/r$ for all $\mu,r>0$.
-\end{theorem}
+\begin{proposition}[Crossings by chains]
+\label{sub:prop:chains}
+For every $\mu>0$ there are $\lambda_0=\lambda_0(\mu)>0$ and $\alpha_0=\alpha_0(\mu)$ such that for $r=1$, all $\lambda\le\lambda_0$, all $n\ge0$ and all $x\in\R^2$, with $\alpha_n\coloneqq\alpha_0^{5^n}$, the probability that there is a chain from a point of $\bar B(x,\alpha_n-1)$ to a point outside $\bar B(x,8\alpha_n+1)$ is at most $\alpha_n^{-7}$.
+\end{proposition}
 
-The assertion on bounded components follows from the bound on chains: an unbounded component meeting $\bar B(0,R)$ contains, for every~$n$ with $\alpha_n\ge R+2$, a chain from $\bar B(0,\alpha_n-1)$ to the complement of $\bar B(0,8\alpha_n+1)$, so its probability is at most $\inf_n\alpha_n^{-7}=0$. The bound on $\lambda_c(\mu,r)$ then follows from the scaling relation $\lambda_c(\mu,r)=r^{-1}\lambda_c(\mu r,1)$ recorded after Theorem~\ref{thm:main}. Hence it suffices to prove the assertion on chains, and from now on $r=1$.
+\begin{proof}[Proof of Theorem~\ref{sub:thm:main}, given \cref{sub:prop:chains}]
+Let first $r=1$ and $\lambda\le\lambda_0(\mu)$. An unbounded component of~$\Xi_\lambda$ meeting $\bar B(0,R)$ contains, for every~$n$ with $\alpha_n\ge R+2$, a chain from a point of $\bar B(0,\alpha_n-1)$ to a point outside $\bar B(0,8\alpha_n+1)$. By \cref{sub:prop:chains} the probability of this event is at most $\inf_n\alpha_n^{-7}=0$, and letting $R\to\infty$ along the integers shows that almost surely all components are bounded. For general $r>0$, the map $x\mapsto x/r$ transforms the model with parameters $(\mu,\lambda,r)$ into the model with parameters $(\mu r,\lambda r,1)$. Hence all components of~$\Xi_\lambda$ are bounded almost surely whenever $\lambda r\le\lambda_0(\mu r)$, and in particular $\lambda_c(\mu,r)\ge\lambda_0(\mu r)/r>0$.
+\end{proof}
+
+The rest of this section contains the proof of \cref{sub:prop:chains}, and from now on $r=1$.
 
 The proof is a multiscale argument for occupied crossings, with scale ratio $M=\alpha^{4}$ and $25$ well-separated sub-crossings in each step. It is independent of Sections~\ref{sec:strategy}--\ref{sec:geometry}, and several letters are used with a new meaning; all notation is introduced below. The occupied boxes of the unit lattice are dominated by the boxes close to at least $j$ lines together with an independent Bernoulli field. Given the lines meeting at least two of the regions of the sub-crossings, the sub-crossings are independent. Such a shared line is seen by the first two regions it meets as a line of fixed direction with independent uniform offsets, and the multivariate Mecke equation compares it with the lines of~$\cL$ of nearly the same direction at the cost of a logarithmic factor. In the remaining regions no use is made of its position; instead, the induction hypothesis bounds crossing probabilities uniformly over $s$ additional lines, with a bound that deteriorates only by a small power of the scale per line.
 
@@ -504,7 +517,7 @@ For all integers $k\ge0$ and $b\ge0$, $\gamma(k)-\gamma(k+b)\le\bar\sigma b$.
 Let $b\ge1$. If $k+b\le k_c$ the difference is $\sigma b$, and if $k>k_c$ it is~$0$. If $k\le k_c<k+b$, it equals $\gamma(k)=\gamma_*+\sigma(k_c-k)\le\gamma_*+\sigma(b-1)\le(\gamma_*+\sigma)b\le\bar\sigma b$.
 \end{proof}
 
-\paragraph{Plan.} \Cref{sub:sec:setting} defines the lattice model, the crossing events with additional lines and the base case. \Cref{sub:sec:geometry} contains the geometry: the inclusion of a crossing in $a$ sub-crossings, the number of regions met by a line, and coordinates for the lines meeting two regions. \Cref{sub:sec:decoupling} proves the decoupling of $a$ sub-crossings. \Cref{sub:sec:induction} contains the induction over scales and the proof of \cref{sub:thm:main}.
+\paragraph{Plan.} \Cref{sub:sec:setting} defines the lattice model, the crossing events with additional lines and the base case. \Cref{sub:sec:geometry} contains the geometry: the inclusion of a crossing in $a$ sub-crossings, the number of regions met by a line, and coordinates for the lines meeting two regions. \Cref{sub:sec:decoupling} proves the decoupling of $a$ sub-crossings. \Cref{sub:sec:induction} contains the induction over scales and the proof of \cref{sub:prop:chains}.
 
 % =================================================================
 \subsection{The lattice model}
@@ -759,8 +772,8 @@ For $n=0$ the claim is the assumption, since $\zeta_0=2$. Assume~\eqref{sub:eq:h
 which is at most $\alpha_{n+1}^{-\gamma(s)}$ by \cref{sub:lem:counting} and~\eqref{sub:eq:A3}.
 \end{proof}
 
-\begin{proof}[Proof of \cref{sub:thm:main}]
-Let $\alpha_0=\alpha_0(\mu)$ satisfy the requirements of this section, $j_0=j_0(\mu,\alpha_0)$ from \cref{sub:lem:base}, $j\coloneqq j_0+k_c$ and $\lambda_0\coloneqq1/(68(j-1))$. By \cref{sub:lem:base} the assumption of \cref{sub:thm:induction} holds, so $F_j^{\zeta_n}(0;\alpha_n)\le\alpha_n^{-\gamma_0}=\alpha_n^{-7}$ for all~$n$. For $\lambda\le\lambda_0$ we have $\sqrt2\lambda(j-1)\le\sqrt2/68<1/48=p$, and \cref{sub:lem:domination} bounds the probability in the theorem by $F_j^1(0;\alpha_n)\le F_j^{\zeta_n}(0;\alpha_n)$.
+\begin{proof}[Proof of \cref{sub:prop:chains}]
+Let $\alpha_0=\alpha_0(\mu)$ satisfy the requirements of this section, $j_0=j_0(\mu,\alpha_0)$ from \cref{sub:lem:base}, $j\coloneqq j_0+k_c$ and $\lambda_0\coloneqq1/(68(j-1))$. By \cref{sub:lem:base} the assumption of \cref{sub:thm:induction} holds, so $F_j^{\zeta_n}(0;\alpha_n)\le\alpha_n^{-\gamma_0}=\alpha_n^{-7}$ for all~$n$. For $\lambda\le\lambda_0$ we have $\sqrt2\lambda(j-1)\le\sqrt2/68<1/48=p$, and \cref{sub:lem:domination} bounds the probability in the proposition by $F_j^1(0;\alpha_n)\le F_j^{\zeta_n}(0;\alpha_n)$.
 \end{proof}
 
 % =================================================================
@@ -861,7 +874,7 @@ Theorems~\ref{thm:main} and~\ref{sub:thm:main} together give $0<\lambda_c(\mu,r)
 
 \emph{Quantitative bounds.} The proof gives $\lambda_c(\mu,1)\ge1/(68(j-1))$, where the level $j=j_0+k_c$ depends on~$\mu$ through the initial scale~$\alpha_0(\mu)$ and through the base case in \cref{sub:lem:base}, neither of which we have made explicit. The resulting lower bound is far from the upper bound of Theorem~\ref{thm:main}. The behaviour of $\lambda_c(\mu,r)$ as $\mu r\to0$ and as $\mu r\to\infty$ is open, in particular whether the logarithmic growth in Theorem~\ref{thm:main} is of the correct order.
 
-\emph{Decay of connections.} Theorem~\ref{sub:thm:main} bounds the probability of a crossing at the scales~$\alpha_n$ by a fixed negative power of the scale. A single line carrying points at mutual distance less than~$2r$ along a segment shows that this probability is at least exponentially small in the scale. Whether the radius of the component of a typical point has an exponential tail for small~$\lambda$, and whether such a decay holds throughout the subcritical regime, is open. The usual arguments for sharpness of the phase transition do not apply directly, because one line influences configurations at arbitrary distances.
+\emph{Decay of connections.} \Cref{sub:prop:chains} bounds the probability of a crossing at the scales~$\alpha_n$ by a fixed negative power of the scale. A single line carrying points at mutual distance less than~$2r$ along a segment shows that this probability is at least exponentially small in the scale. Whether the radius of the component of a typical point has an exponential tail for small~$\lambda$, and whether such a decay holds throughout the subcritical regime, is open. The usual arguments for sharpness of the phase transition do not apply directly, because one line influences configurations at arbitrary distances.
 
 \emph{Random radii.} As noted in Section~\ref{sec:random-radii}, Theorem~\ref{sub:thm:main} gives a subcritical phase for bounded radii, and Remark~\ref{rem:heavy-tails} shows that a finite first moment is necessary. We do not know whether a moment condition on~$\varrho$ is sufficient.
 
