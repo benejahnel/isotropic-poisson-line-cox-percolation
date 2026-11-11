@@ -1,0 +1,358 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{jahnel}
+\DeclareMathOperator{\dist}{dist}
+\newcommand{\cO}{\mathcal O}
+\newcommand{\cT}{\mathcal T}
+\newcommand{\cS}{\mathcal S}
+\newcommand{\cW}{\mathcal W}
+
+\runningtitle{A subcritical phase for the Cox Boolean model on Poisson lines}
+\hypersetup{pdftitle={A subcritical phase for the Cox Boolean model on Poisson lines: a multi-scale proof attempt},pdfauthor={Christian Hirsch, Benedikt Jahnel}}
+
+\title{\textbf{A subcritical phase for the Cox Boolean model\\ on Poisson lines}\\[0.6em] \large Working note: a multi-scale proof attempt, not yet independently checked}
+
+\author{%
+  Christian Hirsch\thanks{Institut f\"ur Mathematische Stochastik, Georg-August-Universit\"at G\"ottingen, Goldschmidtstra\ss e~7, 37077 G\"ottingen, Germany. \texttt{christian.hirsch@uni-goettingen.de}. \orcid{0000-0003-4136-3740}.}
+  \and
+  Benedikt Jahnel\thanks{Institut f\"ur Mathematische Stochastik, Technische Universit\"at Braunschweig, Universit\"atsplatz~2, 38106 Braunschweig, Germany, and Weierstrass Institute for Applied Analysis and Stochastics, Mohrenstra\ss e~39, 10117 Berlin, Germany. \texttt{benedikt.jahnel@tu-braunschweig.de}. \orcid{0000-0002-4212-0065}.}%
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{plain}
+
+\begin{abstract}
+We consider the Boolean model with unit disks centred at the points of a Cox process of intensity~$\lambda$ per unit length on an isotropic Poisson line process of intensity~$\mu$ in the plane. This note contains a complete argument for the existence of a subcritical phase, $\lambda_c(\mu)>0$ for every $\mu>0$. The argument is a multi-scale recursion with scale ratio $M=\alpha^{4}$ and $25$ well-separated sub-crossings per step. Its ingredients are: the domination of the occupied boxes by the boxes close to at least $j$ lines and an independent Bernoulli field; an exact conditional independence of the sub-crossings given the lines shared by two or more of the regions; the observation that a shared line is seen by its first two regions as a line of fixed direction with independent uniform offsets, so that by the Mecke formula it costs only a logarithmic factor there; and an induction hypothesis for crossings in the presence of $s$ arbitrarily placed additional lines, with a bound that deteriorates only by a small power per line. The note is a proof attempt: every step is written out and has been checked by its authors' tools, but it has not been checked independently, and the result should not be regarded as established before that.
+\end{abstract}
+
+% =================================================================
+\section{Result}
+\label{sec:result}
+
+Let $\cL$ be a Poisson line process in~$\R^2$ with intensity measure $\nu(\d\theta\,\d p)=(\mu/\pi)\,\d\theta\,\d p$, where a line $\{y\colon\langle y,n_\theta\rangle=p\}$ is parametrised by the direction $\theta\in[0,\pi)$ of its unit normal $n_\theta$ and by $p\in\R$; the lines meeting a convex set of perimeter~$P$ form a Poisson variable with mean $\mu P/\pi$. Conditionally on~$\cL$, let $X$ be a Poisson process of intensity~$\lambda$ per unit length on every line of~$\cL$, and let $\Xi\coloneqq\bigcup_{c\in X}B(c,1)$. A \emph{chain} is a finite sequence of points of~$X$ with consecutive points at distance less than~$2$.
+
+\begin{theorem}[Subcritical phase]
+\label{thm:main}
+For every $\mu>0$ there are $\lambda_0=\lambda_0(\mu)>0$ and $\alpha_0=\alpha_0(\mu)$ such that for all $\lambda\le\lambda_0$, all $n\ge0$ and all $x\in\R^2$, with $\alpha_n\coloneqq\alpha_0^{5^n}$, the probability that there is a chain from a point of $B(x,\alpha_n-1)$ to a point outside $B(x,8\alpha_n+1)$ is at most $\alpha_n^{-7}$. In particular, for $\lambda\le\lambda_0$ almost surely all connected components of~$\Xi$ are bounded, so that $\lambda_c(\mu)\ge\lambda_0(\mu)>0$.
+\end{theorem}
+
+The second assertion follows from the first: an unbounded component meeting $B(0,R)$ contains, for every~$n$ with $\alpha_n\ge R+2$, a chain from $B(0,\alpha_n-1)$ to the complement of $B(0,8\alpha_n+1)$, so its probability is at most $\inf_n\alpha_n^{-7}=0$.
+
+\paragraph{Parameters.} Throughout,
+\begin{equation}
+\label{eq:param}
+\begin{gathered}
+  \kappa\coloneqq4,\qquad a\coloneqq25,\qquad\gamma_0\coloneqq7,\qquad\gamma_*\coloneqq0.11,\qquad\sigma\coloneqq0.005,\\
+  \bar\sigma\coloneqq0.12,\qquad k_c\coloneqq1378,\qquad\xi\coloneqq0.1,\qquad p\coloneqq\tfrac1{48}\,,
+\end{gathered}
+\end{equation}
+and
+\begin{equation}
+\label{eq:gamma}
+  \gamma(k)\coloneqq\gamma_0-\sigma k\quad(0\le k\le k_c),\qquad\gamma(k)\coloneqq0\quad(k>k_c)\,,
+\end{equation}
+so that $\gamma$ is non-increasing, $\gamma(k)\ge\gamma(k_c)=\gamma_*$ for $k\le k_c$, and $\sigma+\gamma_*\le\bar\sigma$. The following inequalities hold:
+\begin{align}
+\label{eq:P1}
+  (a-\kappa-1)(\gamma_0-\kappa)&\ge(1+\kappa)\gamma_0+\tfrac\kappa2+\xi\,,&\gamma_0&\ge\tfrac32\kappa+\xi\,,\\
+\label{eq:P3}
+  (a-1-\kappa)\gamma_*&\ge\tfrac\kappa2+\xi\,,&\bar\sigma(a-2)&\le\kappa-1-0.2\,.
+\end{align}
+Indeed $60\ge37.1$, $7\ge6.1$, $2.2\ge2.1$ and $2.76\le2.8$.
+
+\begin{lemma}[Profile]
+\label{lem:profile}
+For all integers $k\ge0$ and $b\ge0$, $\gamma(k)-\gamma(k+b)\le\bar\sigma b$.
+\end{lemma}
+
+\begin{proof}
+Let $b\ge1$. If $k+b\le k_c$ the difference is $\sigma b$, and if $k>k_c$ it is~$0$. If $k\le k_c<k+b$, it equals $\gamma(k)=\gamma_*+\sigma(k_c-k)\le\gamma_*+\sigma(b-1)\le(\gamma_*+\sigma)b\le\bar\sigma b$.
+\end{proof}
+
+\paragraph{Plan.} \Cref{sec:setting} defines the lattice model, the crossing events with additional lines and the base case. \Cref{sec:geometry} contains the geometry: the inclusion of a crossing in $a$ sub-crossings, the number of regions met by a line, and coordinates for the lines meeting two regions. \Cref{sec:decoupling} proves the decoupling of $a$ sub-crossings. \Cref{sec:induction} contains the induction over scales and the proof of \cref{thm:main}. \Cref{sec:audit} lists the points at which an error would be most likely.
+
+% =================================================================
+\section{Setting}
+\label{sec:setting}
+
+\paragraph{Counts and crossing events.} For a site $z\in\Z^2$, a radius $r\in[1,2]$ and a finite set~$\Lambda$ of lines put
+\begin{equation*}
+  N_r^{\Lambda}(z)\coloneqq\#\{\ell\in\cL\colon\dist(z,\ell)\le r\}+\#\{\ell\in\Lambda\colon\dist(z,\ell)\le r\}\,,
+\end{equation*}
+and $N_r\coloneqq N_r^\varnothing$, a Poisson variable with mean $2\mu r\le4\mu$. Let $U=(U_z)_{z\in\Z^2}$ be independent uniform variables on $[0,1]$, independent of~$\cL$, and $\omega\coloneqq\{z\colon U_z\le p\}$. A \emph{path} is a finite sequence of sites with consecutive sites at sup-distance at most~$2$; a step has Euclidean length at most $2\sqrt2<3$.
+
+\begin{definition}[Crossing events]
+\label{def:G}
+For $x\in\R^2$, $\rho\ge5$, $j\in\Z$, $r\in[1,2]$ and a finite set~$\Lambda$ of lines, $G_j^{r,\Lambda}(x,\rho)$ is the event that there is a path $z_1,\dots,z_q$ of sites in $\{z\colon N_r^\Lambda(z)\ge j\}\cup\omega$ with $\lvert z_1-x\rvert\le\rho$, $\lvert z_q-x\rvert>8\rho$ and $\lvert z_i-x\rvert\le8\rho$ for $i<q$. For $s\ge0$ put
+\begin{equation*}
+  F_j^r(s;\rho)\coloneqq\sup_{x\in\R^2}\ \sup_{\lvert\Lambda\rvert\le s}\P\bigl(G_j^{r,\Lambda}(x,\rho)\bigr)\,.
+\end{equation*}
+\end{definition}
+
+The events are increasing in $r$, in~$\Lambda$ and in~$\cL$, and decreasing in~$j$; $F_j^r(s;\rho)$ is non-decreasing in $r$ and~$s$. All sites of a path as above lie in $A(x,\rho)\coloneqq\{z\colon\lvert z-x\rvert\le8\rho+3\}$, and a line within distance $r\le2$ of such a site meets $B(x,9\rho)$ because $8\rho+5\le9\rho$. Hence $G_j^{r,\Lambda}(x,\rho)$ is determined by $(U_z)_{z\in A(x,\rho)}$ and by the lines of $\cL\cup\Lambda$ meeting $B(x,9\rho)$. Since $N_r^\Lambda\le N_r+\lvert\Lambda\rvert$,
+\begin{equation}
+\label{eq:trivial}
+  F_j^r(s;\rho)\le F^r_{j-s}(0;\rho)\,.
+\end{equation}
+
+\begin{lemma}[Domination]
+\label{lem:domination}
+Let $j\ge1$ and $\sqrt2\,\lambda(j-1)\le p$. Then for all $x\in\R^2$ and $\rho\ge5$ the probability that there is a chain from a point of $B(x,\rho-1)$ to a point outside $B(x,8\rho+1)$ is at most $F_j^1(0;\rho)$.
+\end{lemma}
+
+\begin{proof}
+Let $Q(z)\coloneqq z+[-1/2,1/2)^2$ and let $N(z)\le N_1(z)$ be the number of lines of~$\cL$ meeting $Q(z)$. Conditionally on~$\cL$, the events $\{X\cap Q(z)\neq\varnothing\}$, $z\in\Z^2$, are independent with probabilities $q_z\le\min\{1,\sqrt2\lambda N(z)\}$, since a chord of a unit square has length at most~$\sqrt2$. Let $(V_z)$ be independent uniform variables independent of $(\cL,X)$, and put $U_z\coloneqq q_zV_z$ if $X\cap Q(z)\neq\varnothing$ and $U_z\coloneqq q_z+(1-q_z)V_z$ otherwise. Conditionally on~$\cL$ the $U_z$ are independent and uniform, so $U$ is independent of~$\cL$ and has the required law. If $X\cap Q(z)\neq\varnothing$ and $N_1(z)\le j-1$, then $U_z\le q_z\le\sqrt2\lambda(j-1)\le p$, so $z\in\omega$. Hence every site whose box contains a point of~$X$ lies in $\{N_1\ge j\}\cup\omega$. If $c_1,\dots,c_q$ is a chain as in the statement and $c_i\in Q(z_i)$, then $\lvert z_i-c_i\rvert<1$, consecutive sites $z_i$ are at sup-distance less than~$3$, hence at most~$2$, $\lvert z_1-x\rvert\le\rho$ and $\lvert z_q-x\rvert>8\rho$; stopping at the first site at distance more than $8\rho$ from~$x$ gives a path as in \cref{def:G}.
+\end{proof}
+
+\begin{lemma}[Base case]
+\label{lem:base}
+For every $\mu>0$ and $\alpha_0\ge40$ there is $j_0=j_0(\mu,\alpha_0)$ such that $F^2_{j_0}(0;\alpha_0)\le\alpha_0^{-\gamma_0}$. Consequently, with $j\coloneqq j_0+k_c$, $F^2_j(s;\alpha_0)\le\alpha_0^{-\gamma(s)}$ for all $s\ge0$.
+\end{lemma}
+
+\begin{proof}
+Fix~$x$. On $G^{2,\varnothing}_{j_0}(x,\alpha_0)$ either some site of $A(x,\alpha_0)$ has $N_2\ge j_0$, or there is a path as in \cref{def:G} in~$\omega$. The set $A(x,\alpha_0)$ has at most $\pi(8\alpha_0+4)^2\le300\alpha_0^2$ sites, so the first alternative has probability at most $300\alpha_0^2\,\P(\mathrm{Poi}(4\mu)\ge j_0)\le\alpha_0^{-7}/2$ for $j_0$ large. In the second alternative the path may be taken self-avoiding; it starts at one of at most $4\alpha_0^2$ sites and has at least $\lceil2.4\alpha_0\rceil$ sites, because it covers a distance of more than $7\alpha_0$ in steps of length at most $2\sqrt2$. There are at most $24^{q-1}$ self-avoiding paths with $q$ sites from a given start, so the probability is at most $4\alpha_0^2\sum_{q\ge2.4\alpha_0}24^{q-1}48^{-q}\le4\alpha_0^2\,2^{-2.4\alpha_0}\le\alpha_0^{-7}/2$ for $\alpha_0\ge40$. The consequence follows from~\eqref{eq:trivial} for $s\le k_c$ and is trivial for $s>k_c$.
+\end{proof}
+
+% =================================================================
+\section{Geometry}
+\label{sec:geometry}
+
+Let $M\ge\max\{100,6a\}$ and $\alpha\ge5$. For $i=1,\dots,a$ let $\beta_i\coloneqq1+7(i-1)/(a-1)$, so that $\beta_1=1$ and $\beta_a=8$, and let $K_i$ be a set of equally spaced points on the circle of radius $M\beta_i$ around the origin with arc spacing in $[0.48,0.5]$; then every point of this circle is within distance $1/4$ of~$K_i$ and $\lvert K_i\rvert\le13M\beta_i\le104M$. A \emph{tuple} is an element $T=(k_1,\dots,k_a)$ of $K_1\times\dots\times K_a$.
+
+\begin{lemma}[Inclusion]
+\label{lem:inclusion}
+For all $x\in\R^2$, $j$, $r$ and~$\Lambda$,
+\begin{equation}
+\label{eq:inclusion}
+  G_j^{r,\Lambda}(x,M\alpha)\subseteq\bigcup_{T}\ \bigcap_{i=1}^{a}G_j^{r,\Lambda}(x+\alpha k_i,\alpha)\,,
+\end{equation}
+and $\lvert(x+\alpha k_i)-(x+\alpha k_{i'})\rvert\ge D\coloneqq7M\alpha/(a-1)\ge36\alpha$ for $i\neq i'$.
+\end{lemma}
+
+\begin{proof}
+Let $z_1,\dots,z_q$ be a path as in the definition of the left side, and let $i<a$. Let $m$ be the largest index with $\lvert z_m-x\rvert\le M\beta_i\alpha$; then $m<q$ and $\lvert z_m-x\rvert>M\beta_i\alpha-3$, so there is $k_i\in K_i$ with $\lvert z_m-x_i\rvert\le3+\alpha/4\le\alpha$, where $x_i\coloneqq x+\alpha k_i$. Since $\lvert z_q-x_i\rvert>8M\alpha-M\beta_i\alpha\ge D\ge8\alpha$, the sequence $z_m,z_{m+1},\dots$ stopped at its first site at distance more than $8\alpha$ from~$x_i$ realises $G_j^{r,\Lambda}(x_i,\alpha)$. For $i=a$ we have $8M\alpha<\lvert z_q-x\rvert\le8M\alpha+3$, so there is $k_a\in K_a$ with $\lvert z_q-x_a\rvert\le\alpha$, and the reversed sequence $z_q,z_{q-1},\dots$, which ends at $z_1$ with $\lvert z_1-x_a\rvert\ge7M\alpha>8\alpha$, stopped at its first site at distance more than $8\alpha$ from~$x_a$, realises $G_j^{r,\Lambda}(x_a,\alpha)$. The distance between points on different circles is at least the difference of the radii.
+\end{proof}
+
+For a tuple~$T$ and $x\in\R^2$ write $x_i\coloneqq x+\alpha k_i$ and $R_i\coloneqq B(x_i,9\alpha)$; the \emph{regions} $R_i$ are pairwise disjoint. We say that a line~$\ell$ is \emph{near-tangent} to the $i$th circle if its distance~$\delta$ from~$x$ satisfies $\lvert\delta-M\beta_i\alpha\rvert<w\alpha$ with $w\coloneqq7M/(2(a-1))\ge18$. Since the radii differ by $2w\alpha$, a line is near-tangent to at most one circle.
+
+\begin{lemma}[Regions met by a line]
+\label{lem:chord}
+Let $\ell$ be a line and $1\le i\le a$. The number of $k\in K_i$ with $\ell\cap B(x+\alpha k,9\alpha)\neq\varnothing$ is at most $c_1\sqrt M$ with $c_1\coloneqq80$, and at most $c_0\coloneqq163\sqrt a$ if $\ell$ is not near-tangent to the $i$th circle.
+\end{lemma}
+
+\begin{proof}
+Scale by $1/\alpha$ and translate $x$ to the origin; let $R\coloneqq M\beta_i\in[M,8M]$ and $\delta$ the distance of the line from the origin. With $\varphi$ the angle of a point of the circle measured from the normal direction of the line, the point is within distance~$9$ of the line if and only if $\cos\varphi\in I\coloneqq[(\delta-9)/R,(\delta+9)/R]$. The set of $\varphi\in[0,\pi]$ with $\cos\varphi\in I$ has measure $\int_{I\cap[-1,1]}(1-u^2)^{-1/2}\dd u$. In general this is at most $\arccos(1-18/R)=2\arcsin\sqrt{9/R}\le6.6/\sqrt R$, because the integrand is largest at the ends of $[-1,1]$ and $\arcsin s\le1.1s$ for $s\le0.3$; by symmetry the points lie on at most two arcs of total length at most $13.2\sqrt R$, which contain at most $13.2\sqrt R/0.48+2\le28\sqrt R\le80\sqrt M$ points of~$K_i$. If $\ell$ is not near-tangent and $\delta\ge R+w$, no point of the circle is within distance~$9$ of the line. If $\delta\le R-w$, then on~$I$ we have $u\le1-(w-9)/R\le1-w/(2R)$ and $u\ge-9/R$, hence $1-u^2\ge w/(2R)$, and the measure is at most $(18/R)\sqrt{2R/w}$. The two arcs have total length at most $36\sqrt{2R/w}\le36\sqrt{32(a-1)/7}\le77\sqrt a$ and contain at most $77\sqrt a/0.48+2\le163\sqrt a$ points of~$K_i$.
+\end{proof}
+
+For $y\in\R^2$, a unit vector~$e$ with $e^\perp$ its rotation by $\pi/2$, and $u\in\R$ let
+\begin{equation*}
+  \ell^{e}_{y}(u)\coloneqq\{y+ue^\perp+te\colon t\in\R\}\,,
+\end{equation*}
+the line of direction~$e$ at signed distance~$u$ from~$y$.
+
+\begin{lemma}[Lines meeting two regions]
+\label{lem:pair}
+Let $y_1,y_2\in\R^2$ with $D'\coloneqq\lvert y_1-y_2\rvert\ge D\ge36\alpha$, $e\coloneqq(y_2-y_1)/D'$, and let $\cW$ be the set of lines meeting both $B(y_1,9\alpha)$ and $B(y_2,9\alpha)$.
+\begin{enumerate}
+  \item There is an injective map $\ell\mapsto(u_1,u_2)$ from $\cW$ to $[-9\alpha,9\alpha]^2$ under which the image of $\nu\vert_{\cW}$ has a density with respect to Lebesgue measure bounded by $1.25\mu/(\pi D)$.
+  \item For $i\in\{1,2\}$, every $\ell\in\cW$, every $\varrho\le2$ and every site~$z$ with $\lvert z-y_i\rvert\le8\alpha+3$: if $\dist(z,\ell)\le\varrho$, then $\dist(z,\ell^e_{y_i}(u_i))\le\varrho+\eta$ with $\eta\coloneqq335\alpha^2/D$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Write the unit normal of a line as $n=\cos\varphi\,e^\perp+\sin\varphi\,e$ with $\varphi\in(-\pi/2,\pi/2]$, and let $u_i\coloneqq p-\langle y_i,n\rangle$ be the signed distance of the line from~$y_i$. The map $(\theta,p)\mapsto(\varphi,u_1)$ is a rotation in the first and a translation in the second coordinate, so $\nu$ has density $\mu/\pi$ in $(\varphi,u_1)$. A line belongs to~$\cW$ if and only if $\lvert u_1\rvert,\lvert u_2\rvert\le9\alpha$, and $u_1-u_2=\langle y_2-y_1,n\rangle=D'\sin\varphi$. Hence on~$\cW$, $\lvert\sin\varphi\rvert\le18\alpha/D'\le1/2$, the map $(\varphi,u_1)\mapsto(u_1,u_2)$ is injective with Jacobian $D'\cos\varphi\ge0.8D'$, and (i) follows. For (ii) let $d\coloneqq\cos\varphi\,e-\sin\varphi\,e^\perp$ be the direction of~$\ell$, so that $\ell=\{y_i+u_in+td\colon t\in\R\}$. Let $g$ be the point of~$\ell$ nearest to~$z$; then $\lvert g-y_i\rvert\le8\alpha+5\le9\alpha$, so $g=y_i+u_in+td$ with $\lvert u_i\rvert,\lvert t\rvert\le9\alpha$. The point $g'\coloneqq y_i+u_ie^\perp+te$ lies on $\ell^e_{y_i}(u_i)$ and $\lvert g-g'\rvert\le(\lvert u_i\rvert+\lvert t\rvert)\cdot2\sin(\lvert\varphi\rvert/2)\le18\alpha\cdot1.035\lvert\sin\varphi\rvert\le335\alpha^2/D'$, because $2\sin(\varphi/2)=\sin\varphi/\cos(\varphi/2)$ and $\lvert\varphi\rvert\le\pi/6$.
+\end{proof}
+
+% =================================================================
+\section{Decoupling of the sub-crossings}
+\label{sec:decoupling}
+
+\begin{proposition}[Decoupling]
+\label{prop:decoupling}
+Let $\alpha\ge5$, let $x_1,\dots,x_a\in\R^2$ have pairwise distances at least $D\ge36\alpha$, and let $\Lambda_1,\dots,\Lambda_a$ be finite sets of lines with $s_i\coloneqq\lvert\Lambda_i\rvert$. Let $r\ge1$, $\eta\coloneqq335\alpha^2/D$ and $\eta'>0$ be such that $r''\coloneqq r+\eta+\eta'\le2$, and put $m\coloneqq2\mu\eta'/\pi$, $q\coloneqq129\mu\alpha^2/D$. Assume $(a-1)m\le1/2$, let $t\ge1$ be an integer and $\Theta(k)\coloneqq F_j^{r''}(k;\alpha)$. Then
+\begin{equation}
+\label{eq:decoupling}
+  \P\Bigl(\bigcap_{i=1}^{a}G_j^{r,\Lambda_i}(x_i,\alpha)\Bigr)\le\sum_{h}\ \prod_{k<l}\frac{(q\,t^2/m^2)^{h_{kl}}}{h_{kl}!}\ \prod_{i=1}^{a}\bigl[\Theta\bigl(s_i+b_i(h)\bigr)+2^{-t/2}\bigr]\,,
+\end{equation}
+where the sum is over all families $h=(h_{kl})_{1\le k<l\le a}$ of non-negative integers and $b_i(h)\coloneqq\sum_{k<l<i}h_{kl}$.
+\end{proposition}
+
+\begin{proof}
+Write $R_i\coloneqq B(x_i,9\alpha)$, $A_i\coloneqq A(x_i,\alpha)$ and $G_i\coloneqq G_j^{r,\Lambda_i}(x_i,\alpha)$. The regions~$R_i$ are pairwise disjoint and so are the sets~$A_i$.
+
+\emph{Step 1: conditioning on the shared lines.} Let $\cS$ be the set of lines of~$\cL$ meeting at least two of the regions, and for $\ell\in\cS$ let $k(\ell)<l(\ell)$ be the two smallest indices of regions met by~$\ell$. The sets $\cS_{kl}\coloneqq\{\ell\in\cS\colon(k(\ell),l(\ell))=(k,l)\}$, $k<l$, and the sets $\cL_i$ of lines of~$\cL$ meeting $R_i$ and no other region, $1\le i\le a$, are restrictions of~$\cL$ to pairwise disjoint sets of lines, hence independent Poisson processes; the intensity measure of $\cS_{kl}$ is at most $\nu$ restricted to the set $\cW_{kl}$ of lines meeting $R_k$ and~$R_l$. The event $G_i$ is determined by $\cL_i$, by the lines of~$\cS$ meeting~$R_i$ and by $(U_z)_{z\in A_i}$. Therefore the events $G_1,\dots,G_a$ are conditionally independent given~$\cS$, and with $\pi_i(\cS)\coloneqq\P(G_i\,\vert\,\cS)$,
+\begin{equation}
+\label{eq:cond}
+  \P\Bigl(\bigcap_iG_i\Bigr)=\E\Bigl[\prod_{i=1}^a\pi_i(\cS)\Bigr]\,.
+\end{equation}
+
+\emph{Step 2: a pointwise bound.} For a region~$i$, a radius~$\varrho$, a finite set~$\Lambda'$ of lines, and unit vectors $e_1,\dots,e_v$ and reals $u_1,\dots,u_v$ put
+\begin{equation*}
+  \Phi_i^\varrho\bigl(u_1,\dots,u_v;\Lambda'\bigr)\coloneqq\P\Bigl(G_j^{\varrho,\,\Lambda_i\cup\Lambda'\cup\{\ell^{e_1}_{x_i}(u_1),\dots,\ell^{e_v}_{x_i}(u_v)\}}(x_i,\alpha)\Bigr)\,,
+\end{equation*}
+the dependence on the directions being suppressed. Fix a realisation of~$\cS$. For $\ell\in\cS_{kl}$ let $(u_k(\ell),u_l(\ell))$ be its coordinates from \cref{lem:pair} applied to $y_1=x_k$, $y_2=x_l$, and $e_{kl}$ the corresponding direction. In region~$i$ we call $\ell\in\cS$ \emph{straightened} if $i\in\{k(\ell),l(\ell)\}$, and \emph{free} if $\ell$ meets~$R_i$ and $i>l(\ell)$. Since $\cL_i\subseteq\cL$ and the events are increasing in the set of lines, $\pi_i(\cS)$ is at most the probability of $G_i$ computed with an independent copy of~$\cL$ in place of~$\cL_i$ and with the lines of~$\cS$ meeting~$R_i$ added to~$\Lambda_i$. By \cref{lem:pair}\,(ii) and monotonicity in the radius, replacing each straightened line~$\ell$ by $\ell^{e_{kl}}_{x_i}(u_i(\ell))$ and the radius~$r$ by $r+\eta$ does not decrease this probability. Hence
+\begin{equation}
+\label{eq:pointwise}
+  \pi_i(\cS)\le\Phi_i^{r+\eta}\bigl((u_i(\ell))_{\ell\text{ straightened in }i};\,\{\ell\colon\ell\text{ free in }i\}\bigr)\,.
+\end{equation}
+The number of lines that are free in~$i$ is at most $b_i(h)$, where $h_{kl}\coloneqq\lvert\cS_{kl}\rvert$, and the number of straightened lines in~$i$ is $v_i(h)\coloneqq\sum_{l>i}h_{il}+\sum_{k<i}h_{ki}$.
+
+\emph{Step 3: integration.} Put
+\begin{equation*}
+  \bar\Phi_i(v,b)\coloneqq\sup\ \frac1{(18\alpha)^{v}}\int_{[-9\alpha,9\alpha]^{v}}\Phi_i^{r+\eta}(u_1,\dots,u_v;\Lambda')\dd u\,,
+\end{equation*}
+the supremum being over all directions $e_1,\dots,e_v$ among the at most $a-1$ vectors $e_{il}$, $e_{ki}$, and over all sets~$\Lambda'$ of at most $b$ lines. We claim that
+\begin{equation}
+\label{eq:integrated}
+  \E\Bigl[\prod_{i=1}^a\pi_i(\cS)\Bigr]\le\sum_h\ \prod_{k<l}\frac{q^{h_{kl}}}{h_{kl}!}\ \prod_{i=1}^a\bar\Phi_i\bigl(v_i(h),b_i(h)\bigr)\,.
+\end{equation}
+By the independence of the Poisson processes $\cS_{kl}$, the bound on their intensity measures, \eqref{eq:pointwise} and \cref{lem:pair}\,(i), the left side is at most
+\begin{equation*}
+  \sum_h\ \prod_{k<l}\frac{1}{h_{kl}!}\Bigl(\frac{1.25\mu}{\pi D}\Bigr)^{h_{kl}}\int\prod_{i=1}^a\Phi_i^{r+\eta}\bigl((u_i(\ell))_{\ell\text{ str.\ in }i};\,\{\ell\text{ free in }i\}\bigr)\prod_{\ell}\d u_{k(\ell)}(\ell)\,\d u_{l(\ell)}(\ell)\,,
+\end{equation*}
+where for given~$h$ the integral is over the coordinates of $h_{kl}$ lines in each class $(k,l)$, each pair of coordinates ranging over the image of $\cW_{kl}$ in $[-9\alpha,9\alpha]^2$, and the set of lines that are free in~$i$ is a function of the coordinates of the lines of the classes $(k,l)$ with $l<i$. Whenever a coordinate of a line is integrated below, the range of integration is enlarged to $[-9\alpha,9\alpha]$; this is legitimate because the integrand is non-negative and because, at that moment, the remaining factors depend on the line only through its other coordinate. We integrate the variables in the order of decreasing region index. The variables $u_a(\ell)$ belong to lines of the classes $(k,a)$. They occur in the factor of region~$a$ only: in region~$k$ such a line enters through $u_k(\ell)$, and it is free in no region. The lines that are free in region~$a$ depend on other variables. Integrating over the $v_a(h)$ variables $u_a(\ell)$ with all other variables fixed therefore bounds the factor of region~$a$ by $(18\alpha)^{v_a(h)}\bar\Phi_a(v_a(h),b_a(h))$. Suppose the factors of the regions $i+1,\dots,a$ have been bounded in this way. The variables $u_i(\ell)$ belong to lines of the classes $(k,i)$ and $(i,l)$. Such a line is free only in regions of index larger than~$i$, whose factors have already been replaced by constants, and it enters the factor of its other region through its other coordinate. So the variables $u_i(\ell)$ occur in the factor of region~$i$ only, and the lines that are free in region~$i$ belong to classes $(k,l)$ with $l<i$ and do not depend on them. Integrating gives the factor $(18\alpha)^{v_i(h)}\bar\Phi_i(v_i(h),b_i(h))$. Since $\sum_iv_i(h)=2\sum_{k<l}h_{kl}$ and $1.25\mu(18\alpha)^2/(\pi D)\le q$, this proves~\eqref{eq:integrated}.
+
+\emph{Step 4: the Mecke comparison.} We show that for all $v,b\ge0$,
+\begin{equation}
+\label{eq:mecke}
+  \bar\Phi_i(v,b)\le\Bigl(\frac tm\Bigr)^{v}\bigl[\Theta(s_i+b)+2^{-t/2}\bigr]\,.
+\end{equation}
+Together with~\eqref{eq:cond}, \eqref{eq:integrated} and $\sum_iv_i(h)=2\sum_{k<l}h_{kl}$ this gives~\eqref{eq:decoupling}. Fix directions $e_1,\dots,e_v$ and~$\Lambda'$ with $\lvert\Lambda'\rvert\le b$, and put $\psi\coloneqq\eta'/(18\alpha)$. For a unit vector~$e$ let $\cW(e)$ be the set of lines whose normal is $\cos\varphi\,e^\perp+\sin\varphi\,e$ with $\lvert\varphi\rvert\le\psi$ and whose signed distance~$u$ from~$x_i$ satisfies $\lvert u\rvert\le9\alpha$; in the coordinates $(\varphi,u)$ the measure~$\nu$ has density $\mu/\pi$ on $\cW(e)$, so $\nu(\cW(e))=(\mu/\pi)\cdot2\psi\cdot18\alpha=m$. As in the proof of \cref{lem:pair}\,(ii), for a line $\ell\in\cW(e)$ with coordinates $(\varphi,u)$ and a site $z\in A_i$, $\dist(z,\ell^e_{x_i}(u))\le\varrho\le2$ implies $\dist(z,\ell)\le\varrho+18\alpha\lvert\varphi\rvert\le\varrho+\eta'$. Hence for every choice of $\varphi_1,\dots,\varphi_v\in[-\psi,\psi]$ the value $\Phi_i^{r+\eta}(u_1,\dots,u_v;\Lambda')$ is at most the probability of $G_j^{r'',\Lambda_i\cup\Lambda'\cup\{\ell_1,\dots,\ell_v\}}(x_i,\alpha)$, where $\ell_c\in\cW(e_c)$ has coordinates $(\varphi_c,u_c)$. Averaging over $\varphi_1,\dots,\varphi_v$ and writing $g(\cL)$ for the indicator of $G_j^{r'',\Lambda_i\cup\Lambda'}(x_i,\alpha)$ as a function of the line process, we obtain from the multivariate Mecke formula~\cite[Theorem~4.4]{LP17}
+\begin{align*}
+  \frac1{(18\alpha)^{v}}\int\Phi_i^{r+\eta}(u;\Lambda')\dd u
+  &\le\frac1{m^v}\int\E\bigl[g(\cL\cup\{\ell_1,\dots,\ell_v\})\bigr]\prod_{c=1}^v\1\{\ell_c\in\cW(e_c)\}\,\nu^{\otimes v}(\d\ell)\\
+  &=\frac1{m^v}\,\E\Bigl[\sum^{\neq}_{\ell_1,\dots,\ell_v\in\cL}\prod_{c=1}^v\1\{\ell_c\in\cW(e_c)\}\ g(\cL)\Bigr]\\
+  &\le\frac1{m^v}\,\E\bigl[(N^*)^v\,g(\cL)\bigr]\,,
+\end{align*}
+where the sum is over tuples of pairwise distinct lines and $N^*$ is the number of lines of~$\cL$ in the union of the sets $\cW(e)$ over the at most $a-1$ admissible directions, a Poisson variable with mean $m^*\le(a-1)m\le1/2$. Since $\E[g(\cL)]\le\Theta(s_i+b)$,
+\begin{equation*}
+  \E\bigl[(N^*)^v g(\cL)\bigr]\le t^v\,\Theta(s_i+b)+\E\bigl[(N^*)^v\1\{N^*>t\}\bigr]\,.
+\end{equation*}
+If $v\le t/2$, then $n^v\le2^v\,n(n-1)\cdots(n-v+1)$ for $n>t$, and
+\begin{equation*}
+  \E\bigl[(N^*)^v\1\{N^*>t\}\bigr]\le2^v(m^*)^v\,\P(N^*>t-v)\le2^v(m^*)^v(m^*)^{t/2}\le t^v\Bigl(\frac{2(a-1)m}{t}\Bigr)^v2^{-t/2}\le t^v\,2^{-t/2}\,,
+\end{equation*}
+which gives~\eqref{eq:mecke}. If $v>t/2$, then~\eqref{eq:mecke} holds because its left side is at most~$1$ and $(t/m)^v2^{-t/2}=(t/m)^{v-t/2}\,(t/(2m))^{t/2}\ge1$, as $2m\le1\le t$.
+\end{proof}
+
+% =================================================================
+\section{The induction over scales}
+\label{sec:induction}
+
+\paragraph{Scales.} Let $\alpha_0\ge40$ and, for $n\ge0$,
+\begin{align*}
+  M_n&\coloneqq\alpha_n^{\kappa},&\alpha_{n+1}&\coloneqq M_n\alpha_n=\alpha_n^{5},&D_n&\coloneqq\frac{7M_n\alpha_n}{a-1},\\
+  \eta_n&\coloneqq\frac{335\alpha_n^2}{D_n}\le48a\,\alpha_n^{1-\kappa},&q_n&\coloneqq\frac{129\mu\alpha_n^2}{D_n}\le19a\mu\,\alpha_n^{1-\kappa},&t_n&\coloneqq\lceil2\gamma_0\log_2\alpha_n\rceil,\\
+  \eta_n'&\coloneqq\frac{\eta_0'}{(n+1)^2},&\eta_0'&\coloneqq\min\Bigl\{\frac14,\frac{\pi}{4\mu(a-1)}\Bigr\},&m_n&\coloneqq\frac{2\mu\eta_n'}{\pi},
+\end{align*}
+and $r_0\coloneqq2$, $r_{n+1}\coloneqq r_n-\eta_n-\eta_n'$. Then $(a-1)m_n\le1/2$ and $2^{-t_n/2}\le\alpha_n^{-\gamma_0}$. We assume that $\alpha_0$ is so large that for all $n\ge0$
+\begin{align}
+\label{eq:A1}
+  &M_n\ge\max\{100,6a\}\,,\qquad\sum_{n\ge0}\eta_n\le0.1\,,\\
+\label{eq:A2}
+  &a^2\,q_n\,\frac{t_n^2}{m_n^2}\,\alpha_n^{\bar\sigma(a-2)}\le1\,,\\
+\label{eq:A3}
+  &2^a\,\e\,\bigl(3\,(104+163\sqrt a\,k_c)\bigr)^a\,\alpha_n^{-\xi}\le1\,.
+\end{align}
+This is possible. For~\eqref{eq:A2}, the left side is at most $C(\mu)\,(n+1)^4(\log\alpha_n)^2\alpha_n^{-0.2}$ by~\eqref{eq:P3}, and $n+1\le1+\log\log\alpha_n$, so it is at most~$1$ as soon as $\alpha_n$ exceeds a constant depending on~$\mu$, hence for all~$n$ if $\alpha_0$ does. The others are immediate. Since $\sum_n\eta_n'\le\eta_0'\pi^2/6\le0.42$, we have $r_n\in[1.48,2]$ for all~$n$.
+
+\begin{theorem}[Induction]
+\label{thm:induction}
+Let $\alpha_0$ be as above and let $j\in\Z$ be such that $F_j^{2}(s;\alpha_0)\le\alpha_0^{-\gamma(s)}$ for all $s\ge0$. Then for all $n\ge0$ and $s\ge0$,
+\begin{equation}
+\label{eq:hyp}
+  F_j^{r_n}(s;\alpha_n)\le\alpha_n^{-\gamma(s)}\,.
+\end{equation}
+\end{theorem}
+
+The proof uses two lemmas. In both, $n$ is fixed, \eqref{eq:hyp} is assumed for this~$n$, and we write $\alpha=\alpha_n$, $M=M_n$, and use the notation of \cref{sec:geometry}.
+
+\begin{lemma}[Shared lines are free]
+\label{lem:free}
+For every $x\in\R^2$, every tuple~$T$ and all finite sets $\Lambda_1,\dots,\Lambda_a$ of lines with $s_i=\lvert\Lambda_i\rvert$,
+\begin{equation*}
+  \P\Bigl(\bigcap_{i=1}^aG_j^{r_{n+1},\Lambda_i}(x_i,\alpha)\Bigr)\le2^a\,\e\,\prod_{i=1}^a\alpha^{-\gamma(s_i)}\,.
+\end{equation*}
+\end{lemma}
+
+\begin{proof}
+We apply \cref{prop:decoupling} with $D=D_n$, $r=r_{n+1}$, $\eta=\eta_n$, $\eta'=\eta_n'$, $t=t_n$, so that $r''=r_n$ and $\Theta(k)\le\alpha^{-\gamma(k)}$ by~\eqref{eq:hyp}. Since $2^{-t/2}\le\alpha^{-\gamma_0}\le\alpha^{-\gamma(k)}$ and by \cref{lem:profile},
+\begin{equation*}
+  \Theta\bigl(s_i+b_i(h)\bigr)+2^{-t/2}\le2\,\alpha^{-\gamma(s_i+b_i(h))}\le2\,\alpha^{-\gamma(s_i)}\,\alpha^{\bar\sigma b_i(h)}\,.
+\end{equation*}
+Moreover $\sum_ib_i(h)=\sum_{k<l}(a-l)h_{kl}\le(a-2)\sum_{k<l}h_{kl}$. Hence the right side of~\eqref{eq:decoupling} is at most
+\begin{equation*}
+  2^a\prod_i\alpha^{-\gamma(s_i)}\sum_h\prod_{k<l}\frac{\bigl(q_n\,t_n^2\,m_n^{-2}\,\alpha^{\bar\sigma(a-2)}\bigr)^{h_{kl}}}{h_{kl}!}=2^a\prod_i\alpha^{-\gamma(s_i)}\exp\Bigl\{\binom a2q_n\,\frac{t_n^2}{m_n^2}\,\alpha^{\bar\sigma(a-2)}\Bigr\}\,,
+\end{equation*}
+and the exponential is at most~$\e$ by~\eqref{eq:A2}.
+\end{proof}
+
+\begin{lemma}[Counting]
+\label{lem:counting}
+Let $0\le s\le k_c$, $x\in\R^2$ and let $\Lambda$ be a set of at most $s$ lines. For $k\in\bigcup_iK_i$ let $s(k)$ be the number of lines of~$\Lambda$ meeting $B(x+\alpha k,9\alpha)$. Then
+\begin{equation*}
+  \prod_{i=1}^a\ \sum_{k\in K_i}\alpha^{-\gamma(s(k))}\le\bigl(3\,(104+163\sqrt a\,k_c)\bigr)^a\,\alpha^{-\xi}\,(M\alpha)^{-\gamma(s)}\,.
+\end{equation*}
+\end{lemma}
+
+\begin{proof}
+Let $\tau_i$ be the number of lines of~$\Lambda$ that are near-tangent to the $i$th circle; then $\sum_i\tau_i\le s$. By \cref{lem:chord}, at most $sc_0$ points $k\in K_i$ have a region met by a line of~$\Lambda$ that is not near-tangent to the $i$th circle, and for these $s(k)\le s$. At most $\tau_ic_1\sqrt M$ further points have a region met by some line of~$\Lambda$, and for these $s(k)\le\tau_i$. For all other points $s(k)=0$. Since $\gamma$ is non-increasing,
+\begin{equation*}
+  \sum_{k\in K_i}\alpha^{-\gamma(s(k))}\le\underbrace{104M\,\alpha^{-\gamma_0}}_{\mathrm{(A)}}+\underbrace{80\,\tau_i\sqrt M\,\alpha^{-\gamma(\tau_i)}}_{\mathrm{(B)}}+\underbrace{163\sqrt a\,s\,\alpha^{-\gamma(s)}}_{\mathrm{(C)}}\,.
+\end{equation*}
+Expanding the product over~$i$ gives at most $3^a$ terms, one for each partition of $\{1,\dots,a\}$ into sets $A$, $B$, $C$ on which the summand (A), (B), (C) is chosen; a term vanishes unless $\tau_i\ge1$ for all $i\in B$ and $s\ge1$ or $C=\varnothing$. With $M=\alpha^\kappa$, $g\coloneqq\gamma(s)$ and $n_A,n_B,n_C$ the cardinalities, each term is at most $(104+163\sqrt a\,k_c)^a\,\alpha^{E}(M\alpha)^{-g}$ with
+\begin{equation*}
+  E\coloneqq-n_A(\gamma_0-\kappa)+\sum_{i\in B}\bigl(\tfrac\kappa2-\gamma(\tau_i)\bigr)-n_Cg+(1+\kappa)g\,,
+\end{equation*}
+and it suffices to show $E\le-\xi$. Recall $\gamma_*\le g\le\gamma_0$ and $n_A+n_B+n_C=a$.
+
+\emph{Case $n_B=0$.} If $n_C\ge\kappa+2$, then $E\le-(n_C-1-\kappa)g\le-\gamma_*\le-\xi$. If $n_C\le\kappa+1$, then $n_A\ge a-\kappa-1$ and $E\le-(a-\kappa-1)(\gamma_0-\kappa)+(1+\kappa)\gamma_0\le-\xi$ by~\eqref{eq:P1}.
+
+\emph{Case $n_B\ge1$.} Since $1\le\tau_i\le s\le k_c$ for $i\in B$ and $\sum_{i\in B}\tau_i\le s$, we have $\sum_{i\in B}\gamma(\tau_i)\ge n_B\gamma_0-\sigma s=(n_B-1)\gamma_0+g$, hence
+\begin{equation*}
+  E\le-n_A(\gamma_0-\kappa)-(n_B-1)\bigl(\gamma_0-\tfrac\kappa2\bigr)+\tfrac\kappa2+(\kappa-n_C)g\,.
+\end{equation*}
+If $n_C\le\kappa$, then $n_A+n_B-1\ge a-1-\kappa$ and $E\le-(a-1-\kappa)(\gamma_0-\kappa)+\frac\kappa2+\kappa\gamma_0\le-\xi$ by~\eqref{eq:P1}. If $\kappa+1\le n_C\le a-2$, then $n_A+n_B-1\ge1$ and $E\le-(\gamma_0-\kappa)+\frac\kappa2\le-\xi$ by~\eqref{eq:P1}. If $n_C=a-1$, then $n_A=0$, $n_B=1$ and $E\le\frac\kappa2-(a-1-\kappa)g\le\frac\kappa2-(a-1-\kappa)\gamma_*\le-\xi$ by~\eqref{eq:P3}.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:induction}]
+For $n=0$ the claim is the assumption, since $r_0=2$. Assume~\eqref{eq:hyp} for~$n$. For $s>k_c$ the claim for $n+1$ is trivial. Let $s\le k_c$, $x\in\R^2$ and $\lvert\Lambda\rvert\le s$. For a tuple~$T$ let $\Lambda_i$ be the set of lines of~$\Lambda$ meeting $R_i=B(x+\alpha k_i,9\alpha)$, so that $\lvert\Lambda_i\rvert=s(k_i)$ and $G_j^{r_{n+1},\Lambda}(x_i,\alpha)=G_j^{r_{n+1},\Lambda_i}(x_i,\alpha)$. By \cref{lem:inclusion,lem:free},
+\begin{equation*}
+  \P\bigl(G_j^{r_{n+1},\Lambda}(x,\alpha_{n+1})\bigr)\le\sum_T2^a\,\e\prod_{i=1}^a\alpha^{-\gamma(s(k_i))}=2^a\,\e\prod_{i=1}^a\ \sum_{k\in K_i}\alpha^{-\gamma(s(k))}\,,
+\end{equation*}
+which is at most $\alpha_{n+1}^{-\gamma(s)}$ by \cref{lem:counting} and~\eqref{eq:A3}.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}]
+Let $\alpha_0=\alpha_0(\mu)$ satisfy the requirements of this section, $j_0=j_0(\mu,\alpha_0)$ from \cref{lem:base}, $j\coloneqq j_0+k_c$ and $\lambda_0\coloneqq1/(68(j-1))$. By \cref{lem:base} the assumption of \cref{thm:induction} holds, so $F_j^{r_n}(0;\alpha_n)\le\alpha_n^{-\gamma_0}=\alpha_n^{-7}$ for all~$n$. For $\lambda\le\lambda_0$ we have $\sqrt2\lambda(j-1)\le\sqrt2/68<1/48=p$, and \cref{lem:domination} bounds the probability in the theorem by $F_j^1(0;\alpha_n)\le F_j^{r_n}(0;\alpha_n)$.
+\end{proof}
+
+% =================================================================
+\section{Where an error would most likely be}
+\label{sec:audit}
+
+The argument is short for the statement it claims, and earlier schemes of ours that looked correct at this stage failed in the details. We list the steps that carry the weight, in the order in which we would check them.
+
+\begin{enumerate}
+  \item \emph{Step 3 of \cref{prop:decoupling}.} The bound~\eqref{eq:integrated} places the supremum over the free lines outside the average over the offsets of the straightened lines. This rests on the ordering of the classes by their two smallest region indices and on integrating the regions in decreasing order. If a variable $u_i(\ell)$ entered the factor of a region that has not yet been integrated, other than region~$i$, the bound would fail.
+  \item \emph{Step 4 of \cref{prop:decoupling}.} An additional line with uniform offset and fixed direction is compared, by the Mecke formula, with the lines of~$\cL$ in a direction window of width $2\psi$ around this direction. The price is the factor $t/m$ per line and the enlargement of the radius by~$\eta'$. The radii are summable because $\eta'_n\propto(n+1)^{-2}$, and the resulting factor $(n+1)^4$ is absorbed in~\eqref{eq:A2}.
+  \item \emph{\Cref{lem:pair}.} The product structure of the measure of the lines meeting two regions in the coordinates $(u_1,u_2)$, and the fact that within a region such a line deviates from the line of direction~$e$ with the same offset by at most $\eta=335\alpha^2/D$. This is where $\kappa>1$ is used: $\eta_n$ is of order $\alpha_n^{1-\kappa}$.
+  \item \emph{The hypothesis with additional lines.} The induction hypothesis~\eqref{eq:hyp} is a bound uniform in the positions of $s$ additional lines, with the exponent $\gamma(s)=\gamma_0-\sigma s$ for $s\le k_c$ and the trivial bound beyond. It holds at the base scale by~\eqref{eq:trivial} because the level~$j$ is chosen $k_c$ above~$j_0$. In \cref{lem:free} a shared line has weight $q_nt_n^2/m_n^2$, of order $\alpha^{1-\kappa}$ up to logarithms, and worsens the product of the bounds by at most $\alpha^{\bar\sigma(a-2)}$; this is the inequality $\bar\sigma(a-2)<\kappa-1$ in~\eqref{eq:P3}. In \cref{lem:counting} the lines of~$\Lambda$ are distributed over the sub-regions; the case distinction there should be rechecked, in particular the role of near-tangent lines and the use of $\sum_i\tau_i\le s$. A numerical evaluation of the exponent~$E$ over all partitions and the extreme choices of the~$\tau_i$ gave a maximum of $-0.2$.
+  \item \emph{Consistency checks we made.} For a line process with a single direction the model percolates at every level, and the argument fails as it should, because \cref{lem:pair}\,(i) uses the density of~$\nu$ in the direction. The bounds are consistent with the lower bound for a crossing along a bundle of~$j$ nearly parallel lines, which is of order $\alpha^{2-j}$ with $j\ge k_c+j_0$, far below $\alpha^{-7}$.
+\end{enumerate}
+
+\section*{Acknowledgements}
+
+BJ acknowledges the financial support of the Leibniz Association within the Leibniz Junior Research Group on Probabilistic Methods for Dynamic Communication Networks (DYCOMNET) as part of the Leibniz Competition (grant no.~J105/2020), of the Berlin Mathematics Research Center MATH+ through the project EF-MA-Sys-2 on Information Flow \& Emergent Behavior in Complex Networks, and of the Deutsche Forschungsgemeinschaft (DFG) through Project P27 within the SPP~2265.
+
+\section*{Use of AI tools}
+
+The proofs, computations and the text of this note were developed with substantial assistance of the AI systems Claude (Anthropic) and ChatGPT Astra~6 (OpenAI), in an interactive process directed by the authors. The argument has not been verified independently of these tools.
+
+\bibliographystyle{amsalpha}
+\bibliography{references}
+
+\end{document}
