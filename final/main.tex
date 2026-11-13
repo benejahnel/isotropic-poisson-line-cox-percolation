@@ -268,7 +268,7 @@ Consequently, $\cL$ is ergodic under translations. The map from $\cL$ to the lin
 We first apply Lemma~\ref{lem:boundary-reduction} to compare the percolation probability with the probabilities of $G(4L_0)$ and~$\cD(4L_0)$. We then cover~$\cD(4L_0)$ by closed crossings and count their possible centres at each scale. This reduces the proof to making $G(4L_0)$ likely and the weighted sum of crossing probabilities small with the same choices of parameters. The recursion turns an initial bound $q_0\le\varepsilon$ into the doubly exponential decay $q_n\le\exp(-t2^n)$ provided that $\varepsilon$ is small enough to absorb the growing prefactors $2401\,a_n^4$. Proposition~\ref{prop:initial} supplies such a small~$\varepsilon$ once the initial scale~$L_0$ and the intensity~$\lambda$ are large, and the logarithm in Theorem~\ref{thm:main} is the price of choosing $L_0$ of order $1/\mu$ when the lines are sparse.
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
-Fix $\mu,r>0$. For any $\lambda>0$ and any admissible initial scale~$L_0$, Lemma~\ref{lem:boundary-reduction} gives $G(4L_0)\setminus\cD(4L_0)\subseteq\cP$, and hence $\P(\cP)\ge\P(G(4L_0))-\P(\cD(4L_0))$. We bound~$\P(\cD(4L_0))$ by covering the event with closed crossings. Suppose $\cD(4L_0)$ occurs and let~$T$ be a finite star-connected set of closed sites with $Q_{4L_0}\subseteq\conv T$. Write $d\coloneqq\max\{\lVert z-w\rVert_\infty\colon z,w\in T\}$ for its maximum-norm diameter. Since~$\conv T$ contains $[-4L_0,4L_0]$, we have $d\ge8L_0$ and $T\subseteq Q_d$. 
+Fix $\mu,r>0$. For any $\lambda>0$ and any admissible initial scale~$L_0$, Lemma~\ref{lem:boundary-reduction} gives $G(4L_0)\setminus\cD(4L_0)\subseteq\cP$, and hence $\P(\cP)\ge\P(G(4L_0))-\P(\cD(4L_0))$. We bound~$\P(\cD(4L_0))$ by covering the event with closed crossings. Suppose $\cD(4L_0)$ occurs and let~$T$ be a finite star-connected set of closed sites with $Q_{4L_0}\subseteq\conv T$. Write $d\coloneqq\max\{\lVert z-w\rVert_\infty\colon z,w\in T\}$ for its maximum-norm diameter. Since~$\conv T$ contains $Q_{4L_0}$, we have $d\ge8L_0$ and $T\subseteq Q_d$. 
 
 The scales increase strictly to infinity. Choose the unique $n\ge0$ with $8L_n\le d<8L_{n+1}$, and choose $z,w\in T$ attaining the diameter. Round~$z$ to a centre $x\in L_n\Z^2$ with $\lVert x-z\rVert_\infty\le L_n/2$. Then $\lVert x\rVert_\infty\le d+L_n/2<9L_{n+1}$, while $z\in Q_{L_n}(x)$ and $\lVert w-x\rVert_\infty\ge d-L_n/2>2L_n$.
 Star-connectedness of~$T$ supplies a finite closed star path from~$z$ to~$w$. Keep the path up to its first visit to~$\partial Q_{2L_n}(x)$. Such a visit occurs because the starting site is inside the inner square, the terminal site is outside the outer square, and a star step cannot skip a boundary at an integer multiple of~$h$. The truncated path stays in~$Q_{2L_n}(x)$ and gives~$\cB(x,L_n)$.
@@ -446,6 +446,38 @@ Finally, the margin between $Q_L$ and the polygon ensures $Q_L\subseteq\conv V$.
 Here $\lVert v\rVert_2\le\lVert v\rVert_1$ and $h/\sqrt2\le0.3L$. The inequality also holds for $v=0$, so Lemma~\ref{lem:support}, applied to $K_1=Q_L$ and $K_2=\conv V$, gives the required containment. Thus, $\cH\subseteq G(L)$. Together with the exclusion of closed star crossings, this proves Lemma~\ref{lem:initial-geometry}.
 \end{proof}
 
+The proof of Lemma~\ref{lem:boundary-reduction} uses that the part of the boundary of a finite cluster facing one component of its complement is star-connected. This is a special case of a result of Tim\'ar~\cite[Lemma~2]{Tim13}, which covers all dimensions.
+% TODO(BJ): Nummer "Lemma 2" nach arXiv:0711.1713 geprüft; in der publizierten Fassung (PAMS 141) gegenprüfen.
+For the planar lattice we give a self-contained proof. An \emph{edge} is an unordered pair of nearest-neighbour sites of~$h\Z^2$, and for $z\in h\Z^2$ the \emph{face} at~$z$ is the set of the four edges $\{z,z+he_1\}$, $\{z+he_1,z+he_1+he_2\}$, $\{z+he_2,z+he_1+he_2\}$ and $\{z,z+he_2\}$. Every edge belongs to exactly two faces. For sets of edges we write $\triangle$ for the symmetric difference. The \emph{degree} of a site in a set~$E$ of edges is the number of edges of~$E$ containing it, and $E$ is \emph{even} if all degrees are even. Faces are even, the symmetric difference of even sets is even, and more generally the degree of a site in $E_1\triangle E_2$ has the parity of the sum of its degrees in $E_1$ and~$E_2$.
+
+\begin{lemma}[Faces generate the even edge sets]
+\label{lem:faces}
+Every finite even set of edges is the symmetric difference of finitely many faces.
+\end{lemma}
+
+\begin{proof}
+By scaling we may assume $h=1$. Let $E$ be a finite even set of edges. For $(i,j)\in\Z^2$ let $\rho(i,j)$ be the number of edges $\{(i',j),(i',j+1)\}\in E$ with $i'\ge i+1$, and let $J$ be the set of sites $(i,j)$ with $\rho(i,j)$ odd.
+
+The set~$J$ is finite. Indeed, $\rho(i,j)=0$ unless $E$ contains an edge $\{(i',j),(i',j+1)\}$, which happens for finitely many~$j$, and for such~$j$ we have $\rho(i,j)=0$ for all large~$i$. For all sufficiently small~$i$, $\rho(i,j)$ is the number~$n_j$ of all edges of~$E$ of the form $\{(i',j),(i',j+1)\}$. This number is even: the sum of the degrees in~$E$ of the sites with second coordinate at most~$j$ is even, the edges with both endpoints among these sites contribute~$2$ to this sum, and the remaining contributing edges are the $n_j$ edges just described, each contributing~$1$.
+
+We show that the symmetric difference of the faces at the sites of~$J$ equals~$E$. An edge~$e$ belongs to this symmetric difference if and only if exactly one of the two faces containing~$e$ is a face at a site of~$J$, that is, if and only if the values of~$\rho$ at the two corresponding sites have different parity. If $e=\{(i,j),(i,j+1)\}$, the two faces are those at $(i-1,j)$ and $(i,j)$, and $\rho(i-1,j)-\rho(i,j)=\1\{e\in E\}$ by definition. If $e=\{(i,j),(i+1,j)\}$, the two faces are those at $(i,j)$ and $(i,j-1)$. Let $W\coloneqq\{(i',j)\colon i'\ge i+1\}$. The sum of the degrees in~$E$ of the sites of~$W$ is even. Edges with both endpoints in~$W$ contribute~$2$ to it. The edges of~$E$ with exactly one endpoint in~$W$ are the $\rho(i,j)$ edges $\{(i',j),(i',j+1)\}$ with $i'\ge i+1$, the $\rho(i,j-1)$ edges $\{(i',j-1),(i',j)\}$ with $i'\ge i+1$, and the edge~$e$ if $e\in E$. Hence $\rho(i,j)+\rho(i,j-1)+\1\{e\in E\}$ is even, and the two values of~$\rho$ have different parity if and only if $e\in E$.
+\end{proof}
+
+\begin{lemma}[Exterior boundaries are star-connected]
+\label{lem:exterior-boundary}
+Let $S\subseteq h\Z^2$ be finite, nonempty and nearest-neighbour connected, let $U$ be a nearest-neighbour connected component of $h\Z^2\setminus S$, and let $T$ be the set of sites of~$U$ that are nearest neighbours of some site of~$S$. Then $T$ is star-connected.
+\end{lemma}
+
+\begin{proof}
+Let $\Pi$ be the set of edges with one endpoint in~$S$ and the other in~$U$. The endpoint in~$U$ of an edge of~$\Pi$ belongs to~$T$, and every site of~$T$ is an endpoint of an edge of~$\Pi$. Suppose that $T$ is not star-connected. Then $T$ is the union of two disjoint nonempty sets $T_1,T_2$ such that no site of~$T_1$ is a star neighbour of a site of~$T_2$. For $i\in\{1,2\}$ let $\Pi_i$ be the set of edges of~$\Pi$ with an endpoint in~$T_i$. The sets $\Pi_1,\Pi_2$ are nonempty and disjoint, and $\Pi=\Pi_1\cup\Pi_2$.
+
+Fix $x\in S$ and $y\in U$. For $i\in\{1,2\}$ choose an edge $\{s_i,t_i\}\in\Pi_i$ with $s_i\in S$ and $t_i\in T_i$, a self-avoiding nearest-neighbour path from~$x$ to~$s_i$ in~$S$ and a self-avoiding nearest-neighbour path from~$t_i$ to~$y$ in~$U$. Their concatenation through the edge $\{s_i,t_i\}$ is a self-avoiding path from~$x$ to~$y$; let $P_i$ be its set of edges. Then $P_i\cap\Pi=\{\{s_i,t_i\}\}\subseteq\Pi_i$, because all other edges of~$P_i$ join two sites of~$S$ or two sites of~$U$. In~$P_i$ the sites $x$ and~$y$ have degree~$1$ and all other sites have even degree. Hence $P_1\triangle P_2$ is a finite even set, and by Lemma~\ref{lem:faces} there are distinct faces $F_1,\dots,F_q$ with $P_1\triangle P_2=F_1\triangle\dots\triangle F_q$.
+
+We claim that some face~$F_k$ contains an edge of~$\Pi_1$ and an edge of~$\Pi_2$. Suppose not, and let $\theta$ be the symmetric difference of~$P_1$ and of all faces~$F_k$ that contain an edge of~$\Pi_1$. Since $P_1\triangle P_2\triangle F_1\triangle\dots\triangle F_q=\varnothing$, the set~$\theta$ is also the symmetric difference of~$P_2$ and of all faces~$F_k$ that contain no edge of~$\Pi_1$. By the second description, $\theta$ contains no edge of~$\Pi_1$. By the first description and the assumption, $\theta$ contains no edge of~$\Pi_2$. Thus $\theta\cap\Pi=\varnothing$. On the other hand, in~$\theta$ the sites $x$ and~$y$ have odd degree and all other sites have even degree. In the graph with edge set~$\theta$, the sum of the degrees over the connected component of~$x$ is even, so this component contains a second site of odd degree, which must be~$y$. Therefore $\theta$ contains the edges of a nearest-neighbour path $x=w_0,w_1,\dots,w_p=y$. Let $w_b$ be the first site of this path in~$U$. Then $b\ge1$, and $w_{b-1}$ is a nearest neighbour of a site of~$U$ that does not belong to~$U$. Since $U$ is a component of $h\Z^2\setminus S$, this forces $w_{b-1}\in S$, so $\{w_{b-1},w_b\}\in\theta\cap\Pi$, a contradiction.
+
+Let $F_k$ be a face containing an edge of~$\Pi_1$ and an edge of~$\Pi_2$. These edges have endpoints $t_1'\in T_1$ and $t_2'\in T_2$. Both are among the four sites of the face, which are pairwise at maximum-norm distance at most~$h$, and $t_1'\neq t_2'$ because $T_1\cap T_2=\varnothing$. Hence $t_1'$ and~$t_2'$ are star neighbours, contrary to the choice of $T_1$ and~$T_2$.
+\end{proof}
+
 We now prove Lemma~\ref{lem:boundary-reduction}, which identifies the closed boundary that would surround a finite open cluster containing the set in~$G(4L_0)$. We first construct this exterior boundary and verify that it consists of closed sites and is star-connected. We then compare convex hulls to show that it contains the initial square in the sense required by~$\cD(4L_0)$. These properties show that excluding~$\cD(4L_0)$ forces the open cluster to be infinite.
 
 \begin{proof}[Proof of Lemma~\ref{lem:boundary-reduction}]
@@ -460,9 +492,7 @@ There is a unique unbounded nearest-neighbour component~$U$ of $h\Z^2\setminus S
   \label{fig:boundary}
 \end{figure}
 
-The set~$T$ is star-connected by the boundary-connectivity theorem of Tim\'ar~\cite{Tim13}, applied to the nearest-neighbour connected set~$S$ and the component~$U$ of its complement.
-% TODO(BJ): Genaue Stelle in [Tim13] prüfen (Theorem-Nummer).
-In the plane, this can also be seen by following the boundary of $\bigcup_{z\in S}D_z$ around its unbounded face: consecutive exterior tiles along this boundary share at least a corner, so their centres are star neighbours, as in Figure~\ref{fig:boundary}.
+The set~$T$ is star-connected by Lemma~\ref{lem:exterior-boundary}, applied to the nearest-neighbour connected set~$S$ and the component~$U$ of its complement. Diagonal steps can indeed be necessary, as in Figure~\ref{fig:boundary}.
 
 Fix a nonzero $v\in\R^2$ and choose $s\in S$ maximising $v\cdot s$. Choose a coordinate~$j$ with $v_j\neq0$ and put $z\coloneqq s+h\sign(v_j)e_j$. Then $v\cdot z=v\cdot s+h\lvert v_j\rvert>\max_{w\in S}v\cdot w$, so $z\notin S$. Every subsequent site on the ray $s+kh\sign(v_j)e_j$, $k\ge1$, has an even larger scalar product and is outside~$S$ as well. This ray proves $z\in U$, and adjacency to~$s$ gives $z\in T$. Hence, $\max_{z\in T}v\cdot z\ge\max_{s\in S}v\cdot s$ for every nonzero~$v$, and the inequality also holds for $v=0$. Applying Lemma~\ref{lem:support} to $K_1=\conv S$ and $K_2=\conv T$ gives $\conv S\subseteq\conv T$.
 
@@ -552,7 +582,7 @@ Let $j\ge1$ and $\sqrt2\,\lambda(j-1)\le p$. Then for all $x\in\R^2$ and $\rho\g
 \end{lemma}
 
 \begin{proof}
-Let $Q(z)\coloneqq z+[-1/2,1/2)^2$ and let $N(z)\le N_1(z)$ be the number of lines of~$\cL$ meeting $Q(z)$. Conditionally on~$\cL$, the events $\{X_\lambda\cap Q(z)\neq\varnothing\}$, $z\in\Z^2$, are independent with probabilities $q_z\le\min\{1,\sqrt2\lambda N(z)\}$, since a chord of a unit square has length at most~$\sqrt2$. Let $(V_z)$ be independent uniform variables independent of $(\cL,X_\lambda)$, and put $U_z\coloneqq q_zV_z$ if $X_\lambda\cap Q(z)\neq\varnothing$ and $U_z\coloneqq q_z+(1-q_z)V_z$ otherwise. Conditionally on~$\cL$ the $U_z$ are independent and uniform, so $U$ is independent of~$\cL$ and has the required law. If $X_\lambda\cap Q(z)\neq\varnothing$ and $N_1(z)\le j-1$, then $U_z\le q_z\le\sqrt2\lambda(j-1)\le p$, so $z\in\omega$. Hence every site whose box contains a point of~$X_\lambda$ lies in $\{N_1\ge j\}\cup\omega$. If $\chi_1,\dots,c_q$ is a chain as in the statement and $c_i\in Q(z_i)$, then $\lvert z_i-c_i\rvert<1$, consecutive sites $z_i$ are at sup-distance less than~$3$, hence at most~$2$, $\lvert z_1-x\rvert\le\rho$ and $\lvert z_q-x\rvert>8\rho$; stopping at the first site at distance more than $8\rho$ from~$x$ gives a path as in \cref{sub:def:G}.
+Let $Q(z)\coloneqq z+[-1/2,1/2)^2$ and let $N(z)\le N_1(z)$ be the number of lines of~$\cL$ meeting $Q(z)$. Conditionally on~$\cL$, the events $\{X_\lambda\cap Q(z)\neq\varnothing\}$, $z\in\Z^2$, are independent with probabilities $q_z\le\min\{1,\sqrt2\lambda N(z)\}$, since a chord of a unit square has length at most~$\sqrt2$. Let $(V_z)$ be independent uniform variables independent of $(\cL,X_\lambda)$, and put $U_z\coloneqq q_zV_z$ if $X_\lambda\cap Q(z)\neq\varnothing$ and $U_z\coloneqq q_z+(1-q_z)V_z$ otherwise. Conditionally on~$\cL$ the $U_z$ are independent and uniform, so $U$ is independent of~$\cL$ and has the required law. If $X_\lambda\cap Q(z)\neq\varnothing$ and $N_1(z)\le j-1$, then $U_z\le q_z\le\sqrt2\lambda(j-1)\le p$, so $z\in\omega$. Hence every site whose box contains a point of~$X_\lambda$ lies in $\{N_1\ge j\}\cup\omega$. If $c_1,\dots,c_q$ is a chain as in the statement and $c_i\in Q(z_i)$, then $\lvert z_i-c_i\rvert<1$, consecutive sites $z_i$ are at sup-distance less than~$3$, hence at most~$2$, $\lvert z_1-x\rvert\le\rho$ and $\lvert z_q-x\rvert>8\rho$; stopping at the first site at distance more than $8\rho$ from~$x$ gives a path as in \cref{sub:def:G}.
 \end{proof}
 
 \begin{lemma}[Base case]
@@ -561,7 +591,7 @@ For every $\mu>0$ and $\alpha_0\ge40$ there is $j_0=j_0(\mu,\alpha_0)$ such that
 \end{lemma}
 
 \begin{proof}
-Fix~$x$. On $G^{2,\varnothing}_{j_0}(x,\alpha_0)$ either some site of $A(x,\alpha_0)$ has $N_2\ge j_0$, or there is a path as in \cref{sub:def:G} in~$\omega$. The set $A(x,\alpha_0)$ has at most $\pi(8\alpha_0+4)^2\le300\alpha_0^2$ sites, so the first alternative has probability at most $300\alpha_0^2\,\P(\mathrm{Poi}(4\mu)\ge j_0)\le\alpha_0^{-7}/2$ for $j_0$ large. In the second alternative the path may be taken self-avoiding; it starts at one of at most $4\alpha_0^2$ sites and has at least $\lceil2.4\alpha_0\rceil$ sites, because it covers a distance of more than $7\alpha_0$ in steps of length at most $2\sqrt2$. There are at most $24^{q-1}$ self-avoiding paths with $q$ sites from a given start, so the probability is at most $4\alpha_0^2\sum_{q\ge2.4\alpha_0}24^{q-1}48^{-q}\le4\alpha_0^2\,2^{-2.4\alpha_0}\le\alpha_0^{-7}/2$ for $\alpha_0\ge40$. The consequence follows from~\eqref{sub:eq:trivial} for $s\le k_c$ and is trivial for $s>k_c$.
+Fix~$x$. On $\cC^{2,\varnothing}_{j_0}(x,\alpha_0)$ either some site of $A(x,\alpha_0)$ has $N_2\ge j_0$, or there is a path as in \cref{sub:def:G} in~$\omega$. The set $A(x,\alpha_0)$ has at most $\pi(8\alpha_0+4)^2\le300\alpha_0^2$ sites, so the first alternative has probability at most $300\alpha_0^2\,\P(\mathrm{Poi}(4\mu)\ge j_0)\le\alpha_0^{-7}/2$ for $j_0$ large. In the second alternative the path may be taken self-avoiding; it starts at one of at most $4\alpha_0^2$ sites and has at least $\lceil2.4\alpha_0\rceil$ sites, because it covers a distance of more than $7\alpha_0$ in steps of length at most $2\sqrt2$. There are at most $24^{q-1}$ self-avoiding paths with $q$ sites from a given start, so the probability is at most $4\alpha_0^2\sum_{q\ge2.4\alpha_0}24^{q-1}48^{-q}\le4\alpha_0^2\,2^{-2.4\alpha_0}\le\alpha_0^{-7}/2$ for $\alpha_0\ge40$. The consequence follows from~\eqref{sub:eq:trivial} for $s\le k_c$ and is trivial for $s>k_c$.
 \end{proof}
 
 % =================================================================
@@ -634,7 +664,7 @@ Write $R_i\coloneqq \bar B(x_i,9\alpha)$, $A_i\coloneqq A(x_i,\alpha)$ and $\cC_
 \emph{Step 1: conditioning on the shared lines.} Let $\cS$ be the set of lines of~$\cL$ meeting at least two of the regions, and for $\ell\in\cS$ let $k(\ell)<l(\ell)$ be the two smallest indices of regions met by~$\ell$. The sets $\cS_{kl}\coloneqq\{\ell\in\cS\colon(k(\ell),l(\ell))=(k,l)\}$, $k<l$, and the sets $\cL_i$ of lines of~$\cL$ meeting $R_i$ and no other region, $1\le i\le a$, are restrictions of~$\cL$ to pairwise disjoint sets of lines, hence independent Poisson processes; the intensity measure of $\cS_{kl}$ is at most $\nu_\mu$ restricted to the set $\cW_{kl}$ of lines meeting $R_k$ and~$R_l$. The event $\cC_i$ is determined by $\cL_i$, by the lines of~$\cS$ meeting~$R_i$ and by $(U_z)_{z\in A_i}$. Therefore the events $\cC_1,\dots,\cC_a$ are conditionally independent given~$\cS$, and with $\pi_i(\cS)\coloneqq\P(\cC_i\,\vert\,\cS)$,
 \begin{equation}
 \label{sub:eq:cond}
-  \P\Bigl(\bigcap_iG_i\Bigr)=\E\Bigl[\prod_{i=1}^a\pi_i(\cS)\Bigr]\,.
+  \P\Bigl(\bigcap_i\cC_i\Bigr)=\E\Bigl[\prod_{i=1}^a\pi_i(\cS)\Bigr]\,.
 \end{equation}
 
 \emph{Step 2: a pointwise bound.} For a region~$i$, a radius~$\zeta$, a finite set~$\Delta'$ of lines, and unit vectors $e_1,\dots,e_v$ and reals $u_1,\dots,u_v$ put
@@ -723,7 +753,7 @@ The proof uses two lemmas. In both, $n$ is fixed, \eqref{sub:eq:hyp} is assumed 
 \label{sub:lem:free}
 For every $x\in\R^2$, every tuple~$T$ and all finite sets $\Delta_1,\dots,\Delta_a$ of lines with $s_i=\lvert\Delta_i\rvert$,
 \begin{equation*}
-  \P\Bigl(\bigcap_{i=1}^aG_j^{\zeta_{n+1},\Delta_i}(x_i,\alpha)\Bigr)\le2^a\,\e\,\prod_{i=1}^a\alpha^{-\gamma(s_i)}\,.
+  \P\Bigl(\bigcap_{i=1}^a\cC_j^{\zeta_{n+1},\Delta_i}(x_i,\alpha)\Bigr)\le2^a\,\e\,\prod_{i=1}^a\alpha^{-\gamma(s_i)}\,.
 \end{equation*}
 \end{lemma}
 
