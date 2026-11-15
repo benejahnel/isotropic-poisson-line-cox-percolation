@@ -1,6 +1,9 @@
 \documentclass[11pt,letterpaper]{article}
 \usepackage{jahnel}
 \usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\numberwithin{table}{section}
 \DeclareMathOperator{\dist}{dist}
 \newcommand{\cS}{\mathcal S}
 \newcommand{\cW}{\mathcal W}
@@ -57,9 +60,9 @@ A closed crossing at a larger scale forces two smaller closed crossings in well-
 
 We therefore estimate crossing probabilities uniformly over the angular restrictions produced by deletion. The ratios between successive scales increase sufficiently rapidly that the total angular loss remains small. The resulting quadratic recursion makes closed crossings increasingly unlikely. If the open set constructed at the initial scale belonged to a finite open component, its exterior boundary would force one of these closed crossings. Bounding the probability of all possible boundaries then gives positive probability of an infinite open component. One fixed point intensity is used throughout the argument.
 
-The subcritical phase requires a different argument, because deleting lines decreases occupied crossings. We dominate the occupied boxes of a unit lattice by the boxes close to at least~$j$ lines together with an independent Bernoulli field, for a large level~$j$ and a small point intensity. A crossing of this dominating set at a large scale forces a fixed number of crossings in windows that are far apart on a much smaller scale. Given the lines that meet at least two of these windows, the crossings are independent. Such a shared line is rare. The joint intensity measure of its signed offsets in the two windows with smallest indices is bounded by a constant multiple of the product of uniform measures on the offset intervals. The multivariate Mecke equation then allows us to compare it with the lines of the process of nearly the same direction, at the cost of a logarithmic factor. In the remaining windows we make no use of its position. Instead, the induction hypothesis bounds crossing probabilities uniformly over a number of additional lines and loses a small power of the scale for each of them. This yields a recursion in which the level is the same at all scales.
+The subcritical phase requires a different argument, because deleting lines decreases occupied crossings. We dominate the occupied set by the sites near many lines together with an independent Bernoulli field, and run a second multiscale argument, now for occupied crossings. Given the lines that meet several distant windows, the crossings in these windows are independent. These shared lines are rare, and we control them through their intensity and the multivariate Mecke equation; \cref{sec:subcritical} begins with a more detailed overview.
 
-\cref{sec:setting} introduces the model and states \cref{thm:main,sub:thm:main}. \cref{sec:strategy} is devoted to the supercritical phase. It explains why deleting a short interval of directions decouples two distant crossings, states the initial estimate, the crossing recursion, and the deterministic boundary lemma, and proves \cref{thm:main} by bounding closed boundaries with crossing events in \cref{sec:lattice-events,sec:proof-main}. \cref{sec:recursion} proves the crossing recursion by deleting directions. \cref{sec:initial} then proves the initial estimate by constructing a polygon of four lines around the inner square, and \cref{sec:geometry} proves the geometric lemma for the initial polygon and the deterministic boundary lemma. \cref{sec:subcritical} is devoted to the subcritical phase and proves \cref{sub:thm:main}. \cref{sec:extensions} discusses extensions to random radii and to higher dimensions together with open questions.
+\cref{sec:setting} introduces the model and states \cref{thm:main,sub:thm:main}. \cref{sec:strategy} is devoted to the supercritical phase. It explains why deleting a short interval of directions decouples two distant crossings, states the initial estimate, the crossing recursion, and the deterministic boundary lemma, and proves \cref{thm:main} by bounding closed boundaries with crossing events in \cref{sec:lattice-events,sec:proof-main}. \cref{sec:recursion} proves the crossing recursion by deleting directions. \cref{sec:initial} then proves the initial estimate by constructing a polygon of four lines around the inner square, and \cref{sec:geometry} proves the geometric lemma for the initial polygon and the deterministic boundary lemma. \cref{sec:subcritical} is devoted to the subcritical phase and proves \cref{sub:thm:main}. \cref{sec:extensions} discusses extensions to random radii and to higher dimensions together with open questions. \cref{sec:star-connected} contains a self-contained proof that exterior boundaries in the planar lattice are star-connected.
 
 % =================================================================
 \section{Setting and main results}
@@ -125,6 +128,29 @@ More precisely, there is a function $\lambda_0\colon(0,\infty)\to(0,\infty)$ suc
 \end{theorem}
 
 \cref{thm:main,sub:thm:main} together give $0<\lambda_c(\mu,r)<\infty$ for all $\mu,r>0$, so the phase transition is nontrivial at every line intensity and disk radius. In contrast to \cref{thm:main}, \cref{sub:thm:main} is qualitative: the function~$\lambda_0$ is not explicit. Its proof gives more than the absence of unbounded components. For small~$\lambda$, the probability that the occupied set connects a disk to the complement of the concentric disk of eight times its radius decays polynomially along a sequence of scales; see \eqref{sub:eq:chain-crossing-bound}. \cref{rem:monotonicity} explains why the argument for \cref{thm:main} does not give \cref{sub:thm:main}, which is proved by a separate multiscale argument in \cref{sec:subcritical}. Random radii and higher dimensions are discussed in \cref{sec:extensions}.
+
+Both proofs are multiscale arguments for crossings of annuli, but they decouple distant crossings in opposite ways. Deleting lines can only create closed crossings. In the supercritical phase, the lines meeting two distant windows can therefore be deleted, at the price of a short interval of directions. In the subcritical phase, deletion goes in the wrong direction. There we condition on the lines shared by several windows and control them through their intensity. \Cref{tab:comparison} compares the two arguments.
+
+\begin{table}[ht]
+  \centering
+  \small
+  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{5.5cm}>{\raggedright\arraybackslash}p{5.5cm}@{}}
+    \toprule
+    & \cref{thm:main}, supercritical phase & \cref{sub:thm:main}, subcritical phase\\
+    \midrule
+    Crossings made unlikely & closed star crossings of the site model & occupied crossings of the dominating lattice model\\
+    Lattice comparison & a site is open if a Cox point lies within distance $r/2$ & sites near at least $j$ lines, together with an independent Bernoulli field\\
+    Scales & $L_{n+1}=A(n+1)^2L_n$ & $\alpha_{n+1}=\alpha_n^5$\\
+    Smaller crossings per step & two & $25$\\
+    Source of dependence & lines meeting both windows & lines meeting at least two of the regions\\
+    Decoupling & delete the lines in a short interval of directions & condition on the shared lines; Mecke comparison in the first two regions\\
+    Price of decoupling & angular losses, summable over the scales & loss of exponent for each additional line\\
+    Bound on $\lambda_c$ & explicit & qualitative\\
+    \bottomrule
+  \end{tabular}
+  \caption{The two multiscale arguments.}
+  \label{tab:comparison}
+\end{table}
 
 % =================================================================
 \section{The supercritical phase: proof of \texorpdfstring{\cref{thm:main}}{the first main theorem}}
@@ -461,39 +487,14 @@ Finally, the margin between $Q_L$ and the polygon ensures $Q_L\subseteq\conv V$.
 Here $\lVert v\rVert_2\le\lVert v\rVert_1$ and $h/\sqrt2\le0.3L$. The inequality also holds for $v=0$, so \cref{lem:support}, applied to $\mathcal Z_1=Q_L$ and $\mathcal Z_2=\conv V$, gives the required containment. Thus, $\cH\subseteq G(L)$. Together with the exclusion of closed star crossings, this proves \cref{lem:initial-geometry}.
 \end{proof}
 
-In the plane, the polygon construction also gives an open circuit around $Q_L$. To see this, translate $\Gamma$ by a small vector so that it misses the tile vertices. The translation can be small enough that the curve still surrounds $Q_L$ and meets only tiles that met $\Gamma$, all of which are disjoint from $Q_L$. Joining the centres of the tiles in traversal order gives a closed nearest-neighbour walk of open sites. Within the traversed tiles, this walk is homotopic to the translated curve, so it has winding number one about the origin when the traversal is counterclockwise. Decomposing the walk into cycles gives a circuit surrounding the origin and hence the whole square. If its open cluster is finite, the boundary of the unbounded face of the union of its tiles gives an exterior contour around the circuit. This yields the usual planar contour interpretation for this construction; the proof of \cref{lem:boundary-reduction} applies even when the open set in $G(4L_0)$ contains no circuit.
+\begin{remark}[Planar contour interpretation]
+\label[remark]{rem:circuit}
+In the plane, the polygon construction also gives an open circuit around $Q_L$. To see this, translate $\Gamma$ by a small vector so that it misses the tile vertices. The translation can be small enough that the curve still surrounds $Q_L$ and meets only tiles that met $\Gamma$, all of which are disjoint from $Q_L$. Joining the centres of the tiles in traversal order gives a closed nearest-neighbour walk of open sites. Within the traversed tiles, this walk is homotopic to the translated curve, so it has winding number one about the origin when the traversal is counterclockwise. Decomposing the walk into cycles gives a circuit surrounding the origin and hence the whole square. If its open cluster is finite, the boundary of the unbounded face of the union of its tiles gives an exterior contour around the circuit. This yields the usual planar contour interpretation for this construction; the proof of \cref{lem:boundary-reduction} applies even when the open set in $G(4L_0)$ contains no circuit. The remark is not used in the proofs.
+\end{remark}
 
 The proof of \cref{lem:boundary-reduction} uses that the part of the boundary of a finite cluster facing one component of its complement is star-connected. This is a special case of a result of Tim\'ar~\cite[Lemma~2]{Tim13}, which covers all dimensions.
 % TODO(BJ): Nummer "Lemma 2" nach arXiv:0711.1713 geprüft; in der publizierten Fassung (PAMS 141) gegenprüfen.
-For the planar lattice we give a self-contained proof. An \emph{edge} is an unordered pair of nearest-neighbour sites of~$h\Z^2$. For $z\in h\Z^2$, the \emph{face}~$\square_z$ is the set of the four edges joining consecutive corners of the square $z+[0,h]^2$. Every edge belongs to exactly two faces. For sets of edges we write $\triangle$ for the symmetric difference. The \emph{degree} of a site in a set of edges is the number of edges of the set containing it, and a set of edges is \emph{even} if all degrees are even. Faces are even, and the degree of a site in $\mathcal X_1\triangle\mathcal X_2$ has the parity of the sum of its degrees in $\mathcal X_1$ and~$\mathcal X_2$. In particular, the symmetric difference of even sets is even.
-
-\begin{lemma}[Faces generate the even edge sets]
-\label[lemma]{lem:faces}
-Every finite even set of edges is the symmetric difference of finitely many faces.
-\end{lemma}
-
-\begin{proof}[Proof of \cref{lem:faces}]
-By scaling we may assume $h=1$. Let $\mathcal X$ be a finite even set of edges. For $(i_1,i_2)\in\Z^2$ let $\varkappa(i_1,i_2)$ be the number of edges $\{(i_1',i_2),(i_1',i_2+1)\}\in\mathcal X$ with $i_1'\ge i_1+1$, and let $\mathcal O$ be the set of sites $(i_1,i_2)$ for which $\varkappa(i_1,i_2)$ is odd.
-
-The set~$\mathcal O$ is finite. Indeed, $\varkappa(i_1,i_2)=0$ unless $\mathcal X$ contains an edge $\{(i_1',i_2),(i_1',i_2+1)\}$, which happens for finitely many~$i_2$, and for such~$i_2$ we have $\varkappa(i_1,i_2)=0$ for all large~$i_1$. For all sufficiently small~$i_1$, the value $\varkappa(i_1,i_2)$ is the number of all edges of~$\mathcal X$ of the form $\{(i_1',i_2),(i_1',i_2+1)\}$. This number is even. To see this, consider the sum of the degrees in~$\mathcal X$ of the sites with second coordinate at most~$i_2$. It is even, the edges with both endpoints among these sites contribute~$2$ to it, and the remaining contributing edges are exactly the edges just counted, each contributing~$1$.
-
-We show that the symmetric difference of the faces $\square_z$, $z\in\mathcal O$, equals~$\mathcal X$. An edge belongs to this symmetric difference if and only if exactly one of the two faces containing it is indexed by a site of~$\mathcal O$, that is, if and only if the values of~$\varkappa$ at the two corresponding sites have different parity. For the edge $\{(i_1,i_2),(i_1,i_2+1)\}$, the two faces are indexed by $(i_1-1,i_2)$ and $(i_1,i_2)$, and $\varkappa(i_1-1,i_2)-\varkappa(i_1,i_2)$ is~$1$ if the edge belongs to~$\mathcal X$ and~$0$ otherwise. For the edge $\{(i_1,i_2),(i_1+1,i_2)\}$, the two faces are indexed by $(i_1,i_2)$ and $(i_1,i_2-1)$. Let $\mathcal U$ be the set of sites $(i_1',i_2)$ with $i_1'\ge i_1+1$. The sum of the degrees in~$\mathcal X$ of the sites of~$\mathcal U$ is even. Edges with both endpoints in~$\mathcal U$ contribute~$2$ to it. The edges of~$\mathcal X$ with exactly one endpoint in~$\mathcal U$ are the $\varkappa(i_1,i_2)$ edges $\{(i_1',i_2),(i_1',i_2+1)\}$ with $i_1'\ge i_1+1$, the $\varkappa(i_1,i_2-1)$ edges $\{(i_1',i_2-1),(i_1',i_2)\}$ with $i_1'\ge i_1+1$, and the edge $\{(i_1,i_2),(i_1+1,i_2)\}$ if it belongs to~$\mathcal X$. Hence, the two values $\varkappa(i_1,i_2)$ and $\varkappa(i_1,i_2-1)$ have different parity if and only if this edge belongs to~$\mathcal X$.
-\end{proof}
-
-\begin{lemma}[Exterior boundaries are star-connected]
-\label[lemma]{lem:exterior-boundary}
-Let $S\subseteq h\Z^2$ be finite, nonempty and nearest-neighbour connected, let $S'$ be a nearest-neighbour connected component of $h\Z^2\setminus S$, and let $T$ be the set of sites of~$S'$ that are nearest neighbours of some site of~$S$. Then $T$ is star-connected.
-\end{lemma}
-
-\begin{proof}[Proof of \cref{lem:exterior-boundary}]
-Let $\Sigma$ be the set of edges with one endpoint in~$S$ and the other in~$S'$. The endpoint in~$S'$ of an edge of~$\Sigma$ belongs to~$T$, and every site of~$T$ is an endpoint of an edge of~$\Sigma$. Suppose that $T$ is not star-connected. Then $T$ is the union of two disjoint nonempty sets $T_1,T_2$ such that no site of~$T_1$ is a star neighbour of a site of~$T_2$. For $i\in\{1,2\}$ let $\Sigma_i$ be the set of edges of~$\Sigma$ with an endpoint in~$T_i$. The sets $\Sigma_1,\Sigma_2$ are nonempty and disjoint, and $\Sigma=\Sigma_1\cup\Sigma_2$.
-
-Fix $y_0\in S$ and $z_0\in S'$. For $i\in\{1,2\}$ choose an edge $\{y_i,z_i\}\in\Sigma_i$ with $y_i\in S$ and $z_i\in T_i$, a self-avoiding nearest-neighbour path from~$y_0$ to~$y_i$ in~$S$, and a self-avoiding nearest-neighbour path from~$z_i$ to~$z_0$ in~$S'$. Their concatenation through the edge $\{y_i,z_i\}$ is a self-avoiding path from~$y_0$ to~$z_0$; let $\mathcal X_i$ be its set of edges. Then $\mathcal X_i\cap\Sigma=\{\{y_i,z_i\}\}\subseteq\Sigma_i$, because all other edges of~$\mathcal X_i$ join two sites of~$S$ or two sites of~$S'$. In~$\mathcal X_i$ the sites $y_0$ and~$z_0$ have degree~$1$, and all other sites have even degree. Hence, $\mathcal X_1\triangle\mathcal X_2$ is a finite even set, and by \cref{lem:faces} there are distinct sites $w_1,\dots,w_q$ with $\mathcal X_1\triangle\mathcal X_2=\square_{w_1}\triangle\dots\triangle\square_{w_q}$.
-
-We claim that some face~$\square_{w_k}$ contains an edge of~$\Sigma_1$ and an edge of~$\Sigma_2$. Suppose not, and let $\vartheta$ be the symmetric difference of~$\mathcal X_1$ and of all faces~$\square_{w_k}$ that contain an edge of~$\Sigma_1$. Since $\mathcal X_1\triangle\mathcal X_2\triangle\square_{w_1}\triangle\dots\triangle\square_{w_q}=\varnothing$, the set~$\vartheta$ is also the symmetric difference of~$\mathcal X_2$ and of all faces~$\square_{w_k}$ that contain no edge of~$\Sigma_1$. By the second description, $\vartheta$ contains no edge of~$\Sigma_1$. By the first description and the assumption, $\vartheta$ contains no edge of~$\Sigma_2$. Thus, $\vartheta\cap\Sigma=\varnothing$. On the other hand, in~$\vartheta$ the sites $y_0$ and~$z_0$ have odd degree, and all other sites have even degree. In the graph with edge set~$\vartheta$, the sum of the degrees over the connected component of~$y_0$ is even, so this component contains a second site of odd degree, which must be~$z_0$. Therefore, $\vartheta$ contains the edges of a nearest-neighbour path $y_0=v_0,v_1,\dots,v_p=z_0$. Let $v_b$ be the first site of this path in~$S'$. Then $b\ge1$, and $v_{b-1}$ is a nearest neighbour of a site of~$S'$ that does not belong to~$S'$. Since $S'$ is a component of $h\Z^2\setminus S$, this forces $v_{b-1}\in S$, so $\{v_{b-1},v_b\}\in\vartheta\cap\Sigma$, a contradiction.
-
-Let $\square_{w_k}$ be a face containing an edge of~$\Sigma_1$ and an edge of~$\Sigma_2$. These edges have endpoints $z_1'\in T_1$ and $z_2'\in T_2$. Both are among the four corners of the face, which are pairwise at maximum-norm distance at most~$h$, and $z_1'\neq z_2'$ because $T_1\cap T_2=\varnothing$. Hence, $z_1'$ and~$z_2'$ are star neighbours, contrary to the choice of $T_1$ and~$T_2$.
-\end{proof}
+For completeness, \cref{sec:star-connected} gives a self-contained proof for the planar lattice; the statement we use is \cref{lem:exterior-boundary}.
 
 We now prove \cref{lem:boundary-reduction}, which identifies the closed boundary that would surround a finite open cluster containing the set in~$G(4L_0)$. We first construct this exterior boundary and verify that it consists of closed sites and is star-connected. We then compare convex hulls to show that it contains the initial square in the sense required by~$\cD(4L_0)$. These properties show that excluding~$\cD(4L_0)$ forces the open cluster to be infinite.
 
@@ -530,7 +531,14 @@ We condition on the lines shared by the smaller regions, which makes the crossin
 
 The two regions are far apart, so the direction change is small. As shown in \cref{fig:shared-line}, increasing the distance threshold for counting a line ensures that every site that counted the original line also counts its replacement. A related comparison appears in Alves and Teixeira's decoupling for Poisson cylinders~\cite[Theorem~1.1 and the proof overview in Section~1]{AT24}: increasing the cylinder radius permits a change in direction, and increasing the intensity supplies a Poisson comparison. In our argument the intensity stays fixed. We integrate over the two offsets and use the Mecke formula; in any later region we account for the shared line through a bound that allows prescribed additional lines.
 
-The induction therefore estimates crossings uniformly over the prescribed lines, with a weaker exponent as their number increases. The first two offsets of each shared line contribute a small factor because the regions are far apart; this factor compensates for the loss in the exponent in the later regions. The bound with no prescribed lines then shows that chain crossing probabilities tend to zero along the chosen scales. This rules out unbounded occupied components at unit disk radius, and rescaling gives the result for every radius.
+The induction therefore estimates crossings uniformly over the prescribed lines, with a weaker exponent as their number increases. The first two offsets of each shared line contribute a small factor because the regions are far apart; this factor compensates for the loss in the exponent in the later regions. The bound with no prescribed lines then shows that chain crossing probabilities tend to zero along the chosen scales. This rules out unbounded occupied components at unit disk radius, and rescaling gives the result for every radius. \Cref{fig:dependencies} shows how the statements of this section depend on each other, and \cref{tab:parameters} lists the parameters and constants.
+
+\begin{figure}[!htbp]
+  \centering
+  \input{figures/fig_dependencies}
+  \caption{Dependencies between the statements of \cref{sec:subcritical}. An arrow points from a statement to a statement whose proof uses it. \Cref{sub:thm:main} follows from the domination lemma and the multiscale bound in \cref{sub:sec:setting}; the induction step for the multiscale bound combines the inclusion, the joint crossing bound and the counting bound, and the joint crossing bound rests on the decoupling estimate.}
+  \label{fig:dependencies}
+\end{figure}
 
 \begin{figure}[!htbp]
   \centering
@@ -624,6 +632,14 @@ For the geometry and induction, set
 \end{equation}
 The remaining subsections prove \cref{sub:thm:induction}, working entirely with lattice crossings. At each step a large crossing gives $a$ smaller crossings at scale~$\alpha$ with scale ratio $M=\alpha^\kappa$. When a line meets several of their observation regions, we use its two offsets in the first two regions it meets and count it as an additional line in any subsequent region. This separates the integration over offsets from the bound that allows a fixed number of prescribed lines.
 
+\paragraph{Bookkeeping of exponents.} The conditions on the parameters balance three effects. We describe them up to constants and logarithmic factors, with $M=\alpha^\kappa$; the target at the larger scale is $(M\alpha)^{-\gamma(s)}=\alpha^{-(1+\kappa)\gamma(s)}$. First, a crossing at scale $M\alpha$ is covered by tuples of $a$ smaller crossings, and each circle carries of the order of~$M$ candidate centres. Without prescribed lines, the tuples contribute $(M\alpha^{-\gamma_0})^a=\alpha^{-a(\gamma_0-\kappa)}$, which is below the target when $a(\gamma_0-\kappa)>(1+\kappa)\gamma_0$. Prescribed lines can weaken the bound in some of the regions, and the first inequality in~\eqref{sub:eq:P1} below keeps a margin when only $a-\kappa-1$ regions are unaffected.
+
+Second, a prescribed line meets only a bounded number of the candidate regions on a circle, unless it is nearly tangent to that circle; then it meets of the order of $\sqrt M=\alpha^{\kappa/2}$ of them, by \cref{sub:lem:chord}. Even if the regions on all other circles see all prescribed lines, the remaining $a-1-\kappa$ factors with exponent at least~$\gamma_*$ pay for these positions. This is the first inequality in~\eqref{sub:eq:P3}.
+
+Third, a line meets two regions at distance of the order of $M\alpha$ with probability of the order of $\alpha^2/(M\alpha)=\alpha^{1-\kappa}$, by \cref{sub:lem:pair}. In each of the at most $a-2$ later regions that it meets, it counts as a prescribed line and lowers the exponent by at most~$\bar\sigma$. A shared line therefore costs at most $\alpha^{1-\kappa+\bar\sigma(a-2)}$, and the second inequality in~\eqref{sub:eq:P3} makes this small, with a margin $\alpha^{-0.2}$ for the logarithmic factors in~\eqref{sub:eq:A2}. This is the place where $\kappa>1$ is needed.
+
+The cut-off~$k_c$ is the number of prescribed lines at which the linear exponent reaches $\gamma_*=\gamma_0-\sigma k_c$. Since the induction starts at the level $j=j_0+k_c$, up to $k_c$ prescribed lines leave the level at least $j_0$ at the first scale, by~\eqref{sub:eq:trivial}. The slope~$\sigma$ must be small, because $\bar\sigma\ge\sigma+\gamma_*$ enters the third effect. Finally, the factor $\alpha^{-\xi}$ absorbs the remaining constants; see~\eqref{sub:eq:A3}. With $\kappa=4$ and $\gamma_0=7$, the choice $a=25$ satisfies all conditions.
+
 The exponent satisfies $\gamma(k)\ge\gamma(k_c)=\gamma_*$ for $0\le k\le k_c$, and $\sigma+\gamma_*\le\bar\sigma$. The parameter estimates used in the induction are
 \begin{align}
 \label{sub:eq:P1}
@@ -631,7 +647,44 @@ The exponent satisfies $\gamma(k)\ge\gamma(k_c)=\gamma_*$ for $0\le k\le k_c$, a
 \label{sub:eq:P3}
   (a-1-\kappa)\gamma_*&\ge\tfrac\kappa2+\xi\,,&\bar\sigma(a-2)&\le\kappa-1-0.2\,.
 \end{align}
-Indeed, $60\ge37.1$, $7\ge6.1$, $2.2\ge2.1$ and $2.76\le2.8$.
+Indeed, $60\ge37.1$, $7\ge6.1$, $2.2\ge2.1$ and $2.76\le2.8$. \Cref{tab:parameters} collects the parameters and the numerical constants of this section.
+
+\begin{table}[!htbp]
+  \centering
+  \small
+  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}p{6.6cm}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{2.8cm}@{}}
+    \toprule
+    Symbol & Meaning & Value & Introduced\\
+    \midrule
+    $a$ & number of smaller crossings per step & $25$ & \eqref{sub:eq:param}\\
+    $\kappa$ & exponent of the scale ratio $M=\alpha^\kappa$ & $4$ & \eqref{sub:eq:param}\\
+    $\alpha_n$ & scales & $\alpha_0^{5^n}$, $\alpha_0\ge40$ & before \cref{sub:thm:induction}\\
+    $M_n$ & scale ratio at step~$n$ & $\alpha_n^\kappa$ & \cref{sub:sec:induction}\\
+    $\gamma_0$ & crossing exponent without prescribed lines & $7$ & \eqref{sub:eq:gamma}\\
+    $\sigma$ & loss of exponent per prescribed line & $0.005$ & \eqref{sub:eq:gamma}\\
+    $k_c$ & largest number of prescribed lines with a nontrivial bound & $1378$ & \eqref{sub:eq:gamma}\\
+    $\gamma_*$ & smallest positive exponent, $\gamma(k_c)$ & $0.11$ & \eqref{sub:eq:param}\\
+    $\bar\sigma$ & bound for the loss of exponent per additional line in the decoupling, $\bar\sigma\ge\sigma+\gamma_*$ & $0.12$ & \eqref{sub:eq:param}\\
+    $\xi$ & margin absorbing the constants of the induction step & $0.1$ & \eqref{sub:eq:param}\\
+    $j_0$ & level of the base case & depends on $\mu,\alpha_0$ & \cref{sub:lem:base}\\
+    $j$ & level of the induction & $j_0+k_c$ & proof of \cref{sub:thm:induction}\\
+    $\lambda_0(\mu)$ & intensity below which all components are bounded & $1/(68(j-1))$ & proof of \cref{sub:thm:main}\\
+    $\omega$ & independent Bernoulli field & density $1/48$ & \cref{sub:sec:setting}\\
+    $\zeta_n$ & counting radius at scale~$\alpha_n$ & $\zeta_0=2$, $\zeta_n\in[1.48,2]$ & \cref{sub:sec:induction}\\
+    $D_n$ & minimal distance between the regions & $7M_n\alpha_n/(a-1)$ & \cref{sub:sec:induction}\\
+    $\eta_n$ & increase of the radius by straightening; $335$ from \cref{sub:lem:pair}\,(ii) & $335\alpha_n^2/D_n$ & \cref{sub:sec:induction}\\
+    $\eta_n'$ & increase of the radius in the Mecke comparison & $\eta_0'/(n+1)^2$ & \cref{sub:sec:induction}\\
+    $\bar\nu_n$ & intensity of the lines in one direction window & $2\mu\eta_n'/\pi$ & \cref{sub:sec:induction}\\
+    $\Omega_n$ & weight of one shared line; $129\ge1.25\cdot18^2/\pi$ from \cref{sub:lem:pair}\,(i) & $129\mu\alpha_n^2/D_n$ & \cref{sub:sec:induction}\\
+    $t_n$ & truncation of the number of window lines & $\lceil2\gamma_0\log_2\alpha_n\rceil$ & \cref{sub:sec:induction}\\
+    $\lvert K_i\rvert$ & number of candidate centres on the $i$th circle & at most $104M$ & \cref{sub:sec:induction}\\
+    $\chi$ & half-width of the near-tangent band & $7M/(2(a-1))$ & \cref{sub:sec:geometry}\\
+    $C_7$, $C_8$ & numbers of regions met by a line, with and without near-tangency & $80$, $163\sqrt a$ & \cref{sub:lem:chord}\\
+    \bottomrule
+  \end{tabular}
+  \caption{Parameters and constants in the proof of \cref{sub:thm:main}.}
+  \label{tab:parameters}
+\end{table}
 
 \subsection{Proof of the multiscale bound for lattice crossings}
 \label{sub:sec:induction}
@@ -1030,6 +1083,41 @@ Whether $\lambda_c(\mu,r)<\infty$ holds for lines in~$\R^m$, $m\ge3$, at every $
 \emph{Random radii.} As noted in \cref{sec:random-radii}, \cref{sub:thm:main} gives a subcritical phase for bounded radii, and \cref{rem:heavy-tails} shows that a finite second moment is necessary. We do not know whether it is sufficient.
 
 \emph{Other line environments.} The proof of \cref{sub:thm:main} uses isotropy only through the density of~$\nu_\mu$ in the direction parameter, in \cref{sub:lem:pair} and in the comparison of Step~4 in the proof of \cref{sub:prop:decoupling}. For a line process with a single direction the dominating lattice model percolates at every level, so some condition of this kind is needed for the argument. We have not examined which directional distributions can be treated, nor the analogues for lines and hyperplanes in higher dimensions.
+
+% =================================================================
+\appendix
+\section{Star-connectedness of exterior boundaries}
+\label{sec:star-connected}
+
+This appendix proves \cref{lem:exterior-boundary}, which is used in the proof of \cref{lem:boundary-reduction}. The argument specialises Tim\'ar's cycle-space proof~\cite[Lemma~2]{Tim13} to the planar lattice. An \emph{edge} is an unordered pair of nearest-neighbour sites of~$h\Z^2$. For $z\in h\Z^2$, the \emph{face}~$\square_z$ is the set of the four edges joining consecutive corners of the square $z+[0,h]^2$. Every edge belongs to exactly two faces. For sets of edges we write $\triangle$ for the symmetric difference. The \emph{degree} of a site in a set of edges is the number of edges of the set containing it, and a set of edges is \emph{even} if all degrees are even. Faces are even, and the degree of a site in $\mathcal X_1\triangle\mathcal X_2$ has the parity of the sum of its degrees in $\mathcal X_1$ and~$\mathcal X_2$. In particular, the symmetric difference of even sets is even.
+
+\begin{lemma}[Faces generate the even edge sets]
+\label[lemma]{lem:faces}
+Every finite even set of edges is the symmetric difference of finitely many faces.
+\end{lemma}
+
+\begin{proof}[Proof of \cref{lem:faces}]
+By scaling we may assume $h=1$. Let $\mathcal X$ be a finite even set of edges. For $(i_1,i_2)\in\Z^2$ let $\varkappa(i_1,i_2)$ be the number of edges $\{(i_1',i_2),(i_1',i_2+1)\}\in\mathcal X$ with $i_1'\ge i_1+1$, and let $\mathcal O$ be the set of sites $(i_1,i_2)$ for which $\varkappa(i_1,i_2)$ is odd.
+
+The set~$\mathcal O$ is finite. Indeed, $\varkappa(i_1,i_2)=0$ unless $\mathcal X$ contains an edge $\{(i_1',i_2),(i_1',i_2+1)\}$, which happens for finitely many~$i_2$, and for such~$i_2$ we have $\varkappa(i_1,i_2)=0$ for all large~$i_1$. For all sufficiently small~$i_1$, the value $\varkappa(i_1,i_2)$ is the number of all edges of~$\mathcal X$ of the form $\{(i_1',i_2),(i_1',i_2+1)\}$. This number is even. To see this, consider the sum of the degrees in~$\mathcal X$ of the sites with second coordinate at most~$i_2$. It is even, the edges with both endpoints among these sites contribute~$2$ to it, and the remaining contributing edges are exactly the edges just counted, each contributing~$1$.
+
+We show that the symmetric difference of the faces $\square_z$, $z\in\mathcal O$, equals~$\mathcal X$. An edge belongs to this symmetric difference if and only if exactly one of the two faces containing it is indexed by a site of~$\mathcal O$, that is, if and only if the values of~$\varkappa$ at the two corresponding sites have different parity. For the edge $\{(i_1,i_2),(i_1,i_2+1)\}$, the two faces are indexed by $(i_1-1,i_2)$ and $(i_1,i_2)$, and $\varkappa(i_1-1,i_2)-\varkappa(i_1,i_2)$ is~$1$ if the edge belongs to~$\mathcal X$ and~$0$ otherwise. For the edge $\{(i_1,i_2),(i_1+1,i_2)\}$, the two faces are indexed by $(i_1,i_2)$ and $(i_1,i_2-1)$. Let $\mathcal U$ be the set of sites $(i_1',i_2)$ with $i_1'\ge i_1+1$. The sum of the degrees in~$\mathcal X$ of the sites of~$\mathcal U$ is even. Edges with both endpoints in~$\mathcal U$ contribute~$2$ to it. The edges of~$\mathcal X$ with exactly one endpoint in~$\mathcal U$ are the $\varkappa(i_1,i_2)$ edges $\{(i_1',i_2),(i_1',i_2+1)\}$ with $i_1'\ge i_1+1$, the $\varkappa(i_1,i_2-1)$ edges $\{(i_1',i_2-1),(i_1',i_2)\}$ with $i_1'\ge i_1+1$, and the edge $\{(i_1,i_2),(i_1+1,i_2)\}$ if it belongs to~$\mathcal X$. Hence, the two values $\varkappa(i_1,i_2)$ and $\varkappa(i_1,i_2-1)$ have different parity if and only if this edge belongs to~$\mathcal X$.
+\end{proof}
+
+\begin{lemma}[Exterior boundaries are star-connected]
+\label[lemma]{lem:exterior-boundary}
+Let $S\subseteq h\Z^2$ be finite, nonempty and nearest-neighbour connected, let $S'$ be a nearest-neighbour connected component of $h\Z^2\setminus S$, and let $T$ be the set of sites of~$S'$ that are nearest neighbours of some site of~$S$. Then $T$ is star-connected.
+\end{lemma}
+
+\begin{proof}[Proof of \cref{lem:exterior-boundary}]
+Let $\Sigma$ be the set of edges with one endpoint in~$S$ and the other in~$S'$. The endpoint in~$S'$ of an edge of~$\Sigma$ belongs to~$T$, and every site of~$T$ is an endpoint of an edge of~$\Sigma$. Suppose that $T$ is not star-connected. Then $T$ is the union of two disjoint nonempty sets $T_1,T_2$ such that no site of~$T_1$ is a star neighbour of a site of~$T_2$. For $i\in\{1,2\}$ let $\Sigma_i$ be the set of edges of~$\Sigma$ with an endpoint in~$T_i$. The sets $\Sigma_1,\Sigma_2$ are nonempty and disjoint, and $\Sigma=\Sigma_1\cup\Sigma_2$.
+
+Fix $y_0\in S$ and $z_0\in S'$. For $i\in\{1,2\}$ choose an edge $\{y_i,z_i\}\in\Sigma_i$ with $y_i\in S$ and $z_i\in T_i$, a self-avoiding nearest-neighbour path from~$y_0$ to~$y_i$ in~$S$, and a self-avoiding nearest-neighbour path from~$z_i$ to~$z_0$ in~$S'$. Their concatenation through the edge $\{y_i,z_i\}$ is a self-avoiding path from~$y_0$ to~$z_0$; let $\mathcal X_i$ be its set of edges. Then $\mathcal X_i\cap\Sigma=\{\{y_i,z_i\}\}\subseteq\Sigma_i$, because all other edges of~$\mathcal X_i$ join two sites of~$S$ or two sites of~$S'$. In~$\mathcal X_i$ the sites $y_0$ and~$z_0$ have degree~$1$, and all other sites have even degree. Hence, $\mathcal X_1\triangle\mathcal X_2$ is a finite even set, and by \cref{lem:faces} there are distinct sites $w_1,\dots,w_q$ with $\mathcal X_1\triangle\mathcal X_2=\square_{w_1}\triangle\dots\triangle\square_{w_q}$.
+
+We claim that some face~$\square_{w_k}$ contains an edge of~$\Sigma_1$ and an edge of~$\Sigma_2$. Suppose not, and let $\vartheta$ be the symmetric difference of~$\mathcal X_1$ and of all faces~$\square_{w_k}$ that contain an edge of~$\Sigma_1$. Since $\mathcal X_1\triangle\mathcal X_2\triangle\square_{w_1}\triangle\dots\triangle\square_{w_q}=\varnothing$, the set~$\vartheta$ is also the symmetric difference of~$\mathcal X_2$ and of all faces~$\square_{w_k}$ that contain no edge of~$\Sigma_1$. By the second description, $\vartheta$ contains no edge of~$\Sigma_1$. By the first description and the assumption, $\vartheta$ contains no edge of~$\Sigma_2$. Thus, $\vartheta\cap\Sigma=\varnothing$. On the other hand, in~$\vartheta$ the sites $y_0$ and~$z_0$ have odd degree, and all other sites have even degree. In the graph with edge set~$\vartheta$, the sum of the degrees over the connected component of~$y_0$ is even, so this component contains a second site of odd degree, which must be~$z_0$. Therefore, $\vartheta$ contains the edges of a nearest-neighbour path $y_0=v_0,v_1,\dots,v_p=z_0$. Let $v_b$ be the first site of this path in~$S'$. Then $b\ge1$, and $v_{b-1}$ is a nearest neighbour of a site of~$S'$ that does not belong to~$S'$. Since $S'$ is a component of $h\Z^2\setminus S$, this forces $v_{b-1}\in S$, so $\{v_{b-1},v_b\}\in\vartheta\cap\Sigma$, a contradiction.
+
+Let $\square_{w_k}$ be a face containing an edge of~$\Sigma_1$ and an edge of~$\Sigma_2$. These edges have endpoints $z_1'\in T_1$ and $z_2'\in T_2$. Both are among the four corners of the face, which are pairwise at maximum-norm distance at most~$h$, and $z_1'\neq z_2'$ because $T_1\cap T_2=\varnothing$. Hence, $z_1'$ and~$z_2'$ are star neighbours, contrary to the choice of $T_1$ and~$T_2$.
+\end{proof}
 
 % =================================================================
 \section*{Acknowledgements}
