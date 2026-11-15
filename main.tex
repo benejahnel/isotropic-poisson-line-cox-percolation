@@ -1,9 +1,6 @@
 \documentclass[11pt,letterpaper]{article}
 \usepackage{jahnel}
 \usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{array}
-\numberwithin{table}{section}
 \DeclareMathOperator{\dist}{dist}
 \newcommand{\cS}{\mathcal S}
 \newcommand{\cW}{\mathcal W}
@@ -672,10 +669,10 @@ Indeed, $60\ge37.1$, $7\ge6.1$, $2.2\ge2.1$ and $2.76\le2.8$. \Cref{tab:paramete
     $\omega$ & independent Bernoulli field & density $1/48$ & \cref{sub:sec:setting}\\
     $\zeta_n$ & counting radius at scale~$\alpha_n$ & $\zeta_0=2$, $\zeta_n\in[1.48,2]$ & \cref{sub:sec:induction}\\
     $D_n$ & minimal distance between the regions & $7M_n\alpha_n/(a-1)$ & \cref{sub:sec:induction}\\
-    $\eta_n$ & increase of the radius by straightening; $335$ from \cref{sub:lem:pair}\,(ii) & $335\alpha_n^2/D_n$ & \cref{sub:sec:induction}\\
+    $\eta_n$ & increase of the radius by straightening; $335$ from \cref{sub:it:pair-straight} of \cref{sub:lem:pair} & $335\alpha_n^2/D_n$ & \cref{sub:sec:induction}\\
     $\eta_n'$ & increase of the radius in the Mecke comparison & $\eta_0'/(n+1)^2$ & \cref{sub:sec:induction}\\
     $\bar\nu_n$ & intensity of the lines in one direction window & $2\mu\eta_n'/\pi$ & \cref{sub:sec:induction}\\
-    $\Omega_n$ & weight of one shared line; $129\ge1.25\cdot18^2/\pi$ from \cref{sub:lem:pair}\,(i) & $129\mu\alpha_n^2/D_n$ & \cref{sub:sec:induction}\\
+    $\Omega_n$ & weight of one shared line; $129\ge1.25\cdot18^2/\pi$ from \cref{sub:it:pair-density} of \cref{sub:lem:pair} & $129\mu\alpha_n^2/D_n$ & \cref{sub:sec:induction}\\
     $t_n$ & truncation of the number of window lines & $\lceil2\gamma_0\log_2\alpha_n\rceil$ & \cref{sub:sec:induction}\\
     $\lvert K_i\rvert$ & number of candidate centres on the $i$th circle & at most $104M$ & \cref{sub:sec:induction}\\
     $\chi$ & half-width of the near-tangent band & $7M/(2(a-1))$ & \cref{sub:sec:geometry}\\
@@ -841,9 +838,9 @@ To compare shared lines with lines of a fixed direction, let $y_1,y_2\in\R^2$, p
 \begin{lemma}[Lines meeting two regions]
 \label[lemma]{sub:lem:pair}
 With the preceding notation, the following hold.
-\begin{enumerate}
-  \item There is an injective map $\ell\mapsto(u_1,u_2)$ from $\cW$ to $[-9\alpha,9\alpha]^2$ under which the image of $\nu_\mu\vert_{\cW}$ has a density with respect to Lebesgue measure bounded by $1.25\mu/(\pi D)$.
-  \item For $i\in\{1,2\}$, every $\ell\in\cW$, every $\zeta\le2$ and every site~$z$ with $\lvert z-y_i\rvert\le8\alpha+3$: if $\dist(z,\ell)\le\zeta$, then $\dist(z,\ell^e_{y_i}(u_i))\le\zeta+\eta$.
+\begin{enumerate}[label=(\arabic*),ref=\arabic*]
+  \item\label{sub:it:pair-density} There is an injective map $\ell\mapsto(u_1,u_2)$ from $\cW$ to $[-9\alpha,9\alpha]^2$ under which the image of $\nu_\mu\vert_{\cW}$ has a density with respect to Lebesgue measure bounded by $1.25\mu/(\pi D)$.
+  \item\label{sub:it:pair-straight} For $i\in\{1,2\}$, every $\ell\in\cW$, every $\zeta\le2$ and every site~$z$ with $\lvert z-y_i\rvert\le8\alpha+3$: if $\dist(z,\ell)\le\zeta$, then $\dist(z,\ell^e_{y_i}(u_i))\le\zeta+\eta$.
 \end{enumerate}
 \end{lemma}
 
@@ -922,7 +919,7 @@ Write $\mathcal V_i\coloneqq\mathcal V(x_i,\alpha)$ and let $\cL_i$ be the restr
 
 For a realisation of~$\cS$, let $H_{kl}=\lvert\cS_{kl}\rvert$ and let $(u_k(\ell),u_l(\ell))$ be the two offsets of $\ell\in\cS_{kl}$ from \cref{sub:lem:pair}. We straighten $\ell$ in regions $k$ and~$l$. In region~$i$, let $\mathcal S_i^+$ be the set of shared lines meeting $\mathcal R_i$ with $l(\ell)<i$. The offset densities allow us to exclude coincidences between lines after straightening or with~$\Delta_i$, which occur on a set of probability zero.
 
-Couple $\cL_i$ to the corresponding restriction of a full Poisson line process independent of~$\cS$. Since the events are increasing in the set of lines, $\Pi_i(\cS)$ is at most the probability of $\cC_i$ computed with an independent copy of~$\cL$ in place of~$\cL_i$ and with the lines of~$\cS$ meeting~$\mathcal R_i$ added to~$\Delta_i$. By \cref{sub:lem:pair}\,(ii) and monotonicity in the radius, replacing each line $\ell\in\cS_{kl}$ in its first two regions by $\ell^{e_{kl}}_{x_i}(u_i(\ell))$ and the radius~$\zeta$ by $\zeta+\eta$ does not decrease this probability. Hence,
+Couple $\cL_i$ to the corresponding restriction of a full Poisson line process independent of~$\cS$. Since the events are increasing in the set of lines, $\Pi_i(\cS)$ is at most the probability of $\cC_i$ computed with an independent copy of~$\cL$ in place of~$\cL_i$ and with the lines of~$\cS$ meeting~$\mathcal R_i$ added to~$\Delta_i$. By \cref{sub:it:pair-straight} of \cref{sub:lem:pair} and monotonicity in the radius, replacing each line $\ell\in\cS_{kl}$ in its first two regions by $\ell^{e_{kl}}_{x_i}(u_i(\ell))$ and the radius~$\zeta$ by $\zeta+\eta$ does not decrease this probability. Hence,
 \begin{equation}
 \label{sub:eq:pointwise}
   \Pi_i(\cS)\le\Phi_i^{\zeta+\eta}\bigl((u_i(\ell))_{\ell\text{ straightened in }i};\,\mathcal S_i^+\bigr)\,.
@@ -932,7 +929,7 @@ There are $v_i(H)$ offsets in the first argument and at most $b_i(H)$ lines in t
 \Cref{fig:shared-line} illustrates the comparison in the first two regions and the treatment of the line in a later region.
 
 \emph{Step 3: Offset integration.}
-By the independence of the Poisson processes $\cS_{kl}$, the bound on their intensity measures, \eqref{sub:eq:pointwise} and \cref{sub:lem:pair}\,(i), the left side of \eqref{sub:eq:integrated} is at most
+By the independence of the Poisson processes $\cS_{kl}$, the bound on their intensity measures, \eqref{sub:eq:pointwise} and \cref{sub:it:pair-density} of \cref{sub:lem:pair}, the left side of \eqref{sub:eq:integrated} is at most
 \begin{equation*}
   \sum_H\ \prod_{k<l}\frac{1}{H_{kl}!}\Bigl(\frac{1.25\mu}{\pi D}\Bigr)^{H_{kl}}\int\prod_{i=1}^a\Phi_i^{\zeta+\eta}\bigl((u_i(\ell))_{\ell\text{ str.\ in }i};\,\mathcal S_i^+\bigr)\prod_{\ell}\d u_{k(\ell)}(\ell)\,\d u_{l(\ell)}(\ell)\,,
 \end{equation*}
@@ -943,7 +940,7 @@ Integrate in decreasing order of the region index. At index~$i$, all factors wit
 \emph{Step 4: One-region comparison by the Mecke formula.}
 Fix directions $e_1,\dots,e_v$ and~$\Delta'$ with $\lvert\Delta'\rvert\le b$, and put $\psi\coloneqq\eta'/(18\alpha)$. For a unit vector~$e$ let $\cW(e)$ be the set of lines whose normal is $\cos\varphi\,e^\perp+\sin\varphi\,e$ with $\lvert\varphi\rvert\le\psi$ and whose signed distance~$u$ from~$x_i$ satisfies $\lvert u\rvert\le9\alpha$; in the coordinates $(\varphi,u)$ the measure~$\nu_\mu$ has density $\mu/\pi$ on $\cW(e)$, so $\nu_\mu(\cW(e))=(\mu/\pi)\cdot2\psi\cdot18\alpha=\bar\nu$.
 
-As in the proof of \cref{sub:lem:pair}\,(ii), for a line $\ell\in\cW(e)$ with coordinates $(\varphi,u)$ and a site $z\in \mathcal V_i$, $\dist(z,\ell^e_{x_i}(u))\le\zeta+\eta\le2$ implies $\dist(z,\ell)\le\zeta+\eta+18\alpha\lvert\varphi\rvert\le\zeta''$. For each fixed set $\Delta_i\cup\Delta'$, coincidences between sampled lines or with that set have zero product measure in the offsets and angles. Outside this exceptional set, rotation preserves each added line's contribution to the enlarged line counts. Hence, for almost every joint choice of offsets $u_1,\dots,u_v$ and angles $\varphi_1,\dots,\varphi_v\in[-\psi,\psi]$, the value $\Phi_i^{\zeta+\eta}(u_1,\dots,u_v;\Delta')$ is at most the probability of $\cC_j^{\zeta'',\Delta_i\cup\Delta'\cup\{\ell_1,\dots,\ell_v\}}(x_i,\alpha)$, where $\ell_c\in\cW(e_c)$ has coordinates $(\varphi_c,u_c)$.
+As in the proof of \cref{sub:it:pair-straight} of \cref{sub:lem:pair}, for a line $\ell\in\cW(e)$ with coordinates $(\varphi,u)$ and a site $z\in \mathcal V_i$, $\dist(z,\ell^e_{x_i}(u))\le\zeta+\eta\le2$ implies $\dist(z,\ell)\le\zeta+\eta+18\alpha\lvert\varphi\rvert\le\zeta''$. For each fixed set $\Delta_i\cup\Delta'$, coincidences between sampled lines or with that set have zero product measure in the offsets and angles. Outside this exceptional set, rotation preserves each added line's contribution to the enlarged line counts. Hence, for almost every joint choice of offsets $u_1,\dots,u_v$ and angles $\varphi_1,\dots,\varphi_v\in[-\psi,\psi]$, the value $\Phi_i^{\zeta+\eta}(u_1,\dots,u_v;\Delta')$ is at most the probability of $\cC_j^{\zeta'',\Delta_i\cup\Delta'\cup\{\ell_1,\dots,\ell_v\}}(x_i,\alpha)$, where $\ell_c\in\cW(e_c)$ has coordinates $(\varphi_c,u_c)$.
 
 For nonnegative integers $m,v$, write $(m)_v\coloneqq m(m-1)\cdots(m-v+1)$, with $(m)_0=1$ and $(m)_v=0$ for $v>m$. Average over $\varphi_1,\dots,\varphi_v$. For fixed uniform variables $(U_z)_{z\in\mathcal V_i}$, write $f(\cL)$ for the indicator of $\cC_j^{\zeta'',\Delta_i\cup\Delta'}(x_i,\alpha)$ as a function of the line process. Applying the multivariate Mecke formula~\cite[Theorem~4.4]{LP17} conditionally on these variables and then averaging over them gives
 \begin{align*}
@@ -966,9 +963,9 @@ Dividing by $\bar\nu^v$ and taking the supremum over the prescribed directions a
 We finish by proving the geometric estimate that controls the distribution of the two offsets and justifies the replacement of a shared line.
 
 \begin{proof}[Proof of \cref{sub:lem:pair}]
-In terms of the parameters in~\eqref{eq:line-parameters}, the passage to $(\varphi,u_1)$ is a rotation in the first and a translation in the second coordinate, so $\nu_\mu$ has density $\mu/\pi$ in $(\varphi,u_1)$. A line belongs to~$\cW$ if and only if $\lvert u_1\rvert,\lvert u_2\rvert\le9\alpha$, and $u_1-u_2=\langle y_2-y_1,n\rangle=D'\sin\varphi$. Hence, on~$\cW$, $\lvert\sin\varphi\rvert\le18\alpha/D'\le1/2$, the map $(\varphi,u_1)\mapsto(u_1,u_2)$ is injective with Jacobian $D'\cos\varphi\ge0.8D'$, and (i) follows.
+In terms of the parameters in~\eqref{eq:line-parameters}, the passage to $(\varphi,u_1)$ is a rotation in the first and a translation in the second coordinate, so $\nu_\mu$ has density $\mu/\pi$ in $(\varphi,u_1)$. A line belongs to~$\cW$ if and only if $\lvert u_1\rvert,\lvert u_2\rvert\le9\alpha$, and $u_1-u_2=\langle y_2-y_1,n\rangle=D'\sin\varphi$. Hence, on~$\cW$, $\lvert\sin\varphi\rvert\le18\alpha/D'\le1/2$, the map $(\varphi,u_1)\mapsto(u_1,u_2)$ is injective with Jacobian $D'\cos\varphi\ge0.8D'$, and \cref{sub:it:pair-density} follows.
 
-For part (ii), let $i$, $\ell$, $\zeta$, and $z$ satisfy its hypotheses. Compare the signed-distance formulas for the original and straightened lines. We have $\lvert n-e^\perp\rvert=2\sin(\lvert\varphi\rvert/2)\le2\lvert\sin\varphi\rvert$ because $\lvert\varphi\rvert\le\pi/6$, and $\lvert z-y_i\rvert\le8\alpha+3\le9\alpha$. Therefore,
+For \cref{sub:it:pair-straight}, let $i$, $\ell$, $\zeta$, and $z$ satisfy its hypotheses. Compare the signed-distance formulas for the original and straightened lines. We have $\lvert n-e^\perp\rvert=2\sin(\lvert\varphi\rvert/2)\le2\lvert\sin\varphi\rvert$ because $\lvert\varphi\rvert\le\pi/6$, and $\lvert z-y_i\rvert\le8\alpha+3\le9\alpha$. Therefore,
 \begin{align*}
   \dist(z,\ell^e_{y_i}(u_i))
   &=\bigl\lvert\langle z-y_i,e^\perp\rangle-u_i\bigr\rvert\\
@@ -1122,6 +1119,7 @@ Let $\square_{w_k}$ be a face containing an edge of~$\Sigma_1$ and an edge of~$\
 % =================================================================
 \section*{Acknowledgements}
 
+% TODO(BJ): Förderhinweise prüfen, auch für CH ergänzen.
 BJ acknowledges the financial support of the Leibniz Association within the Leibniz Junior Research Group on Probabilistic Methods for Dynamic Communication Networks (DYCOMNET) as part of the Leibniz Competition (grant no.~J105/2020), of the Berlin Mathematics Research Centre MATH+ through the project EF-MA-Sys-2 on Information Flow \& Emergent Behavior in Complex Networks, and of the Deutsche Forschungsgemeinschaft (DFG) through Project P27 within the SPP~2265.
 
 \section*{Use of AI tools}
@@ -1130,6 +1128,6 @@ BJ acknowledges the financial support of the Leibniz Association within the Leib
 The simulations, proofs, computations, figures and the text of this paper were developed with substantial assistance of the AI systems Claude (Anthropic) and ChatGPT Astra~6 (OpenAI), in an interactive process directed by the authors.
 
 \bibliographystyle{amsalpha}
-\bibliography{references}
+{\small\bibliography{references}}
 
 \end{document}

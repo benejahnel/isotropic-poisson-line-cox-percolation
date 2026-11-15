@@ -14,6 +14,9 @@
 \RequirePackage{microtype}
 \setlength{\emergencystretch}{1em}
 \RequirePackage{graphicx}
+\RequirePackage[font=small]{caption}  % captions in small type
+\RequirePackage{booktabs}
+\RequirePackage{array}
 \RequirePackage{xcolor}
 \RequirePackage{tikz}
 \usetikzlibrary{calc}
@@ -28,6 +31,14 @@
 \RequirePackage{hyperref}
 \hypersetup{colorlinks=true,linktoc=all,linkcolor=paperlink,citecolor=paperlink,urlcolor=paperlink,pdfstartview=Fit}
 \RequirePackage[capitalise,noabbrev]{cleveref}
+\crefname{figure}{Figure}{Figures}
+\Crefname{figure}{Figure}{Figures}
+\crefname{table}{Table}{Tables}
+\Crefname{table}{Table}{Tables}
+\crefname{section}{Section}{Sections}
+\Crefname{section}{Section}{Sections}
+\crefname{enumi}{Item}{Items}
+\Crefname{enumi}{Item}{Items}
 
 % Header: running title left, page number right
 \RequirePackage{fancyhdr}
@@ -65,6 +76,7 @@
 \newtheorem{remark}[theorem]{Remark}
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
+\numberwithin{table}{section}
 \setcounter{tocdepth}{1}
 
 % ---------------------------------------------------------------
