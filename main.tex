@@ -126,28 +126,7 @@ More precisely, there is a function $\lambda_0\colon(0,\infty)\to(0,\infty)$ suc
 
 \cref{thm:main,sub:thm:main} together give $0<\lambda_c(\mu,r)<\infty$ for all $\mu,r>0$, so the phase transition is nontrivial at every line intensity and disk radius. In contrast to \cref{thm:main}, \cref{sub:thm:main} is qualitative: the function~$\lambda_0$ is not explicit. Its proof gives more than the absence of unbounded components. For small~$\lambda$, the probability that the occupied set connects a disk to the complement of the concentric disk of eight times its radius decays polynomially along a sequence of scales; see \eqref{sub:eq:chain-crossing-bound}. \cref{rem:monotonicity} explains why the argument for \cref{thm:main} does not give \cref{sub:thm:main}, which is proved by a separate multiscale argument in \cref{sec:subcritical}. Random radii and higher dimensions are discussed in \cref{sec:extensions}.
 
-Both proofs are multiscale arguments for crossings of annuli, but they decouple distant crossings in opposite ways. Deleting lines can only create closed crossings. In the supercritical phase, the lines meeting two distant windows can therefore be deleted, at the price of a short interval of directions. In the subcritical phase, deletion goes in the wrong direction. There we condition on the lines shared by several windows and control them through their intensity. \Cref{tab:comparison} compares the two arguments.
-
-\begin{table}[ht]
-  \centering
-  \small
-  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{5.5cm}>{\raggedright\arraybackslash}p{5.5cm}@{}}
-    \toprule
-    & \cref{thm:main}, supercritical phase & \cref{sub:thm:main}, subcritical phase\\
-    \midrule
-    Crossings made unlikely & closed star crossings of the site model & occupied crossings of the dominating lattice model\\
-    Lattice comparison & a site is open if a Cox point lies within distance $r/2$ & sites near at least $j$ lines, together with an independent Bernoulli field\\
-    Scales & $L_{n+1}=A(n+1)^2L_n$ & $\alpha_{n+1}=\alpha_n^5$\\
-    Smaller crossings per step & two & $25$\\
-    Source of dependence & lines meeting both windows & lines meeting at least two of the regions\\
-    Decoupling & delete the lines in a short interval of directions & condition on the shared lines; Mecke comparison in the first two regions\\
-    Price of decoupling & angular losses, summable over the scales & loss of exponent for each additional line\\
-    Bound on $\lambda_c$ & explicit & qualitative\\
-    \bottomrule
-  \end{tabular}
-  \caption{The two multiscale arguments.}
-  \label{tab:comparison}
-\end{table}
+Both proofs are multiscale arguments for crossings of annuli, but they decouple distant crossings in opposite ways. Deleting lines can only create closed crossings. In the supercritical phase, the lines meeting two distant windows can therefore be deleted, at the price of a short interval of directions. In the subcritical phase, deletion goes in the wrong direction. There we condition on the lines shared by several windows and control them through their intensity.
 
 % =================================================================
 \section{The supercritical phase: proof of \texorpdfstring{\cref{thm:main}}{the first main theorem}}
@@ -521,7 +500,7 @@ The constructed set~$T$ is finite, closed, and star-connected, and $Q_{4L_0}\sub
 
 We prove \cref{sub:thm:main} by showing that long occupied crossings become unlikely at small point intensity. First, at unit disk radius, we replace chains of points by paths through occupied unit squares. The lattice comparison bounds these paths by paths through sites of two kinds: those near many Poisson lines and those in an independent Bernoulli field of small density. We choose the threshold for the number of lines large enough to start the induction, and then take the point intensity small enough for the comparison to hold.
 
-At each scale, a large crossing forces smaller crossings near successive circles. This is the geometric step in Gou\'er\'e's subcritical argument for the Poisson Boolean model~\cite[Lemma~3.3]{Gou08}, where the smaller crossing events are independent after a restriction on the disk radii. In our model, distant regions can depend on the same line even at unit disk radius. % TODO(BJ): Stellenangaben [JJV23, proof of Theorem 4] und [AT24, Theorem 1.1 and Section 1] prüfen.
+At each scale, a large crossing forces smaller crossings near successive circles. This is the geometric step in Gou\'er\'e's subcritical argument for the Poisson--Boolean model~\cite[Lemma~3.3]{Gou08}, where the smaller crossing events are independent after a restriction on the disk radii. In our model, distant regions can depend on the same line even at unit disk radius. % TODO(BJ): Stellenangaben [JJV23, proof of Theorem 4] und [AT24, Theorem 1.1 and Section 1] prüfen.
 Jahnel, Jhawar, and Vu~\cite[proof of Theorem~4]{JJV23} handle this dependence in the Manhattan model by a lattice comparison and circuits in a dual randomly stretched lattice. Here the lines have arbitrary directions, and we estimate the joint probability of the smaller crossings directly.
 
 We condition on the lines shared by the smaller regions, which makes the crossings conditionally independent. For each shared line, use the two regions with smallest indices that it meets. Join their centres and choose the unit normal to the shared line that points to the same side as the counterclockwise normal to the joining direction. The offset at each centre is its perpendicular distance to the shared line, with a positive sign if the line lies in the direction of the chosen normal and a negative sign if it lies in the opposite direction. Together, the two offsets determine the line. In each of these regions we replace the shared line by a line parallel to the joining direction at the same signed offset, now measured along the normal to the joining direction. This is what we mean by straightening the line.
@@ -648,8 +627,8 @@ Indeed, $60\ge37.1$, $7\ge6.1$, $2.2\ge2.1$ and $2.76\le2.8$. \Cref{tab:paramete
 
 \begin{table}[!htbp]
   \centering
-  \small
-  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}p{6.6cm}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{2.8cm}@{}}
+  \footnotesize
+  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.4cm}>{\raggedright\arraybackslash}p{6.4cm}>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{2.6cm}@{}}
     \toprule
     Symbol & Meaning & Value & Introduced\\
     \midrule
@@ -973,6 +952,7 @@ For \cref{sub:it:pair-straight}, let $i$, $\ell$, $\zeta$, and $z$ satisfy its h
   &\le\zeta+18\alpha\lvert\sin\varphi\rvert
   \le\zeta+324\alpha^2/D'\le\zeta+\eta\,.
 \end{align*}
+This proves \cref{sub:it:pair-straight}.
 \end{proof}
 
 % =================================================================
