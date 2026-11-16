@@ -42,7 +42,7 @@ Poisson line Cox processes describe points distributed along a random system of 
 
 Intersections between lines allow occupied paths to pass from one line to another. Increasing the point intensity makes such connections more likely locally, but a single line can also influence configurations in regions arbitrarily far apart. Establishing percolation therefore requires control of these connections across increasing spatial scales. The question is whether increasing the linear point intensity can produce an unbounded occupied component for every positive line intensity and disk radius.
 
-General criteria for Cox percolation were proved by Hirsch, Jahnel, and Cali~\cite[Section~2.1]{HJC19}. Their supercritical result assumes stabilisation of the directing random measure together with an additional connectivity condition. Poisson line length measures fall outside this framework because they do not satisfy the stabilisation hypothesis; see the discussion in Jahnel and T\'obi\'as~\cite[Section~3]{JT22}.
+General criteria for Cox percolation were proved by Hirsch, Jahnel, and Cali~\cite[Section~2.1]{HJC19}. Their supercritical result assumes stabilisation of the directing random measure together with an additional connectivity condition. Poisson line length measures do not satisfy the stabilisation hypothesis; see the discussion in Jahnel and T\'obi\'as~\cite[Section~3]{JT22}.
 
 Jahnel, Jhawar, and Vu~\cite{JJV23} establish phase transitions for a non-stabilising environment of horizontal and vertical Poisson lines. Their supercritical argument exploits the two coordinate directions to compare occupied connections along streets with bond percolation on a randomly stretched square lattice~\cite[Sections~1.3 and~2]{JJV23}. Their outlook~\cite[Section~1.4]{JJV23} identifies the general Poisson line environment as a further problem, for which this lattice representation is unavailable. Hil\'ario, S\'a, Sanchis, and Teixeira~\cite[Section~9]{HSST26} also ask whether the Poisson line Cox Boolean model has a nontrivial phase transition.
 % TODO(BJ): Abschnittsnummer in [HSST26] in der publizierten Fassung (PTRF 195, 2026) prüfen.
@@ -139,7 +139,7 @@ The reduction of one large crossing to two separated smaller crossings follows t
 \begin{figure}[ht]
   \centering
   \input{figures/fig_angular_deletion}
-  \caption{Angular deletion in two separated observation windows, schematic. (a)~The dashed amber lines have normal angles in the shaded sector of the inset; this sector contains every direction that permits a line to meet both squares. (b)~Removing all lines in this angular interval and their points leaves the same retained configuration as in~(a). No retained line meets both windows, which gives independence of the two restrictions of the marked Poisson process. Solid teal segments and dark dots show retained lines and points, and disks show neighbourhoods of the displayed points. Only points inside the windows are shown. The angular range and disk radii are enlarged for visibility.}
+  \caption{Angular deletion in two separated observation windows, schematic. (a)~The dashed amber lines have normal angles in the shaded sector of the inset; this sector contains every direction that permits a line to meet both squares. (b)~Removing all lines in this angular interval and their points leaves the solid lines and their points shown in~(a). No remaining line meets both windows, so the two restrictions of the marked Poisson process are independent. Solid teal segments show the remaining lines, dark dots show their points, and disks show neighbourhoods of the displayed points. Only points inside the windows are shown. The angular range and disk radii are enlarged for visibility.}
   \label{fig:deletion}
 \end{figure}
 
@@ -294,7 +294,7 @@ We have therefore covered~$\cD(4L_0)$ by crossings centred at $x\in L_n\Z^2\cap 
   \P(\cD(4L_0))\le\sum_{n=0}^\infty\ \sum_{x\in L_n\Z^2\cap Q_{9L_{n+1}}}\P(\cB(x,L_n))\le361\sum_{n=0}^\infty A_n^2q_n\,.
 \end{equation}
 
-With the boundary estimate established, we choose the initial scale so that the line environment supplies the polygon with sufficiently high probability. Once this scale has been fixed, the point intensity will make gaps along the four selected lines unlikely. Let $c,C_0$ be the constants supplied by \cref{prop:initial}. Choose a universal $C_5\ge1$ such that $C_0\exp(-cC_5)\le\varepsilon/2$, and put $C_6\coloneqq11/2+4C_5$. The initial scale is at least both the disk radius and a constant multiple of $1/\mu$. We choose the point intensity to absorb the resulting factor $1+4L_0/r$ in the initial estimate:
+With the boundary estimate established, we choose the initial scale $L_0$ so that all four line families are nonempty with high probability. We then choose the point intensity so that the probability bound for an empty interval along the selected lines is at most $\varepsilon/2$. Let $c,C_0$ be the constants in \cref{prop:initial}. Choose a universal $C_5\ge1$ such that $C_0\exp(-cC_5)\le\varepsilon/2$, and put $C_6\coloneqq11/2+4C_5$. The initial scale is at least both the disk radius and a constant multiple of $1/\mu$. We use the following initial scale and bound on the point intensity:
 \begin{align}\label{eq:parameter-choice}
   L_0&\coloneqq h\bigl\lceil\max(r,C_5/\mu)/h\bigr\rceil,&C_1&\coloneqq\frac1c\max\{1,\log(2C_0C_6/\varepsilon)\},\\
   \lambda&\ge\frac{C_1}{r}\bigl[1+\logp(1/(\mu r))\bigr],&1+4L_0/r&\le C_6\max\{1,1/(\mu r)\}\,.\notag
@@ -500,19 +500,19 @@ The constructed set~$T$ is finite, closed, and star-connected, and $Q_{4L_0}\sub
 
 We prove \cref{sub:thm:main} by showing that long occupied crossings become unlikely at small point intensity. First, at unit disk radius, we replace chains of points by paths through occupied unit squares. The lattice comparison bounds these paths by paths through sites of two kinds: those near many Poisson lines and those in an independent Bernoulli field of small density. We choose the threshold for the number of lines large enough to start the induction, and then take the point intensity small enough for the comparison to hold.
 
-At each scale, a large crossing forces smaller crossings near successive circles. This is the geometric step in Gou\'er\'e's subcritical argument for the Poisson--Boolean model~\cite[Lemma~3.3]{Gou08}, where the smaller crossing events are independent after a restriction on the disk radii. In our model, distant regions can depend on the same line even at unit disk radius. % TODO(BJ): Stellenangaben [JJV23, proof of Theorem 4] und [AT24, Theorem 1.1 and Section 1] prüfen.
-Jahnel, Jhawar, and Vu~\cite[proof of Theorem~4]{JJV23} handle this dependence in the Manhattan model by a lattice comparison and circuits in a dual randomly stretched lattice. Here the lines have arbitrary directions, and we estimate the joint probability of the smaller crossings directly.
+At each scale, a large crossing forces smaller crossings near successive circles. This is the geometric step in Gou\'er\'e's subcritical argument for the Poisson--Boolean model~\cite[Lemma~3.3]{Gou08}, where the smaller crossing events are independent after a restriction on the disk radii. In our model, distant regions can depend on the same line even at unit disk radius.
+Jahnel, Jhawar, and Vu~\cite[Propositions~3.3--3.5]{JJV23} handle this dependence in the Manhattan model by a lattice comparison and circuits in a dual randomly stretched lattice. Here the lines have arbitrary directions, and we estimate the joint probability of the smaller crossings directly.
 
 We condition on the lines shared by the smaller regions, which makes the crossings conditionally independent. For each shared line, use the two regions with smallest indices that it meets. Join their centres and choose the unit normal to the shared line that points to the same side as the counterclockwise normal to the joining direction. The offset at each centre is its perpendicular distance to the shared line, with a positive sign if the line lies in the direction of the chosen normal and a negative sign if it lies in the opposite direction. Together, the two offsets determine the line. In each of these regions we replace the shared line by a line parallel to the joining direction at the same signed offset, now measured along the normal to the joining direction. This is what we mean by straightening the line.
 
-The two regions are far apart, so the direction change is small. As shown in \cref{fig:shared-line}, increasing the distance threshold for counting a line ensures that every site that counted the original line also counts its replacement. A related comparison appears in Alves and Teixeira's decoupling for Poisson cylinders~\cite[Theorem~1.1 and the proof overview in Section~1]{AT24}: increasing the cylinder radius permits a change in direction, and increasing the intensity supplies a Poisson comparison. In our argument the intensity stays fixed. We integrate over the two offsets and use the Mecke formula; in any later region we account for the shared line through a bound that allows prescribed additional lines.
+The two regions are far apart, so the direction change is small. As shown in \cref{fig:shared-line}, increasing the distance threshold for counting a line ensures that every site that counted the original line also counts its replacement. A related comparison appears in Alves and Teixeira's decoupling for Poisson cylinders~\cite[Theorem~1 and the proof overview on p.~3544]{AT24}: increasing the cylinder radius permits a change in direction, and increasing the intensity supplies a Poisson comparison. In our argument the intensity stays fixed. We integrate over the two offsets and use the Mecke formula; in any later region we account for the shared line through a bound that allows prescribed additional lines.
 
 The induction therefore estimates crossings uniformly over the prescribed lines, with a weaker exponent as their number increases. The first two offsets of each shared line contribute a small factor because the regions are far apart; this factor compensates for the loss in the exponent in the later regions. The bound with no prescribed lines then shows that chain crossing probabilities tend to zero along the chosen scales. This rules out unbounded occupied components at unit disk radius, and rescaling gives the result for every radius. \Cref{fig:dependencies} shows how the statements of this section depend on each other, and \cref{tab:parameters} lists the parameters and constants.
 
 \begin{figure}[!htbp]
   \centering
   \input{figures/fig_dependencies}
-  \caption{Dependencies between the statements of \cref{sec:subcritical}. An arrow points from a statement to a statement whose proof uses it. \Cref{sub:thm:main} follows from the domination lemma and the multiscale bound in \cref{sub:sec:setting}; the induction step for the multiscale bound combines the inclusion, the joint crossing bound and the counting bound, and the joint crossing bound rests on the decoupling estimate.}
+  \caption{Dependencies between the statements of \cref{sec:subcritical}. An arrow points from a statement to a statement whose proof uses it. \Cref{sub:thm:main} follows from the domination lemma and the multiscale bound in \cref{sub:sec:setting}; the multiscale bound uses the decoupling estimate. The initial estimate, the crossing inclusion, and the count of candidate regions are proved within the proof of the multiscale bound.}
   \label{fig:dependencies}
 \end{figure}
 
@@ -553,12 +553,20 @@ The events are increasing in $\zeta$, in~$\Delta$ and in~$\cL$, and decreasing i
   F_j^\zeta(s;\alpha)\le F^\zeta_{j-s}(0;\alpha)\,.
 \end{equation}
 
-The first estimate transfers a bound on lattice crossings to crossings by chains.
+The first estimate transfers a bound on lattice crossings to crossings by chains. Conditional on the lines, we compare occupancy of the unit squares with the Bernoulli field at sites where the line count is below~$j$.
 
 \begin{lemma}[Domination]
 \label[lemma]{sub:lem:domination}
 Let $j\ge1$ be an integer and $\sqrt2\,\lambda(j-1)\le 1/48$. Then $\P(\mathcal J(x,\alpha))\le F_j^1(0;\alpha)$ for all $x\in\R^2$ and $\alpha\ge5$.
 \end{lemma}
+
+\begin{proof}[Proof of \cref{sub:lem:domination}]
+Let $\mathcal Q(z)\coloneqq z+[-1/2,1/2)^2$ and let $N(z)\le N_1(z)$ be the number of lines of~$\cL$ meeting $\mathcal Q(z)$. Conditionally on~$\cL$, the events $\{X_\lambda\cap \mathcal Q(z)\neq\varnothing\}$, $z\in\Z^2$, are independent with probabilities $\Psi_z\le\min\{1,\sqrt2\lambda N(z)\}$, since a chord of a unit square has length at most~$\sqrt2$.
+
+Let $(U'_z)$ be independent uniform variables independent of $(\cL,X_\lambda)$, and put $U_z\coloneqq \Psi_zU'_z$ if $X_\lambda\cap \mathcal Q(z)\neq\varnothing$ and $U_z\coloneqq \Psi_z+(1-\Psi_z)U'_z$ otherwise. Conditionally on~$\cL$ the $U_z$ are independent and uniform, so $U$ is independent of~$\cL$ and has the required law. If $X_\lambda\cap \mathcal Q(z)\neq\varnothing$ and $N_1(z)\le j-1$, then $U_z\le \Psi_z\le\sqrt2\lambda(j-1)\le 1/48$, so $z\in\omega$. Hence, every site whose box contains a point of~$X_\lambda$ lies in $\{N_1\ge j\}\cup\omega$.
+
+If $p_1,\dots,p_m$ is a chain as in the statement and $p_i\in \mathcal Q(z_i)$, then $\lvert z_i-p_i\rvert<1$, consecutive sites $z_i$ are at sup-distance less than~$3$, hence at most~$2$, $\lvert z_1-x\rvert\le\alpha$ and $\lvert z_m-x\rvert>8\alpha$; stopping at the first site at distance more than $8\alpha$ from~$x$ gives a path as in \cref{sub:def:G}.
+\end{proof}
 
 The second estimate controls crossings on successive scales, uniformly over the prescribed lines. Put $\gamma_0\coloneqq7$, $\sigma\coloneqq0.005$, and $k_c\coloneqq1378$, and define the exponent for a nonnegative integer~$k$ by
 \begin{equation}
@@ -590,16 +598,6 @@ First take $r=1$. Choose $j$, $\alpha_0$, and $(\zeta_n)$ as in \cref{sub:thm:in
 An unbounded component of~$\Xi_\lambda$ meeting $\bar B(0,k)$ forces $\mathcal J(0,\alpha_n)$ for every $n$ with $\alpha_n\ge k+2$. Since $\alpha_n\to\infty$, this has probability zero by \eqref{sub:eq:chain-crossing-bound}. Taking the union over positive integers~$k$ shows that all components are bounded almost surely. For general $r>0$, the map $x\mapsto x/r$ transforms $(\mu,\lambda,r)$ into $(\mu r,\lambda r,1)$. Hence, all components are bounded almost surely when $\lambda\le\lambda_0(\mu r)/r$, giving $\lambda_c(\mu,r)\ge\lambda_0(\mu r)/r>0$.
 \end{proof}
 
-We now prove the lattice comparison. Conditional on the lines, we compare occupancy of the unit squares with the Bernoulli field at sites where the line count is below~$j$.
-
-\begin{proof}[Proof of \cref{sub:lem:domination}]
-Let $\mathcal Q(z)\coloneqq z+[-1/2,1/2)^2$ and let $N(z)\le N_1(z)$ be the number of lines of~$\cL$ meeting $\mathcal Q(z)$. Conditionally on~$\cL$, the events $\{X_\lambda\cap \mathcal Q(z)\neq\varnothing\}$, $z\in\Z^2$, are independent with probabilities $\Psi_z\le\min\{1,\sqrt2\lambda N(z)\}$, since a chord of a unit square has length at most~$\sqrt2$.
-
-Let $(U'_z)$ be independent uniform variables independent of $(\cL,X_\lambda)$, and put $U_z\coloneqq \Psi_zU'_z$ if $X_\lambda\cap \mathcal Q(z)\neq\varnothing$ and $U_z\coloneqq \Psi_z+(1-\Psi_z)U'_z$ otherwise. Conditionally on~$\cL$ the $U_z$ are independent and uniform, so $U$ is independent of~$\cL$ and has the required law. If $X_\lambda\cap \mathcal Q(z)\neq\varnothing$ and $N_1(z)\le j-1$, then $U_z\le \Psi_z\le\sqrt2\lambda(j-1)\le 1/48$, so $z\in\omega$. Hence, every site whose box contains a point of~$X_\lambda$ lies in $\{N_1\ge j\}\cup\omega$.
-
-If $p_1,\dots,p_m$ is a chain as in the statement and $p_i\in \mathcal Q(z_i)$, then $\lvert z_i-p_i\rvert<1$, consecutive sites $z_i$ are at sup-distance less than~$3$, hence at most~$2$, $\lvert z_1-x\rvert\le\alpha$ and $\lvert z_m-x\rvert>8\alpha$; stopping at the first site at distance more than $8\alpha$ from~$x$ gives a path as in \cref{sub:def:G}.
-\end{proof}
-
 For the geometry and induction, set
 \begin{equation}
 \label{sub:eq:param}
@@ -608,13 +606,13 @@ For the geometry and induction, set
 \end{equation}
 The remaining subsections prove \cref{sub:thm:induction}, working entirely with lattice crossings. At each step a large crossing gives $a$ smaller crossings at scale~$\alpha$ with scale ratio $M=\alpha^\kappa$. When a line meets several of their observation regions, we use its two offsets in the first two regions it meets and count it as an additional line in any subsequent region. This separates the integration over offsets from the bound that allows a fixed number of prescribed lines.
 
-\paragraph{Bookkeeping of exponents.} The conditions on the parameters balance three effects. We describe them up to constants and logarithmic factors, with $M=\alpha^\kappa$; the target at the larger scale is $(M\alpha)^{-\gamma(s)}=\alpha^{-(1+\kappa)\gamma(s)}$. First, a crossing at scale $M\alpha$ is covered by tuples of $a$ smaller crossings, and each circle carries of the order of~$M$ candidate centres. Without prescribed lines, the tuples contribute $(M\alpha^{-\gamma_0})^a=\alpha^{-a(\gamma_0-\kappa)}$, which is below the target when $a(\gamma_0-\kappa)>(1+\kappa)\gamma_0$. Prescribed lines can weaken the bound in some of the regions, and the first inequality in~\eqref{sub:eq:P1} below keeps a margin when only $a-\kappa-1$ regions are unaffected.
+\paragraph{Choice of exponents.} The conditions on the parameters balance three effects. We describe them up to constants and logarithmic factors, with $M=\alpha^\kappa$; the target at the larger scale is $(M\alpha)^{-\gamma(s)}=\alpha^{-(1+\kappa)\gamma(s)}$. First, a crossing at scale $M\alpha$ is covered by tuples of $a$ smaller crossings, and each circle carries of the order of~$M$ candidate centres. Without prescribed lines, the tuples contribute $(M\alpha^{-\gamma_0})^a=\alpha^{-a(\gamma_0-\kappa)}$, which is below the target when $a(\gamma_0-\kappa)>(1+\kappa)\gamma_0$. Prescribed lines require a separate count of candidate regions according to how those lines meet them.
 
-Second, a prescribed line meets only a bounded number of the candidate regions on a circle, unless it is nearly tangent to that circle; then it meets of the order of $\sqrt M=\alpha^{\kappa/2}$ of them, by \cref{sub:lem:chord}. Even if the regions on all other circles see all prescribed lines, the remaining $a-1-\kappa$ factors with exponent at least~$\gamma_*$ pay for these positions. This is the first inequality in~\eqref{sub:eq:P3}.
+Second, for $0\le s\le k_c$, the counting argument separates regions meeting no prescribed line, regions meeting only prescribed lines nearly tangent to the circle, and regions meeting a prescribed line that is not nearly tangent. Let $\tau_i$ be the number of prescribed lines nearly tangent to the $i$th circle. Up to fixed constants, the three contributions to the sum over candidate regions on that circle are bounded by $M\alpha^{-\gamma_0}$, $\tau_i\sqrt M\,\alpha^{-\gamma(\tau_i)}$, and $s\alpha^{-\gamma(s)}$, respectively. Each prescribed line can be nearly tangent to at most one circle, so $\sum_i\tau_i\le s$. The counting argument expands the product of these three contributions over the circles and uses this restriction together with the affine dependence of~$\gamma$ on the number of prescribed lines. For the chosen parameters, every term is bounded by a fixed constant times $\alpha^{-\xi}(M\alpha)^{-\gamma(s)}$. This comparison includes configurations in which every selected region meets a prescribed line.
 
-Third, a line meets two regions at distance of the order of $M\alpha$ with probability of the order of $\alpha^2/(M\alpha)=\alpha^{1-\kappa}$, by \cref{sub:lem:pair}. In each of the at most $a-2$ later regions that it meets, it counts as a prescribed line and lowers the exponent by at most~$\bar\sigma$. A shared line therefore costs at most $\alpha^{1-\kappa+\bar\sigma(a-2)}$, and the second inequality in~\eqref{sub:eq:P3} makes this small, with a margin $\alpha^{-0.2}$ for the logarithmic factors in~\eqref{sub:eq:A2}. This is the place where $\kappa>1$ is needed.
+Third, the expected number of Poisson lines meeting two regions whose centres are separated by a distance of the order of $M\alpha$ is at most $C\mu\alpha^2/(M\alpha)=C\mu\alpha^{1-\kappa}$, for a constant~$C$ independent of~$\alpha$. The probability that at least one line meets both regions is bounded by the same quantity. In each of the at most $a-2$ later regions that it meets, a shared line counts as a prescribed line and lowers the exponent by at most~$\bar\sigma$. Up to constants and logarithmic factors, each shared line therefore contributes at most $\alpha^{1-\kappa+\bar\sigma(a-2)}$. The second inequality in~\eqref{sub:eq:P3} makes this small, with a margin $\alpha^{-0.2}$ for the logarithmic factors in~\eqref{sub:eq:A2}. This is the place where $\kappa>1$ is needed.
 
-The cut-off~$k_c$ is the number of prescribed lines at which the linear exponent reaches $\gamma_*=\gamma_0-\sigma k_c$. Since the induction starts at the level $j=j_0+k_c$, up to $k_c$ prescribed lines leave the level at least $j_0$ at the first scale, by~\eqref{sub:eq:trivial}. The slope~$\sigma$ must be small, because $\bar\sigma\ge\sigma+\gamma_*$ enters the third effect. Finally, the factor $\alpha^{-\xi}$ absorbs the remaining constants; see~\eqref{sub:eq:A3}. With $\kappa=4$ and $\gamma_0=7$, the choice $a=25$ satisfies all conditions.
+The cut-off~$k_c$ is the number of prescribed lines at which the linear exponent reaches $\gamma_*=\gamma_0-\sigma k_c$. Since the induction starts at the level $j=j_0+k_c$, up to $k_c$ prescribed lines leave the level at least $j_0$ at the first scale, by~\eqref{sub:eq:trivial}. The slope~$\sigma$ must be small, because $\bar\sigma\ge\sigma+\gamma_*$ enters the third effect. Finally, we take the initial scale large enough that multiplying the remaining constants by $\alpha^{-\xi}$ gives at most one; see~\eqref{sub:eq:A3}. With $\kappa=4$ and $\gamma_0=7$, the choice $a=25$ satisfies all conditions.
 
 The exponent satisfies $\gamma(k)\ge\gamma(k_c)=\gamma_*$ for $0\le k\le k_c$, and $\sigma+\gamma_*\le\bar\sigma$. The parameter estimates used in the induction are
 \begin{align}
@@ -641,8 +639,8 @@ Indeed, $60\ge37.1$, $7\ge6.1$, $2.2\ge2.1$ and $2.76\le2.8$. \Cref{tab:paramete
     $k_c$ & largest number of prescribed lines with a nontrivial bound & $1378$ & \eqref{sub:eq:gamma}\\
     $\gamma_*$ & smallest positive exponent, $\gamma(k_c)$ & $0.11$ & \eqref{sub:eq:param}\\
     $\bar\sigma$ & bound for the loss of exponent per additional line in the decoupling, $\bar\sigma\ge\sigma+\gamma_*$ & $0.12$ & \eqref{sub:eq:param}\\
-    $\xi$ & margin absorbing the constants of the induction step & $0.1$ & \eqref{sub:eq:param}\\
-    $j_0$ & level of the base case & depends on $\mu,\alpha_0$ & \cref{sub:lem:base}\\
+    $\xi$ & determines the factor $\alpha_n^{-\xi}$ in \eqref{sub:eq:A3} & $0.1$ & \eqref{sub:eq:param}\\
+    $j_0$ & level of the base case & depends on $\mu,\alpha_0$ & proof of \cref{sub:thm:induction}\\
     $j$ & level of the induction & $j_0+k_c$ & proof of \cref{sub:thm:induction}\\
     $\lambda_0(\mu)$ & intensity below which all components are bounded & $1/(68(j-1))$ & proof of \cref{sub:thm:main}\\
     $\omega$ & independent Bernoulli field & density $1/48$ & \cref{sub:sec:setting}\\
@@ -654,8 +652,8 @@ Indeed, $60\ge37.1$, $7\ge6.1$, $2.2\ge2.1$ and $2.76\le2.8$. \Cref{tab:paramete
     $\Omega_n$ & weight of one shared line; $129\ge1.25\cdot18^2/\pi$ from \cref{sub:it:pair-density} of \cref{sub:lem:pair} & $129\mu\alpha_n^2/D_n$ & \cref{sub:sec:induction}\\
     $t_n$ & truncation of the number of window lines & $\lceil2\gamma_0\log_2\alpha_n\rceil$ & \cref{sub:sec:induction}\\
     $\lvert K_i\rvert$ & number of candidate centres on the $i$th circle & at most $104M$ & \cref{sub:sec:induction}\\
-    $\chi$ & half-width of the near-tangent band & $7M/(2(a-1))$ & \cref{sub:sec:geometry}\\
-    $C_7$, $C_8$ & numbers of regions met by a line, with and without near-tangency & $80$, $163\sqrt a$ & \cref{sub:lem:chord}\\
+    $\chi$ & half-width of the near-tangent band & $7M/(2(a-1))$ & proof of \cref{sub:thm:induction}\\
+    $C_7$, $C_8$ & numbers of regions met by a line, with and without near-tangency & $80$, $163\sqrt a$ & proof of \cref{sub:thm:induction}\\
     \bottomrule
   \end{tabular}
   \caption{Parameters and constants in the proof of \cref{sub:thm:main}.}
@@ -673,7 +671,7 @@ For a candidate initial scale $\alpha_0\ge40$ and each $n\ge0$, define
   \eta_n&\coloneqq\frac{335\alpha_n^2}{D_n}\le48a\,\alpha_n^{1-\kappa},&\Omega_n&\coloneqq\frac{129\mu\alpha_n^2}{D_n}\le19a\mu\,\alpha_n^{1-\kappa},&t_n&\coloneqq\lceil2\gamma_0\log_2\alpha_n\rceil,\\
   \eta_n'&\coloneqq\frac{\eta_0'}{(n+1)^2},&\eta_0'&\coloneqq\min\Bigl\{\frac14,\frac{\pi}{4\mu(a-1)}\Bigr\},&\bar\nu_n&\coloneqq\frac{2\mu\eta_n'}{\pi},
 \end{align*}
-and $\zeta_0\coloneqq2$, $\zeta_{n+1}\coloneqq \zeta_n-\eta_n-\eta_n'$. Then $(a-1)\bar\nu_n\le1/2$ and $2^{-t_n/2}\le\alpha_n^{-\gamma_0}$. We impose three conditions on $\alpha_0$. The first makes the geometry applicable and bounds the total decrease of the counting radius due to straightening. The second controls the cost of shared lines after accounting for the possible loss in the crossing exponent. The third uses the factor $\alpha_n^{-\xi}$ from counting the smaller regions to absorb the fixed constants in the induction step. We require that for all $n\ge0$
+and $\zeta_0\coloneqq2$, $\zeta_{n+1}\coloneqq \zeta_n-\eta_n-\eta_n'$. Then $(a-1)\bar\nu_n\le1/2$ and $2^{-t_n/2}\le\alpha_n^{-\gamma_0}$. We impose three conditions on $\alpha_0$. The first makes the geometry applicable and bounds the total decrease of the counting radius due to straightening. The second keeps the factor for shared lines at most one even after the decrease in the crossing exponent. The third ensures that the product of the fixed constants in the induction step and $\alpha_n^{-\xi}$ is at most one. We require that for all $n\ge0$
 \begin{align}
 \label{sub:eq:A1}
   &M_n\ge\max\{100,6a\}\,,\qquad\sum_{n\ge0}\eta_n\le0.1\,,\\
@@ -684,98 +682,87 @@ and $\zeta_0\coloneqq2$, $\zeta_{n+1}\coloneqq \zeta_n-\eta_n-\eta_n'$. Then $(a
 \end{align}
 This is possible. For~\eqref{sub:eq:A2}, the left side is at most $C(\mu)\,(n+1)^4(\log\alpha_n)^2\alpha_n^{-0.2}$ by~\eqref{sub:eq:P3}, and $n+1\le1+\log\log\alpha_n$, so it is at most~$1$ as soon as $\alpha_n$ exceeds a constant depending on~$\mu$, hence for all~$n$ if $\alpha_0$ does. The others are immediate. Since $\sum_n\eta_n'\le\eta_0'\pi^2/6\le0.42$, we have $\zeta_n\in[1.48,2]$ for all~$n$.
 
-For the geometric construction, take $M\ge\max\{100,6a\}$ and $\alpha\ge5$, and put $D=7M\alpha/(a-1)\ge36\alpha$. For $i=1,\dots,a$ let $\beta_i\coloneqq1+7(i-1)/(a-1)$, so that $\beta_1=1$ and $\beta_a=8$, and let $K_i$ be a set of equally spaced points on the circle of radius $M\beta_i$ around the origin with arc spacing in $[0.49,0.5]$; then every point of this circle is within distance $1/4$ of~$K_i$ and $\lvert K_i\rvert\le13M\beta_i\le104M$. We sum over tuples $\boldsymbol k=(k_1,\dots,k_a)\in K_1\times\dots\times K_a$. For $x\in\R^2$ and such a tuple, set $x_i\coloneqq x+\alpha k_i$ and $\mathcal R_i\coloneqq\bar B(x_i,9\alpha)$.
+The decoupling proposition bounds the joint crossing probability for fixed regions. We state it for general separated regions before specifying the candidate regions used in the induction. The sum over their possible centres is estimated directly in the proof of the multiscale bound.
 
-The crossing inclusion supplies one smaller crossing near each circle and ensures disjoint observation regions.
+Conditioning on the lines that meet several regions makes the crossing events independent. Each such line is described by its two offsets in the first two regions it meets. We integrate over these offsets and use the Mecke formula to compare with Poisson lines of nearly the same direction. In later regions we count the shared line among the prescribed lines.
 
-\begin{lemma}[Inclusion]
-\label[lemma]{sub:lem:inclusion}
-For every $x\in\R^2$, every integer $j$, every $\zeta\in[1,2]$, and every finite set~$\Delta$ of lines,
+Fix $\alpha\ge5$, an integer~$j$, and centres $x_1,\dots,x_a\in\R^2$ at pairwise distances at least $D\ge36\alpha$. Write $\mathcal R_i\coloneqq\bar B(x_i,9\alpha)$ and let $\Delta_i$ be a finite set of lines with $s_i\coloneqq\lvert\Delta_i\rvert$. For $\zeta\ge1$ and $\eta'>0$, put $\eta\coloneqq335\alpha^2/D$, $\zeta''\coloneqq\zeta+\eta+\eta'$, $\bar\nu\coloneqq2\mu\eta'/\pi$, and $\Omega\coloneqq129\mu\alpha^2/D$. When $\zeta''\le2$, put $\Theta(m)\coloneqq F_j^{\zeta''}(m;\alpha)$ for nonnegative integers~$m$.
+
+Let $\cS$ be the set of lines of~$\cL$ that meet at least two regions. For $\ell\in\cS$, let $k(\ell)<l(\ell)$ be the two smallest indices of regions it meets, and let $\cS_{kl}$ be the set of lines with $(k(\ell),l(\ell))=(k,l)$. Thus, the observed count in class $(k,l)$ is $\lvert\cS_{kl}\rvert$. For any array $H=(H_{kl})_{1\le k<l\le a}$ of nonnegative integers, define
+\begin{equation*}
+  b_i(H)\coloneqq\sum_{k<l<i}H_{kl},
+  \qquad
+  v_i(H)\coloneqq\sum_{l>i}H_{il}+\sum_{k<i}H_{ki}.
+\end{equation*}
+For the observed counts, $v_i(H)$ gives the number of offsets to integrate in region~$i$, while $b_i(H)$ bounds the number of shared lines counted there as additional lines.
+
+For example, a line meeting only regions $1$, $2$, and~$3$ supplies offsets in regions $1$ and~$2$ and counts as one additional line in region~$3$; see \cref{fig:shared-line}.
+
+The decoupling estimate sums over all such arrays~$H$. Let the integer $t\ge1$ be the cutoff in the Poisson count used in the Mecke comparison. For each shared line, integrating over its two offsets gives a factor~$\Omega$, and the Mecke comparison gives a factor~$t/\bar\nu$ per offset.
+
+\begin{proposition}[Decoupling]
+\label[proposition]{sub:prop:decoupling}
+Suppose $\zeta''\le2$ and $(a-1)\bar\nu\le1/2$. For every integer $t\ge1$,
 \begin{equation}
-\label{sub:eq:inclusion}
-  \cC_j^{\zeta,\Delta}(x,M\alpha)\subseteq\bigcup_{\boldsymbol k}\ \bigcap_{i=1}^{a}\cC_j^{\zeta,\Delta}(x+\alpha k_i,\alpha)\,,
+\label{sub:eq:decoupling}
+  \P\Bigl(\bigcap_{i=1}^{a}\cC_j^{\zeta,\Delta_i}(x_i,\alpha)\Bigr)\le\sum_{H}\ \prod_{k<l}\frac{(\Omega\,t^2/\bar\nu^2)^{H_{kl}}}{H_{kl}!}\ \prod_{i=1}^{a}\bigl[\Theta\bigl(s_i+b_i(H)\bigr)+2^{-t/2}\bigr]\,,
 \end{equation}
-and $\lvert x_i-x_{i'}\rvert\ge D$ for $i\neq i'$.
-\end{lemma}
+\end{proposition}
 
-The initial estimate uses the Poisson tail for the line count and a path count for the independent Bernoulli field.
+For the geometric construction, take $M\ge\max\{100,6a\}$ and $\alpha\ge5$, and put $D=7M\alpha/(a-1)\ge36\alpha$. For $i=1,\dots,a$ let $\beta_i\coloneqq1+7(i-1)/(a-1)$, so that $\beta_1=1$ and $\beta_a=8$, and let $K_i$ be a set of equally spaced points on the circle of radius $M\beta_i$ around the origin with arc spacing in $[0.49,0.5]$; then every point of this circle is within distance $1/4$ of~$K_i$ and $\lvert K_i\rvert\le13M\beta_i\le104M$. We sum over tuples $\boldsymbol k=(k_1,\dots,k_a)\in K_1\times\dots\times K_a$. For $x\in\R^2$ and such a tuple, set $x_i\coloneqq x+\alpha k_i$ and $\mathcal R_i\coloneqq\bar B(x_i,9\alpha)$. Centres on different circles satisfy $\lvert x_i-x_{i'}\rvert\ge M\alpha\lvert\beta_i-\beta_{i'}\rvert\ge D$ for $i\neq i'$, since their distance is at least the difference of their distances from~$x$.
 
-\begin{lemma}[Base case]
-\label[lemma]{sub:lem:base}
-For every $\mu>0$ and $\alpha_0\ge40$ there is a positive integer $j_0=j_0(\mu,\alpha_0)$ such that $F^2_{j_0}(0;\alpha_0)\le\alpha_0^{-\gamma_0}$. Consequently, $F^2_{j_0+k_c}(s;\alpha_0)\le\alpha_0^{-\gamma(s)}$ for all nonnegative integers~$s$.
-\end{lemma}
+For a finite set $\Delta$ of lines and $k\in\bigcup_iK_i$, let $s(k)$ count the lines of $\Delta$ meeting $\bar B(x+\alpha k,9\alpha)$.
 
-The induction step has two parts: first we estimate the joint probability for a fixed tuple of regions, and then we sum over tuples. Fix a scale index $n\ge0$, write $\alpha=\alpha_n$ and $M=M_n$, and take the sets $K_i$ and regions $\mathcal R_i$ for these values. Fix an integer $j$ as the threshold for the joint crossing bound, and for each finite set $\Delta_i$ of lines put $s_i=\lvert\Delta_i\rvert$. This bound uses the induction hypothesis at index~$n$.
-
-\begin{lemma}[Joint crossing bound for fixed regions]
-\label[lemma]{sub:lem:free}
-For every $x\in\R^2$, every tuple~$\boldsymbol k$ and all finite sets $\Delta_1,\dots,\Delta_a$ of lines, assuming \eqref{sub:eq:hyp} at index~$n$,
-\begin{equation*}
-  \P\Bigl(\bigcap_{i=1}^a\cC_j^{\zeta_{n+1},\Delta_i}(x_i,\alpha)\Bigr)\le2^a\,\e\,\prod_{i=1}^a\alpha^{-\gamma(s_i)}\,.
-\end{equation*}
-\end{lemma}
-
-To sum the joint bound over the possible regions, for a finite set $\Delta$ of lines and $k\in\bigcup_iK_i$ let $s(k)$ count the lines of $\Delta$ meeting $\bar B(x+\alpha k,9\alpha)$.
-
-\begin{lemma}[Counting]
-\label[lemma]{sub:lem:counting}
-Let $s\in\{0,\dots,k_c\}$, $x\in\R^2$ and let $\Delta$ be a set of at most $s$ lines. Then
-\begin{equation*}
-  \prod_{i=1}^a\ \sum_{k\in K_i}\alpha^{-\gamma(s(k))}\le\bigl(3\,(104+163\sqrt a\,k_c)\bigr)^a\,\alpha^{-\xi}\,(M\alpha)^{-\gamma(s)}\,.
-\end{equation*}
-\end{lemma}
-
-The next proof combines the initial estimate, the crossing inclusion, and the two bounds for the induction step.
+We now prove the multiscale bound. We establish the initial estimate, extract the smaller crossings, and apply the decoupling proposition. We then reduce the induction step to a count of candidate regions and prove that count using the geometry of lines near the concentric circles.
 
 \begin{proof}[Proof of \cref{sub:thm:induction}]
-Choose $\alpha_0$ satisfying \eqref{sub:eq:A1}--\eqref{sub:eq:A3}. At scale $\alpha_n$, use the sets $K_i$ for $\alpha=\alpha_n$ and $M=M_n$. Let $j_0$ be the threshold in \cref{sub:lem:base}. With $j=j_0+k_c$, that lemma proves \eqref{sub:eq:hyp} at $n=0$ because $\zeta_0=2$. 
-
-Assume \eqref{sub:eq:hyp} holds at index~$n$. For $s>k_c$, the bound at $n+1$ is one. Now take $s\le k_c$, $x\in\R^2$, and a set $\Delta$ of at most $s$ lines. For a tuple~$\boldsymbol k$ let $\Delta_i$ be the set of lines of~$\Delta$ meeting $\mathcal R_i=\bar B(x+\alpha k_i,9\alpha)$, so that $\lvert\Delta_i\rvert=s(k_i)$ and $\cC_j^{\zeta_{n+1},\Delta}(x_i,\alpha)=\cC_j^{\zeta_{n+1},\Delta_i}(x_i,\alpha)$. By \cref{sub:lem:inclusion}, the large crossing is contained in the union over tuples. On each tuple, \cref{sub:lem:free} bounds the joint probability, so
-\begin{equation*}
-  \P\bigl(\cC_j^{\zeta_{n+1},\Delta}(x,\alpha_{n+1})\bigr)\le\sum_{\boldsymbol k}2^a\,\e\prod_{i=1}^a\alpha^{-\gamma(s(k_i))}=2^a\,\e\prod_{i=1}^a\ \sum_{k\in K_i}\alpha^{-\gamma(s(k))}\,,
-\end{equation*}
-which is at most $\alpha_{n+1}^{-\gamma(s)}$ by \cref{sub:lem:counting} and~\eqref{sub:eq:A3}. Taking the suprema over $x$ and $\Delta$ proves the induction step.
-\end{proof}
-
-The initial estimate separates sites with large Poisson line counts from paths in the independent Bernoulli field.
-
-\begin{proof}[Proof of \cref{sub:lem:base}]
-Fix~$x$. On $\cC^{2,\varnothing}_{j_0}(x,\alpha_0)$ either some site of $\mathcal V(x,\alpha_0)$ has $N_2\ge j_0$, or there is a path as in \cref{sub:def:G} in~$\omega$. The set $\mathcal V(x,\alpha_0)$ has at most $\pi(8\alpha_0+4)^2\le300\alpha_0^2$ sites, so the first alternative has probability at most $300\alpha_0^2\,\P(\mathrm{Poi}(4\mu)\ge j_0)\le\alpha_0^{-7}/2$ for $j_0$ large.
+Choose $\alpha_0$ satisfying \eqref{sub:eq:A1}--\eqref{sub:eq:A3}. We first choose a positive integer $j_0$ that makes crossings unlikely at this initial scale, using the Poisson tail for the line count and a path count for the independent Bernoulli field. Fix~$x$. On $\cC^{2,\varnothing}_{j_0}(x,\alpha_0)$ either some site of $\mathcal V(x,\alpha_0)$ has $N_2\ge j_0$, or there is a path as in \cref{sub:def:G} in~$\omega$. The set $\mathcal V(x,\alpha_0)$ has at most $\pi(8\alpha_0+4)^2\le300\alpha_0^2$ sites, so the first alternative has probability at most $300\alpha_0^2\,\P(\mathrm{Poi}(4\mu)\ge j_0)\le\alpha_0^{-7}/2$ for $j_0$ large.
 
 In the second alternative the path may be taken self-avoiding; it starts at one of at most $4\alpha_0^2$ sites and has at least $\lceil2.4\alpha_0\rceil$ sites, because it covers a distance of more than $7\alpha_0$ in steps of length at most $2\sqrt2$. There are at most $24^{m-1}$ self-avoiding paths with $m$ sites from a given start, so the probability is at most $4\alpha_0^2\sum_{m\ge2.4\alpha_0}24^{m-1}48^{-m}\le4\alpha_0^2\,2^{-2.4\alpha_0}\le\alpha_0^{-7}/2$ for $\alpha_0\ge40$.
 
-The consequence follows from~\eqref{sub:eq:trivial} for $s\le k_c$ and is trivial for $s>k_c$.
-\end{proof}
+Both estimates are uniform in~$x$, so we can choose $j_0=j_0(\mu,\alpha_0)$ with $F^2_{j_0}(0;\alpha_0)\le\alpha_0^{-\gamma_0}$. Put $j=j_0+k_c$. For $s\le k_c$, \eqref{sub:eq:trivial} and monotonicity in the threshold give $F_j^2(s;\alpha_0)\le F_{j-s}^2(0;\alpha_0)\le F_{j_0}^2(0;\alpha_0)\le\alpha_0^{-\gamma(s)}$. For $s>k_c$, the desired bound is one. Since $\zeta_0=2$, this proves \eqref{sub:eq:hyp} at $n=0$.
 
-\subsection{Proofs of the crossing inclusion and counting bound}
-\label{sub:sec:geometry}
+Assume \eqref{sub:eq:hyp} holds at index~$n$. For $s>k_c$, the bound at $n+1$ is again one. Now take $s\le k_c$, $x\in\R^2$, and a set $\Delta$ of at most $s$ lines. Write $\alpha=\alpha_n$, $M=M_n$, and $\zeta=\zeta_{n+1}$, and use the sets $K_i$ for these values. The geometric part of the induction step is the inclusion
+\begin{equation}
+\label{sub:eq:inclusion}
+  \cC_j^{\zeta,\Delta}(x,M\alpha)\subseteq\bigcup_{\boldsymbol k}\ \bigcap_{i=1}^{a}\cC_j^{\zeta,\Delta}(x+\alpha k_i,\alpha)\,.
+\end{equation}
+To verify it, let $z_1,\dots,z_m$ be a path for the event on the left of \eqref{sub:eq:inclusion}, and let $i<a$. Let $m_0$ be the largest index with $\lvert z_{m_0}-x\rvert\le M\beta_i\alpha$; then $m_0<m$ and $\lvert z_{m_0}-x\rvert>M\beta_i\alpha-3$, so there is $k_i\in K_i$ with $\lvert z_{m_0}-x_i\rvert\le3+\alpha/4\le\alpha$. Since $\lvert z_m-x_i\rvert>8M\alpha-M\beta_i\alpha\ge D\ge8\alpha$, the sequence $z_{m_0},z_{m_0+1},\dots$ stopped at its first site at distance more than $8\alpha$ from~$x_i$ realises $\cC_j^{\zeta,\Delta}(x_i,\alpha)$.
 
-We first show how a large crossing supplies a smaller crossing near each circle for the geometric construction with $M\ge\max\{100,6a\}$ and $\alpha\ge5$. For the counting bound, a line nearly tangent to a circle can meet many candidate regions on that circle, but it can be nearly tangent to at most one circle. This distinction controls the product of the sums over the candidate centres.
+For $i=a$, we have $8M\alpha<\lvert z_m-x\rvert\le8M\alpha+3$, so there is $k_a\in K_a$ with $\lvert z_m-x_a\rvert\le\alpha$, and the reversed sequence $z_m,z_{m-1},\dots$, which ends at $z_1$ with $\lvert z_1-x_a\rvert\ge7M\alpha>8\alpha$, stopped at its first site at distance more than $8\alpha$ from~$x_a$, realises $\cC_j^{\zeta,\Delta}(x_a,\alpha)$. This proves \eqref{sub:eq:inclusion}.
 
-\begin{proof}[Proof of \cref{sub:lem:inclusion}]
-Let $z_1,\dots,z_m$ be a path for the event on the left of \eqref{sub:eq:inclusion}, and let $i<a$. Let $m_0$ be the largest index with $\lvert z_{m_0}-x\rvert\le M\beta_i\alpha$; then $m_0<m$ and $\lvert z_{m_0}-x\rvert>M\beta_i\alpha-3$, so there is $k_i\in K_i$ with $\lvert z_{m_0}-x_i\rvert\le3+\alpha/4\le\alpha$. Since $\lvert z_m-x_i\rvert>8M\alpha-M\beta_i\alpha\ge D\ge8\alpha$, the sequence $z_{m_0},z_{m_0+1},\dots$ stopped at its first site at distance more than $8\alpha$ from~$x_i$ realises $\cC_j^{\zeta,\Delta}(x_i,\alpha)$.
+For each tuple~$\boldsymbol k$, let $\Delta_i$ be the set of lines of~$\Delta$ meeting $\mathcal R_i=\bar B(x+\alpha k_i,9\alpha)$, and put $s_i=\lvert\Delta_i\rvert=s(k_i)$. Then $\cC_j^{\zeta_{n+1},\Delta}(x_i,\alpha)=\cC_j^{\zeta_{n+1},\Delta_i}(x_i,\alpha)$. We apply \cref{sub:prop:decoupling} with $D=D_n$, $\zeta=\zeta_{n+1}$, $\eta=\eta_n$, $\eta'=\eta_n'$, and $t=t_n$. The centres have pairwise distances at least $D_n\ge36\alpha$, and $\zeta_{n+1}\ge1$, $\zeta''=\zeta_n\le2$, $(a-1)\bar\nu_n\le1/2$, and $t_n\ge1$. Thus, all its hypotheses hold, and the induction hypothesis gives $\Theta(k)\le\alpha^{-\gamma(k)}$ for every nonnegative integer~$k$.
 
-For $i=a$, we have $8M\alpha<\lvert z_m-x\rvert\le8M\alpha+3$, so there is $k_a\in K_a$ with $\lvert z_m-x_a\rvert\le\alpha$, and the reversed sequence $z_m,z_{m-1},\dots$, which ends at $z_1$ with $\lvert z_1-x_a\rvert\ge7M\alpha>8\alpha$, stopped at its first site at distance more than $8\alpha$ from~$x_a$, realises $\cC_j^{\zeta,\Delta}(x_a,\alpha)$. The distance between points on different circles is at least the difference of the radii.
-\end{proof}
+The loss from counting shared lines as additional lines is controlled by the decrease of~$\gamma$. For nonnegative integers $k,b$, the decrease $\gamma(k)-\gamma(k+b)$ is at most $\bar\sigma b$. It is zero when $b=0$ or $k>k_c$, and equals $\sigma b$ if $k+b\le k_c$. In the remaining case $k\le k_c<k+b$, it is at most $\gamma_*+\sigma(b-1)\le\bar\sigma b$ since $\gamma_*+\sigma\le\bar\sigma$. Together with $2^{-t_n/2}\le\alpha^{-\gamma_0}\le\alpha^{-\gamma(k)}$, this gives $\Theta(s_i+b_i(H))+2^{-t_n/2}\le2\alpha^{-\gamma(s_i+b_i(H))}\le2\alpha^{-\gamma(s_i)}\alpha^{\bar\sigma b_i(H)}$.
 
-We say that a line~$\ell$ is \emph{near-tangent} to the $i$th circle if its distance~$\varpi$ from~$x$ satisfies $\lvert\varpi-M\beta_i\alpha\rvert<\chi\alpha$ with $\chi\coloneqq7M/(2(a-1))\ge18$. Since the radii differ by $2\chi\alpha$, a line is near-tangent to at most one circle. \Cref{fig:subcrossings} illustrates the sub-crossings and the two cases of the counting estimate.
+Moreover, $\sum_i b_i(H)=\sum_{k<l}(a-l)H_{kl}\le(a-2)\sum_{k<l}H_{kl}$, because each shared line is counted as an additional line in at most $a-2$ regions. Substitution in \eqref{sub:eq:decoupling} yields
+\begin{align*}
+  \P\Bigl(\bigcap_{i=1}^a\cC_j^{\zeta_{n+1},\Delta_i}(x_i,\alpha)\Bigr)
+  &\le2^a\prod_i\alpha^{-\gamma(s_i)}\sum_H\prod_{k<l}\frac{\bigl(\Omega_n\,t_n^2\,\bar\nu_n^{-2}\,\alpha^{\bar\sigma(a-2)}\bigr)^{H_{kl}}}{H_{kl}!}\\
+  &=2^a\prod_i\alpha^{-\gamma(s_i)}\exp\Bigl\{\binom a2\Omega_n\,\frac{t_n^2}{\bar\nu_n^2}\,\alpha^{\bar\sigma(a-2)}\Bigr\}\\
+  &\le2^a\,\e\prod_i\alpha^{-\gamma(s_i)}\,,
+\end{align*}
+where the last inequality follows from~\eqref{sub:eq:A2}. This bound holds for every tuple. The inclusion~\eqref{sub:eq:inclusion} and a union bound reduce the induction step to the second estimate in
+\begin{align}
+\label{sub:eq:tuple-bound}
+  \P\bigl(\cC_j^{\zeta_{n+1},\Delta}(x,\alpha_{n+1})\bigr)
+  &\le\sum_{\boldsymbol k}2^a\,\e\prod_{i=1}^a\alpha^{-\gamma(s(k_i))}
+  =2^a\,\e\prod_{i=1}^a\ \sum_{k\in K_i}\alpha^{-\gamma(s(k))}\,,\\
+\label{sub:eq:counting-bound}
+  \prod_{i=1}^a\ \sum_{k\in K_i}\alpha^{-\gamma(s(k))}
+  &\le\bigl(3\,(104+163\sqrt a\,k_c)\bigr)^a\,\alpha^{-\xi}\,(M\alpha)^{-\gamma(s)}\,.
+\end{align}
+Once \eqref{sub:eq:counting-bound} is proved, \eqref{sub:eq:A3} makes the right side of \eqref{sub:eq:tuple-bound} at most $\alpha_{n+1}^{-\gamma(s)}$. Taking the suprema over $x$ and $\Delta$ then gives \eqref{sub:eq:hyp} at index $n+1$. We establish the remaining estimate by first counting the candidate regions met by one line and then using these counts in the product over the circles.
 
-\begin{figure}[ht]
-  \centering
-  \input{figures/fig_subcrossings}
-  \caption{The geometry of the sub-crossings, schematic with five circles; the proof uses $a=25$. (a)~A path as in the event $\cC_j^{\zeta,\Delta}(x,M\alpha)$ (dashed amber) leaves each circle of radius $M\beta_i\alpha$ for the last time near a point $x_i=x+\alpha k_i$ with $k_i\in K_i$, and continues with a crossing as in $\cC_j^{\zeta,\Delta}(x_i,\alpha)$ inside the region $\mathcal R_i=\bar B(x_i,9\alpha)$ (teal disks); see \cref{sub:lem:inclusion}. Regions on different circles are at distance at least~$D$. (b)~The points of~$K_i$ on one circle and the bands of half-width~$9\alpha$ around two lines. The regions of the highlighted points are the ones met by the line. A line that is not near-tangent meets at most $C_8$ of them, a near-tangent line up to $C_7\sqrt M$; see \cref{sub:lem:chord}. The region radius and the band width are enlarged.}
-  \label{fig:subcrossings}
-\end{figure}
+We say that a line~$\ell$ is \emph{near-tangent} to the $i$th circle if its distance~$\varpi$ from~$x$ satisfies $\lvert\varpi-M\beta_i\alpha\rvert<\chi\alpha$ with $\chi\coloneqq7M/(2(a-1))\ge18$. Since the radii differ by $2\chi\alpha$, a line is near-tangent to at most one circle. Put $C_7=80$ and $C_8=163\sqrt a$. For a fixed circle, we will bound the number of $k\in K_i$ with $\ell\cap\bar B(x+\alpha k,9\alpha)\neq\varnothing$ by $C_7\sqrt M$ for every line~$\ell$ and by $C_8$ when $\ell$ is not near-tangent. \Cref{fig:subcrossings} illustrates the construction and these two cases.
 
-Put $C_7=80$ and $C_8=163\sqrt a$. The next estimate bounds how many candidate regions a prescribed line can meet on a single circle.
+For these geometric estimates only, scale by $1/\alpha$ and translate $x$ to the origin; the circle then has radius $M\beta_i\in[M,8M]$; let $\varpi$ be the distance of the line from the origin. With $\varphi$ the angle of a point of the circle measured from the normal direction of the line, the point is within distance~$9$ of the line if and only if $\cos\varphi\in \mathcal I\coloneqq[(\varpi-9)/(M\beta_i),(\varpi+9)/(M\beta_i)]$. The set of $\varphi\in[0,\pi]$ with $\cos\varphi\in \mathcal I$ has measure $\int_{\mathcal I\cap[-1,1]}(1-u^2)^{-1/2}\dd u$.
 
-\begin{lemma}[Regions met by a line]
-\label[lemma]{sub:lem:chord}
-For a line $\ell$, a centre $x\in\R^2$, and $1\le i\le a$, the following bounds hold. The number of $k\in K_i$ with $\ell\cap \bar B(x+\alpha k,9\alpha)\neq\varnothing$ is at most $C_7\sqrt M$ and at most $C_8$ if $\ell$ is not near-tangent to the $i$th circle.
-\end{lemma}
+For any line, this measure is at most $\arccos(1-18/(M\beta_i))=2\arcsin\sqrt{9/(M\beta_i)}\le6.6/\sqrt{M\beta_i}$, because the integrand is largest at the ends of $[-1,1]$ and $\arcsin y\le1.1y$ for $0\le y\le0.3$; by symmetry the points lie on at most two arcs of total length at most $13.2\sqrt{M\beta_i}$, which contain at most $13.2\sqrt{M\beta_i}/0.49+2\le28\sqrt{M\beta_i}\le80\sqrt M$ points of~$K_i$.
 
-\begin{proof}[Proof of \cref{sub:lem:counting}]
-Let $\tau_i$ be the number of lines of~$\Delta$ that are near-tangent to the $i$th circle; then $\sum_i\tau_i\le s$. By \cref{sub:lem:chord}, at most $sC_8$ points $k\in K_i$ have a region met by a line of~$\Delta$ that is not near-tangent to the $i$th circle, and for these $s(k)\le s$. At most $\tau_iC_7\sqrt M$ further points have a region met by some line of~$\Delta$, and for these $s(k)\le\tau_i$. For all other points $s(k)=0$. Since $\gamma$ is non-increasing,
+If $\ell$ is not near-tangent and $\varpi\ge M\beta_i+\chi$, no point of the circle is within distance~$9$ of the line. For a line with $\varpi\le M\beta_i-\chi$, on $\mathcal I\cap[-1,1]$ we have $u\le1-(\chi-9)/(M\beta_i)\le1-\chi/(2M\beta_i)$ and $u\ge-9/(M\beta_i)$. Hence, $1-u^2\ge \chi/(2M\beta_i)$, and the measure is at most $(18/(M\beta_i))\sqrt{2M\beta_i/\chi}$. The two arcs have total length at most $36\sqrt{2M\beta_i/\chi}\le36\sqrt{32(a-1)/7}\le77\sqrt a$ and contain at most $77\sqrt a/0.49+2\le163\sqrt a$ points of~$K_i$.
+
+Returning to the original coordinates, let $\tau_i$ be the number of lines of~$\Delta$ that are near-tangent to the $i$th circle; then $\sum_i\tau_i\le s$. By the bounds just proved, at most $sC_8$ points $k\in K_i$ have a region met by a line of~$\Delta$ that is not near-tangent to the $i$th circle, and for these $s(k)\le s$. At most $\tau_iC_7\sqrt M$ further points have a region met by some line of~$\Delta$, and for these $s(k)\le\tau_i$. For all other points $s(k)=0$. Since $\gamma$ is non-increasing,
 \begin{equation*}
   \sum_{k\in K_i}\alpha^{-\gamma(s(k))}\le\underbrace{104M\,\alpha^{-\gamma_0}}_{\mathrm{(A)}}+\underbrace{80\,\tau_i\sqrt M\,\alpha^{-\gamma(\tau_i)}}_{\mathrm{(B)}}+\underbrace{163\sqrt a\,s\,\alpha^{-\gamma(s)}}_{\mathrm{(C)}}\,.
 \end{equation*}
@@ -790,21 +777,20 @@ and it suffices to show $Y\le-\xi$. Put $p\coloneqq\lvert\mathcal J_{\mathrm A}\
   q\ge1:\quad Y&\le2+4g-24\min\{3,g\}
   =\max\{4g-70,2-20g\}\le-\xi\,.
 \end{align*}
-Summing the at most $3^a$ terms proves the claimed bound.
+Summing the at most $3^a$ terms proves \eqref{sub:eq:counting-bound}, and therefore completes the induction step.
 \end{proof}
 
-\begin{proof}[Proof of \cref{sub:lem:chord}]
-Scale by $1/\alpha$ and translate $x$ to the origin; the circle then has radius $M\beta_i\in[M,8M]$; let $\varpi$ be the distance of the line from the origin. With $\varphi$ the angle of a point of the circle measured from the normal direction of the line, the point is within distance~$9$ of the line if and only if $\cos\varphi\in \mathcal I\coloneqq[(\varpi-9)/(M\beta_i),(\varpi+9)/(M\beta_i)]$. The set of $\varphi\in[0,\pi]$ with $\cos\varphi\in \mathcal I$ has measure $\int_{\mathcal I\cap[-1,1]}(1-u^2)^{-1/2}\dd u$.
+\begin{figure}[ht]
+  \centering
+  \input{figures/fig_subcrossings}
+  \caption{The geometry of the sub-crossings, schematic with five circles; the proof uses $a=25$. (a)~A path as in the event $\cC_j^{\zeta,\Delta}(x,M\alpha)$ (dashed amber) leaves each circle of radius $M\beta_i\alpha$ for the last time near a point $x_i=x+\alpha k_i$ with $k_i\in K_i$, and continues with a crossing as in $\cC_j^{\zeta,\Delta}(x_i,\alpha)$ inside the region $\mathcal R_i=\bar B(x_i,9\alpha)$ (teal disks); see \eqref{sub:eq:inclusion}. The centres of regions on different circles are at distance at least~$D$. (b)~The points of~$K_i$ on one circle and the bands of half-width~$9\alpha$ around two lines. The regions of the highlighted points are the ones met by the line. A line that is not near-tangent meets at most $C_8$ of them, a near-tangent line up to $C_7\sqrt M$; see the proof of \cref{sub:thm:induction}. The region radius and the band width are enlarged.}
+  \label{fig:subcrossings}
+\end{figure}
 
-For any line, this measure is at most $\arccos(1-18/(M\beta_i))=2\arcsin\sqrt{9/(M\beta_i)}\le6.6/\sqrt{M\beta_i}$, because the integrand is largest at the ends of $[-1,1]$ and $\arcsin y\le1.1y$ for $0\le y\le0.3$; by symmetry the points lie on at most two arcs of total length at most $13.2\sqrt{M\beta_i}$, which contain at most $13.2\sqrt{M\beta_i}/0.49+2\le28\sqrt{M\beta_i}\le80\sqrt M$ points of~$K_i$.
-
-If $\ell$ is not near-tangent and $\varpi\ge M\beta_i+\chi$, no point of the circle is within distance~$9$ of the line. For a line with $\varpi\le M\beta_i-\chi$, on $\mathcal I\cap[-1,1]$ we have $u\le1-(\chi-9)/(M\beta_i)\le1-\chi/(2M\beta_i)$ and $u\ge-9/(M\beta_i)$. Hence, $1-u^2\ge \chi/(2M\beta_i)$, and the measure is at most $(18/(M\beta_i))\sqrt{2M\beta_i/\chi}$. The two arcs have total length at most $36\sqrt{2M\beta_i/\chi}\le36\sqrt{32(a-1)/7}\le77\sqrt a$ and contain at most $77\sqrt a/0.49+2\le163\sqrt a$ points of~$K_i$.
-\end{proof}
-
-\subsection{Proof of the joint crossing bound for fixed regions}
+\subsection{Proof of the decoupling estimate}
 \label{sub:sec:decoupling}
 
-The joint crossing bound in \cref{sub:lem:free} relies on a decoupling estimate for the smaller regions. We state the offset estimate and the decoupling proposition first. We use the proposition to prove the joint crossing bound, then prove the two estimates.
+We prove \cref{sub:prop:decoupling} by conditioning on the lines shared by the regions, using the regions and parameters defined before that proposition. We first state and prove the geometric estimate that controls the two offsets and the change in distance when a shared line is straightened. We then integrate these offsets and use the Mecke formula to compare the resulting probabilities with crossings at the enlarged radius.
 
 For $y\in\R^2$, a unit vector~$e$ with $e^\perp$ its rotation by $\pi/2$, and $u\in\R$ let
 \begin{equation*}
@@ -823,45 +809,18 @@ With the preceding notation, the following hold.
 \end{enumerate}
 \end{lemma}
 
-Conditioning on the lines that meet several regions makes the crossing events independent. Each such line is described by its two offsets in the first two regions it meets. The Mecke formula controls the cost of integrating these offsets; in later regions we bound the crossing probabilities by allowing additional lines.
+\begin{proof}[Proof of \cref{sub:lem:pair}]
+In terms of the parameters in~\eqref{eq:line-parameters}, the passage to $(\varphi,u_1)$ is a rotation in the first and a translation in the second coordinate, so $\nu_\mu$ has density $\mu/\pi$ in $(\varphi,u_1)$. A line belongs to~$\cW$ if and only if $\lvert u_1\rvert,\lvert u_2\rvert\le9\alpha$, and $u_1-u_2=\langle y_2-y_1,n\rangle=D'\sin\varphi$. Hence, on~$\cW$, $\lvert\sin\varphi\rvert\le18\alpha/D'\le1/2$, the map $(\varphi,u_1)\mapsto(u_1,u_2)$ is injective with Jacobian $D'\cos\varphi\ge0.8D'$, and \cref{sub:it:pair-density} follows.
 
-Fix $\alpha\ge5$, an integer~$j$, and centres $x_1,\dots,x_a\in\R^2$ at pairwise distances at least $D\ge36\alpha$. Write $\mathcal R_i\coloneqq\bar B(x_i,9\alpha)$ and let $\Delta_i$ be a finite set of lines with $s_i\coloneqq\lvert\Delta_i\rvert$. For $\zeta\ge1$ and $\eta'>0$, put $\eta\coloneqq335\alpha^2/D$, $\zeta''\coloneqq\zeta+\eta+\eta'$, $\bar\nu\coloneqq2\mu\eta'/\pi$, and $\Omega\coloneqq129\mu\alpha^2/D$. When $\zeta''\le2$, put $\Theta(m)\coloneqq F_j^{\zeta''}(m;\alpha)$ for nonnegative integers~$m$.
-
-Let $\cS$ be the set of lines of~$\cL$ that meet at least two regions. For $\ell\in\cS$, let $k(\ell)<l(\ell)$ be the two smallest indices of regions it meets, and let $\cS_{kl}$ be the set of lines with $(k(\ell),l(\ell))=(k,l)$. Thus, the observed count in class $(k,l)$ is $\lvert\cS_{kl}\rvert$. For any array $H=(H_{kl})_{1\le k<l\le a}$ of nonnegative integers, define
-\begin{equation*}
-  b_i(H)\coloneqq\sum_{k<l<i}H_{kl},
-  \qquad
-  v_i(H)\coloneqq\sum_{l>i}H_{il}+\sum_{k<i}H_{ki}.
-\end{equation*}
-For the observed counts, $v_i(H)$ gives the number of offsets to integrate in region~$i$, while $b_i(H)$ bounds the number of shared lines counted there as additional lines.
-
-For example, a line meeting only regions $1$, $2$, and~$3$ supplies offsets in regions $1$ and~$2$ and counts as one additional line in region~$3$; see \cref{fig:shared-line}.
-
-The decoupling estimate sums over all such arrays~$H$, with a cost for the two offsets of each shared line.
-
-\begin{proposition}[Decoupling]
-\label[proposition]{sub:prop:decoupling}
-Suppose $\zeta''\le2$ and $(a-1)\bar\nu\le1/2$. For every integer $t\ge1$,
-\begin{equation}
-\label{sub:eq:decoupling}
-  \P\Bigl(\bigcap_{i=1}^{a}\cC_j^{\zeta,\Delta_i}(x_i,\alpha)\Bigr)\le\sum_{H}\ \prod_{k<l}\frac{(\Omega\,t^2/\bar\nu^2)^{H_{kl}}}{H_{kl}!}\ \prod_{i=1}^{a}\bigl[\Theta\bigl(s_i+b_i(H)\bigr)+2^{-t/2}\bigr]\,,
-\end{equation}
-\end{proposition}
-
-We now apply the decoupling estimate at consecutive scales to prove the joint crossing bound. Each shared line can be counted as an additional line in at most $a-2$ regions, and the induction hypothesis controls the resulting loss.
-
-\begin{proof}[Proof of \cref{sub:lem:free}]
-We apply \cref{sub:prop:decoupling} with $D=D_n$, $\zeta=\zeta_{n+1}$, $\eta=\eta_n$, $\eta'=\eta_n'$, $t=t_n$, so that $\zeta''=\zeta_n$ and $\Theta(k)\le\alpha^{-\gamma(k)}$ by~\eqref{sub:eq:hyp}. For nonnegative integers $k,b$, the decrease $\gamma(k)-\gamma(k+b)$ is at most $\bar\sigma b$. It is zero when $b=0$ or $k>k_c$, and equals $\sigma b$ if $k+b\le k_c$. In the remaining case $k\le k_c<k+b$, it is at most $\gamma_*+\sigma(b-1)\le\bar\sigma b$ since $\gamma_*+\sigma\le\bar\sigma$.
-
-Together with $2^{-t/2}\le\alpha^{-\gamma_0}\le\alpha^{-\gamma(k)}$, this gives
-\begin{equation*}
-  \Theta\bigl(s_i+b_i(H)\bigr)+2^{-t/2}\le2\,\alpha^{-\gamma(s_i+b_i(H))}\le2\,\alpha^{-\gamma(s_i)}\,\alpha^{\bar\sigma b_i(H)}\,.
-\end{equation*}
-Moreover, $\sum_ib_i(H)=\sum_{k<l}(a-l)H_{kl}\le(a-2)\sum_{k<l}H_{kl}$. Hence, the right side of~\eqref{sub:eq:decoupling} is at most
-\begin{equation*}
-  2^a\prod_i\alpha^{-\gamma(s_i)}\sum_H\prod_{k<l}\frac{\bigl(\Omega_n\,t_n^2\,\bar\nu_n^{-2}\,\alpha^{\bar\sigma(a-2)}\bigr)^{H_{kl}}}{H_{kl}!}=2^a\prod_i\alpha^{-\gamma(s_i)}\exp\Bigl\{\binom a2\Omega_n\,\frac{t_n^2}{\bar\nu_n^2}\,\alpha^{\bar\sigma(a-2)}\Bigr\}\,,
-\end{equation*}
-and the exponential is at most~$\e$ by~\eqref{sub:eq:A2}.
+For \cref{sub:it:pair-straight}, let $i$, $\ell$, $\zeta$, and $z$ satisfy its hypotheses. Compare the signed-distance formulas for the original and straightened lines. We have $\lvert n-e^\perp\rvert=2\sin(\lvert\varphi\rvert/2)\le2\lvert\sin\varphi\rvert$ because $\lvert\varphi\rvert\le\pi/6$, and $\lvert z-y_i\rvert\le8\alpha+3\le9\alpha$. Therefore,
+\begin{align*}
+  \dist(z,\ell^e_{y_i}(u_i))
+  &=\bigl\lvert\langle z-y_i,e^\perp\rangle-u_i\bigr\rvert\\
+  &\le\dist(z,\ell)+\lvert z-y_i\rvert\,\lvert e^\perp-n\rvert\\
+  &\le\zeta+18\alpha\lvert\sin\varphi\rvert
+  \le\zeta+324\alpha^2/D'\le\zeta+\eta\,.
+\end{align*}
+This proves \cref{sub:it:pair-straight}.
 \end{proof}
 
 The proof of the decoupling proposition first gives the reduction to two estimates, then verifies them.
@@ -939,27 +898,11 @@ where the sum is over tuples of pairwise distinct lines and $N^*$ is the number 
 Dividing by $\bar\nu^v$ and taking the supremum over the prescribed directions and~$\Delta'$ proves~\eqref{sub:eq:mecke}.
 \end{proof}
 
-We finish by proving the geometric estimate that controls the distribution of the two offsets and justifies the replacement of a shared line.
-
-\begin{proof}[Proof of \cref{sub:lem:pair}]
-In terms of the parameters in~\eqref{eq:line-parameters}, the passage to $(\varphi,u_1)$ is a rotation in the first and a translation in the second coordinate, so $\nu_\mu$ has density $\mu/\pi$ in $(\varphi,u_1)$. A line belongs to~$\cW$ if and only if $\lvert u_1\rvert,\lvert u_2\rvert\le9\alpha$, and $u_1-u_2=\langle y_2-y_1,n\rangle=D'\sin\varphi$. Hence, on~$\cW$, $\lvert\sin\varphi\rvert\le18\alpha/D'\le1/2$, the map $(\varphi,u_1)\mapsto(u_1,u_2)$ is injective with Jacobian $D'\cos\varphi\ge0.8D'$, and \cref{sub:it:pair-density} follows.
-
-For \cref{sub:it:pair-straight}, let $i$, $\ell$, $\zeta$, and $z$ satisfy its hypotheses. Compare the signed-distance formulas for the original and straightened lines. We have $\lvert n-e^\perp\rvert=2\sin(\lvert\varphi\rvert/2)\le2\lvert\sin\varphi\rvert$ because $\lvert\varphi\rvert\le\pi/6$, and $\lvert z-y_i\rvert\le8\alpha+3\le9\alpha$. Therefore,
-\begin{align*}
-  \dist(z,\ell^e_{y_i}(u_i))
-  &=\bigl\lvert\langle z-y_i,e^\perp\rangle-u_i\bigr\rvert\\
-  &\le\dist(z,\ell)+\lvert z-y_i\rvert\,\lvert e^\perp-n\rvert\\
-  &\le\zeta+18\alpha\lvert\sin\varphi\rvert
-  \le\zeta+324\alpha^2/D'\le\zeta+\eta\,.
-\end{align*}
-This proves \cref{sub:it:pair-straight}.
-\end{proof}
-
 % =================================================================
 \section{Extensions and open questions}
 \label{sec:extensions}
 
-The proof of \cref{thm:main} combines three ingredients of different generality. The lattice comparison, the covering of~$\cD(4L_0)$ by closed crossings, and \cref{lem:boundary-reduction} are deterministic. The recursion in \cref{prop:recursion} uses only three properties: $\cB(x,L)$ is decreasing under addition of points, it depends on the points in a bounded window, and the directions of lines meeting two distant windows form a small set. Only the initial estimate in \cref{prop:initial} uses that four lines in the plane can enclose a square. In this section we discuss how far these ingredients carry over to random radii and to higher dimensions. \cref{cor:random-radii} and \cref{rem:heavy-tails} are proved in full. \cref{rem:hyperplanes,rem:dense-lines} contain proof sketches whose details have not been written out. \cref{sec:subcritical-outlook} collects questions on the subcritical phase that \cref{sub:thm:main} leaves open.
+The lattice comparison, the covering of~$\cD(4L_0)$ by closed crossings, and \cref{lem:boundary-reduction} are deterministic. The recursion in \cref{prop:recursion} uses only three properties: $\cB(x,L)$ is decreasing under addition of points, it depends on the points in a bounded window, and the directions of lines meeting two distant windows form a small set. Only the initial estimate in \cref{prop:initial} uses that four lines in the plane can enclose a square. We discuss which parts of the proof extend to random radii and to higher dimensions. \cref{cor:random-radii} and \cref{rem:heavy-tails} are proved in full. \cref{rem:hyperplanes,rem:dense-lines} contain proof sketches whose details have not been written out. \cref{sec:subcritical-outlook} collects questions on the subcritical phase that \cref{sub:thm:main} leaves open.
 % TODO(BJ): Entscheiden, ob rem:hyperplanes und rem:dense-lines zu Sätzen mit vollständigem Beweis ausgebaut werden sollen.
 
 We first record why the argument for \cref{thm:main} does not apply to the subcritical phase.
@@ -999,7 +942,7 @@ Suppose instead that every line $\ell\in\cL$ carries an independent radius~$\rho
 \begin{equation*}
   \lambda_c\le C\inf\Bigl\{t^{-1}\bigl[1+\logp\bigl(1/(\mu t\bar\varrho(t))\bigr)\bigr]\colon t>0,\ \bar\varrho(t)>0\Bigr\}\,.
 \end{equation*}
-In this variant the tail~$\bar\varrho(t)$ enters only through the logarithm. Thinning the lines makes the environment sparser, but it does not reduce the point intensity along the retained lines.
+In this variant the tail~$\bar\varrho(t)$ enters only through the logarithm. Thinning the lines makes the environment sparser, but it does not reduce the point intensity along the remaining lines.
 \end{remark}
 
 For the Poisson--Boolean model in the plane, Gou\'er\'e~\cite{Gou08} showed that a subcritical phase exists if and only if the radius distribution has a finite second moment. The necessity of this condition carries over to the Cox setting.
@@ -1053,7 +996,7 @@ Whether $\lambda_c(\mu,r)<\infty$ holds for lines in~$\R^m$, $m\ge3$, at every $
 
 \cref{thm:main,sub:thm:main} together give $0<\lambda_c(\mu,r)<\infty$ for all $\mu,r>0$. The proof of \cref{sub:thm:main} is qualitative, and it leaves the following questions open.
 
-\emph{Quantitative bounds.} The proof gives $\lambda_c(\mu,1)\ge1/(68(j-1))$, where the level $j=j_0+k_c$ depends on~$\mu$ through the initial scale~$\alpha_0(\mu)$ and through the base case in \cref{sub:lem:base}, neither of which we have made explicit. The initial scale is very large: condition~\eqref{sub:eq:A3} alone requires $\alpha_0\ge10^{1711}$. The resulting lower bound is far from the upper bound of \cref{thm:main}. The behaviour of $\lambda_c(\mu,r)$ as $\mu r\to0$ and as $\mu r\to\infty$ is open, in particular whether the logarithmic growth in \cref{thm:main} is of the correct order.
+\emph{Quantitative bounds.} The proof gives $\lambda_c(\mu,1)\ge1/(68(j-1))$, where the level $j=j_0+k_c$ depends on~$\mu$ through the initial scale~$\alpha_0(\mu)$ and through the initial estimate in the proof of \cref{sub:thm:induction}, neither of which we have made explicit. The initial scale is very large: condition~\eqref{sub:eq:A3} alone requires $\alpha_0\ge10^{1711}$. The resulting lower bound is far from the upper bound of \cref{thm:main}. The behaviour of $\lambda_c(\mu,r)$ as $\mu r\to0$ and as $\mu r\to\infty$ is open, in particular whether the logarithmic growth in \cref{thm:main} is of the correct order.
 
 \emph{Decay of connections.} The estimate \eqref{sub:eq:chain-crossing-bound} bounds the probability of a crossing at the scales~$\alpha_n$ by a fixed negative power of the scale. A single line carrying points at mutual distance less than~$2r$ along a segment shows that this probability is bounded from below by a quantity that decays exponentially in the scale, so the decay cannot be faster than exponential. Whether the radius of the component of a typical point has an exponential tail for small~$\lambda$, and whether such a decay holds throughout the subcritical regime, is open. The usual arguments for sharpness of the phase transition do not apply directly, because one line influences configurations at arbitrary distances.
 
