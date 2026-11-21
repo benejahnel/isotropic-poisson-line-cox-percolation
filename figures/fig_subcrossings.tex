@@ -1,10 +1,5 @@
-% Hand-written TikZ (fig_subcrossings).
-% Idea: (a) a crossing at scale M\alpha leaves one sub-crossing near each circle (Lemma "Inclusion");
-%       (b) a band of fixed width around a line contains few points of K_i, unless the line is
-%           near-tangent to the circle (Lemma "Regions met by a line").
-% Schematic: 5 circles instead of a = 25; region radius and band width enlarged.
-% Panel (a): unit = M\alpha, radii 1, 2.75, 4.5, 6.25, 8; the centres are the last exit points of the path.
-% Panel (b): circle of radius 3, band half-width 0.22, lines at distances 2.9 and 1 from the centre.
+% Panel (a): the crossing path. Panel (b): a schematic sample on a single circle.
+% Panel (b) classifies centers by their actual distance to each drawn line.
 \begin{tikzpicture}
   % ---------------- panel (a)
   \begin{scope}[x=0.4cm,y=0.4cm]
@@ -23,28 +18,45 @@
     \node[font=\small] at (0,-9.4) {(a)};
   \end{scope}
   % ---------------- panel (b)
-  \begin{scope}[shift={(8.6cm,0cm)}]
-    \begin{scope}
-      \clip (-3.6,-3.4) rectangle (3.6,3.4);
-      \fill[deleted!18] (-3.6,2.68) rectangle (3.6,3.12);
-      \fill[deleted!18] (-3.6,-1.22) rectangle (3.6,-0.78);
-      \draw[deleted, thick] (-3.6,2.9) -- (3.6,2.9);
-      \draw[deleted, thick] (-3.6,-1) -- (3.6,-1);
-    \end{scope}
-    \draw[gray] (0,0) circle (3);
-    \foreach \t in {0,4,...,356} {
-      \pgfmathtruncatemacro\hit{(abs(3*sin(\t)-2.9)<=0.22) || (abs(3*sin(\t)+1)<=0.22)}
-      \ifnum\hit=1
-        \fill[retained] (\t:3) circle (0.075);
-      \else
-        \fill[gray!55] (\t:3) circle (0.04);
-      \fi
+  \begin{scope}[shift={(8.6cm,0cm)},font=\small]
+    \def\rad{2.45}
+    \def\topline{2.38}
+    \def\crossline{0.64}
+    \def\halfwidth{0.19}
+    \def\emptypt#1{\draw[draw=black!65, fill=white, line width=.45pt]
+      #1 circle[radius=.041];}
+    \def\tangentpt#1{\begin{scope}[shift={#1}]
+      \filldraw[draw=retained!85!black, fill=retained!75, line width=.38pt]
+      (0,.084) -- (-.074,-.049) -- (.074,-.049) -- cycle;\end{scope}}
+    \def\crosspt#1{\begin{scope}[shift={#1}]
+      \filldraw[draw=deleted!70!black, fill=deleted!85!black, line width=.38pt]
+      (-.056,-.056) rectangle (.056,.056);\end{scope}}
+    \fill[retained!13] (-3.02,{\topline-\halfwidth}) rectangle (3.02,{\topline+\halfwidth});
+    \fill[deleted!20,opacity=.85] ({\crossline-\halfwidth},-2.68)
+          rectangle ({\crossline+\halfwidth},2.85);
+    \draw[retained!85!black, densely dashed, line width=.65pt]
+      (-3.02,\topline) -- (3.02,\topline);
+    \draw[deleted!75!black, line width=.65pt]
+      (\crossline,-2.68) -- (\crossline,2.85);
+    \node[anchor=south west,font=\small,text=retained!65!black] at (-3.02,2.58)
+      {$\ell_t\in T_i$};
+    \node[anchor=west,font=\small,text=deleted!65!black] at (.79,-2.68)
+      {$\ell_c\in\Delta\setminus T_i$};
+    \draw[black!40] (0,0) circle (\rad);
+    \foreach \ang in {0,4,...,356}{
+      \pgfmathtruncatemacro{\crosshit}{abs(\rad*cos(\ang)-\crossline)<=\halfwidth}
+      \pgfmathtruncatemacro{\tanhit}{abs(\rad*sin(\ang)-\topline)<=\halfwidth}
+      \ifnum\crosshit=1 \crosspt{(\ang:\rad)}
+      \else\ifnum\tanhit=1 \tangentpt{(\ang:\rad)}
+      \else \emptypt{(\ang:\rad)}\fi\fi
     }
-    \fill[black] (0,0) circle (0.04) node[below, font=\small] {$x$};
-    \node[font=\scriptsize, anchor=south west, inner sep=2pt] at (2.35,3.12) {near-tangent};
-    \node[font=\scriptsize, anchor=south west, inner sep=2pt] at (1.2,-0.78) {not near-tangent};
-    \node[font=\scriptsize, anchor=west] at (-2.55,0.9) {$K_i$};
-    \draw[gray, ->, shorten >=2pt] (-2.2,1.05) -- (156:3);
+    \fill (0,0) circle(.038) node[below left,inner sep=1.5pt] {$x$};
+    \node[font=\scriptsize,align=center] (both) at (-.93,1.15) {both bands\\$k\in A_i$};
+    \draw[black!75,thin,->,shorten >=2.5pt] (both.north east) -- (76:\rad);
+    \node[anchor=east] at (-1.44,-3.2) {$K_i:$};
+    \emptypt{(-1.13,-3.2)} \node[anchor=west] at (-.99,-3.2) {$E_i$};
+    \tangentpt{(.16,-3.2)} \node[anchor=west] at (.30,-3.2) {$B_i$};
+    \crosspt{(1.44,-3.2)} \node[anchor=west] at (1.58,-3.2) {$A_i$};
     \node[font=\small] at (0,-3.76) {(b)};
   \end{scope}
 \end{tikzpicture}

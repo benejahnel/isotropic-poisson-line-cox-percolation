@@ -1,0 +1,45 @@
+% The left panel uses normalized coordinates; the right panel uses physical coordinates.
+\begin{tikzpicture}[>=latex,font=\small,
+  ring/.style={draw=black!56,line width=.55pt},
+  dim/.style={draw=black!75,thin},
+  point/.style={circle,fill=retained,inner sep=1.65pt},
+  disk/.style={draw=retained,fill=retainedfill,line width=.65pt}]
+  \begin{scope}[shift={(0cm,0.06cm)}]
+    \draw[ring] (0,0) circle (1.35);
+    \foreach \t in {0,15,...,345} \fill[black!56] (\t:1.35) circle (0.85pt);
+    \coordinate (k) at (30:1.35);
+    \draw[dim,->] (0,0)--(k);
+    \fill (0,0) circle (1.25pt) node[below left,inner sep=1.1pt] {$0$};
+    \node[point] at (k) {};
+    \node[anchor=south west,inner sep=2pt] at (k) {$k_i\in K_i$};
+    \draw[dim,->] (0,0)--(203:1.35) node[midway,above,sloped,inner sep=1pt] {$M\beta_i$};
+  \end{scope}
+  \draw[->,thick] (2.05,.03)--(4.06,.03)
+    node[midway,above=3pt,inner sep=1pt] {$k\mapsto x+\alpha k$};
+  \begin{scope}[shift={(4.85cm,-.93cm)},x=.86cm,y=.86cm]
+    \coordinate (X) at (0,0);
+    \coordinate (P) at (26:2.70);
+    \coordinate (Q) at (57:3.50);
+    \foreach \r in {2.70,3.50} {
+      \draw[ring] (-8:\r) arc[start angle=-8,end angle=79,radius=\r];
+      \foreach \t in {1,7,...,79} \fill[black!55] (\t:\r) circle[radius=.029];
+    }
+    \draw[dim] (X)--(3.5,0);
+    \draw[dim] (X)--(P) (X)--(Q);
+    \fill (X) circle (1.25pt) node[below left,inner sep=1pt] {$x$};
+    \path[disk] (P) circle[radius=.29];
+    \path[disk] (Q) circle[radius=.29];
+    \draw[black!65,densely dotted] (P)--(Q);
+    \draw[deleted,thick,dashed] (1.41,.75)--(4.26,1.37)
+      node[right,inner sep=2pt,text=black] {$\ell\in\Delta$};
+    \node[point] at (P) {};
+    \node[point] at (Q) {};
+    \draw[dim] ($(P)+(.10,-.12)$)--($(P)+(.43,-.44)$);
+    \node[anchor=west,inner sep=1.5pt] at ($(P)+(.43,-.44)$) {$x_i$};
+    \node[anchor=east,inner sep=1.5pt] at ($(Q)+(-.34,-.03)$) {$x_{i+1}$};
+    \draw[dim] ($(P)+(.23,.17)$)--(3.24,1.84)--(3.48,1.84);
+    \node[anchor=west,inner sep=2pt] at (3.48,1.84) {$\mathcal R_i=\bar B(x_i,9\alpha)$};
+    \draw[dim] (2.70,-.015)--(2.70,-.43) (3.50,-.015)--(3.50,-.43);
+    \draw[dim,<->] (2.70,-.35)--(3.50,-.35) node[midway,below=1pt] {$D$};
+  \end{scope}
+\end{tikzpicture}

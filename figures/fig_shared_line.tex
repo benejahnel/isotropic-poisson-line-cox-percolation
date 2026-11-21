@@ -1,40 +1,21 @@
-% Panel (a): the perpendicular arrows end at the orthogonal projections.
-% Panel (b): the original strip is clipped to the window, where the enlarged strip contains it.
-\begin{tikzpicture}[x=1.08cm,y=1.08cm,font=\small,>=stealth]
-  \node[anchor=west] at (-1.26,1.21) {(a) A line shared by three regions};
-  \foreach \c in {(0,0),(4.8,0),(8.65,-0.78)}
-    \filldraw[draw=gray,fill=gray!8] \c circle (0.80);
-  \draw[gray, densely dotted] (0,0) -- (4.8,0);
-  \draw[->,gray,thick] (1.54,0) -- (2.61,0) node[midway,below=2pt,text=black] {$e_{kl}$};
-  \draw[deleted,thick] (-1.15,0.6155) -- (9.75,-1.2375) node[right] {$\ell$};
-  \draw[retained,thick,densely dashed] (-0.89,0.414) -- (0.91,0.414);
-  \draw[retained,thick,densely dashed] (3.89,-0.390) -- (5.69,-0.390);
-  \draw[->,thick] (0,0) -- (0.0694,0.4082) node[midway,left=2pt] {$u_k>0$};
-  \draw[->,thick] (4.8,0) -- (4.7346,-0.3849) node[midway,right=2pt] {$u_l<0$};
-  \draw[->,thick] (2.8,-0.056) -- (2.901,0.538) node[above] {$n$};
-  \fill (0,0) circle (0.032) node[below=1pt] {$x_k$};
-  \fill (4.8,0) circle (0.032) node[above=1pt] {$x_l$};
-  \fill (8.65,-0.78) circle (0.032);
-  \node[anchor=north] at (8.65,-1.61) {Additional line};
-  \begin{scope}[shift={(0,-3.2)}]
-    \node[anchor=west] at (-1.26,1.5) {(b) Why the counting radius increases};
-    \begin{scope}[shift={(2.08,0)}]
-      \begin{scope}
-        \clip (0,0) circle (1.02);
-        \fill[retained!19] (-1.08,-0.52) rectangle (1.08,0.52);
-        \draw[retained,thin] (-1.08,-0.52) -- (1.08,-0.52)
-                             (-1.08,0.52) -- (1.08,0.52);
-        \fill[deleted!34] (-1.08,-0.513) -- (1.08,0.006) --
-                          (1.08,0.513) -- (-1.08,-0.006) -- cycle;
-        \draw[deleted,thick] (-1.08,-0.2592) -- (1.08,0.2592);
-        \draw[retained,thick,densely dashed] (-1.08,0) -- (1.08,0);
-      \end{scope}
-      \draw[gray] (0,0) circle (1.02);
-      \fill (0.61,0.34) circle (0.033) node[above=1pt] {$z$};
-    \end{scope}
-    \fill[deleted!34] (4.1,0.31) rectangle +(0.34,0.19);
-    \node[anchor=west] at (4.54,0.405) {Within $\zeta$ of the original line};
-    \fill[retained!19] (4.1,-0.31) rectangle +(0.34,0.19);
-    \node[anchor=west] at (4.54,-0.215) {Within $\zeta+\eta$ of the replacement};
-  \end{scope}
+\begin{tikzpicture}[x=1cm,y=1cm,font=\small]
+  \foreach \x/\i in {0/1,4.6/2,9.2/3}{
+    \filldraw[fill=black!3,draw=black!50] (\x,0) circle (.98);
+    \node at (\x,-1.25) {$\mathcal R_{\i}$};
+  }
+  % Each gray line meets exactly one of the three disks.
+  \draw[black!45] (-.43,-1.09) -- (-.22,1.08);
+  \draw[black!45] (5.20,-1.08) -- (4.87,1.12);
+  \draw[black!45] (8.61,-1.08) -- (8.95,1.13);
+  % The horizontal line meets all three disks. The other misses disk three.
+  \draw[very thick,retained] (-1.2,-.17) -- (10.6,-.17)
+    node[right,text=black] {$\ell_1$};
+  \draw[very thick,deleted,dashed] (-1.2,1.008) -- (10.6,-1.824)
+    node[right,text=black] {$\ell_2$};
+  \foreach \x/\i in {0/1,4.6/2,9.2/3}{
+    \fill (\x,0) circle (1pt) node[above right=1pt] {$x_{\i}$};
+  }
+  \node at (0,-1.72) {$\ell_1,\ell_2$};
+  \node at (4.6,-1.72) {$\ell_1,\ell_2$};
+  \node at (9.2,-1.72) {$\ell_1$};
 \end{tikzpicture}
