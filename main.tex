@@ -475,6 +475,13 @@ Here $\lVert v\rVert_2\le\lVert v\rVert_1$ and $h/\sqrt2\le0.3L$. The inequality
 In the plane, the polygon construction also gives an open circuit around $Q_L$. To see this, translate $\Gamma$ by a small vector so that it misses the tile vertices. The translation can be small enough that the curve still surrounds $Q_L$ and meets only tiles that met $\Gamma$, all of which are disjoint from $Q_L$. Joining the centres of the tiles in traversal order gives a closed nearest-neighbour walk of open sites. Within the traversed tiles, this walk is homotopic to the translated curve, so it has winding number one about the origin when the traversal is counterclockwise. Decomposing the walk into cycles gives a circuit surrounding the origin and hence the whole square. If its open cluster is finite, the boundary of the unbounded face of the union of its tiles gives an exterior contour around the circuit. This yields the usual planar contour interpretation for this construction; the proof of \cref{lem:boundary-reduction} applies even when the open set in $G(4L_0)$ contains no circuit. The remark is not used in the proofs.
 \end{remark}
 
+\begin{figure}[t]
+  \centering
+  \input{figures/fig_boundary}
+  \caption{The exterior boundary in the proof of \cref{lem:boundary-reduction}, for a finite open cluster~$S$ chosen for illustration (teal tiles and dots, with $h=1$). Amber tiles and dots form the set~$T$ of sites of the unbounded complement component~$S^\infty$ that are nearest neighbours of~$S$; all of them are closed. Thick amber segments mark the diagonal star steps that are needed to connect~$T$. As a generic cluster,~$S$ is not convex and need not enclose a region: it has a tentacle at the top, a winding inlet on the right, and an opening at the upper left. Through this opening, the large inner region belongs to~$S^\infty$, so $T$ also runs along the inner side of~$S$ and lies largely inside~$\conv S$. The single unshaded tile at the lower left belongs to a bounded component of the complement and contributes nothing to~$T$. The dashed polygons are $\conv S$ (teal) and $\conv T$ (amber), with $\conv S\subseteq\conv T$.}
+  \label{fig:boundary}
+\end{figure}
+
 The proof of \cref{lem:boundary-reduction} uses that the part of the boundary of a finite cluster facing one component of its complement is star-connected. This is a special case of a result of Tim\'ar~\cite[Lemma~2]{Tim13}, which covers all dimensions.
 % TODO(BJ): Nummer "Lemma 2" nach arXiv:0711.1713 geprüft; in der publizierten Fassung (PAMS 141) gegenprüfen.
 For completeness, \cref{sec:star-connected} gives a self-contained proof for the planar lattice; the statement we use is \cref{lem:exterior-boundary}.
@@ -486,20 +493,12 @@ Assume~$G(4L_0)$ occurs. Choose a finite nearest-neighbour connected open set $V
 
 There is a unique unbounded nearest-neighbour component~$S^\infty$ of $h\Z^2\setminus S$. Indeed, choose a lattice square containing~$S$ in its interior. The sites outside this square form a connected set; every unbounded component of the complement must meet this set, so all such components coincide. Define~$T$ to consist of sites in~$S^\infty$ that are nearest neighbours of some site of~$S$. It is finite because $S$ is finite and each site has four nearest neighbours. Every site of~$T$ is closed: if one were open, its adjacency to~$S$ would put it in the same full open cluster.
 
-\begin{figure}[ht]
-  \centering
-  \input{figures/fig_boundary}
-  \caption{The exterior boundary in the proof of \cref{lem:boundary-reduction}, for a finite open cluster~$S$ chosen for illustration (teal tiles and dots, with $h=1$). Amber tiles and dots form the set~$T$ of sites of the unbounded complement component~$S^\infty$ that are nearest neighbours of~$S$; all of them are closed. Thick amber segments mark the diagonal star steps that are needed to connect~$T$. As a generic cluster,~$S$ is not convex and need not enclose a region: it has a tentacle at the top, a winding inlet on the right, and an opening at the upper left. Through this opening, the large inner region belongs to~$S^\infty$, so $T$ also runs along the inner side of~$S$ and lies largely inside~$\conv S$. The single unshaded tile at the lower left belongs to a bounded component of the complement and contributes nothing to~$T$. The dashed polygons are $\conv S$ (teal) and $\conv T$ (amber), with $\conv S\subseteq\conv T$.}
-  \label{fig:boundary}
-\end{figure}
-
 The set~$T$ is star-connected by \cref{lem:exterior-boundary}, applied to the nearest-neighbour connected set~$S$ and the component~$S^\infty$ of its complement. Diagonal steps can indeed be necessary, as in \cref{fig:boundary}.
 
 Fix a nonzero $v\in\R^2$ and choose $y\in S$ maximising $v\cdot y$. Choose a coordinate~$i$ with $v_i\neq0$ and let $z$ be the site obtained from~$y$ by adding $h\sign(v_i)$ to its $i$th coordinate. Then $v\cdot z=v\cdot y+h\lvert v_i\rvert>\max_{w\in S}v\cdot w$, so $z\notin S$. Every further site obtained by repeating this step has an even larger scalar product and is outside~$S$ as well. These sites form an infinite nearest-neighbour path in the complement of~$S$, which proves $z\in S^\infty$, and adjacency to~$y$ gives $z\in T$. Hence, $\max_{z\in T}v\cdot z\ge\max_{y\in S}v\cdot y$ for every nonzero~$v$, and the inequality also holds for $v=0$. Applying \cref{lem:support} to $\mathcal Z_1=\conv S$ and $\mathcal Z_2=\conv T$ gives $\conv S\subseteq\conv T$.
 
 The constructed set~$T$ is finite, closed, and star-connected, and $Q_{4L_0}\subseteq\conv V\subseteq\conv S\subseteq\conv T$. Thus, if $G(4L_0)$ occurs and~$\cP$ fails, then~$\cD(4L_0)$ occurs. Equivalently, $G(4L_0)\setminus\cD(4L_0)\subseteq\cP$, as claimed.
 \end{proof}
-
 
 % =================================================================
 \section{The subcritical phase: proof of \texorpdfstring{\cref{sub:thm:main}}{the second main theorem}}
