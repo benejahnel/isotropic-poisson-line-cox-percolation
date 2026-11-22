@@ -537,7 +537,13 @@ Let $(U'_z)_{z\in\Z^2}$ be independent uniform variables on $(0,1)$, independent
   \end{cases}
   \qquad \omega\coloneqq\{z\in\Z^2\colon U_z\le 1/48\}\,.
 \end{equation*}
-Given~$\cL$, the two intervals into which $\Psi_z$ divides $(0,1)$ are chosen with probabilities equal to their lengths, and $U_z$ is uniform on the chosen interval. These choices are independent across squares, so the conditional law of $(U_z)_{z\in\Z^2}$ is the product uniform law. Thus, $\omega$ is an independent Bernoulli field of density $1/48$ and is independent of~$\cL$.
+We claim that $\omega$ is an independent Bernoulli field of density $1/48$ and that it is independent of~$\cL$. To see this, we compute the conditional law of $(U_z)_{z\in\Z^2}$ given~$\cL$. Fix $z\in\Z^2$ and $t\in(0,1)$. Given~$\cL$, the square $\mathcal Q(z)$ is occupied with probability~$\Psi_z$, and then $U_z$ is uniform on $(0,\Psi_z)$. Otherwise, $U_z$ is uniform on $(\Psi_z,1)$. Hence,
+\begin{equation*}
+  \P(U_z\le t\mid\cL)
+  =\min\{t,\Psi_z\}+\max\{t-\Psi_z,0\}
+  =t\,,
+\end{equation*}
+where the two terms are the contributions of the occupied and of the empty square. Thus, given~$\cL$, each $U_z$ is uniform on $(0,1)$. Moreover, $U_z$ is a function of $U'_z$ and of the occupation of $\mathcal Q(z)$. Given~$\cL$, these pairs are independent for different~$z$, because the squares are disjoint and the variables $U'_z$ are independent of each other and of $(\cL,X_\lambda)$. Therefore, the conditional law of $(U_z)_{z\in\Z^2}$ given~$\cL$ is the product of uniform laws on $(0,1)$. This conditional law does not depend on~$\cL$, although the variables $\Psi_z$ do. Consequently, $(U_z)_{z\in\Z^2}$ is independent of~$\cL$ and is a family of independent uniform variables, which proves the claim. The field~$\omega$ is not independent of~$X_\lambda$; this dependence is what the coupling uses.
 
 On an occupied square, $U_z\le\Psi_z$. If $N_1(z)<j$ for an integer $j\ge1$, then $\Psi_z\le\sqrt2\,\lambda(j-1)$. Hence, whenever $\sqrt2\,\lambda(j-1)\le 1/48$,
 \begin{equation*}
