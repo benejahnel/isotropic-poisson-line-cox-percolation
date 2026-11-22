@@ -51,12 +51,12 @@
       \else \emptypt{(\ang:\rad)}\fi\fi
     }
     \fill (0,0) circle(.038) node[below left,inner sep=1.5pt] {$x$};
-    \node[font=\scriptsize,align=center] (both) at (-.93,1.15) {both bands\\$k\in A_i$};
+    \node[font=\scriptsize,align=center] (both) at (-.93,1.15) {both bands\\$k\in K_i^{\mathrm{nt}}$};
     \draw[black!75,thin,->,shorten >=2.5pt] (both.north east) -- (76:\rad);
     \node[anchor=east] at (-1.44,-3.2) {$K_i:$};
-    \emptypt{(-1.13,-3.2)} \node[anchor=west] at (-.99,-3.2) {$E_i$};
-    \tangentpt{(.16,-3.2)} \node[anchor=west] at (.30,-3.2) {$B_i$};
-    \crosspt{(1.44,-3.2)} \node[anchor=west] at (1.58,-3.2) {$A_i$};
+    \emptypt{(-1.13,-3.2)} \node[anchor=west] at (-.99,-3.2) {$K_i^{0}$};
+    \tangentpt{(.16,-3.2)} \node[anchor=west] at (.30,-3.2) {$K_i^{\mathrm{t}}$};
+    \crosspt{(1.44,-3.2)} \node[anchor=west] at (1.58,-3.2) {$K_i^{\mathrm{nt}}$};
     \node[font=\small] at (0,-3.76) {(b)};
   \end{scope}
 \end{tikzpicture}
