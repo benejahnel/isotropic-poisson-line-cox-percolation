@@ -123,7 +123,7 @@ For every $\mu,r>0$,
 More precisely, there is a function $\lambda_0\colon(0,\infty)\to(0,\infty)$ such that, for all $\mu,r>0$ and all $\lambda\le\lambda_0(\mu r)/r$, almost surely all connected components of~$\Xi_\lambda$ are bounded.
 \end{theorem}
 
-\cref{thm:main,sub:thm:main} together give $0<\lambda_c(\mu,r)<\infty$ for all $\mu,r>0$, so the phase transition is nontrivial at every line intensity and disk radius. The subcritical proof also controls the probability of long connections: for small~$\lambda$, the probability that the occupied set connects a disk to the complement of the concentric disk of eight times its radius decays polynomially in the scale; see \eqref{sub:eq:chain-crossing-bound} and \cref{sub:rem:all-scales}. \cref{rem:monotonicity} explains why the argument for \cref{thm:main} does not give \cref{sub:thm:main}, which is proved by a separate multiscale argument in \cref{sec:subcritical}. Random radii and higher dimensions are discussed in \cref{sec:extensions}.
+\cref{thm:main,sub:thm:main} together give $0<\lambda_c(\mu,r)<\infty$ for all $\mu,r>0$, so the phase transition is nontrivial at every line intensity and disk radius. The subcritical proof also controls the probability of long connections: for small~$\lambda$, the probability that the occupied set connects a disk to the complement of the concentric disk of eight times its radius decays polynomially in the scale; see \eqref{sub:eq:chain-crossing-bound} and \cref{sub:rem:all-scales}. The argument for \cref{thm:main} does not give \cref{sub:thm:main}, because deleting lines decreases occupied crossing events; \cref{sub:thm:main} is proved by a separate multiscale argument in \cref{sec:subcritical}. Random radii and higher dimensions are discussed in \cref{sec:extensions}.
 
 The two proofs also give bounds on the critical intensity. They are of the same order when $\mu r\ge1$ and differ by a logarithmic factor when $\mu r<1$.
 
@@ -622,35 +622,29 @@ The two powers of~$\alpha$ that matter in the induction can now be compared with
 \label{sub:eq:P3}
   1-\kappa+a\gamma_*&=-0.25\,.
 \end{align}
-The left side of \eqref{sub:eq:P1} is concave in~$g$ and has values $0.2$ and $40$ at the two endpoints. Equation~\eqref{sub:eq:P3} follows from $a\gamma_*=25\cdot0.11=2.75$. \Cref{tab:parameters} collects the parameters and the numerical constants of this section.
+The left side of \eqref{sub:eq:P1} is concave in~$g$ and has values $0.2$ and $40$ at the two endpoints. Equation~\eqref{sub:eq:P3} follows from $a\gamma_*=25\cdot0.11=2.75$. \Cref{tab:parameters} collects the main parameters of this section.
 
-\begin{table}[!htbp]
+\begin{table}[!tb]
   \centering
   \footnotesize
-  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.4cm}>{\raggedright\arraybackslash}p{6.4cm}>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{2.6cm}@{}}
+  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.4cm}>{\raggedright\arraybackslash}p{6.3cm}>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{3.4cm}@{}}
     \toprule
     Symbol & Meaning & Value & Introduced\\
     \midrule
     $a$ & number of smaller crossings per step & $25$ & \eqref{sub:eq:param}\\
     $\kappa$ & exponent of the scale ratio $M=\alpha^\kappa$ & $4$ & \eqref{sub:eq:param}\\
-    $\alpha_n$ & scales & $\alpha_0^{5^n}$, $\alpha_0\ge40$ & before \cref{sub:thm:induction}\\
-    $M_n$ & scale ratio at step~$n$ & $\alpha_n^\kappa$ & \cref{sub:sec:induction}\\
+    $\alpha_n$ & scales & $\alpha_0^{5^n}$, $\alpha_0\ge40$ & \cref{sub:sec:setting}\\
     $\gamma_0$ & crossing exponent without prescribed lines & $7$ & \eqref{sub:eq:gamma}\\
     $\sigma$ & loss of exponent per prescribed line & $0.005$ & \eqref{sub:eq:gamma}\\
     $k_c$ & largest number of prescribed lines with a nontrivial bound & $1378$ & \eqref{sub:eq:gamma}\\
     $\gamma_*$ & smallest positive exponent, $\gamma(k_c)$ & $0.11$ & \eqref{sub:eq:param}\\
     $\xi$ & determines the factor $\alpha_n^{-\xi}$ in \eqref{sub:eq:A3} & $0.1$ & \eqref{sub:eq:param}\\
-    $j_0$ & level of the base case & depends on $\mu,\alpha_0$ & proof of \cref{sub:thm:induction}\\
     $j$ & level of the induction & $j_0+k_c$ & proof of \cref{sub:thm:induction}\\
     $\lambda_0(\mu)$ & intensity below which all components are bounded & $1/(70(j-1))$ & proof of \cref{sub:thm:main}\\
     $\omega$ & independent Bernoulli field & density $1/48$ & \cref{sub:sec:setting}\\
-    $D_n$ & lower bound on the distance between centres & $7M_n\alpha_n/(a-1)$ & \cref{sub:sec:induction}\\
-    $\lvert K_i\rvert$ & number of candidate centres on the $i$th circle & at most $104M$ & \cref{sub:sec:induction}\\
-    $\chi$ & half-width of the near-tangent band & $7M/(2(a-1))$ & proof of \cref{sub:thm:induction}\\
-    $C_7$, $C_8$ & $C_7\sqrt M$ and $C_8$ bound the number of candidate centres on one circle whose disk meets a given line, in general and for lines that are not near-tangent & $80$, $163\sqrt a$ & proof of \cref{sub:thm:induction}\\
     \bottomrule
   \end{tabular}
-  \caption{Parameters and constants in the proof of \cref{sub:thm:main}.}
+  \caption{Main parameters in the proof of \cref{sub:thm:main}.}
   \label{tab:parameters}
 \end{table}
 
@@ -857,15 +851,8 @@ For the lower bound with $\bar\mu<1$, we use the choices made for line intensity
 \section{Extensions and open questions}
 \label{sec:extensions}
 
-The lattice comparison, the covering of~$\cD(4L_0)$ by closed crossings, and \cref{lem:boundary-reduction} are deterministic. The recursion in \cref{prop:recursion} uses only three properties: $\cB(x,L)$ is decreasing under addition of points, it depends on the points in a bounded window, and the directions of lines meeting two distant windows form a small set. Only the initial estimate in \cref{prop:initial} uses that four lines in the plane can enclose a square. We discuss which parts of the proof extend to random radii and to higher dimensions. \cref{cor:random-radii} and \cref{rem:heavy-tails} are proved in full. \cref{rem:hyperplanes,rem:dense-lines} contain proof sketches whose details have not been written out. \cref{sec:subcritical-outlook} collects questions on the subcritical phase that \cref{sub:thm:main} leaves open.
+The lattice comparison, the covering of~$\cD(4L_0)$ by closed crossings, and \cref{lem:boundary-reduction} are deterministic. The recursion in \cref{prop:recursion} uses only three properties: $\cB(x,L)$ is decreasing under addition of points, it depends on the points in a bounded window, and the directions of lines meeting two distant windows form a small set. Only the initial estimate in \cref{prop:initial} uses that four lines in the plane can enclose a square. We discuss which parts of the proofs extend to random radii, to higher dimensions, and to other directional distributions. \cref{cor:random-radii} and \cref{rem:heavy-tails} are proved in full. \cref{rem:hyperplanes,rem:dense-lines} contain proof sketches whose details have not been written out. \cref{sec:subcritical-outlook} collects open questions.
 % TODO(BJ): Entscheiden, ob rem:hyperplanes und rem:dense-lines zu Sätzen mit vollständigem Beweis ausgebaut werden sollen.
-
-We first record why the argument for \cref{thm:main} does not apply to the subcritical phase.
-
-\begin{remark}[Direction of monotonicity]
-\label[remark]{rem:monotonicity}
-Deleting lines decreases occupied crossing events, so the comparison in \cref{prop:recursion} has the wrong direction for proving absence of occupied percolation at small~$\lambda$. Establishing $\lambda_c(\mu,r)>0$ consequently requires a separate argument, which is given in \cref{sec:subcritical}. Throughout the present proof, the initial scale and one finite point intensity are fixed before the recursion is applied at larger scales.
-\end{remark}
 
 \subsection{Random radii}
 \label{sec:random-radii}
